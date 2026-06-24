@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Marc Lavoie cybersecurity portfolio featuring SOC analyst projects, SIEM labs, detection rules, cloud security labs, Windows hardening, scripting projects, training, and resume information.">
+  <title>Marc Lavoie | Cybersecurity Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#home" aria-label="Marc Lavoie home">
+        <span class="brand-mark" aria-hidden="true">ML</span>
+        <span>
+          <strong>Marc Lavoie</strong>
+          <small>Cybersecurity Portfolio</small>
+        </span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="visually-hidden">Toggle navigation</span>
+      </button>
+
+      <ul class="nav-links" id="primary-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#soc-projects">SOC Projects</a></li>
+        <li><a href="#wazuh-elk">Wazuh / ELK</a></li>
+        <li><a href="#detection-rules">Detection Rules</a></li>
+        <li><a href="#gcp-labs">Google Cloud</a></li>
+        <li><a href="#windows-hardening">Windows</a></li>
+        <li><a href="#scripting-projects">Scripting</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section" id="home">
+      <div class="section-inner hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Cybersecurity Portfolio</p>
+          <h1>Marc Lavoie</h1>
+          <p class="hero-lede">
+            Public portfolio for SOC analysis, defensive security labs, detection engineering, cloud security practice, Windows hardening, and automation projects.
+          </p>
+          <div class="hero-actions" aria-label="Portfolio actions">
+            <a class="button button-primary" href="#soc-projects">View Projects</a>
+            <a class="button button-secondary" href="#resume">Resume Placeholder</a>
+          </div>
+        </div>
+
+        <div class="ops-panel" aria-label="Decorative security operations dashboard preview">
+          <div class="ops-panel-header">
+            <span>Security Operations Snapshot</span>
+            <span class="status-dot">Monitoring</span>
+          </div>
+          <div class="signal-row">
+            <span>SIEM lab coverage</span>
+            <strong>Wazuh / ELK</strong>
+          </div>
+          <div class="signal-row">
+            <span>Detection focus</span>
+            <strong>Endpoint + Cloud</strong>
+          </div>
+          <div class="signal-row">
+            <span>Automation</span>
+            <strong>PowerShell + Python</strong>
+          </div>
+          <div class="terminal-visual" aria-hidden="true">
+            <span>&gt; ingest_windows_events --source sysmon</span>
+            <span>&gt; map_detection --framework mitre_attack</span>
+            <span>&gt; verify_controls --status documented</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="about">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">About Me</p>
+          <h2>Defensive security learner focused on practical, evidence-based work.</h2>
+          <p>
+            This portfolio is designed for recruiters and security teams to review lab work, documentation habits, and hands-on cybersecurity practice without exposing sensitive data.
+          </p>
+        </div>
+
+        <div class="about-layout">
+          <div>
+            <h3>Professional Focus</h3>
+            <p>
+              Marc Lavoie is building a public cybersecurity portfolio around SOC analyst workflows, SIEM monitoring, detection logic, endpoint hardening, cloud security fundamentals, and repeatable scripting.
+            </p>
+            <p>
+              Each project area is intentionally written with safe placeholders so public visitors can understand the work while private credentials, logs, screenshots, and environment details stay out of the website.
+            </p>
+          </div>
+
+          <div class="skills-panel" aria-labelledby="skills-title">
+            <h3 id="skills-title">Skills Snapshot</h3>
+            <ul class="skills-list">
+              <li>SIEM triage and alert documentation</li>
+              <li>Windows event and Sysmon analysis</li>
+              <li>Detection rule planning and validation</li>
+              <li>Cloud IAM and logging fundamentals</li>
+              <li>PowerShell security automation</li>
+              <li>Python log parsing and reporting</li>
+              <li>Security baseline checklists</li>
+              <li>Recruiter-friendly documentation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="soc-projects">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">SOC Analyst Projects</p>
+          <h2>Alert triage, endpoint visibility, and investigation notes.</h2>
+          <p>
+            Public-safe examples of SOC analyst practice, including event review, suspicious activity summaries, and repeatable investigation checklists.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Sysmon Log Analysis">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Sysmon Log Analysis</h3>
+              <p>Practice project for reviewing Windows endpoint telemetry, identifying notable process activity, and documenting triage findings.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Sysmon, Windows Event Viewer, Wazuh, spreadsheets</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Endpoint telemetry review and investigation writing</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/sysmon-log-analysis-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="wazuh-elk">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Wazuh / ELK Stack Lab</p>
+          <h2>SIEM lab documentation for collection, search, and review workflows.</h2>
+          <p>
+            These project cards use placeholder screenshots and repository links until sanitized lab evidence is ready for publication.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Wazuh SIEM Lab">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Wazuh SIEM Lab</h3>
+              <p>Home lab outline for host enrollment, alert review, dashboard navigation, and defensive monitoring practice.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Wazuh, Windows endpoints, Linux server, Sysmon</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>SIEM setup, alert triage, and endpoint monitoring</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/wazuh-siem-lab-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for ELK Stack Lab">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>ELK Stack Lab</h3>
+              <p>Practice environment for searching sample logs, building simple dashboards, and documenting analyst queries.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Elasticsearch, Logstash, Kibana, Beats, sample logs</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Log ingestion, search, visualization, and reporting</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/elk-stack-lab-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="detection-rules">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Detection Rules</p>
+          <h2>Readable detection examples with test notes and safe sample data.</h2>
+          <p>
+            Detection content should use synthetic examples only and avoid real incident artifacts, internal hostnames, internal IP addresses, or private environment details.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Detection Rule Examples">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Detection Rule Examples</h3>
+              <p>Placeholder collection for Sigma-style ideas, query notes, test conditions, false-positive notes, and response guidance.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Sigma concepts, Wazuh rules, Kibana queries, MITRE ATT&amp;CK</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Detection logic, validation planning, and documentation</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/detection-rules-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="gcp-labs">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Google Cloud Security Labs</p>
+          <h2>Cloud security practice without exposing lab credentials or project IDs.</h2>
+          <p>
+            Public documentation should describe learning outcomes, controls reviewed, and sanitized screenshots only.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Google Cloud Security Labs">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Google Cloud Security Labs</h3>
+              <p>Safe public write-ups for IAM review, logging concepts, storage access controls, and security command center concepts.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Google Cloud Console, IAM, Cloud Logging, Cloud Storage</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Cloud security fundamentals and access-control review</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/google-cloud-security-labs-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="windows-hardening">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Windows Hardening Projects</p>
+          <h2>Security baselines, audit checks, and practical endpoint improvements.</h2>
+          <p>
+            Windows hardening projects should publish generic baseline notes and sanitized command examples only.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Windows Hardening Scripts">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Windows Hardening Scripts</h3>
+              <p>Placeholder project for documenting defensive configuration checks, audit policy review, and endpoint baseline validation.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>PowerShell, Windows Security, Group Policy, Microsoft baselines</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>System hardening, control validation, and documentation</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/windows-hardening-scripts-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="scripting-projects">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Scripting Projects</p>
+          <h2>Automation that supports repeatable security workflows.</h2>
+          <p>
+            These placeholders are ready for sanitized scripts, usage notes, and safe sample inputs.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for PowerShell Automation">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>PowerShell Automation</h3>
+              <p>Security automation examples for inventory checks, Windows event review, and repeatable endpoint validation tasks.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>PowerShell, Windows Event Logs, CSV reports</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Automation, reporting, and repeatable analyst workflows</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/powershell-automation-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Python Log Parsing">
+              <span>Screenshot Placeholder</span>
+            </div>
+            <div class="project-content">
+              <h3>Python Log Parsing</h3>
+              <p>Placeholder project for parsing safe sample logs, extracting key fields, and producing analyst-friendly summaries.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Python, regular expressions, CSV, JSON sample data</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Log parsing, data cleanup, and security reporting</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="https://github.com/MarcCyberLavoie/python-log-parsing-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certifications">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Certifications and Training</p>
+          <h2>Training roadmap and completed learning placeholders.</h2>
+          <p>
+            Add only public-safe certification names, completion dates, badge links, and training summaries that are intended for recruiters.
+          </p>
+        </div>
+
+        <div class="timeline" aria-label="Certifications and training placeholders">
+          <div class="timeline-item">
+            <span class="timeline-date">Planned</span>
+            <h3>Security Fundamentals</h3>
+            <p>Placeholder for foundational security coursework, networking refreshers, or certification preparation.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">In Progress</span>
+            <h3>SOC Analyst Practice</h3>
+            <p>Placeholder for SIEM, alert triage, detection engineering, and incident response training notes.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-date">Future</span>
+            <h3>Cloud Security</h3>
+            <p>Placeholder for cloud IAM, logging, storage security, and security posture management learning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-muted" id="resume">
+      <div class="section-inner resume-layout">
+        <div class="section-heading">
+          <p class="eyebrow">Resume</p>
+          <h2>Resume placeholder for public portfolio visitors.</h2>
+          <p>
+            Add a sanitized resume link or PDF only after removing private phone numbers, private addresses, student IDs, internal system names, and non-public employer information.
+          </p>
+        </div>
+
+        <div class="resume-box" aria-label="Resume placeholder">
+          <h3>Marc Lavoie Resume</h3>
+          <p>Resume link coming soon.</p>
+          <a class="button button-secondary" href="#" aria-disabled="true">Placeholder Resume Link</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-inner contact-layout">
+        <div class="section-heading">
+          <p class="eyebrow">Contact</p>
+          <h2>Public contact placeholder.</h2>
+          <p>
+            Replace these placeholders with professional public contact links when ready. Do not publish private emails, phone numbers, school credentials, or personal addresses.
+          </p>
+        </div>
+
+        <div class="contact-list" aria-label="Contact placeholders">
+          <a href="mailto:public-contact@example.com">public-contact@example.com</a>
+          <a href="https://github.com/MarcCyberLavoie" target="_blank" rel="noopener">GitHub Profile Placeholder</a>
+          <a href="https://www.linkedin.com/in/your-profile-placeholder" target="_blank" rel="noopener">LinkedIn Placeholder</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="section-inner footer-inner">
+      <p>&copy; <span id="current-year">2026</span> Marc Lavoie. Public cybersecurity portfolio.</p>
+      <a href="#home" class="back-to-top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
