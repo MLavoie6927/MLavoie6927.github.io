@@ -420,20 +420,32 @@ h3 {
   overflow: hidden;
 }
 
+.project-card:hover {
+  border-color: rgba(75, 180, 255, 0.55);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
 .project-image-link {
   display: block;
   width: 100%;
   overflow: hidden;
-  border-radius: 14px;
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-bottom: 1px solid var(--border);
   background: #020617;
+}
+
+.project-image-link:focus-visible {
+  outline: 3px solid var(--warning);
+  outline-offset: -3px;
 }
 
 .project-image {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 14px;
+}
+
+.project-image-link:hover .project-image {
+  filter: brightness(1.08);
 }
 
 .screenshot-placeholder {
