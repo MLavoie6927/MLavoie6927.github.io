@@ -420,6 +420,22 @@ h3 {
   overflow: hidden;
 }
 
+.project-image-link {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: #020617;
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
 .screenshot-placeholder {
   display: grid;
   min-height: 190px;
