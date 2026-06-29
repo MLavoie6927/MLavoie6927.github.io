@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Marc Lavoie cybersecurity portfolio featuring SOC analyst projects, SIEM labs, detection rules, cloud security labs, Windows hardening, scripting projects, training, and resume information.">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="styles.css?v=pdf-project-cards-20260629">
+  <link rel="stylesheet" href="styles.css?v=cyber-lab-pdf-fix-20260629">
 
   <style>
     #scripting-projects .project-grid {
@@ -44,6 +44,10 @@
       max-height: none;
       object-fit: contain;
       object-position: center;
+    }
+
+    #gcp-labs .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     #windows-hardening .project-card-wide {
@@ -160,6 +164,7 @@
     }
 
     @media (max-width: 900px) {
+      #gcp-labs .project-grid,
       #windows-hardening .windows-hardening-gallery {
         grid-template-columns: 1fr;
       }
@@ -443,7 +448,7 @@
     <section class="section section-muted" id="gcp-labs">
       <div class="section-inner">
         <div class="section-heading">
-          <p class="eyebrow">Cyber Portfolio Lab</p>
+          <p class="eyebrow">Cyber Portfolio Labs</p>
           <h2>Cybersecurity lab documentation and practical security training work.</h2>
           <p>
             Public-safe cybersecurity lab documentation showing hands-on practice, security concepts, tools reviewed, and sanitized learning outcomes.
@@ -452,7 +457,7 @@
 
         <div class="project-grid">
           <article class="project-card">
-            <a class="document-preview" href="assets/rackspace%20cybsecurity%20labs.pdf" target="_blank" rel="noopener" aria-label="Open Cyber Portfolio Lab PDF documentation">
+            <a class="document-preview" href="assets/Cyber%20Portfolio%20Lab.pdf" target="_blank" rel="noopener" aria-label="Open Cyber Portfolio Lab PDF documentation">
               <span class="document-preview-inner">
                 <span class="document-preview-icon" aria-hidden="true">PDF</span>
                 <span class="document-preview-title">Cyber Portfolio Lab</span>
@@ -472,7 +477,32 @@
                   <dd>Security lab documentation, hands-on learning, technical writing, and portfolio presentation</dd>
                 </div>
               </dl>
-              <a class="project-link" href="assets/rackspace%20cybsecurity%20labs.pdf" target="_blank" rel="noopener">View Cyber Portfolio Lab PDF</a>
+              <a class="project-link" href="assets/Cyber%20Portfolio%20Lab.pdf" target="_blank" rel="noopener">View Cyber Portfolio Lab PDF</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <a class="document-preview" href="assets/rackspace%20cybersecurity%20labs.pdf" target="_blank" rel="noopener" aria-label="Open Rackspace Security Labs PDF documentation">
+              <span class="document-preview-inner">
+                <span class="document-preview-icon" aria-hidden="true">PDF</span>
+                <span class="document-preview-title">Rackspace Security Labs</span>
+                <span class="document-preview-label">Open Documentation</span>
+              </span>
+            </a>
+            <div class="project-content">
+              <h3>Rackspace Security Labs</h3>
+              <p>Documented Rackspace cybersecurity lab work covering practical security exercises, defensive concepts, and analyst-ready technical notes.</p>
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>Rackspace labs, cybersecurity training, security documentation, defensive workflows</dd>
+                </div>
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Cybersecurity lab practice, cloud/security fundamentals, technical documentation, and portfolio presentation</dd>
+                </div>
+              </dl>
+              <a class="project-link" href="assets/rackspace%20cybersecurity%20labs.pdf" target="_blank" rel="noopener">View Rackspace Security Labs PDF</a>
             </div>
           </article>
         </div>
