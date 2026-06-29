@@ -107,9 +107,13 @@ border: 0;
 position: sticky;
 top: 0;
 z-index: 100;
-background: rgba(8, 11, 16, 0.94);
-border-bottom: 1px solid rgba(54, 211, 153, 0.18);
+background:
+linear-gradient(90deg, rgba(8, 11, 16, 0.98) 0%, rgba(8, 11, 16, 0.88) 42%, rgba(8, 11, 16, 0.98) 100%),
+url("assets/Background%20for%20website.png") center center / cover no-repeat,
+#080b10;
+border-bottom: 1px solid rgba(54, 211, 153, 0.22);
 backdrop-filter: blur(16px);
+font-size: 0;
 }
 
 .nav {
@@ -141,16 +145,21 @@ display: grid;
 width: 42px;
 height: 42px;
 place-items: center;
-border: 1px solid rgba(54, 211, 153, 0.55);
+border: 1px solid rgba(54, 211, 153, 0.7);
 border-radius: 8px;
-background: #0d1917;
+background: rgba(13, 25, 23, 0.88);
 color: var(--accent);
 font-weight: 800;
+box-shadow: 0 0 18px rgba(54, 211, 153, 0.12);
 }
 
 .brand strong,
 .brand small {
 display: block;
+}
+
+.brand strong {
+color: var(--text);
 }
 
 .brand small {
@@ -164,7 +173,7 @@ width: 44px;
 height: 44px;
 border: 1px solid var(--border);
 border-radius: 8px;
-background: var(--surface);
+background: rgba(17, 24, 33, 0.86);
 color: var(--text);
 cursor: pointer;
 }
@@ -194,12 +203,13 @@ border-radius: 6px;
 color: var(--text-muted);
 font-size: 0.9rem;
 font-weight: 700;
+text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
 }
 
 .nav-links a:hover,
 .nav-links a.active {
 color: var(--text);
-background: rgba(75, 180, 255, 0.11);
+background: rgba(75, 180, 255, 0.12);
 }
 
 main {
@@ -560,44 +570,159 @@ height: 100%;
 object-fit: cover;
 }
 
+#scripting-projects .project-grid {
+align-items: start;
+}
+
 #scripting-projects .project-card {
-display: flex;
-flex-direction: column;
-}
-
-#scripting-projects .project-content {
-order: 1;
-}
-
-#scripting-projects .screenshot-placeholder {
-order: 2;
-}
-
-#scripting-projects .screenshot-placeholder.screenshot-filled {
 display: block;
-aspect-ratio: auto;
 min-height: 0;
-height: auto;
-padding: 0;
-overflow: visible;
-border-top: 1px solid var(--border);
-border-bottom: 0;
+overflow: hidden;
 background: #030811;
 }
 
-#scripting-projects .screenshot-placeholder.screenshot-filled a {
+#scripting-projects .scripting-full-image {
+display: block;
+width: 100%;
+min-height: 0;
+height: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+background: #030811;
+border-bottom: 0;
+}
+
+#scripting-projects .scripting-full-image a {
 display: block;
 width: 100%;
 line-height: 0;
 }
 
-#scripting-projects .screenshot-placeholder.screenshot-filled .project-screenshot {
+#scripting-projects .scripting-full-image img {
 display: block;
 width: 100%;
 height: auto;
 max-height: none;
 object-fit: contain;
 object-position: center;
+}
+
+#gcp-labs .project-grid {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#windows-hardening .project-card-wide {
+grid-column: 1 / -1;
+}
+
+#windows-hardening .windows-hardening-gallery {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 1.25rem;
+padding: 1.25rem;
+background:
+linear-gradient(180deg, rgba(6, 13, 25, 0.92), rgba(3, 8, 17, 0.98)),
+radial-gradient(circle at top, rgba(0, 229, 255, 0.12), transparent 40%);
+border-bottom: 1px solid rgba(74, 144, 226, 0.25);
+}
+
+#windows-hardening .windows-hardening-example {
+margin: 0;
+}
+
+#windows-hardening .windows-hardening-example a {
+display: block;
+overflow: hidden;
+border: 1px solid rgba(0, 229, 255, 0.35);
+border-radius: 0.9rem;
+background: #030811;
+box-shadow: 0 0 0.75rem rgba(0, 229, 255, 0.12);
+transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+#windows-hardening .windows-hardening-example a:hover,
+#windows-hardening .windows-hardening-example a:focus {
+transform: translateY(-3px);
+border-color: rgba(0, 229, 255, 0.85);
+box-shadow: 0 0 1.25rem rgba(0, 229, 255, 0.28);
+}
+
+#windows-hardening .windows-hardening-example img {
+display: block;
+width: 100%;
+height: auto;
+aspect-ratio: 2 / 3;
+object-fit: cover;
+object-position: center top;
+}
+
+#windows-hardening .windows-hardening-example figcaption {
+padding-top: 0.85rem;
+color: #f5faff;
+font-size: 1.05rem;
+font-weight: 800;
+line-height: 1.2;
+text-align: center;
+text-shadow: 0 0 0.5rem rgba(0, 229, 255, 0.35);
+}
+
+.document-preview {
+display: flex;
+min-height: 14rem;
+align-items: center;
+justify-content: center;
+padding: 1.5rem;
+text-align: center;
+text-decoration: none;
+color: #f5faff;
+background:
+linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+radial-gradient(circle at center, rgba(0, 229, 255, 0.12), transparent 55%),
+#030811;
+background-size: 2rem 2rem, 2rem 2rem, auto, auto;
+border-bottom: 1px solid rgba(74, 144, 226, 0.25);
+}
+
+.document-preview-inner {
+display: inline-flex;
+flex-direction: column;
+align-items: center;
+gap: 0.65rem;
+padding: 1rem 1.25rem;
+border: 1px solid rgba(0, 255, 196, 0.55);
+border-radius: 0.65rem;
+background: rgba(3, 8, 17, 0.82);
+box-shadow: 0 0 1rem rgba(0, 229, 255, 0.14);
+}
+
+.document-preview-icon {
+color: #3cffc2;
+font-size: 1.95rem;
+font-weight: 900;
+line-height: 1;
+}
+
+.document-preview-title {
+color: #f5faff;
+font-size: 1.05rem;
+font-weight: 900;
+line-height: 1.2;
+}
+
+.document-preview-label {
+color: #41a8ff;
+font-size: 0.9rem;
+font-weight: 800;
+letter-spacing: 0.08em;
+text-transform: uppercase;
+}
+
+.document-preview:hover .document-preview-inner,
+.document-preview:focus .document-preview-inner {
+border-color: rgba(0, 255, 196, 0.95);
+box-shadow: 0 0 1.25rem rgba(0, 229, 255, 0.28);
 }
 
 .project-content {
@@ -769,7 +894,10 @@ display: none;
 max-height: calc(100vh - 76px);
 padding: 1rem;
 border-bottom: 1px solid var(--border);
-background: #080b10;
+background:
+linear-gradient(180deg, rgba(8, 11, 16, 0.98), rgba(8, 11, 16, 0.94)),
+url("assets/Background%20for%20website.png") center center / cover no-repeat,
+#080b10;
 overflow-y: auto;
 }
 
@@ -783,6 +911,18 @@ gap: 0.45rem;
 padding: 0.85rem;
 border: 1px solid var(--border);
 background: var(--surface);
+}
+}
+
+@media (max-width: 900px) {
+#gcp-labs .project-grid,
+#windows-hardening .windows-hardening-gallery {
+grid-template-columns: 1fr;
+}
+
+#windows-hardening .windows-hardening-example img {
+aspect-ratio: auto;
+object-fit: contain;
 }
 }
 
