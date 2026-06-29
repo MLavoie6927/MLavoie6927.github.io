@@ -271,36 +271,15 @@ main {
   padding: 5rem 0;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(8, 11, 16, 0.95) 0%, rgba(8, 11, 16, 0.9) 48%, rgba(8, 11, 16, 0.96) 100%),
+    linear-gradient(180deg, rgba(8, 11, 16, 0.72) 0%, rgba(8, 11, 16, 0.82) 48%, rgba(8, 11, 16, 0.94) 100%),
     radial-gradient(circle at center, rgba(75, 180, 255, 0.08), transparent 42%),
+    url("assets/Background%20for%20website.png") center center / cover no-repeat,
     var(--bg);
 }
 
 .hero::before,
 .hero::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 43%;
-  background-image: url("assets/hero%20background.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  opacity: 0.34;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero::before {
-  left: 0;
-  background-position: left center;
-  transform: scaleX(-1);
-  transform-origin: center;
-}
-
-.hero::after {
-  right: 0;
-  background-position: right center;
+  content: none;
 }
 
 .hero-grid {
@@ -997,9 +976,7 @@ main {
 
   .hero::before,
   .hero::after {
-    width: 50%;
-    opacity: 0.18;
-    background-size: cover;
+    content: none;
   }
 
   .hero-grid,
