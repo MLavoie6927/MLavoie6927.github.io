@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Marc Lavoie cybersecurity portfolio featuring SOC analyst projects, SIEM labs, detection rules, cloud security labs, Windows hardening, scripting projects, training, and resume information.">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="styles.css?v=windows-hardening-gallery-20260628">
+  <link rel="stylesheet" href="styles.css?v=pdf-project-cards-20260629">
 
   <style>
     #scripting-projects .project-grid {
@@ -101,6 +101,64 @@
       text-shadow: 0 0 0.5rem rgba(0, 229, 255, 0.35);
     }
 
+    .document-preview {
+      display: flex;
+      min-height: 14rem;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: #f5faff;
+      background:
+        linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(0, 229, 255, 0.12), transparent 55%),
+        #030811;
+      background-size: 2rem 2rem, 2rem 2rem, auto, auto;
+      border-bottom: 1px solid rgba(74, 144, 226, 0.25);
+    }
+
+    .document-preview-inner {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 1rem 1.25rem;
+      border: 1px solid rgba(0, 255, 196, 0.55);
+      border-radius: 0.65rem;
+      background: rgba(3, 8, 17, 0.82);
+      box-shadow: 0 0 1rem rgba(0, 229, 255, 0.14);
+    }
+
+    .document-preview-icon {
+      color: #3cffc2;
+      font-size: 1.95rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .document-preview-title {
+      color: #f5faff;
+      font-size: 1.05rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .document-preview-label {
+      color: #41a8ff;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .document-preview:hover .document-preview-inner,
+    .document-preview:focus .document-preview-inner {
+      border-color: rgba(0, 255, 196, 0.95);
+      box-shadow: 0 0 1.25rem rgba(0, 229, 255, 0.28);
+    }
+
     @media (max-width: 900px) {
       #windows-hardening .windows-hardening-gallery {
         grid-template-columns: 1fr;
@@ -140,7 +198,7 @@
         <li><a href="#soc-projects">SOC Projects</a></li>
         <li><a href="#wazuh-elk">Wazuh / ELK</a></li>
         <li><a href="#detection-rules">Detection Rules</a></li>
-        <li><a href="#gcp-labs">Google Cloud</a></li>
+        <li><a href="#gcp-labs">Cyber Lab</a></li>
         <li><a href="#windows-hardening">Windows</a></li>
         <li><a href="#scripting-projects">Scripting</a></li>
         <li><a href="#certifications">Certifications</a></li>
@@ -270,29 +328,33 @@
           <p class="eyebrow">Wazuh / ELK Stack Lab</p>
           <h2>SIEM lab documentation for collection, search, and review workflows.</h2>
           <p>
-            These project cards use placeholder screenshots and repository links until sanitized lab evidence is ready for publication.
+            Public-safe SIEM documentation covering Wazuh installation, host monitoring concepts, alert review, and sanitized lab notes.
           </p>
         </div>
 
         <div class="project-grid">
           <article class="project-card">
-            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Wazuh SIEM Lab">
-              <span>Screenshot Placeholder</span>
-            </div>
+            <a class="document-preview" href="assets/Wazuh%20Installation.pdf" target="_blank" rel="noopener" aria-label="Open Wazuh Installation PDF documentation">
+              <span class="document-preview-inner">
+                <span class="document-preview-icon" aria-hidden="true">PDF</span>
+                <span class="document-preview-title">Wazuh Installation</span>
+                <span class="document-preview-label">Open Documentation</span>
+              </span>
+            </a>
             <div class="project-content">
-              <h3>Wazuh SIEM Lab</h3>
-              <p>Home lab outline for host enrollment, alert review, dashboard navigation, and defensive monitoring practice.</p>
+              <h3>Wazuh Installation</h3>
+              <p>Documented Wazuh SIEM installation workflow for building a defensive monitoring lab and preparing endpoint visibility for analyst practice.</p>
               <dl>
                 <div>
                   <dt>Tools used</dt>
-                  <dd>Wazuh, Windows endpoints, Linux server, Sysmon</dd>
+                  <dd>Wazuh, Linux server, Windows endpoints, Sysmon, PowerShell</dd>
                 </div>
                 <div>
                   <dt>Skill demonstrated</dt>
-                  <dd>SIEM setup, alert triage, and endpoint monitoring</dd>
+                  <dd>SIEM deployment, installation documentation, endpoint monitoring preparation, and security lab validation</dd>
                 </div>
               </dl>
-              <a class="project-link" href="https://github.com/MarcCyberLavoie/wazuh-siem-lab-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+              <a class="project-link" href="assets/Wazuh%20Installation.pdf" target="_blank" rel="noopener">View Wazuh Installation PDF</a>
             </div>
           </article>
 
@@ -381,32 +443,36 @@
     <section class="section section-muted" id="gcp-labs">
       <div class="section-inner">
         <div class="section-heading">
-          <p class="eyebrow">Google Cloud Security Labs</p>
-          <h2>Cloud security practice without exposing lab credentials or project IDs.</h2>
+          <p class="eyebrow">Cyber Portfolio Lab</p>
+          <h2>Cybersecurity lab documentation and practical security training work.</h2>
           <p>
-            Public documentation should describe learning outcomes, controls reviewed, and sanitized screenshots only.
+            Public-safe cybersecurity lab documentation showing hands-on practice, security concepts, tools reviewed, and sanitized learning outcomes.
           </p>
         </div>
 
         <div class="project-grid">
           <article class="project-card">
-            <div class="screenshot-placeholder" role="img" aria-label="Placeholder screenshot area for Google Cloud Security Labs">
-              <span>Screenshot Placeholder</span>
-            </div>
+            <a class="document-preview" href="assets/rackspace%20cybsecurity%20labs.pdf" target="_blank" rel="noopener" aria-label="Open Cyber Portfolio Lab PDF documentation">
+              <span class="document-preview-inner">
+                <span class="document-preview-icon" aria-hidden="true">PDF</span>
+                <span class="document-preview-title">Cyber Portfolio Lab</span>
+                <span class="document-preview-label">Open Documentation</span>
+              </span>
+            </a>
             <div class="project-content">
-              <h3>Google Cloud Security Labs</h3>
-              <p>Safe public write-ups for IAM review, logging concepts, storage access controls, and security command center concepts.</p>
+              <h3>Cyber Portfolio Lab</h3>
+              <p>Documented cybersecurity lab work for practical security learning, defensive operations practice, and public portfolio evidence.</p>
               <dl>
                 <div>
                   <dt>Tools used</dt>
-                  <dd>Google Cloud Console, IAM, Cloud Logging, Cloud Storage</dd>
+                  <dd>Cybersecurity labs, security documentation, analyst notes, defensive workflows</dd>
                 </div>
                 <div>
                   <dt>Skill demonstrated</dt>
-                  <dd>Cloud security fundamentals and access-control review</dd>
+                  <dd>Security lab documentation, hands-on learning, technical writing, and portfolio presentation</dd>
                 </div>
               </dl>
-              <a class="project-link" href="https://github.com/MarcCyberLavoie/google-cloud-security-labs-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+              <a class="project-link" href="assets/rackspace%20cybsecurity%20labs.pdf" target="_blank" rel="noopener">View Cyber Portfolio Lab PDF</a>
             </div>
           </article>
         </div>
