@@ -727,6 +727,53 @@ main {
   object-position: center;
 }
 
+#cpp-projects .cpp-code-grid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+#cpp-projects .cpp-code-card {
+  overflow: hidden;
+  background: #030811;
+}
+
+#cpp-projects .cpp-code-preview {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(54, 211, 153, 0.12), transparent 52%),
+    #030811;
+  background-size: 2rem 2rem, 2rem 2rem, auto, auto;
+  border-bottom: 1px solid rgba(74, 144, 226, 0.25);
+}
+
+#cpp-projects .cpp-code-preview a {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+#cpp-projects .cpp-code-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center top;
+}
+
+#cpp-projects .cpp-code-button {
+  width: 100%;
+  justify-self: start;
+  margin-top: 0.25rem;
+}
+
 .credentials-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
