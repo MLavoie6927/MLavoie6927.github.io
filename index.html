@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Marc Lavoie cybersecurity portfolio featuring SOC analyst projects, SIEM labs, detection rules, cloud security labs, Windows hardening, scripting projects, Cybrary certificates, INE certificates, public recognition, training, and resume information.">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
-  <link rel="stylesheet" href="styles.css?v=cybrary-ine-certificate-fixes-20260704">
+  <link rel="stylesheet" href="styles.css?v=front-layout-restored-20260720">
 </head>
 
 <body>
@@ -37,6 +37,7 @@
         <li><a href="#gcp-labs">Cyber Lab</a></li>
         <li><a href="#windows-hardening">Windows</a></li>
         <li><a href="#scripting-projects">Scripting</a></li>
+        <li><a href="#cpp-projects">C++ Code</a></li>
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#cybrary-certificates">Cybrary Certs</a></li>
         <li><a href="#ine-certificates">INE Certs</a></li>
@@ -53,10 +54,6 @@
         <div class="hero-copy">
           <p class="eyebrow">Cybersecurity Portfolio</p>
           <h1>Marc Lavoie</h1>
-          <p class="hero-lede">
-            Public portfolio for SOC analysis, defensive security labs, detection engineering,
-            cloud security practice, Windows hardening, and automation projects.
-          </p>
 
           <div class="hero-actions" aria-label="Portfolio actions">
             <a class="button button-primary" href="#soc-projects">View Projects</a>
@@ -119,19 +116,23 @@
             <div class="screenshot-placeholder screenshot-filled">
               <img class="project-screenshot" src="assets/sysmon-log-analysis.svg" alt="Windows Event Viewer showing Sysmon Event ID 13 logs">
             </div>
+
             <div class="project-content">
               <h3>Sysmon Log Analysis</h3>
               <p>Practice project for reviewing Windows endpoint telemetry, identifying notable process activity, and documenting triage findings.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Sysmon, Windows Event Viewer, Wazuh, spreadsheets</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Endpoint telemetry review and investigation writing</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="https://github.com/MarcCyberLavoie/sysmon-log-analysis-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
             </div>
           </article>
@@ -144,19 +145,23 @@
                 <span class="document-preview-label">Open Report</span>
               </span>
             </a>
+
             <div class="project-content">
               <h3>Malware Investigation</h3>
               <p>Malware investigation report documenting suspicious activity review, analyst observations, and defensive investigation findings.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Windows event analysis, malware investigation notes, SOC triage workflow, security documentation</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Malware analysis documentation, incident investigation writing, and evidence-based security reporting</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="assets/MarcL%20Malware%20Investigation.pdf" target="_blank" rel="noopener">View Malware Investigation PDF</a>
             </div>
           </article>
@@ -169,19 +174,23 @@
                 <span class="document-preview-label">Open Report</span>
               </span>
             </a>
+
             <div class="project-content">
               <h3>Remcos RAT Windows Investigation</h3>
               <p>Windows-focused investigation report for Remcos RAT activity, including suspicious behavior review, endpoint analysis context, and SOC-style findings.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Windows security logs, endpoint telemetry, malware investigation workflow, analyst documentation</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Remote access trojan investigation, Windows endpoint analysis, alert triage, and technical reporting</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="assets/ml%20remco%20rat%20windows%20investigations.pdf" target="_blank" rel="noopener">View Remcos RAT Investigation PDF</a>
             </div>
           </article>
@@ -204,19 +213,23 @@
                 <span class="document-preview-label">Open Documentation</span>
               </span>
             </a>
+
             <div class="project-content">
               <h3>Wazuh Installation</h3>
               <p>Documented Wazuh SIEM installation workflow for building a defensive monitoring lab and preparing endpoint visibility for analyst practice.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Wazuh, Linux server, Windows endpoints, Sysmon, PowerShell</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>SIEM deployment, installation documentation, endpoint monitoring preparation, and security lab validation</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="assets/Wazuh%20Installation.pdf" target="_blank" rel="noopener">View Wazuh Installation PDF</a>
             </div>
           </article>
@@ -225,19 +238,23 @@
             <div class="screenshot-placeholder screenshot-filled">
               <img class="project-screenshot" src="assets/elk-stack-lab.svg" alt="Sanitized Elastic Discover view from Marc Lavoie's ELK Stack Lab">
             </div>
+
             <div class="project-content">
               <h3>ELK Stack Lab</h3>
               <p>Practice environment for searching sample logs, building simple dashboards, and documenting analyst queries.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Elasticsearch, Logstash, Kibana, Beats, sample logs</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Log ingestion, search, visualization, and reporting</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="https://github.com/MarcCyberLavoie/elk-stack-lab-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
             </div>
           </article>
@@ -287,17 +304,18 @@
             <div class="project-content">
               <h3>Cross-Platform Detection Rule Examples</h3>
               <p>Phishing detection examples showing rule metadata, severity, data sources, MITRE ATT&amp;CK mapping, correlation logic, entity grouping, and analyst response guidance.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Microsoft Sentinel, IBM QRadar, CrowdStrike Falcon, Google SecOps / Chronicle, MITRE ATT&amp;CK</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Cross-platform detection engineering, correlation logic, and SOC response design</dd>
                 </div>
               </dl>
-              <a class="project-link" href="https://github.com/MarcCyberLavoie/detection-rules-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
             </div>
           </article>
         </div>
@@ -319,19 +337,23 @@
                 <span class="document-preview-label">Open Documentation</span>
               </span>
             </a>
+
             <div class="project-content">
               <h3>Cyber Portfolio Lab</h3>
               <p>Documented cybersecurity lab work for practical security learning, defensive operations practice, and public portfolio evidence.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Cybersecurity labs, security documentation, analyst notes, defensive workflows</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Security lab documentation, hands-on learning, technical writing, and portfolio presentation</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="assets/cyber%20portfolio%20lab.pdf" target="_blank" rel="noopener">View Cyber Portfolio Lab PDF</a>
             </div>
           </article>
@@ -344,19 +366,23 @@
                 <span class="document-preview-label">Open Documentation</span>
               </span>
             </a>
+
             <div class="project-content">
               <h3>Rackspace Security Labs</h3>
               <p>Documented Rackspace cybersecurity lab work covering practical security exercises, defensive concepts, and analyst-ready technical notes.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>Rackspace labs, cybersecurity training, security documentation, defensive workflows</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>Cybersecurity lab practice, cloud/security fundamentals, technical documentation, and portfolio presentation</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="assets/rackspace%20cybersecurity%20labs.pdf" target="_blank" rel="noopener">View Rackspace Security Labs PDF</a>
             </div>
           </article>
@@ -368,7 +394,7 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">Windows Hardening Projects</p>
-          <h2>Security baselines, audit checks, and practical endpoint improvements.</h2>
+          <h2>Security baselines, Audit Checks, &amp; Endpoint Improvements.</h2>
           <p>
             PowerShell-based Windows hardening examples covering Group Policy registry settings, browser security controls, endpoint baseline validation, and defensive configuration documentation.
           </p>
@@ -401,17 +427,19 @@
 
             <div class="project-content">
               <h3>Windows Hardening Script Examples</h3>
-              <p>PowerShell hardening examples for Group Policy registry enforcement, legacy Internet Options security zones, Microsoft Defender protections, firewall posture, logging, SMB hardening, UAC controls, and endpoint baseline validation.</p>
+
               <dl>
                 <div>
                   <dt>Tools used</dt>
                   <dd>PowerShell, Windows Security, Group Policy, Microsoft Defender, Windows Firewall, Windows Event Logs</dd>
                 </div>
+
                 <div>
                   <dt>Skill demonstrated</dt>
                   <dd>System hardening, defensive scripting, registry policy validation, audit configuration, and security documentation</dd>
                 </div>
               </dl>
+
               <a class="project-link" href="https://github.com/MarcCyberLavoie/windows-hardening-scripts-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
             </div>
           </article>
@@ -449,6 +477,44 @@
       </div>
     </section>
 
+    <section class="section" id="cpp-projects">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">C++ Code Projects</p>
+          <h2>C++ programming projects and code samples.</h2>
+        </div>
+
+        <div class="project-grid cpp-code-grid">
+          <article class="project-card cpp-code-card">
+            <div class="cpp-code-preview">
+              <a href="assets/Credit%20Card%20Validator%20C%2B%2B.png" target="_blank" rel="noopener" aria-label="Open Credit Card Validator C++ code image full size">
+                <img src="assets/Credit%20Card%20Validator%20C%2B%2B.png" alt="Credit Card Validator C++ code project screenshot" loading="lazy" decoding="async">
+              </a>
+            </div>
+
+            <div class="project-content">
+              <h3>Credit Card Validator C++</h3>
+              <p>C++ programming project demonstrating credit card number validation logic, user input handling, conditional checks, and structured code organization.</p>
+
+              <dl>
+                <div>
+                  <dt>Tools used</dt>
+                  <dd>C++, console application logic, validation routines, control flow, arithmetic checks</dd>
+                </div>
+
+                <div>
+                  <dt>Skill demonstrated</dt>
+                  <dd>Input validation, algorithmic thinking, conditional logic, code readability, and practical programming fundamentals</dd>
+                </div>
+              </dl>
+
+              <a class="button button-secondary cpp-code-button" href="assets/Credit%20Card%20Validator%20C%2B%2B.png" target="_blank" rel="noopener">View C++ Code</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="certifications">
       <div class="section-inner">
         <div class="section-heading">
@@ -464,6 +530,7 @@
             <a class="credential-preview" href="assets/credentials/bas-cybersecurity.svg" target="_blank" rel="noopener" aria-label="View Marc Lavoie's Bachelor of Applied Science degree">
               <img src="assets/credentials/bas-cybersecurity.svg" alt="Bachelor of Applied Science degree in IT Networking - Cybersecurity awarded to Marc Lavoie by Whatcom Community College" loading="lazy">
             </a>
+
             <div class="credential-content">
               <span class="credential-type">Education</span>
               <h3>Bachelor of Applied Science</h3>
@@ -478,6 +545,7 @@
             <a class="credential-preview" href="assets/credentials/pisces-analyst-professional.svg" target="_blank" rel="noopener" aria-label="View Marc Lavoie's PISCES Analyst Professional certificate">
               <img src="assets/credentials/pisces-analyst-professional.svg" alt="PISCES Analyst Professional certificate awarded to Marc Lavoie" loading="lazy">
             </a>
+
             <div class="credential-content">
               <span class="credential-type">Certification</span>
               <h3>PISCES Analyst Professional</h3>
@@ -625,7 +693,7 @@
               <span class="certificate-provider">Cybrary</span>
               <h3>Intro to Web Wazuh Activity Logs</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-intro-to-web-wazuh-activity-logs.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-intro-to-web%20Wazuh-activity-log-analysis.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
 
@@ -749,27 +817,27 @@
           <article class="certificate-card">
             <div class="certificate-card-body">
               <span class="certificate-provider">Cybrary</span>
-              <h3>Vulnerability Communication</h3>
+              <h3>Vulnerability Scanner Basics</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-vulnerability-communication.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-vulnerability-scanner-basics.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
 
           <article class="certificate-card">
             <div class="certificate-card-body">
               <span class="certificate-provider">Cybrary</span>
-              <h3>Windows Event Log Basics</h3>
+              <h3>Windows Event Logs Basics</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-windows-event-log-basics.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-windows-event-logs-basics.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
 
           <article class="certificate-card">
             <div class="certificate-card-body">
               <span class="certificate-provider">Cybrary</span>
-              <h3>Wazuh Index</h3>
+              <h3>Wireshark Basics</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-wazuh-index.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20cybrary-cert-wireshark-basics.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
         </div>
@@ -811,7 +879,7 @@
               <span class="certificate-provider">INE</span>
               <h3>Host &amp; Network Penetration Testing Exploitation</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML Host &amp; Network P T Exploitation.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20Host%20%26%20Network%20P%20T%20Exploitation.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
 
@@ -820,7 +888,7 @@
               <span class="certificate-provider">INE</span>
               <h3>Host &amp; Penetration Testing Post Exploitation</h3>
               <p>Certificate of completion documenting cybersecurity training and professional development.</p>
-              <a class="button button-secondary certificate-button" href="assets/ML Host &amp; Penetration Testing Post Exploitation.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
+              <a class="button button-secondary certificate-button" href="assets/ML%20Host%20%26%20Penetration%20Testing%20Post%20Exploitation.pdf" target="_blank" rel="noopener">View Certificate PDF</a>
             </div>
           </article>
 
@@ -909,19 +977,19 @@
                     <dt>Recognition area</dt>
                     <dd>Cybersecurity analysis, threat hunting, DNS review, phishing investigation, and suspicious activity reporting</dd>
                   </div>
+
                   <div>
                     <dt>Skill demonstrated</dt>
                     <dd>Analyst attention to detail, suspicious behavior identification, investigation writing, and community-focused security work</dd>
                   </div>
+
                   <div>
                     <dt>Supporting document</dt>
                     <dd>Microsoft Sentinel Rogue DNS Resolver full explanation and investigation documentation</dd>
                   </div>
                 </dl>
 
-                <a class="button button-secondary" href="assets/Microsoft_Sentinel_Rogue_DNS_Resolver_Full_Explanation.pdf" target="_blank" rel="noopener">
-                  View DNS Resolver Document
-                </a>
+                <a class="button button-secondary" href="assets/Microsoft_Sentinel_Rogue_DNS_Resolver_Full_Explanation.pdf" target="_blank" rel="noopener">View DNS Resolver Document</a>
               </div>
             </div>
           </article>
@@ -934,9 +1002,6 @@
         <div class="section-heading">
           <p class="eyebrow">Resume</p>
           <h2>Marc Lavoie Cybersecurity Resume.</h2>
-          <p>
-            Public resume for cybersecurity, SOC analyst, Windows security, cloud security, and defensive security portfolio review.
-          </p>
         </div>
 
         <div class="resume-box resume-centered" aria-label="Marc Lavoie cybersecurity resume">
@@ -963,7 +1028,7 @@
 
   <footer class="site-footer">
     <div class="section-inner footer-inner">
-      <p>&copy; <span id="current-year">2026</span> Marc Lavoie. Public cybersecurity portfolio.</p>
+      <p>&copy; <span id="current-year">2026</span> Marc Lavoie. Cybersecurity portfolio.</p>
       <a href="#home" class="back-to-top">Back to top</a>
     </div>
   </footer>
