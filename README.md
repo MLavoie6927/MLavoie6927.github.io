@@ -1,4 +1,4 @@
-# Marc Lavoie | Cybersecurity Portfolio
+﻿# Marc Lavoie | Cybersecurity Portfolio
 
 Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML, CSS, and JavaScript only. It has no backend, database, login system, tracking scripts, API keys, or external JavaScript libraries.
 
@@ -17,11 +17,11 @@ Open `index.html` in a browser to preview the site locally. No build step is req
 
 This repository is intended to be published as:
 
-`https://MarcCyberLavoie.github.io`
+`https://MLavoie6927.github.io`
 
 To deploy with GitHub Pages:
 
-1. Push these files to the `main` branch of `MarcCyberLavoie.github.io`.
+1. Push these files to the `main` branch of `MLavoie6927.github.io`.
 2. Open the repository on GitHub.
 3. Go to **Settings**.
 4. Open **Pages**.

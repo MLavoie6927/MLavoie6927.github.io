@@ -1,4 +1,4 @@
-# Public Publishing Security Checklist
+﻿# Public Publishing Security Checklist
 
 Use this checklist before publishing or updating the cybersecurity portfolio on GitHub Pages.
 
