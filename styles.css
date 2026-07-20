@@ -205,7 +205,7 @@ h3 {
   flex-wrap: nowrap;
   flex: 1 1 auto;
   min-width: 0;
-  gap: clamp(0.25rem, 0.45vw, 0.55rem);
+  gap: clamp(0.2rem, 0.32vw, 0.4rem);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -222,12 +222,12 @@ h3 {
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  padding: 0.54rem clamp(0.52rem, 0.55vw, 0.72rem);
+  padding: 0.5rem clamp(0.42rem, 0.48vw, 0.6rem);
   border: 1px solid rgba(60, 210, 255, 0.18);
   border-radius: 10px;
   background: rgba(10, 18, 28, 0.82);
   color: var(--text);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   font-weight: 800;
   line-height: 1.15;
   text-align: center;
@@ -791,6 +791,50 @@ main {
   margin-top: 0.25rem;
 }
 
+.forensics-showcase {
+  max-width: 1040px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.forensics-video-frame {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: #020509;
+}
+
+.forensics-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #020509;
+}
+
+.forensics-content {
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  align-items: start;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+
+.forensics-summary {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.project-kicker {
+  color: var(--accent-alt);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .credentials-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1046,7 +1090,7 @@ main {
   }
 
   .brand small {
-    font-size: 0.66rem;
+    display: none;
   }
 
   .nav-links {
@@ -1055,9 +1099,9 @@ main {
 
   .nav-links a {
     min-height: 36px;
-    padding: 0.45rem 0.42rem;
+    padding: 0.43rem 0.36rem;
     border-radius: 8px;
-    font-size: 0.7rem;
+    font-size: 0.66rem;
   }
 }
 
@@ -1166,6 +1210,11 @@ main {
 
   .about-layout {
     grid-template-columns: 1fr;
+  }
+
+  .forensics-content {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .project-grid,
