@@ -1192,7 +1192,7 @@ main {
   font-weight: 800;
 }
 
-@media (min-width: 1461px) and (max-width: 1750px) {
+@media (min-width: 1581px) {
   .nav {
     gap: 0.5rem;
     padding-inline: 0.75rem;
@@ -1227,7 +1227,7 @@ main {
   }
 }
 
-@media (max-width: 1460px) {
+@media (max-width: 1580px) {
   .nav-toggle {
     display: inline-block;
   }
