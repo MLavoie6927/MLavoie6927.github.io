@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=network-engineering-20260814">
+  <link rel="stylesheet" href="styles.css?v=telecom-super-lab-20260814">
 </head>
 
 <body>
@@ -568,50 +568,96 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">Network Engineering</p>
-          <h2>Service-provider routing, MPLS forwarding, and VPN isolation.</h2>
+          <h2>Carrier routing, service isolation, and security engineering.</h2>
           <p>
-            A documented six-router lab that separates provider underlay reachability, label distribution, customer routing, and VPN route exchange into clear operational layers.
+            Two documented provider labs progress from a focused MPLS Layer-3 VPN to an integrated telecom architecture with broadband, 5G, protected voice, detection engineering, and evidence-driven validation.
           </p>
         </div>
 
-        <article class="network-showcase">
-          <a class="network-report-preview" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener" aria-label="Open Marc Lavoie's MPLS Layer-3 VPN lab report">
-            <img src="assets/mpls-l3vpn-lab-cover.png" alt="Cover of Marc Lavoie's MPLS Layer-3 VPN network engineering lab report" loading="lazy">
-          </a>
+        <div class="network-projects">
+          <article class="network-showcase">
+            <a class="network-report-preview" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener" aria-label="Open Marc Lavoie's MPLS Layer-3 VPN lab report">
+              <img src="assets/mpls-l3vpn-lab-cover.png" alt="Cover of Marc Lavoie's MPLS Layer-3 VPN network engineering lab report" loading="lazy">
+            </a>
 
-          <div class="project-content network-content">
-            <div class="network-summary">
-              <span class="project-kicker">Technical Field Guide</span>
-              <h3>MPLS Layer-3 VPN Service Provider Lab</h3>
-              <p>
-                This portfolio project connects two customer sites across a redundant provider core while keeping customer IPv4 prefixes out of the P-router routing tables. The report explains the design, staged implementation, label stack, verification workflow, and failure-isolation strategy.
-              </p>
-            </div>
-
-            <div class="network-stats" aria-label="MPLS lab summary">
-              <div><strong>6</strong><span>Routers</span></div>
-              <div><strong>2</strong><span>Core Paths</span></div>
-              <div><strong>1</strong><span>Customer VRF</span></div>
-            </div>
-
-            <dl>
-              <div>
-                <dt>Technologies used</dt>
-                <dd>Cisco IOS, OSPFv2 Area 0, MPLS LDP, MP-BGP VPNv4, VRF CUSTOMER_A, and CE-to-PE eBGP</dd>
+            <div class="project-content network-content">
+              <div class="network-summary">
+                <span class="project-kicker">Technical Field Guide</span>
+                <h3>MPLS Layer-3 VPN Service Provider Lab</h3>
+                <p>
+                  This portfolio project connects two customer sites across a redundant provider core while keeping customer IPv4 prefixes out of the P-router routing tables. The report explains the design, staged implementation, label stack, verification workflow, and failure-isolation strategy.
+                </p>
               </div>
 
-              <div>
-                <dt>Skills demonstrated</dt>
-                <dd>Service-provider topology design, protocol-role separation, label-switched forwarding, customer route isolation, validation planning, and layered troubleshooting</dd>
+              <div class="network-stats" aria-label="MPLS lab summary">
+                <div><strong>6</strong><span>Routers</span></div>
+                <div><strong>2</strong><span>Core Paths</span></div>
+                <div><strong>1</strong><span>Customer VRF</span></div>
               </div>
-            </dl>
 
-            <div class="network-actions">
-              <a class="button button-primary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener">View Lab Report</a>
-              <a class="button button-secondary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" download>Download PDF</a>
+              <dl>
+                <div>
+                  <dt>Technologies used</dt>
+                  <dd>Cisco IOS, OSPFv2 Area 0, MPLS LDP, MP-BGP VPNv4, VRF CUSTOMER_A, and CE-to-PE eBGP</dd>
+                </div>
+
+                <div>
+                  <dt>Skills demonstrated</dt>
+                  <dd>Service-provider topology design, protocol-role separation, label-switched forwarding, customer route isolation, validation planning, and layered troubleshooting</dd>
+                </div>
+              </dl>
+
+              <div class="network-actions">
+                <a class="button button-primary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener">View Lab Report</a>
+                <a class="button button-secondary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" download>Download PDF</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+
+          <article class="network-showcase network-showcase-reverse">
+            <a class="network-report-preview network-report-preview-landscape" href="assets/Marc_Lavoie_Telecom_MPLS_5G_Cyber_Super_Lab_Report.pdf" target="_blank" rel="noopener" aria-label="Open Marc Lavoie's Telecom, MPLS, and 5G Cybersecurity Super Lab report">
+              <img src="assets/telecom-super-lab-cover.png" alt="Cover of Marc Lavoie's Telecom, MPLS, and 5G Cybersecurity Super Lab technical report" loading="lazy">
+            </a>
+
+            <div class="project-content network-content">
+              <div class="network-summary">
+                <span class="project-kicker">Validated Architecture Portfolio</span>
+                <h3>Telecom + MPLS + 5G Cybersecurity Super Lab</h3>
+                <p>
+                  This multi-service provider design joins a resilient MPLS core with enterprise L3VPN, residential broadband, 5G standalone, protected voice, dual Internet transit, and SOC/NOC telemetry. Its public-safe field guide documents the trust boundaries, failure engineering, detection workflow, and complete static validation gate without publishing subscriber test material.
+                </p>
+              </div>
+
+              <div class="network-stats" aria-label="Telecom Super Lab summary">
+                <div><strong>185</strong><span>Files</span></div>
+                <div><strong>35</strong><span>Scenarios</span></div>
+                <div><strong>30</strong><span>Detections</span></div>
+              </div>
+
+              <dl>
+                <div>
+                  <dt>Technologies used</dt>
+                  <dd>OSPFv2/v3, BFD, MPLS/LDP, MP-BGP, VRFs, PPPoE/RADIUS, Open5GS, UERANSIM, SIP-TLS, SRTP, Suricata, Zeek, Splunk, Sentinel, and CrowdStrike LogScale</dd>
+                </div>
+
+                <div>
+                  <dt>Skills demonstrated</dt>
+                  <dd>Carrier architecture, telecom service separation, routing security, detection engineering, validation automation, bounded fault injection, recovery planning, and evidence design</dd>
+                </div>
+              </dl>
+
+              <div class="network-verification" aria-label="Static validation result">
+                <strong>388 assertions passed</strong>
+                <span>Complete package gate: 0 errors and 0 warnings. Runtime device and traffic evidence is the next stage.</span>
+              </div>
+
+              <div class="network-actions">
+                <a class="button button-primary" href="assets/Marc_Lavoie_Telecom_MPLS_5G_Cyber_Super_Lab_Report.pdf" target="_blank" rel="noopener">View Technical Report</a>
+                <a class="button button-secondary" href="assets/Marc_Lavoie_Telecom_MPLS_5G_Cyber_Super_Lab_Report.pdf" download>Download PDF</a>
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
