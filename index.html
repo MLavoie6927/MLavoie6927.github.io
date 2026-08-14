@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie cybersecurity portfolio featuring SOC analyst projects, SIEM labs, detection rules, digital forensics, cloud security labs, Windows hardening, scripting projects, certifications, public recognition, and resume information.">
+  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring SOC analyst projects, SIEM labs, detection rules, digital forensics, MPLS networking, cloud security labs, Windows hardening, scripting projects, certifications, public recognition, and resume information.">
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=digital-forensics-20260720">
+  <link rel="stylesheet" href="styles.css?v=network-engineering-20260814">
 </head>
 
 <body>
@@ -41,6 +41,7 @@
         <li><a href="#scripting-projects">Scripting</a></li>
         <li><a href="#cpp-projects">C++ Code</a></li>
         <li><a href="#digital-forensics">Forensics</a></li>
+        <li><a href="#network-engineering" aria-label="Network Engineering">Network Eng.</a></li>
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#cybrary-certificates">Cybrary Certs</a></li>
         <li><a href="#ine-certificates">INE Certs</a></li>
@@ -563,6 +564,57 @@
       </div>
     </section>
 
+    <section class="section" id="network-engineering">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Network Engineering</p>
+          <h2>Service-provider routing, MPLS forwarding, and VPN isolation.</h2>
+          <p>
+            A documented six-router lab that separates provider underlay reachability, label distribution, customer routing, and VPN route exchange into clear operational layers.
+          </p>
+        </div>
+
+        <article class="network-showcase">
+          <a class="network-report-preview" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener" aria-label="Open Marc Lavoie's MPLS Layer-3 VPN lab report">
+            <img src="assets/mpls-l3vpn-lab-cover.png" alt="Cover of Marc Lavoie's MPLS Layer-3 VPN network engineering lab report" loading="lazy">
+          </a>
+
+          <div class="project-content network-content">
+            <div class="network-summary">
+              <span class="project-kicker">Technical Field Guide</span>
+              <h3>MPLS Layer-3 VPN Service Provider Lab</h3>
+              <p>
+                This portfolio project connects two customer sites across a redundant provider core while keeping customer IPv4 prefixes out of the P-router routing tables. The report explains the design, staged implementation, label stack, verification workflow, and failure-isolation strategy.
+              </p>
+            </div>
+
+            <div class="network-stats" aria-label="MPLS lab summary">
+              <div><strong>6</strong><span>Routers</span></div>
+              <div><strong>2</strong><span>Core Paths</span></div>
+              <div><strong>1</strong><span>Customer VRF</span></div>
+            </div>
+
+            <dl>
+              <div>
+                <dt>Technologies used</dt>
+                <dd>Cisco IOS, OSPFv2 Area 0, MPLS LDP, MP-BGP VPNv4, VRF CUSTOMER_A, and CE-to-PE eBGP</dd>
+              </div>
+
+              <div>
+                <dt>Skills demonstrated</dt>
+                <dd>Service-provider topology design, protocol-role separation, label-switched forwarding, customer route isolation, validation planning, and layered troubleshooting</dd>
+              </div>
+            </dl>
+
+            <div class="network-actions">
+              <a class="button button-primary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener">View Lab Report</a>
+              <a class="button button-secondary" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" download>Download PDF</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="certifications">
       <div class="section-inner">
         <div class="section-heading">
@@ -1067,6 +1119,7 @@
         </div>
 
         <div class="contact-list contact-centered" aria-label="Contact links">
+          <a href="https://github.com/MLavoie6927" target="_blank" rel="noopener">https://mlavoie6927.github.io/</a>
           <a href="https://www.linkedin.com/in/marc-lavoie" target="_blank" rel="noopener">LinkedIn Profile</a>
         </div>
       </div>
