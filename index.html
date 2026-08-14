@@ -1200,6 +1200,580 @@
       </div>
     </section>
 
+    <section class="section" id="interview-questions">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Interview Preparation</p>
+          <h2>Common Cybersecurity Interview Questions &amp; Answers.</h2>
+          <p>
+            Direct answers to common SOC, incident response, detection engineering, networking, and security operations questions, supported by evidence throughout this portfolio.
+          </p>
+        </div>
+
+        <div class="interview-overview">
+          <div class="interview-method" aria-labelledby="investigation-method-title">
+            <p class="project-kicker">Investigation Method</p>
+            <h3 id="investigation-method-title">A repeatable path from alert to improvement.</h3>
+            <p>
+              My answers follow the same operating sequence I use in labs and documented investigations. Each decision should be supported by evidence, performed within authorization, and followed by a measurable improvement.
+            </p>
+
+            <ol class="interview-method-steps" aria-label="Security investigation sequence">
+              <li><span>01</span>Validate</li>
+              <li><span>02</span>Correlate</li>
+              <li><span>03</span>Scope</li>
+              <li><span>04</span>Investigate</li>
+              <li><span>05</span>Contain</li>
+              <li><span>06</span>Remediate</li>
+              <li><span>07</span>Improve</li>
+            </ol>
+          </div>
+
+          <figure class="cia-figure" aria-labelledby="cia-title">
+            <figcaption>
+              <span class="project-kicker">Security Decision Lens</span>
+              <strong id="cia-title">The CIA Triad</strong>
+            </figcaption>
+
+            <div class="cia-triangle" role="img" aria-label="CIA security triad with confidentiality, integrity, and availability">
+              <span class="cia-outline" aria-hidden="true"></span>
+              <div class="cia-node cia-confidentiality"><strong>C</strong><span>Confidentiality</span></div>
+              <div class="cia-node cia-integrity"><strong>I</strong><span>Integrity</span></div>
+              <div class="cia-node cia-availability"><strong>A</strong><span>Availability</span></div>
+              <div class="cia-center">CIA</div>
+            </div>
+
+            <ul class="cia-definitions">
+              <li><strong>Confidentiality</strong><span>Protect information from unauthorized access.</span></li>
+              <li><strong>Integrity</strong><span>Preserve the accuracy and trustworthiness of data.</span></li>
+              <li><strong>Availability</strong><span>Keep systems and services reliably accessible.</span></li>
+            </ul>
+          </figure>
+        </div>
+
+        <div class="interview-question-list">
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">01</span>
+              <span>Tell me about yourself.</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I am a cybersecurity analyst with a Bachelor of Applied Science in IT Networking - Cybersecurity, earned cum laude, and PISCES Analyst Professional training. My focus is blue-team operations, SIEM investigation, threat hunting, detection engineering, incident response, network security, and technical troubleshooting.
+                </p>
+                <p>
+                  During my PISCES internship, I developed cyber analytics skills from the ground up and earned public recognition for the quality of my investigation and reporting work. That experience demonstrated that I can learn a new discipline quickly, apply feedback, and produce analysis that others consider valuable.
+                </p>
+                <p>
+                  I like working directly with telemetry: SIEM events, endpoint processes, DNS activity, packet captures, authentication logs, IDS alerts, firewall records, and network flows. I also study the infrastructure underneath those alerts because understanding routing, protocols, segmentation, and service dependencies produces stronger investigations.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>PISCES monitoring experience, documented SOC investigations, multi-platform detection rules, endpoint telemetry, and network-security labs.</p>
+                <nav class="interview-links" aria-label="Evidence for tell me about yourself">
+                  <a href="#soc-projects">SOC Projects</a>
+                  <a href="#detection-rules">Detection Rules</a>
+                  <a href="#network-engineering">Network Engineering</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Apply this depth inside a production SOC, NOC, or security engineering team and take long-term ownership of operational results.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">02</span>
+              <span>Why do you want to work in cybersecurity?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  My interest began in the late 1990s and early 2000s when I helped recover computers affected by ransomware and other destructive malware. I found that I could diagnose the symptoms, remediate the problem, restore normal operation, and explain what had happened quickly. That experience made me realize this was work I could pursue professionally.
+                </p>
+                <p>
+                  Cybersecurity still fits the way I naturally think. I enjoy turning incomplete evidence into a defensible explanation: what happened, where it started, what was affected, how to contain it, and what should change so it is less likely to happen again.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Malware-oriented investigations, suspicious DNS analysis, Windows telemetry, digital forensics, containment planning, and remediation documentation.</p>
+                <nav class="interview-links" aria-label="Evidence for cybersecurity motivation">
+                  <a href="#soc-projects">Investigations</a>
+                  <a href="#digital-forensics">Digital Forensics</a>
+                  <a href="#windows-hardening">Windows Security</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Continue expanding production experience while preserving the curiosity and practical recovery mindset that started my career interest.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">03</span>
+              <span>Walk me through how you would investigate a security alert.</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I begin by validating the alert source, timestamp, affected host, user, detection logic, initial severity, and telemetry quality. I do not assume the alert title tells the full story. I then correlate endpoint processes, command lines, authentication, DNS, network connections, firewall and IDS events, hashes, registry activity, persistence, packet captures, and threat intelligence as available.
+                </p>
+                <p>
+                  From that evidence I build a timeline, determine scope and blast radius, map relevant behavior to MITRE ATT&amp;CK, and assess whether containment is required. I preserve important evidence, follow the organization's escalation and response authority, document findings, and review whether the detection or defensive control should be improved.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Sysmon, Microsoft Sentinel, Wazuh, ELK, Suricata, and packet-analysis work demonstrate different parts of this workflow.</p>
+                <nav class="interview-links" aria-label="Evidence for alert investigation">
+                  <a href="#soc-projects">Sysmon Analysis</a>
+                  <a href="#wazuh-elk">Wazuh / ELK</a>
+                  <a href="#detection-rules">Detection Engineering</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Operating boundary</strong><span>The exact sequence follows the employer's tooling, evidence-retention requirements, containment authority, and incident-response plan.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">04</span>
+              <span>How do you determine incident severity?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I do not assign severity from the alert name alone. I evaluate detection confidence, asset criticality, user privilege, number of affected systems, persistence, privilege escalation, credential access, lateral movement, command-and-control activity, data exposure, operational impact, and whether the attacker remains active.
+                </p>
+                <p>
+                  I also assess the CIA triad: whether confidentiality may have been lost, integrity may have been altered, or availability may be impaired. The technical assessment is then mapped into the organization's established severity matrix and escalation process.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Ransomware, DNS, privilege, lateral-movement, firewall, and availability scenarios demonstrate the difference between an isolated alert and a broader incident.</p>
+                <nav class="interview-links" aria-label="Evidence for incident severity">
+                  <a href="#soc-projects">SOC Projects</a>
+                  <a href="#firewall-security">Firewall Security</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Learn the employer's business impact definitions, critical-asset inventory, regulatory duties, and SEV classification during onboarding.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">05</span>
+              <span>What is a false positive and what is a false negative?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  A <strong>false positive</strong> occurs when a security control identifies legitimate activity as malicious. For example, an approved administrator script might trigger a suspicious PowerShell alert even though the activity is authorized. False positives consume analyst time and, when excessive, contribute to alert fatigue.
+                </p>
+                <p>
+                  A <strong>false negative</strong> occurs when malicious activity is present but the control fails to detect it. For example, an attacker may use an execution method that falls outside the rule's current logic. False negatives are usually the more serious risk because an attacker may continue operating while the organization believes no alert exists.
+                </p>
+                <p>
+                  The objective is not to eliminate one by blindly accepting more of the other. I would test detection logic against known benign and malicious behavior, measure the results, investigate misses, and tune the rule while preserving meaningful coverage.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>The detection examples document rule logic, required data sources, validation conditions, response context, and the need to tune without creating detection gaps.</p>
+                <nav class="interview-links" aria-label="Evidence for false positives and false negatives">
+                  <a href="#detection-rules">Detection Rules</a>
+                  <a href="#soc-projects">SOC Investigations</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Use labeled test cases, production baselines, and analyst feedback to measure both noisy alerts and missed behavior over time.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">06</span>
+              <span>How do you reduce false positives?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I first understand why the detection exists and compare the triggering behavior with legitimate baselines. I examine the user, asset role, process, destination, time, frequency, authentication context, related alerts, historical behavior, and approved administrative activity.
+                </p>
+                <p>
+                  I tune carefully by improving correlation, thresholds, time windows, asset context, or narrowly scoped exclusions. I do not solve alert fatigue by broadly suppressing detections. My preferred loop is detect, investigate, measure, tune, validate, and monitor.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>The detection-rule examples document correlation logic, required data sources, thresholds, MITRE mapping, response, and validation considerations.</p>
+                <nav class="interview-links" aria-label="Evidence for false positive reduction">
+                  <a href="#detection-rules">Detection Rules</a>
+                  <a href="#public-recognition">PISCES Recognition</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Use sustained production telemetry and analyst feedback before making aggressive exclusions or declaring a detection stable.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">07</span>
+              <span>What is the difference between SIEM and EDR?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  A SIEM provides broad visibility by aggregating and correlating telemetry from endpoints, servers, identity, DNS, cloud services, applications, firewalls, IDS/IPS, and network devices. It helps me understand relationships across the environment.
+                </p>
+                <p>
+                  EDR provides deeper endpoint visibility into process trees, command lines, files, registry changes, persistence, user activity, and network connections. Depending on the platform and my authorization, it can also support actions such as host isolation. In short, SIEM helps explain the environment; EDR helps interrogate and respond to the endpoint. Strong investigations often use both.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Sentinel, Wazuh, and ELK demonstrate centralized analysis; Sysmon and Defender or CrowdStrike-oriented work demonstrate endpoint-focused investigation concepts.</p>
+                <nav class="interview-links" aria-label="Evidence for SIEM and EDR">
+                  <a href="#wazuh-elk">SIEM Labs</a>
+                  <a href="#soc-projects">Endpoint Analysis</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Professional judgment</strong><span>Modern SIEM, EDR, XDR, and SOAR products overlap, so I focus on the telemetry and response capability needed for the investigation.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">08</span>
+              <span>Describe a technical problem you struggled with.</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  Building monitoring environments taught me that installing a security product is often easier than making every agent, interface, parser, service, firewall rule, and detection work together. I encountered failures involving log ingestion, packet visibility, ports, services, connectivity, parsing, and detection logic.
+                </p>
+                <p>
+                  I learned to avoid random changes and troubleshoot layer by layer: confirm the service, listener, network path, packet arrival, log generation, ingestion, parsing, and detection logic. That method turns a vague failure into a sequence of testable questions and creates better documentation for the next person.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Wazuh, ELK, Sysmon, Windows hardening, scripting, and network labs required cross-layer troubleshooting and verification.</p>
+                <nav class="interview-links" aria-label="Evidence for technical troubleshooting">
+                  <a href="#wazuh-elk">Wazuh / ELK</a>
+                  <a href="#windows-hardening">Windows</a>
+                  <a href="#network-engineering">Networking</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Apply the same method to high-availability production systems, redundant infrastructure, and larger service-provider environments.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">09</span>
+              <span>How would you communicate an incident to management?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I would lead with business-relevant facts: what happened, confirmed scope, current impact, containment status, confidence level, unanswered questions, and the next decision or action. I would not present management with a wall of logs or hide uncertainty behind technical language.
+                </p>
+                <blockquote>
+                  One employee endpoint is confirmed affected and has been contained. Two related systems remain under investigation. We have not confirmed data exfiltration. Authentication and network telemetry are being reviewed to determine whether credentials or additional assets were affected.
+                </blockquote>
+                <p>Behind that summary I would maintain the complete evidence, timeline, indicators, analyst notes, and technical recommendations.</p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>Technical reports throughout the portfolio separate findings, evidence, limitations, response recommendations, and operational next steps.</p>
+                <nav class="interview-links" aria-label="Evidence for incident communication">
+                  <a href="#soc-projects">Incident Reports</a>
+                  <a href="#network-engineering">Technical Reports</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Audience awareness</strong><span>A CISO, legal team, engineer, analyst, executive, and customer need different levels of detail without changing the underlying facts.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">10</span>
+              <span>How do you protect sensitive information when documenting work?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I treat documentation as part of the security boundary. I avoid exposing credentials, tokens, personal information, customer data, internal addressing, private architecture, or confidential configurations unless authorized and operationally necessary.
+                </p>
+                <p>
+                  Public work uses synthetic names, reserved addresses, sanitized indicators, and carefully reviewed screenshots. Organizational work follows classification, least privilege, need-to-know access, retention, incident-record, and chain-of-custody requirements. Forensic evidence should be preserved with integrity controls such as cryptographic hashes when required.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>The public reports and screenshots demonstrate detailed technical communication while excluding credentials, private logs, cloud identifiers, and internal network information.</p>
+                <nav class="interview-links" aria-label="Evidence for sensitive documentation">
+                  <a href="#digital-forensics">Forensics</a>
+                  <a href="#firewall-security">Public-Safe Playbook</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Operating boundary</strong><span>Legal, regulatory, law-enforcement, and litigation matters require the employer's formal evidence and counsel procedures.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question interview-question-featured">
+            <summary>
+              <span class="interview-number">11</span>
+              <span>Why should we hire you?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  You should hire me because I have deliberately studied beyond the normal entry-level curriculum. I routinely research advanced networking, detection engineering, incident response, telecom, firewall, and security architecture topics, including material commonly encountered at the graduate level. That additional depth helps me reason through tougher problems instead of depending on a memorized checklist.
+                </p>
+                <p>
+                  I also have the capacity to produce a high volume of careful work without treating quality as optional. This portfolio includes investigations, detection logic, scripts, architecture reports, validation evidence, remediation guidance, and public-safe documentation. I can move between endpoint, SIEM, network, firewall, packet, and routing evidence while keeping the final explanation understandable.
+                </p>
+                <p>
+                  I have already shown that learning speed can become visible results: I entered my PISCES internship learning cyber analytics from the ground up and earned public recognition for the quality of my analysis and reporting.
+                </p>
+                <p>
+                  I do not claim that research or a lab is identical to years of enterprise production ownership. What I offer is technical range, persistence, strong learning speed, disciplined documentation, and the willingness to stay with a difficult problem until I can deliver a defensible result.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>The breadth and depth of the portfolio demonstrate sustained output across SOC analysis, detection engineering, scripting, digital forensics, network engineering, telecom security, and firewall defense.</p>
+                <nav class="interview-links" aria-label="Evidence for why hire Marc Lavoie">
+                  <a href="#detection-rules">Detection Engineering</a>
+                  <a href="#network-engineering">Advanced Networking</a>
+                  <a href="#firewall-security">Firewall Defense</a>
+                  <a href="#public-recognition">Public Recognition</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>What I want to prove next</strong><span>That I can convert this preparation into dependable operational ownership, strong teamwork, and measurable security improvements for an employer.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">12</span>
+              <span>What would you do during your first 30, 60, and 90 days?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <div class="interview-timeline">
+                  <div><strong>First 30 days</strong><span>Learn the architecture, critical assets, network paths, security tools, normal behavior, escalation rules, incident process, change control, and why the environment was designed as it is.</span></div>
+                  <div><strong>Days 31-60</strong><span>Handle normal alerts and troubleshooting with increasing independence, correlate SIEM, EDR, DNS, firewall, IDS, flow, and packet evidence, and identify recurring visibility or tuning gaps.</span></div>
+                  <div><strong>Days 61-90</strong><span>Take dependable ownership within assigned authority, recognize when escalation is required, document complete investigations, and propose evidence-backed improvements through change control.</span></div>
+                </div>
+                <p>
+                  The goal is not to arrive and immediately redesign the environment. It is to learn first, earn trust through reliable work, and then improve controls with evidence and team approval.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>PISCES experience, layered troubleshooting, validation runbooks, and documented limitations demonstrate this learn-operate-improve progression.</p>
+                <nav class="interview-links" aria-label="Evidence for first ninety days">
+                  <a href="#public-recognition">PISCES Work</a>
+                  <a href="#network-engineering">Validation Runbooks</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Success measure</strong><span>By day 90, the team should trust me with normal responsibilities while knowing I will escalate decisions that exceed my authority or current evidence.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">13</span>
+              <span>How would you investigate and respond to a DDoS attack?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I would first identify the attack type and bottleneck: SYN, UDP, ICMP, DNS amplification, HTTP or HTTPS request flooding, connection exhaustion, or another Layer 3, 4, or 7 pattern. I would compare normal and current interface utilization, packets and connections per second, session state, TCP flags, source distribution, NetFlow or IPFIX, firewall counters, IDS alerts, packet captures, DNS or HTTP rates, and server health.
+                </p>
+                <p>
+                  If the circuit is not saturated, authorized controls may include zone or DoS protection, SYN cookies or proxying, rate limits, connection quotas, application controls, and restrictions on unnecessary services. If the upstream circuit is saturated, the firewall cannot recover that consumed bandwidth. I would coordinate approved upstream filtering, scrubbing, FlowSpec, RTBH, CDN, Anycast, or provider mitigation as the architecture permits.
+                </p>
+                <p><strong>Firewall controls protect systems behind the circuit. Upstream mitigation protects the circuit itself.</strong></p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>The ten-platform firewall playbook shows enabled flood controls, measured thresholds, verification, rollback, and the boundary between local and provider mitigation.</p>
+                <nav class="interview-links" aria-label="Evidence for DDoS response">
+                  <a href="#firewall-security">Firewall + DDoS Playbook</a>
+                  <a href="#network-engineering">Provider Networking</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Operating boundary</strong><span>Thresholds must be based on observed traffic and capacity; destructive testing belongs only in an isolated lab or explicitly authorized test window.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">14</span>
+              <span>How does your PISCES experience apply to a NOC or Security Engineer position?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  I entered the PISCES internship learning cyber analytics from the ground up and earned public recognition for the quality of my analysis and reporting. The experience taught me to investigate security across networks rather than looking at only one endpoint. Working with ELK and Suricata telemetry associated with municipal environments required reviewing suspicious outbound connections, DNS anomalies, unusual ports, encrypted traffic, and potentially malicious network behavior in context.
+                </p>
+                <p>
+                  That applies directly to NOC and security engineering because many incidents become network questions: which host initiated the traffic, which protocol and path were used, whether the firewall permitted it, whether the behavior is isolated or distributed, and whether the response requires endpoint containment, a firewall change, routing action, or provider assistance.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>PISCES recognition, ELK and Suricata analysis, DNS investigation, packet analysis, firewall defense, and routing labs show the connection between SOC and NOC work.</p>
+                <nav class="interview-links" aria-label="Evidence for PISCES and NOC security engineering">
+                  <a href="#public-recognition">PISCES Recognition</a>
+                  <a href="#wazuh-elk">ELK Analysis</a>
+                  <a href="#network-engineering">Network Engineering</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Develop this combined SOC and networking perspective through production incident, availability, routing, and security-control ownership.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">15</span>
+              <span>Which project best represents your abilities?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  My detection-engineering and full investigation projects together represent me best because they show both sides of the work. Detection engineering asks how I would find suspicious behavior; incident response asks what I would do after finding it.
+                </p>
+                <p>
+                  For a SOC or detection role, I would walk through the multi-platform phishing detections and explain the data sources, logic, MITRE mapping, alert grouping, response, and tuning. For a NOC or security engineering role, I would use the telecom super lab and firewall playbook to explain service separation, monitoring, resilience, DDoS boundaries, validation, and recovery. Together they show that I can connect security events to the infrastructure underneath them.
+                </p>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>These projects combine SIEM logic, endpoint and network evidence, packet reasoning, architecture, containment, remediation, and honest validation boundaries.</p>
+                <nav class="interview-links" aria-label="Evidence for representative project">
+                  <a href="#detection-rules">Detection Library</a>
+                  <a href="#network-engineering">Telecom Super Lab</a>
+                  <a href="#firewall-security">DDoS Defense</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Add production evidence and measured operational outcomes as those opportunities become available.</span></div>
+            </div>
+          </details>
+
+          <details class="interview-question">
+            <summary>
+              <span class="interview-number">16</span>
+              <span>What is subnetting, and why is it necessary?</span>
+              <span class="interview-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="interview-answer">
+              <div class="interview-response">
+                <h3>Answer</h3>
+                <p>
+                  Subnetting is the process of dividing a larger IP network into smaller logical networks by extending the network prefix. It improves address allocation, limits the size of broadcast domains, and makes routing, troubleshooting, and network ownership easier to manage.
+                </p>
+                <p>
+                  From a security perspective, subnetting creates logical boundaries between users, servers, management systems, voice devices, guests, and other trust zones. Those boundaries do not enforce security by themselves; routers, ACLs, and firewalls must control the traffic that is permitted to cross them.
+                </p>
+
+                <div class="subnet-example" aria-label="Example of dividing a slash 24 network into four slash 26 subnets">
+                  <div class="subnet-example-heading">
+                    <p class="project-kicker">Public-Safe Example</p>
+                    <p><code>192.0.2.0/24</code> contains 256 total addresses. Dividing it into four <code>/26</code> networks gives each subnet 64 total addresses and 62 usable host addresses.</p>
+                  </div>
+
+                  <div class="subnet-grid">
+                    <div>
+                      <strong>HR</strong>
+                      <code>192.0.2.0/26</code>
+                      <span>Hosts: 192.0.2.1 - 192.0.2.62</span>
+                      <span>Broadcast: 192.0.2.63</span>
+                    </div>
+                    <div>
+                      <strong>Finance</strong>
+                      <code>192.0.2.64/26</code>
+                      <span>Hosts: 192.0.2.65 - 192.0.2.126</span>
+                      <span>Broadcast: 192.0.2.127</span>
+                    </div>
+                    <div>
+                      <strong>IT</strong>
+                      <code>192.0.2.128/26</code>
+                      <span>Hosts: 192.0.2.129 - 192.0.2.190</span>
+                      <span>Broadcast: 192.0.2.191</span>
+                    </div>
+                    <div>
+                      <strong>Servers</strong>
+                      <code>192.0.2.192/26</code>
+                      <span>Hosts: 192.0.2.193 - 192.0.2.254</span>
+                      <span>Broadcast: 192.0.2.255</span>
+                    </div>
+                  </div>
+
+                  <div class="subnet-policy" aria-label="Example inter-subnet security policies">
+                    <div><code>HR &rarr; Internet</code><span class="policy-allow">Allow</span></div>
+                    <div><code>HR &rarr; Finance</code><span class="policy-deny">Deny</span></div>
+                    <div><code>User VLANs &rarr; Servers</code><span>Required ports only</span></div>
+                    <div><code>IT &rarr; Network devices</code><span>Authorized management protocols</span></div>
+                    <div><code>Guest &rarr; Internal networks</code><span class="policy-deny">Deny</span></div>
+                  </div>
+                </div>
+
+                <blockquote>
+                  Subnetting is not only about conserving IP addresses. It creates manageable broadcast domains, simplifies routing and troubleshooting, and establishes logical boundaries where VLANs, ACLs, and firewalls can enforce security policy.
+                </blockquote>
+              </div>
+              <div class="interview-evidence">
+                <h3>Portfolio evidence</h3>
+                <p>My network-engineering labs use customer VRFs, service separation, routed boundaries, and firewall policy to demonstrate how addressing and segmentation support secure operations.</p>
+                <nav class="interview-links" aria-label="Evidence for subnetting answer">
+                  <a href="#network-engineering">Network Engineering</a>
+                  <a href="#firewall-security">Firewall &amp; DDoS Defense</a>
+                  <a href="#gcp-labs">Cloud Security Labs</a>
+                </nav>
+              </div>
+              <div class="interview-next-step"><strong>Next step</strong><span>Continue applying VLSM, route summarization, IPv6 prefix planning, and change-controlled segmentation in larger production-style environments.</span></div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-muted" id="resume">
       <div class="section-inner">
         <div class="section-heading">
