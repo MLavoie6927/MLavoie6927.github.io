@@ -571,11 +571,56 @@
           <p class="eyebrow">Network Engineering</p>
           <h2>Carrier routing, service isolation, and security engineering.</h2>
           <p>
-            Two documented provider labs progress from a focused MPLS Layer-3 VPN to an integrated telecom architecture with broadband, 5G, protected voice, detection engineering, and evidence-driven validation.
+            Three documented provider labs progress from a focused MPLS Layer-3 VPN to an integrated telecom architecture and a flagship NOC Security Engineering environment that joins routing, firewall operations, detection, incident response, and automation.
           </p>
         </div>
 
         <div class="network-projects">
+          <article class="network-showcase network-showcase-featured">
+            <a class="network-report-preview network-report-preview-landscape" href="projects/service-provider-noc-security-lab/" aria-label="Open Marc Lavoie's featured Service Provider NOC Security Engineering Lab">
+              <img src="projects/service-provider-noc-security-lab/architecture.svg" alt="Architecture of Marc Lavoie's simulated service-provider NOC security engineering lab" loading="lazy">
+            </a>
+
+            <div class="project-content network-content">
+              <div class="network-summary">
+                <span class="featured-label">Featured Project</span>
+                <span class="project-kicker">NOC + Security Engineering</span>
+                <h3>Service Provider NOC Security Engineering Lab</h3>
+                <p>
+                  A complete simulated carrier environment that connects OSPF, BFD, MPLS/LDP, MP-BGP L3VPN, strict customer routing policy, PAN-OS-style NGFW controls, SIEM and IDS detection, DDoS response, digital forensics, service restoration, and Python health automation. Its interactive dashboard demonstrates five operating states while the technical package provides every device configuration, validation command, incident decision, and rollback step.
+                </p>
+              </div>
+
+              <div class="network-stats" aria-label="Service Provider NOC Security Lab summary">
+                <div><strong>10</strong><span>Network Roles</span></div>
+                <div><strong>5</strong><span>Scenarios</span></div>
+                <div><strong>67</strong><span>Static Checks</span></div>
+              </div>
+
+              <dl>
+                <div>
+                  <dt>Technologies used</dt>
+                  <dd>IOS XE-style routing, OSPF, BFD, MPLS/LDP, MP-BGP VPNv4, VRFs, eBGP policy, PAN-OS-style NAT and DoS controls, Splunk/ELK, Suricata, Sysmon, NetFlow/IPFIX, Wireshark, and Python</dd>
+                </div>
+
+                <div>
+                  <dt>Skills demonstrated</dt>
+                  <dd>Carrier troubleshooting, customer isolation, routing security, firewall engineering, DDoS capacity decisions, multi-source investigation, chain of custody, incident leadership, recovery validation, and technical communication</dd>
+                </div>
+              </dl>
+
+              <div class="network-verification" aria-label="Service Provider NOC Security Lab validation result">
+                <strong>67 static assertions and 5 scenario self-tests passed</strong>
+                <span>The package is complete at the design and offline-validation level. Device boot, protocol convergence, PAN-OS commit, and live packet evidence remain explicitly identified authorized runtime stages.</span>
+              </div>
+
+              <div class="network-actions">
+                <a class="button button-primary" href="projects/service-provider-noc-security-lab/">Open Interactive Project</a>
+                <a class="button button-secondary" href="projects/service-provider-noc-security-lab/ROUTER-CONFIGURATIONS.txt">View Complete Configurations</a>
+              </div>
+            </div>
+          </article>
+
           <article class="network-showcase">
             <a class="network-report-preview" href="assets/Marc_Lavoie_MPLS_L3VPN_Lab_Report.pdf" target="_blank" rel="noopener" aria-label="Open Marc Lavoie's MPLS Layer-3 VPN lab report">
               <img src="assets/mpls-l3vpn-lab-cover.png" alt="Cover of Marc Lavoie's MPLS Layer-3 VPN network engineering lab report" loading="lazy">
@@ -1677,16 +1722,17 @@
               <div class="interview-response">
                 <h3>Answer</h3>
                 <p>
-                  My detection-engineering and full investigation projects together represent me best because they show both sides of the work. Detection engineering asks how I would find suspicious behavior; incident response asks what I would do after finding it.
+                  My Service Provider NOC Security Engineering Lab best represents my range because it connects the network that delivers the service to the controls and evidence that protect it. The project moves from OSPF, BFD, MPLS, MP-BGP, VRFs, and eBGP policy through NGFW operations, SIEM and IDS monitoring, packet analysis, incident response, digital forensics, service restoration, and automation.
                 </p>
                 <p>
-                  For a SOC or detection role, I would walk through the multi-platform phishing detections and explain the data sources, logic, MITRE mapping, alert grouping, response, and tuning. For a NOC or security engineering role, I would use the telecom super lab and firewall playbook to explain service separation, monitoring, resilience, DDoS boundaries, validation, and recovery. Together they show that I can connect security events to the infrastructure underneath them.
+                  I would walk an interviewer through a customer DDoS event and show how I determine whether the bottleneck is the application, firewall, customer link, or upstream circuit; then I would show the routing-failure and rejected-prefix scenarios to demonstrate that I can distinguish availability problems from security incidents. The complete configurations, detections, evidence process, rollback steps, and offline health-check script make the design reviewable instead of relying on a diagram alone.
                 </p>
               </div>
               <div class="interview-evidence">
                 <h3>Portfolio evidence</h3>
-                <p>These projects combine SIEM logic, endpoint and network evidence, packet reasoning, architecture, containment, remediation, and honest validation boundaries.</p>
+                <p>The featured lab combines carrier routing, firewall policy, SIEM logic, endpoint and network evidence, packet reasoning, containment, recovery, automation, and explicit validation boundaries.</p>
                 <nav class="interview-links" aria-label="Evidence for representative project">
+                  <a href="projects/service-provider-noc-security-lab/">Featured NOC Security Lab</a>
                   <a href="#detection-rules">Detection Library</a>
                   <a href="#network-engineering">Telecom Super Lab</a>
                   <a href="#firewall-security">DDoS Defense</a>

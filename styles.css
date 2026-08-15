@@ -852,6 +852,26 @@ main {
   box-shadow: var(--shadow);
 }
 
+.network-showcase-featured {
+  border-color: rgba(54, 211, 153, 0.72);
+  box-shadow: 0 20px 52px rgba(19, 181, 123, 0.11);
+}
+
+.network-showcase-featured .network-report-preview {
+  background: #050c13;
+}
+
+.featured-label {
+  justify-self: start;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 .network-showcase-reverse {
   grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
 }
