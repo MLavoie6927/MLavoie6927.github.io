@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+  <title id="title">Service Provider NOC Security Engineering Lab architecture</title>
+  <desc id="desc">A simulated Internet edge, Palo Alto firewall, redundant MPLS core, isolated customer VPNs, and SOC and NOC telemetry stack.</desc>
+  <defs>
+    <style>
+      .zone { fill: #09131e; stroke: #27445c; stroke-width: 2; }
+      .zone-title { fill: #7f9db7; font: 700 16px Arial, sans-serif; letter-spacing: 1px; }
+      .node { fill: #111f2d; stroke: #4bb4ff; stroke-width: 2; }
+      .node-core { fill: #10251f; stroke: #36d399; stroke-width: 2; }
+      .node-alert { fill: #25191c; stroke: #ff7e70; stroke-width: 2; }
+      .node-customer { fill: #192038; stroke: #9ba9ff; stroke-width: 2; }
+      .node-text { fill: #f3f7fb; font: 700 15px Arial, sans-serif; text-anchor: middle; }
+      .node-sub { fill: #9db0c1; font: 12px Arial, sans-serif; text-anchor: middle; }
+      .link { fill: none; stroke: #4bb4ff; stroke-width: 3; }
+      .core-link { fill: none; stroke: #36d399; stroke-width: 4; }
+      .telemetry { fill: none; stroke: #f7c948; stroke-width: 2; stroke-dasharray: 8 7; }
+      .vrf-a { fill: none; stroke: #9ba9ff; stroke-width: 3; }
+      .vrf-b { fill: none; stroke: #ff9a8f; stroke-width: 3; }
+      .label { fill: #9db0c1; font: 12px Arial, sans-serif; text-anchor: middle; }
+      .pill { fill: #0b1722; stroke: #27445c; stroke-width: 1; }
+      .pill-text { fill: #c6d4df; font: 700 11px Arial, sans-serif; text-anchor: middle; }
+    </style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#4bb4ff"/>
+    </marker>
+    <marker id="arrow-yellow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f7c948"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="820" fill="#060b12"/>
+  <rect x="30" y="34" width="250" height="276" rx="8" class="zone"/>
+  <rect x="305" y="34" width="300" height="276" rx="8" class="zone"/>
+  <rect x="630" y="34" width="740" height="466" rx="8" class="zone"/>
+  <rect x="30" y="530" width="900" height="254" rx="8" class="zone"/>
+  <rect x="955" y="530" width="415" height="254" rx="8" class="zone"/>
+
+  <text x="55" y="66" class="zone-title">SIMULATED INTERNET</text>
+  <text x="330" y="66" class="zone-title">SECURITY EDGE</text>
+  <text x="655" y="66" class="zone-title">REDUNDANT MPLS / IP CORE</text>
+  <text x="55" y="562" class="zone-title">ISOLATED CUSTOMER SERVICES</text>
+  <text x="980" y="562" class="zone-title">SOC / NOC OBSERVABILITY</text>
+
+  <path d="M155 146 L355 146" class="link" marker-end="url(#arrow-blue)"/>
+  <path d="M455 146 L680 146" class="link" marker-end="url(#arrow-blue)"/>
+  <path d="M780 146 L860 146" class="core-link"/>
+  <path d="M960 146 L1050 146" class="core-link"/>
+  <path d="M1150 146 L1240 146" class="core-link"/>
+  <path d="M910 196 L910 282" class="core-link"/>
+  <path d="M1100 196 L1100 282" class="core-link"/>
+  <path d="M910 332 L1100 332" class="core-link"/>
+  <path d="M880 196 C820 280 760 340 760 450" class="core-link"/>
+  <path d="M940 196 C960 300 1000 350 1010 450" class="core-link"/>
+  <path d="M1290 196 C1290 300 1240 350 1240 450" class="core-link"/>
+  <path d="M780 196 L910 282" class="core-link"/>
+  <path d="M1240 196 L1100 282" class="core-link"/>
+
+  <path d="M760 500 L300 610" class="vrf-a"/>
+  <path d="M1240 500 L470 610" class="vrf-a"/>
+  <path d="M1010 500 L720 610" class="vrf-b"/>
+
+  <path d="M455 196 C520 390 1030 390 1080 610" class="telemetry" marker-end="url(#arrow-yellow)"/>
+  <path d="M760 196 C760 430 1120 420 1160 610" class="telemetry" marker-end="url(#arrow-yellow)"/>
+  <path d="M1005 382 C1010 500 1235 500 1240 610" class="telemetry" marker-end="url(#arrow-yellow)"/>
+
+  <g transform="translate(70 96)">
+    <rect width="170" height="100" rx="7" class="node"/>
+    <text x="85" y="38" class="node-text">ISP-1</text>
+    <text x="85" y="62" class="node-sub">AS 64501</text>
+    <text x="85" y="82" class="node-sub">203.0.113.1/30</text>
+  </g>
+  <g transform="translate(355 96)">
+    <rect width="200" height="100" rx="7" class="node"/>
+    <text x="100" y="32" class="node-text">EDGE-1</text>
+    <text x="100" y="56" class="node-sub">eBGP / prefix filtering</text>
+    <text x="100" y="78" class="node-sub">RTBH / upstream handoff</text>
+  </g>
+  <g transform="translate(680 96)">
+    <rect width="100" height="100" rx="7" class="node-alert"/>
+    <text x="50" y="32" class="node-text">NGFW-1</text>
+    <text x="50" y="56" class="node-sub">NAT / VPN</text>
+    <text x="50" y="78" class="node-sub">DoS policy</text>
+  </g>
+
+  <g transform="translate(860 96)">
+    <rect width="100" height="100" rx="7" class="node-core"/>
+    <text x="50" y="40" class="node-text">PE1</text>
+    <text x="50" y="66" class="node-sub">MP-BGP</text>
+  </g>
+  <g transform="translate(1050 96)">
+    <rect width="100" height="100" rx="7" class="node-core"/>
+    <text x="50" y="40" class="node-text">P1</text>
+    <text x="50" y="66" class="node-sub">OSPF / LDP</text>
+  </g>
+  <g transform="translate(1240 96)">
+    <rect width="100" height="100" rx="7" class="node-core"/>
+    <text x="50" y="40" class="node-text">PE2</text>
+    <text x="50" y="66" class="node-sub">MP-BGP</text>
+  </g>
+  <g transform="translate(860 282)">
+    <rect width="100" height="100" rx="7" class="node-core"/>
+    <text x="50" y="40" class="node-text">P2</text>
+    <text x="50" y="66" class="node-sub">OSPF / LDP</text>
+  </g>
+  <g transform="translate(1050 282)">
+    <rect width="100" height="100" rx="7" class="node-core"/>
+    <text x="50" y="40" class="node-text">P3</text>
+    <text x="50" y="66" class="node-sub">OSPF / LDP</text>
+  </g>
+  <g transform="translate(710 450)">
+    <rect width="100" height="50" rx="7" class="node-core"/>
+    <text x="50" y="31" class="node-text">CE-A1</text>
+  </g>
+  <g transform="translate(1190 450)">
+    <rect width="100" height="50" rx="7" class="node-core"/>
+    <text x="50" y="31" class="node-text">CE-A2</text>
+  </g>
+  <g transform="translate(960 450)">
+    <rect width="100" height="50" rx="7" class="node-core"/>
+    <text x="50" y="31" class="node-text">CE-B1</text>
+  </g>
+
+  <g transform="translate(85 610)">
+    <rect width="430" height="125" rx="7" class="node-customer"/>
+    <text x="215" y="34" class="node-text">CUSTOMER A / VRF CUST_A</text>
+    <text x="215" y="61" class="node-sub">Site 1: 10.50.10.0/24 | Site 2: 10.50.20.0/24</text>
+    <text x="215" y="84" class="node-sub">Public web VIP 198.51.100.50 | DNS 10.50.10.53</text>
+    <text x="215" y="106" class="node-sub">RD 65000:100 | RT 65000:100</text>
+  </g>
+  <g transform="translate(545 610)">
+    <rect width="345" height="125" rx="7" class="node-alert"/>
+    <text x="172" y="34" class="node-text">CUSTOMER B / VRF CUST_B</text>
+    <text x="172" y="61" class="node-sub">Site 1: 10.60.10.0/24</text>
+    <text x="172" y="84" class="node-sub">Explicitly isolated from CUST_A</text>
+    <text x="172" y="106" class="node-sub">RD 65000:200 | RT 65000:200</text>
+  </g>
+
+  <g transform="translate(1000 610)">
+    <rect width="320" height="125" rx="7" class="node"/>
+    <text x="160" y="31" class="node-text">SECURITY STACK</text>
+    <text x="160" y="57" class="node-sub">Splunk / ELK | Suricata | Sysmon</text>
+    <text x="160" y="80" class="node-sub">NetFlow / IPFIX | DNS | NGFW logs</text>
+    <text x="160" y="103" class="node-sub">Wireshark | automation | evidence vault</text>
+  </g>
+
+  <g transform="translate(68 232)">
+    <rect width="175" height="38" rx="19" class="pill"/>
+    <text x="87" y="24" class="pill-text">SIMULATION ONLY</text>
+  </g>
+  <g transform="translate(347 232)">
+    <rect width="216" height="38" rx="19" class="pill"/>
+    <text x="108" y="24" class="pill-text">DOCUMENTATION ADDRESSES</text>
+  </g>
+  <g transform="translate(860 408)">
+    <rect width="290" height="34" rx="17" class="pill"/>
+    <text x="145" y="22" class="pill-text">OSPF AREA 0 + MPLS LDP + BFD</text>
+  </g>
+</svg>

@@ -1,0 +1,360 @@
+SERVICE PROVIDER NOC SECURITY ENGINEERING LAB
+PAN-OS-style NGFW candidate configuration
+Author: Marc Lavoie
+
+IMPORTANT BOUNDARY
+==================
+This is a public-safe candidate configuration for an isolated PAN-OS lab VM.
+PAN-OS object paths and supported flood settings can vary by release, license,
+and management plane. Review the candidate diff, validate each command on the
+authorized target release, and use formal change control before commit.
+
+No credentials, API keys, certificates, production thresholds, serial numbers,
+or organization-specific identifiers belong in this file.
+
+POLICY INTENT
+=============
+1. Permit public HTTP/HTTPS only to PUBLIC-WEB-VIP 198.51.100.50.
+2. Permit authoritative UDP/TCP DNS only to PUBLIC-DNS-VIP 198.51.100.53.
+3. Deny unsolicited IPv4 ICMP from untrust to public services.
+4. Deny all unmatched untrust traffic.
+5. Log at session start and end for permitted public services.
+6. Attach threat-prevention and file-analysis profiles where licensed.
+7. Apply zone and classified DoS protection with lab baseline thresholds.
+8. Preserve internal troubleshooting from an authorized management zone.
+9. Escalate upstream when attack volume saturates the external circuit.
+
+ADDRESSING
+==========
+ethernet1/1  untrust             192.0.2.2/30       gateway 192.0.2.1
+ethernet1/2  customer-services   10.254.0.1/29      PE1 .2 / PE2 .3
+ethernet1/3  management          192.0.2.129/28     optional lab management
+
+Public web VIP                  198.51.100.50/32
+Public DNS VIP                  198.51.100.53/32
+Translated web server          10.50.10.10/32
+Translated DNS server          10.50.10.53/32
+Customer A aggregate           10.50.0.0/16
+
+
+STAGE 0 - SNAPSHOT AND CHANGE RECORD
+====================================
+> show system info
+> show config running
+> show jobs all
+> show high-availability state
+> request config-lock add comment "NOC security lab staged change"
+
+Export a named configuration snapshot in the GUI or with the supported API for
+the lab release. Record UTC start time, operator, approver, validation plan,
+rollback trigger, and expected customer impact.
+
+
+STAGE 1 - INTERFACES, ZONES, AND ROUTING
+========================================
+> configure
+# set network interface ethernet ethernet1/1 layer3 ip 192.0.2.2/30
+# set network interface ethernet ethernet1/1 comment "EDGE-1 transit"
+# set network interface ethernet ethernet1/2 layer3 ip 10.254.0.1/29
+# set network interface ethernet ethernet1/2 comment "CUST_A service transit"
+# set network interface ethernet ethernet1/3 layer3 ip 192.0.2.129/28
+# set network interface ethernet ethernet1/3 comment "isolated lab management"
+
+# set zone untrust network layer3 ethernet1/1
+# set zone customer-services network layer3 ethernet1/2
+# set zone management network layer3 ethernet1/3
+
+# set network virtual-router default interface [ ethernet1/1 ethernet1/2 ]
+# set network virtual-router default routing-table ip static-route DEFAULT destination 0.0.0.0/0
+# set network virtual-router default routing-table ip static-route DEFAULT interface ethernet1/1
+# set network virtual-router default routing-table ip static-route DEFAULT nexthop ip-address 192.0.2.1
+# set network virtual-router default routing-table ip static-route DEFAULT metric 10
+
+# set network virtual-router default routing-table ip static-route CUST-A-PRIMARY destination 10.50.0.0/16
+# set network virtual-router default routing-table ip static-route CUST-A-PRIMARY interface ethernet1/2
+# set network virtual-router default routing-table ip static-route CUST-A-PRIMARY nexthop ip-address 10.254.0.2
+# set network virtual-router default routing-table ip static-route CUST-A-PRIMARY metric 10
+
+# set network virtual-router default routing-table ip static-route CUST-A-BACKUP destination 10.50.0.0/16
+# set network virtual-router default routing-table ip static-route CUST-A-BACKUP interface ethernet1/2
+# set network virtual-router default routing-table ip static-route CUST-A-BACKUP nexthop ip-address 10.254.0.3
+# set network virtual-router default routing-table ip static-route CUST-A-BACKUP metric 20
+
+
+STAGE 2 - ADDRESS AND SERVICE OBJECTS
+=====================================
+# set address PUBLIC-WEB-VIP ip-netmask 198.51.100.50/32
+# set address PUBLIC-DNS-VIP ip-netmask 198.51.100.53/32
+# set address CUST-A-WEB01 ip-netmask 10.50.10.10/32
+# set address CUST-A-DNS01 ip-netmask 10.50.10.53/32
+# set address CUST-A-NETWORKS ip-netmask 10.50.0.0/16
+# set address LAB-MGMT-NET ip-netmask 192.0.2.128/28
+
+# set service TCP-80 protocol tcp port 80
+# set service TCP-443 protocol tcp port 443
+# set service TCP-53 protocol tcp port 53
+# set service UDP-53 protocol udp port 53
+# set service-group PUBLIC-WEB-SERVICES members [ TCP-80 TCP-443 ]
+# set service-group PUBLIC-DNS-SERVICES members [ UDP-53 TCP-53 ]
+
+
+STAGE 3 - DESTINATION NAT
+=========================
+# set rulebase nat rules DNAT-WEB-HTTP from untrust
+# set rulebase nat rules DNAT-WEB-HTTP to untrust
+# set rulebase nat rules DNAT-WEB-HTTP source any
+# set rulebase nat rules DNAT-WEB-HTTP destination PUBLIC-WEB-VIP
+# set rulebase nat rules DNAT-WEB-HTTP service TCP-80
+# set rulebase nat rules DNAT-WEB-HTTP destination-translation translated-address CUST-A-WEB01
+# set rulebase nat rules DNAT-WEB-HTTP destination-translation translated-port 80
+
+# set rulebase nat rules DNAT-WEB-HTTPS from untrust
+# set rulebase nat rules DNAT-WEB-HTTPS to untrust
+# set rulebase nat rules DNAT-WEB-HTTPS source any
+# set rulebase nat rules DNAT-WEB-HTTPS destination PUBLIC-WEB-VIP
+# set rulebase nat rules DNAT-WEB-HTTPS service TCP-443
+# set rulebase nat rules DNAT-WEB-HTTPS destination-translation translated-address CUST-A-WEB01
+# set rulebase nat rules DNAT-WEB-HTTPS destination-translation translated-port 443
+
+# set rulebase nat rules DNAT-DNS-UDP from untrust
+# set rulebase nat rules DNAT-DNS-UDP to untrust
+# set rulebase nat rules DNAT-DNS-UDP source any
+# set rulebase nat rules DNAT-DNS-UDP destination PUBLIC-DNS-VIP
+# set rulebase nat rules DNAT-DNS-UDP service UDP-53
+# set rulebase nat rules DNAT-DNS-UDP destination-translation translated-address CUST-A-DNS01
+# set rulebase nat rules DNAT-DNS-UDP destination-translation translated-port 53
+
+# set rulebase nat rules DNAT-DNS-TCP from untrust
+# set rulebase nat rules DNAT-DNS-TCP to untrust
+# set rulebase nat rules DNAT-DNS-TCP source any
+# set rulebase nat rules DNAT-DNS-TCP destination PUBLIC-DNS-VIP
+# set rulebase nat rules DNAT-DNS-TCP service TCP-53
+# set rulebase nat rules DNAT-DNS-TCP destination-translation translated-address CUST-A-DNS01
+# set rulebase nat rules DNAT-DNS-TCP destination-translation translated-port 53
+
+
+STAGE 4 - LOG FORWARDING AND THREAT PROFILES
+=============================================
+The following names represent policy intent. Create destinations only with
+lab-local certificates and credentials, never values from a public repository.
+
+# set shared log-settings syslog NOC-SIEM-SYSLOG server SIEM transport UDP
+# set shared log-settings syslog NOC-SIEM-SYSLOG server SIEM port 514
+# set shared log-settings syslog NOC-SIEM-SYSLOG server SIEM server 10.50.10.40
+# set shared log-settings profiles NOC-SIEM match TRAFFIC log-type traffic
+# set shared log-settings profiles NOC-SIEM match TRAFFIC send-syslog NOC-SIEM-SYSLOG
+# set shared log-settings profiles NOC-SIEM match THREAT log-type threat
+# set shared log-settings profiles NOC-SIEM match THREAT send-syslog NOC-SIEM-SYSLOG
+# set shared log-settings profiles NOC-SIEM match SYSTEM log-type system
+# set shared log-settings profiles NOC-SIEM match SYSTEM send-syslog NOC-SIEM-SYSLOG
+
+# set profiles vulnerability NOC-VULNERABILITY rules HIGH-CRITICAL severity [ high critical ]
+# set profiles vulnerability NOC-VULNERABILITY rules HIGH-CRITICAL action reset-both
+# set profiles vulnerability NOC-VULNERABILITY rules MEDIUM severity medium
+# set profiles vulnerability NOC-VULNERABILITY rules MEDIUM action alert
+# set profiles spyware NOC-ANTISPYWARE rules HIGH-CRITICAL severity [ high critical ]
+# set profiles spyware NOC-ANTISPYWARE rules HIGH-CRITICAL action reset-both
+# set profiles virus NOC-ANTIVIRUS decoder http action reset-both
+# set profiles virus NOC-ANTIVIRUS decoder ssl action reset-both
+# set profile-group NOC-THREAT-PROFILES virus NOC-ANTIVIRUS
+# set profile-group NOC-THREAT-PROFILES spyware NOC-ANTISPYWARE
+# set profile-group NOC-THREAT-PROFILES vulnerability NOC-VULNERABILITY
+
+If subscriptions are unavailable, use alert-only controls supported by the lab
+license and state that limitation in the evidence record.
+
+
+STAGE 5 - ZONE AND DOS PROTECTION
+=================================
+These are intentionally low LAB thresholds so the controls can be observed
+without generating unsafe traffic. Production thresholds must come from
+measured baselines, capacity, application behavior, and release validation.
+
+# set network profiles zone-protection-profile UNTRUST-ZPP flood tcp-syn enable yes
+# set network profiles zone-protection-profile UNTRUST-ZPP flood tcp-syn action syn-cookies
+# set network profiles zone-protection-profile UNTRUST-ZPP flood tcp-syn alarm-rate 350
+# set network profiles zone-protection-profile UNTRUST-ZPP flood tcp-syn activate-rate 450
+# set network profiles zone-protection-profile UNTRUST-ZPP flood tcp-syn maximal-rate 800
+# set network profiles zone-protection-profile UNTRUST-ZPP flood udp enable yes
+# set network profiles zone-protection-profile UNTRUST-ZPP flood udp alarm-rate 500
+# set network profiles zone-protection-profile UNTRUST-ZPP flood udp activate-rate 650
+# set network profiles zone-protection-profile UNTRUST-ZPP flood udp maximal-rate 1000
+# set network profiles zone-protection-profile UNTRUST-ZPP flood icmp enable yes
+# set network profiles zone-protection-profile UNTRUST-ZPP flood icmp alarm-rate 100
+# set network profiles zone-protection-profile UNTRUST-ZPP flood icmp activate-rate 150
+# set network profiles zone-protection-profile UNTRUST-ZPP flood icmp maximal-rate 250
+# set network profiles zone-protection-profile UNTRUST-ZPP scan tcp-port-scan enable yes
+# set network profiles zone-protection-profile UNTRUST-ZPP scan tcp-port-scan action block
+# set zone untrust network zone-protection-profile UNTRUST-ZPP
+
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate tcp-syn enable yes
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate tcp-syn action syn-cookies
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate tcp-syn alarm-rate 250
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate tcp-syn activate-rate 350
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate tcp-syn maximal-rate 600
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate udp enable yes
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate udp alarm-rate 350
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate udp activate-rate 500
+# set network profiles dos-protection PUBLIC-SERVICE-DOS aggregate udp maximal-rate 800
+
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES from untrust
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES to customer-services
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES source any
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES destination [ PUBLIC-WEB-VIP PUBLIC-DNS-VIP ]
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES action protect
+# set rulebase dos rules PROTECT-PUBLIC-SERVICES aggregate PUBLIC-SERVICE-DOS
+
+
+STAGE 6 - SECURITY POLICY IN EXPLICIT ORDER
+============================================
+# set rulebase security rules DENY-UNTRUST-ICMP from untrust
+# set rulebase security rules DENY-UNTRUST-ICMP to customer-services
+# set rulebase security rules DENY-UNTRUST-ICMP source any
+# set rulebase security rules DENY-UNTRUST-ICMP destination [ PUBLIC-WEB-VIP PUBLIC-DNS-VIP ]
+# set rulebase security rules DENY-UNTRUST-ICMP application ping
+# set rulebase security rules DENY-UNTRUST-ICMP service application-default
+# set rulebase security rules DENY-UNTRUST-ICMP action deny
+# set rulebase security rules DENY-UNTRUST-ICMP log-start yes
+# set rulebase security rules DENY-UNTRUST-ICMP log-end yes
+# set rulebase security rules DENY-UNTRUST-ICMP log-setting NOC-SIEM
+
+# set rulebase security rules ALLOW-PUBLIC-WEB from untrust
+# set rulebase security rules ALLOW-PUBLIC-WEB to customer-services
+# set rulebase security rules ALLOW-PUBLIC-WEB source any
+# set rulebase security rules ALLOW-PUBLIC-WEB destination PUBLIC-WEB-VIP
+# set rulebase security rules ALLOW-PUBLIC-WEB application [ web-browsing ssl ]
+# set rulebase security rules ALLOW-PUBLIC-WEB service application-default
+# set rulebase security rules ALLOW-PUBLIC-WEB action allow
+# set rulebase security rules ALLOW-PUBLIC-WEB profile-setting group NOC-THREAT-PROFILES
+# set rulebase security rules ALLOW-PUBLIC-WEB log-start yes
+# set rulebase security rules ALLOW-PUBLIC-WEB log-end yes
+# set rulebase security rules ALLOW-PUBLIC-WEB log-setting NOC-SIEM
+
+# set rulebase security rules ALLOW-PUBLIC-DNS from untrust
+# set rulebase security rules ALLOW-PUBLIC-DNS to customer-services
+# set rulebase security rules ALLOW-PUBLIC-DNS source any
+# set rulebase security rules ALLOW-PUBLIC-DNS destination PUBLIC-DNS-VIP
+# set rulebase security rules ALLOW-PUBLIC-DNS application dns
+# set rulebase security rules ALLOW-PUBLIC-DNS service application-default
+# set rulebase security rules ALLOW-PUBLIC-DNS action allow
+# set rulebase security rules ALLOW-PUBLIC-DNS profile-setting group NOC-THREAT-PROFILES
+# set rulebase security rules ALLOW-PUBLIC-DNS log-start yes
+# set rulebase security rules ALLOW-PUBLIC-DNS log-end yes
+# set rulebase security rules ALLOW-PUBLIC-DNS log-setting NOC-SIEM
+
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS from management
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS to customer-services
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS source LAB-MGMT-NET
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS destination CUST-A-NETWORKS
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS application [ ping ssh ]
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS service application-default
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS action allow
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS log-end yes
+# set rulebase security rules ALLOW-MGMT-DIAGNOSTICS log-setting NOC-SIEM
+
+# set rulebase security rules DEFAULT-DENY from any
+# set rulebase security rules DEFAULT-DENY to any
+# set rulebase security rules DEFAULT-DENY source any
+# set rulebase security rules DEFAULT-DENY destination any
+# set rulebase security rules DEFAULT-DENY application any
+# set rulebase security rules DEFAULT-DENY service any
+# set rulebase security rules DEFAULT-DENY action deny
+# set rulebase security rules DEFAULT-DENY log-start yes
+# set rulebase security rules DEFAULT-DENY log-end yes
+# set rulebase security rules DEFAULT-DENY log-setting NOC-SIEM
+
+SECURITY POLICY NOTE
+====================
+PAN-OS evaluates security policy using the original destination address but the
+post-NAT destination zone. Confirm rule matches with policy test commands on the
+specific release. Rule order must remain:
+  1. DENY-UNTRUST-ICMP
+  2. ALLOW-PUBLIC-WEB
+  3. ALLOW-PUBLIC-DNS
+  4. ALLOW-MGMT-DIAGNOSTICS
+  5. DEFAULT-DENY
+
+
+STAGE 7 - VALIDATE CANDIDATE, COMMIT, AND VERIFY
+================================================
+# validate full
+# show config diff
+
+Review all changes before proceeding. In the isolated lab only:
+# commit description "NOC security lab: public services, logging, and bounded flood protection"
+
+Operational verification:
+> show jobs processed
+> show routing route
+> show session all filter destination 10.50.10.10
+> show session all filter destination 10.50.10.53
+> show counter global filter severity drop
+> show counter global filter delta yes
+> show running security-policy
+> show running nat-policy
+> show log traffic direction equal backward
+> show log threat
+> show log system severity greater-than-or-equal high
+> show dos-protection rule all
+> show zone-protection zone untrust
+
+Policy match tests vary by PAN-OS release. Use the supported test command or GUI
+policy match tool to verify:
+  untrust -> PUBLIC-WEB-VIP tcp/80      ALLOW-PUBLIC-WEB
+  untrust -> PUBLIC-WEB-VIP tcp/443     ALLOW-PUBLIC-WEB
+  untrust -> PUBLIC-DNS-VIP udp/53      ALLOW-PUBLIC-DNS
+  untrust -> PUBLIC-DNS-VIP tcp/53      ALLOW-PUBLIC-DNS
+  untrust -> PUBLIC-WEB-VIP icmp         DENY-UNTRUST-ICMP
+  untrust -> any other internal service  DEFAULT-DENY
+
+
+BOUNDED LAB TRAFFIC VALIDATION
+==============================
+Do not use unrestricted flood flags. Generate only a small, bounded sample
+against the isolated documentation VIP. Example from a lab traffic host:
+
+nping --tcp -p 443 --flags syn --rate 100 --count 1000 198.51.100.50
+
+Guardrails:
+- Destination must resolve only inside the isolated lab.
+- Maximum rate in this runbook is 100 packets/second.
+- Maximum count is 1,000 packets.
+- Confirm the target is owned and the test window is approved.
+- Stop immediately if traffic leaves the lab or affects unrelated services.
+
+For high-rate dashboard examples, use sample_telemetry.json. Those values are
+synthetic and do not require generating 12,844 SYN packets per second.
+
+
+ROLLBACK
+========
+Rollback trigger examples:
+- Public web or DNS validation fails after the approved change window begins.
+- Unexpected rule match, route loss, session exhaustion, or management loss.
+- Logging pipeline failure removes required visibility.
+- Customer impact exceeds the approved scope.
+
+Rollback process:
+1. Use out-of-band access.
+2. Load the pre-change named configuration snapshot.
+3. Review the diff to ensure only the intended candidate changes are removed.
+4. Commit the rollback.
+5. Re-run routing, NAT, security-policy, service, and SIEM validation.
+6. Preserve before/after evidence and open a problem record.
+
+Do not use a blind rollback if unrelated changes were committed after the
+snapshot. In that case create a targeted candidate rollback under change control.
+
+
+ENGINEERING CONCLUSIONS
+=======================
+- A port allowlist is not DDoS protection; allowed applications can be flooded.
+- Zone protection protects the firewall zone; classified DoS policy protects
+  selected services and sources/destinations.
+- A firewall behind a saturated circuit cannot recover consumed upstream capacity.
+- Upstream scrubbing, provider ACLs, BGP FlowSpec, or RTBH must be pre-authorized.
+- Denying untrusted IPv4 ICMP is scoped here to public-service ingress. Internal
+  diagnostics remain available from an authorized management zone.
+- Thresholds are engineering values derived from baselines, capacity, and risk,
+  not numbers copied unchanged from a portfolio project.
+

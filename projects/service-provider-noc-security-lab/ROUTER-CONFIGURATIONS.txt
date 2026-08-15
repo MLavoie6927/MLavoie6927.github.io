@@ -1,0 +1,859 @@
+SERVICE PROVIDER NOC SECURITY ENGINEERING LAB
+Complete IOS XE-style candidate configurations
+Author: Marc Lavoie
+
+STATUS AND SAFETY
+=================
+These are public-safe, vendor-aware lab configurations for an isolated
+GNS3/EVE-NG-style environment. Documentation ranges and generic RFC1918
+addresses are used. Validate syntax against the exact authorized image and
+release before deployment. No configuration in this file was taken from an
+employer or production network.
+
+TOPOLOGY INVENTORY
+==================
+ISP-1    AS 64501  Simulated upstream and RTBH receiver
+EDGE-1   AS 64500  Customer/provider Internet edge
+P1/P2/P3 AS 65000  OSPF/LDP provider transport
+PE1/PE2  AS 65000  MP-BGP VPNv4 provider edge
+CE-A1/A2 AS 65101  Customer A sites
+CE-B1    AS 65201  Customer B site
+NGFW-1             Security edge; configured in PALO-ALTO-CONFIGURATION.txt
+
+ADDRESS PLAN
+============
+ISP-1 <-> EDGE-1       203.0.113.0/30    ISP .1 / EDGE .2
+EDGE-1 <-> NGFW-1      192.0.2.0/30      EDGE .1 / FW .2
+Public service prefix  198.51.100.0/24   WEB VIP .50 / DNS VIP .53
+
+PE1 <-> P1             10.255.0.0/31     PE1 .0 / P1 .1
+PE1 <-> P2             10.255.0.2/31     PE1 .2 / P2 .3
+P1  <-> P3             10.255.0.4/31     P1 .4  / P3 .5
+P2  <-> P3             10.255.0.6/31     P2 .6  / P3 .7
+P3  <-> PE2            10.255.0.8/31     P3 .8  / PE2 .9
+P1  <-> PE2            10.255.0.10/31    P1 .10 / PE2 .11
+
+PE1 loopback           10.255.255.11/32
+PE2 loopback           10.255.255.12/32
+P1 loopback            10.255.255.1/32
+P2 loopback            10.255.255.2/32
+P3 loopback            10.255.255.3/32
+
+PE1 <-> CE-A1          172.20.101.0/30    PE .1 / CE .2
+PE2 <-> CE-A2          172.20.102.0/30    PE .1 / CE .2
+PE1 <-> CE-B1          172.20.201.0/30    PE .1 / CE .2
+NGFW <-> PE1/PE2       10.254.0.0/29      FW .1 / PE1 .2 / PE2 .3
+
+Customer A Site 1      10.50.10.0/24     CE .1 / WEB .10 / DNS .53
+Customer A Site 2      10.50.20.0/24     CE .1
+Customer B Site 1      10.60.10.0/24     CE .1
+
+VRF CUST_A             RD 65000:100 / RT 65000:100
+VRF CUST_B             RD 65000:200 / RT 65000:200
+
+LINK MAP
+========
+Device  Interface       Peer    Peer Interface
+PE1     Gi0/0           P1      Gi0/0
+PE1     Gi0/1           P2      Gi0/0
+PE1     Gi0/2           CE-A1   Gi0/0
+PE1     Gi0/3           NGFW    ethernet1/2 through VLAN 310
+PE1     Gi0/4           CE-B1   Gi0/0
+P1      Gi0/1           P3      Gi0/0
+P1      Gi0/2           PE2     Gi0/1
+P2      Gi0/1           P3      Gi0/1
+P3      Gi0/2           PE2     Gi0/0
+PE2     Gi0/2           CE-A2   Gi0/0
+PE2     Gi0/3           NGFW    ethernet1/2 through VLAN 310
+
+COMMON BASELINE - APPLY TO EVERY IOS XE NODE
+=============================================
+configure terminal
+ no ip http server
+ no ip http secure-server
+ service timestamps debug datetime msec localtime show-timezone
+ service timestamps log datetime msec localtime show-timezone
+ service password-encryption
+ login block-for 120 attempts 5 within 60
+ login on-failure log
+ login on-success log
+ ip domain name noc-lab.example
+ username marc privilege 15 secret <SET-IN-LAB-ONLY>
+ aaa new-model
+ aaa authentication login default local
+ aaa authorization exec default local
+ crypto key generate rsa modulus 3072
+ ip ssh version 2
+ ip ssh time-out 30
+ ip ssh authentication-retries 3
+ clock timezone UTC 0 0
+ ntp server 192.0.2.123 prefer
+ logging buffered 65536 informational
+ logging host 10.50.10.40 transport udp port 514
+ logging trap informational
+ archive
+  path flash:archive-$h-$t
+  write-memory
+ exit
+ line console 0
+  logging synchronous
+  exec-timeout 10 0
+ exit
+ line vty 0 4
+  transport input ssh
+  exec-timeout 10 0
+  login authentication default
+ exit
+end
+write memory
+
+NOTE: Replace the placeholder local secret at the console. Never place a real
+password in a public repository. In a production environment use centralized
+TACACS+/RADIUS, an approved management VRF, and organization PKI.
+
+
+P1 - PROVIDER ROUTER
+====================
+configure terminal
+ hostname P1
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.1 255.255.255.255
+  ip ospf 100 area 0
+ exit
+ interface GigabitEthernet0/0
+  description P1_to_PE1
+  ip address 10.255.0.1 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description P1_to_P3
+  ip address 10.255.0.4 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/2
+  description P1_to_PE2
+  ip address 10.255.0.10 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ router ospf 100
+  router-id 10.255.255.1
+  passive-interface Loopback0
+  mpls ldp sync
+ exit
+ mpls label protocol ldp
+ mpls ldp router-id Loopback0 force
+end
+write memory
+
+
+P2 - PROVIDER ROUTER
+====================
+configure terminal
+ hostname P2
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.2 255.255.255.255
+  ip ospf 100 area 0
+ exit
+ interface GigabitEthernet0/0
+  description P2_to_PE1
+  ip address 10.255.0.3 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description P2_to_P3
+  ip address 10.255.0.6 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ router ospf 100
+  router-id 10.255.255.2
+  passive-interface Loopback0
+  mpls ldp sync
+ exit
+ mpls label protocol ldp
+ mpls ldp router-id Loopback0 force
+end
+write memory
+
+
+P3 - PROVIDER ROUTER
+====================
+configure terminal
+ hostname P3
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.3 255.255.255.255
+  ip ospf 100 area 0
+ exit
+ interface GigabitEthernet0/0
+  description P3_to_P1
+  ip address 10.255.0.5 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description P3_to_P2
+  ip address 10.255.0.7 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/2
+  description P3_to_PE2
+  ip address 10.255.0.8 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ router ospf 100
+  router-id 10.255.255.3
+  passive-interface Loopback0
+  mpls ldp sync
+ exit
+ mpls label protocol ldp
+ mpls ldp router-id Loopback0 force
+end
+write memory
+
+
+PE1 - PROVIDER EDGE
+===================
+configure terminal
+ hostname PE1
+ vrf definition CUST_A
+  rd 65000:100
+  address-family ipv4
+   route-target export 65000:100
+   route-target import 65000:100
+  exit-address-family
+ exit
+ vrf definition CUST_B
+  rd 65000:200
+  address-family ipv4
+   route-target export 65000:200
+   route-target import 65000:200
+  exit-address-family
+ exit
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.11 255.255.255.255
+  ip ospf 100 area 0
+ exit
+ interface GigabitEthernet0/0
+  description PE1_to_P1
+  ip address 10.255.0.0 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description PE1_to_P2
+  ip address 10.255.0.2 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/2
+  description PE1_to_CE-A1
+  vrf forwarding CUST_A
+  ip address 172.20.101.1 255.255.255.252
+  no shutdown
+ exit
+ interface GigabitEthernet0/3
+  description PE1_to_NGFW_CUST-A_TRANSIT
+  vrf forwarding CUST_A
+  ip address 10.254.0.2 255.255.255.248
+  no shutdown
+ exit
+ interface GigabitEthernet0/4
+  description PE1_to_CE-B1
+  vrf forwarding CUST_B
+  ip address 172.20.201.1 255.255.255.252
+  no shutdown
+ exit
+ ip prefix-list CUST-A-SITE1-IN seq 5 permit 10.50.10.0/24
+ ip prefix-list CUST-A-SITE1-IN seq 100 deny 0.0.0.0/0 le 32
+ ip prefix-list CUST-B-SITE1-IN seq 5 permit 10.60.10.0/24
+ ip prefix-list CUST-B-SITE1-IN seq 100 deny 0.0.0.0/0 le 32
+ route-map CUST-A-SITE1-IN permit 10
+  match ip address prefix-list CUST-A-SITE1-IN
+ exit
+ route-map CUST-A-SITE1-IN deny 100
+ exit
+ route-map CUST-B-SITE1-IN permit 10
+  match ip address prefix-list CUST-B-SITE1-IN
+ exit
+ route-map CUST-B-SITE1-IN deny 100
+ exit
+ ip route vrf CUST_A 0.0.0.0 0.0.0.0 10.254.0.1 name CUST-A-INTERNET-DEFAULT
+ ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ route-map EXPORT-CUST-A-DEFAULT permit 10
+  match ip address prefix-list DEFAULT-ONLY
+ exit
+ router ospf 100
+  router-id 10.255.255.11
+  passive-interface Loopback0
+  mpls ldp sync
+ exit
+ mpls label protocol ldp
+ mpls ldp router-id Loopback0 force
+ router bgp 65000
+  bgp log-neighbor-changes
+  no bgp default ipv4-unicast
+  neighbor 10.255.255.12 remote-as 65000
+  neighbor 10.255.255.12 update-source Loopback0
+  address-family vpnv4
+   neighbor 10.255.255.12 activate
+   neighbor 10.255.255.12 send-community both
+  exit-address-family
+  address-family ipv4 vrf CUST_A
+   redistribute static route-map EXPORT-CUST-A-DEFAULT
+   neighbor 172.20.101.2 remote-as 65101
+   neighbor 172.20.101.2 description CE-A1
+   neighbor 172.20.101.2 activate
+   neighbor 172.20.101.2 soft-reconfiguration inbound
+   neighbor 172.20.101.2 route-map CUST-A-SITE1-IN in
+   neighbor 172.20.101.2 maximum-prefix 5 80 restart 5
+  exit-address-family
+  address-family ipv4 vrf CUST_B
+   neighbor 172.20.201.2 remote-as 65201
+   neighbor 172.20.201.2 description CE-B1
+   neighbor 172.20.201.2 activate
+   neighbor 172.20.201.2 soft-reconfiguration inbound
+   neighbor 172.20.201.2 route-map CUST-B-SITE1-IN in
+   neighbor 172.20.201.2 maximum-prefix 5 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+PE2 - PROVIDER EDGE
+===================
+configure terminal
+ hostname PE2
+ vrf definition CUST_A
+  rd 65000:100
+  address-family ipv4
+   route-target export 65000:100
+   route-target import 65000:100
+  exit-address-family
+ exit
+ vrf definition CUST_B
+  rd 65000:200
+  address-family ipv4
+   route-target export 65000:200
+   route-target import 65000:200
+  exit-address-family
+ exit
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.12 255.255.255.255
+  ip ospf 100 area 0
+ exit
+ interface GigabitEthernet0/0
+  description PE2_to_P3
+  ip address 10.255.0.9 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description PE2_to_P1
+  ip address 10.255.0.11 255.255.255.254
+  ip ospf network point-to-point
+  ip ospf 100 area 0
+  ip ospf bfd
+  bfd interval 300 min_rx 300 multiplier 3
+  mpls ip
+  no shutdown
+ exit
+ interface GigabitEthernet0/2
+  description PE2_to_CE-A2
+  vrf forwarding CUST_A
+  ip address 172.20.102.1 255.255.255.252
+  no shutdown
+ exit
+ interface GigabitEthernet0/3
+  description PE2_to_NGFW_CUST-A_TRANSIT
+  vrf forwarding CUST_A
+  ip address 10.254.0.3 255.255.255.248
+  no shutdown
+ exit
+ ip prefix-list CUST-A-SITE2-IN seq 5 permit 10.50.20.0/24
+ ip prefix-list CUST-A-SITE2-IN seq 100 deny 0.0.0.0/0 le 32
+ route-map CUST-A-SITE2-IN permit 10
+  match ip address prefix-list CUST-A-SITE2-IN
+ exit
+ route-map CUST-A-SITE2-IN deny 100
+ exit
+ ip route vrf CUST_A 0.0.0.0 0.0.0.0 10.254.0.1 name CUST-A-INTERNET-DEFAULT
+ ip prefix-list DEFAULT-ONLY seq 5 permit 0.0.0.0/0
+ route-map EXPORT-CUST-A-DEFAULT permit 10
+  match ip address prefix-list DEFAULT-ONLY
+ exit
+ router ospf 100
+  router-id 10.255.255.12
+  passive-interface Loopback0
+  mpls ldp sync
+ exit
+ mpls label protocol ldp
+ mpls ldp router-id Loopback0 force
+ router bgp 65000
+  bgp log-neighbor-changes
+  no bgp default ipv4-unicast
+  neighbor 10.255.255.11 remote-as 65000
+  neighbor 10.255.255.11 update-source Loopback0
+  address-family vpnv4
+   neighbor 10.255.255.11 activate
+   neighbor 10.255.255.11 send-community both
+  exit-address-family
+  address-family ipv4 vrf CUST_A
+   redistribute static route-map EXPORT-CUST-A-DEFAULT
+   neighbor 172.20.102.2 remote-as 65101
+   neighbor 172.20.102.2 description CE-A2
+   neighbor 172.20.102.2 activate
+   neighbor 172.20.102.2 soft-reconfiguration inbound
+   neighbor 172.20.102.2 route-map CUST-A-SITE2-IN in
+   neighbor 172.20.102.2 maximum-prefix 5 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+CE-A1 - CUSTOMER A SITE 1
+=========================
+configure terminal
+ hostname CE-A1
+ interface GigabitEthernet0/0
+  description CE-A1_to_PE1
+  ip address 172.20.101.2 255.255.255.252
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description CUSTOMER_A_SITE1_LAN
+  ip address 10.50.10.1 255.255.255.0
+  no shutdown
+ exit
+ ip prefix-list CUST-A-OUT seq 5 permit 10.50.10.0/24
+ ip prefix-list CUST-A-OUT seq 100 deny 0.0.0.0/0 le 32
+ route-map CUST-A-OUT permit 10
+  match ip address prefix-list CUST-A-OUT
+ exit
+ route-map CUST-A-OUT deny 100
+ exit
+ router bgp 65101
+  bgp log-neighbor-changes
+  neighbor 172.20.101.1 remote-as 65000
+  address-family ipv4
+   network 10.50.10.0 mask 255.255.255.0
+   neighbor 172.20.101.1 activate
+   neighbor 172.20.101.1 route-map CUST-A-OUT out
+   neighbor 172.20.101.1 maximum-prefix 10 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+CE-A2 - CUSTOMER A SITE 2
+=========================
+configure terminal
+ hostname CE-A2
+ interface GigabitEthernet0/0
+  description CE-A2_to_PE2
+  ip address 172.20.102.2 255.255.255.252
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description CUSTOMER_A_SITE2_LAN
+  ip address 10.50.20.1 255.255.255.0
+  no shutdown
+ exit
+ ip prefix-list CUST-A-OUT seq 5 permit 10.50.20.0/24
+ ip prefix-list CUST-A-OUT seq 100 deny 0.0.0.0/0 le 32
+ route-map CUST-A-OUT permit 10
+  match ip address prefix-list CUST-A-OUT
+ exit
+ route-map CUST-A-OUT deny 100
+ exit
+ router bgp 65101
+  bgp log-neighbor-changes
+  neighbor 172.20.102.1 remote-as 65000
+  address-family ipv4
+   network 10.50.20.0 mask 255.255.255.0
+   neighbor 172.20.102.1 activate
+   neighbor 172.20.102.1 route-map CUST-A-OUT out
+   neighbor 172.20.102.1 maximum-prefix 10 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+CE-B1 - CUSTOMER B SITE 1
+=========================
+configure terminal
+ hostname CE-B1
+ interface GigabitEthernet0/0
+  description CE-B1_to_PE1
+  ip address 172.20.201.2 255.255.255.252
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description CUSTOMER_B_SITE1_LAN
+  ip address 10.60.10.1 255.255.255.0
+  no shutdown
+ exit
+ ip prefix-list CUST-B-OUT seq 5 permit 10.60.10.0/24
+ ip prefix-list CUST-B-OUT seq 100 deny 0.0.0.0/0 le 32
+ route-map CUST-B-OUT permit 10
+  match ip address prefix-list CUST-B-OUT
+ exit
+ route-map CUST-B-OUT deny 100
+ exit
+ router bgp 65201
+  bgp log-neighbor-changes
+  neighbor 172.20.201.1 remote-as 65000
+  address-family ipv4
+   network 10.60.10.0 mask 255.255.255.0
+   neighbor 172.20.201.1 activate
+   neighbor 172.20.201.1 route-map CUST-B-OUT out
+   neighbor 172.20.201.1 maximum-prefix 10 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+EDGE-1 - INTERNET EDGE
+======================
+configure terminal
+ hostname EDGE-1
+ interface Loopback0
+  description ROUTER_ID
+  ip address 10.255.255.21 255.255.255.255
+ exit
+ interface GigabitEthernet0/0
+  description EDGE-1_to_ISP-1
+  ip address 203.0.113.2 255.255.255.252
+  no ip redirects
+  no ip proxy-arp
+  no shutdown
+ exit
+ interface GigabitEthernet0/1
+  description EDGE-1_to_NGFW-1_OUTSIDE
+  ip address 192.0.2.1 255.255.255.252
+  no ip redirects
+  no ip proxy-arp
+  no shutdown
+ exit
+ ip route 198.51.100.0 255.255.255.0 192.0.2.2 name PUBLIC-SERVICE-PREFIX
+ ip route 192.0.2.254 255.255.255.255 Null0 name RTBH-DISCARD-NEXT-HOP
+ ip prefix-list ISP-IN seq 5 permit 0.0.0.0/0
+ ip prefix-list ISP-IN seq 100 deny 0.0.0.0/0 le 32
+ ip prefix-list ISP-OUT seq 5 permit 198.51.100.0/24
+ ip prefix-list ISP-OUT seq 100 deny 0.0.0.0/0 le 32
+ route-map ISP-IN permit 10
+  match ip address prefix-list ISP-IN
+ exit
+ route-map ISP-IN deny 100
+ exit
+ route-map ISP-OUT permit 10
+  match ip address prefix-list ISP-OUT
+ exit
+ route-map ISP-OUT deny 100
+ exit
+ router bgp 64500
+  bgp router-id 10.255.255.21
+  bgp log-neighbor-changes
+  neighbor 203.0.113.1 remote-as 64501
+  neighbor 203.0.113.1 description ISP-1
+  address-family ipv4
+   network 198.51.100.0 mask 255.255.255.0
+   neighbor 203.0.113.1 activate
+   neighbor 203.0.113.1 route-map ISP-IN in
+   neighbor 203.0.113.1 route-map ISP-OUT out
+   neighbor 203.0.113.1 maximum-prefix 5 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+ISP-1 - SIMULATED UPSTREAM
+==========================
+configure terminal
+ hostname ISP-1
+ interface Loopback0
+  description SIMULATED_INTERNET_TEST_SOURCE
+  ip address 203.0.113.100 255.255.255.255
+ exit
+ interface GigabitEthernet0/0
+  description ISP-1_to_EDGE-1
+  ip address 203.0.113.1 255.255.255.252
+  no shutdown
+ exit
+ ip route 0.0.0.0 0.0.0.0 Null0 250 name SIMULATED-INTERNET-DEFAULT
+ ip route 192.0.2.254 255.255.255.255 Null0 name RTBH-DISCARD
+ ip prefix-list CUSTOMER-IN seq 5 permit 198.51.100.0/24
+ ip prefix-list CUSTOMER-IN seq 10 permit 198.51.100.0/24 ge 32
+ ip prefix-list CUSTOMER-IN seq 100 deny 0.0.0.0/0 le 32
+ route-map CUSTOMER-IN permit 10
+  match ip address prefix-list CUSTOMER-IN
+ exit
+ route-map CUSTOMER-IN deny 100
+ exit
+ ip prefix-list DEFAULT-OUT seq 5 permit 0.0.0.0/0
+ route-map DEFAULT-OUT permit 10
+  match ip address prefix-list DEFAULT-OUT
+ exit
+ router bgp 64501
+  bgp router-id 203.0.113.100
+  bgp log-neighbor-changes
+  neighbor 203.0.113.2 remote-as 64500
+  address-family ipv4
+   network 0.0.0.0
+   neighbor 203.0.113.2 activate
+   neighbor 203.0.113.2 route-map CUSTOMER-IN in
+   neighbor 203.0.113.2 route-map DEFAULT-OUT out
+   neighbor 203.0.113.2 maximum-prefix 10 80 restart 5
+  exit-address-family
+ exit
+end
+write memory
+
+
+OPTIONAL RTBH TRIGGER - AUTHORIZED LAB ONLY
+===========================================
+Use only for the lab-owned public VIP after documenting the service impact.
+The upstream must have a pre-agreed discard community and policy. This sample
+uses 64501:666 as a lab convention; it is not a universal provider community.
+
+On EDGE-1:
+configure terminal
+ ip route 198.51.100.50 255.255.255.255 Null0 tag 666 name IR-01-RTBH
+ ip prefix-list RTBH-HOST seq 5 permit 198.51.100.50/32
+ route-map RTBH-EXPORT permit 10
+  match ip address prefix-list RTBH-HOST
+  set community 64501:666 additive
+ exit
+ router bgp 64500
+  address-family ipv4
+   redistribute static route-map RTBH-EXPORT
+  exit-address-family
+ exit
+end
+
+On ISP-1, pre-stage and validate the provider-side policy:
+configure terminal
+ ip community-list standard CUSTOMER-RTBH permit 64501:666
+ ip prefix-list CUSTOMER-RTBH-HOSTS seq 5 permit 198.51.100.0/24 ge 32
+ route-map CUSTOMER-IN permit 5
+  match community CUSTOMER-RTBH
+  match ip address prefix-list CUSTOMER-RTBH-HOSTS
+  set ip next-hop 192.0.2.254
+ exit
+ route-map CUSTOMER-IN permit 10
+  match ip address prefix-list CUSTOMER-IN
+ exit
+end
+
+Verify:
+show bgp ipv4 unicast 198.51.100.50/32
+show ip route 198.51.100.50
+show route-map CUSTOMER-IN
+show ip bgp community 64501:666
+
+Rollback EDGE-1:
+configure terminal
+ no ip route 198.51.100.50 255.255.255.255 Null0 tag 666
+ router bgp 64500
+  address-family ipv4
+   no redistribute static route-map RTBH-EXPORT
+  exit-address-family
+ exit
+end
+
+
+NORMAL-OPERATION VALIDATION
+===========================
+Run and save these outputs before fault or security testing.
+
+Core routing and label transport:
+show interfaces description
+show ip interface brief
+show ip ospf neighbor
+show ip ospf database router
+show bfd neighbors details
+show ip route ospf
+show mpls interfaces
+show mpls ldp neighbor
+show mpls ldp bindings
+show mpls forwarding-table
+
+VPN control and forwarding planes:
+show vrf
+show bgp vpnv4 unicast all summary
+show bgp vpnv4 unicast all
+show ip route vrf CUST_A
+show ip route vrf CUST_B
+show ip cef vrf CUST_A 10.50.20.10 detail
+show ip cef vrf CUST_B 10.60.10.10 detail
+
+Routing security:
+show ip prefix-list
+show route-map
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 routes
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 received-routes
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 advertised-routes
+show bgp ipv4 unicast neighbors 203.0.113.1 routes
+
+Customer A positive test from a Site 1 host:
+ping 10.50.20.10
+traceroute 10.50.20.10
+
+Customer separation negative test from Customer A:
+ping 10.60.10.10
+traceroute 10.60.10.10
+Expected: no route or administratively prohibited. No CUST_B prefix may appear
+in the CUST_A RIB, CEF table, or VPNv4 import set.
+
+Public-service test from ISP-1:
+ping 198.51.100.50 source Loopback0
+Expected: ICMP denied by NGFW policy.
+Application tests originate from a simulated external Linux host, not IOS:
+curl -I --connect-timeout 5 http://198.51.100.50/
+curl -Ik --connect-timeout 5 https://198.51.100.50/
+dig @198.51.100.53 lab-web.example A +time=2 +tries=1
+
+
+ROUTING-FAILURE TEST - ISOLATED LAB ONLY
+========================================
+Baseline on PE1:
+show ip ospf neighbor
+show bfd neighbors
+show ip route 10.255.255.12
+show mpls forwarding-table 10.255.255.12 255.255.255.255
+traceroute vrf CUST_A 10.50.20.10 source 10.50.10.1
+
+Inject PE1-to-P1 link failure on PE1:
+configure terminal
+ interface GigabitEthernet0/0
+  shutdown
+ exit
+end
+
+Observe:
+show logging | include OSPF|BFD|GigabitEthernet0/0
+show ip ospf neighbor
+show bfd neighbors
+show ip route 10.255.255.12
+show mpls forwarding-table 10.255.255.12 255.255.255.255
+traceroute vrf CUST_A 10.50.20.10 source 10.50.10.1
+
+Expected: traffic shifts through PE1-P2-P3-PE2. Record packet loss and
+convergence time. Do not claim sub-second convergence until measured.
+
+Rollback:
+configure terminal
+ interface GigabitEthernet0/0
+  no shutdown
+ exit
+end
+show ip ospf neighbor
+show bfd neighbors
+show mpls ldp neighbor
+
+
+ROUTE-LEAK NEGATIVE TEST - ISOLATED LAB ONLY
+============================================
+The normal CE outbound route-map prevents this update. For a controlled
+negative test, add a default locally on CE-A1 while preserving the outbound
+allowlist.
+
+CE-A1:
+configure terminal
+ ip route 0.0.0.0 0.0.0.0 Null0 250 name NEGATIVE-TEST-DEFAULT
+ router bgp 65101
+  address-family ipv4
+   network 0.0.0.0
+  exit-address-family
+ exit
+end
+
+PE1 expected verification:
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 received-routes
+show ip route vrf CUST_A 0.0.0.0
+show logging | include BGP|prefix|route-map
+
+Expected: the customer default is denied by CUST-A-SITE1-IN. The only default
+in CUST_A remains the controlled NGFW default sourced by the provider.
+
+Rollback CE-A1:
+configure terminal
+ router bgp 65101
+  address-family ipv4
+   no network 0.0.0.0
+  exit-address-family
+ exit
+ no ip route 0.0.0.0 0.0.0.0 Null0 250
+end
+
+
+PRE-CHANGE / POST-CHANGE CHECKLIST
+==================================
+1. Save running configuration and current show-command evidence.
+2. Record change owner, approver, window, scope, and rollback trigger.
+3. Confirm out-of-band access before changing routing or firewall state.
+4. Apply one stage at a time.
+5. Validate control plane, forwarding plane, service, and telemetry.
+6. Run positive and negative tests.
+7. Roll back immediately if the defined trigger is reached.
+8. Save final configuration and evidence with UTC timestamps and SHA-256.

@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "project": "Service Provider NOC Security Engineering Lab",
+    "owner": "Marc Lavoie",
+    "synthetic": true,
+    "classification": "public-safe simulated telemetry",
+    "generated_utc": "2026-08-14T14:32:18Z",
+    "schema_version": 1
+  },
+  "thresholds": {
+    "circuit_utilization_warning_percent": 75.0,
+    "circuit_utilization_critical_percent": 90.0,
+    "syn_rate_warning_pps": 500,
+    "syn_rate_critical_pps": 6000,
+    "packet_loss_warning_percent": 1.0,
+    "latency_warning_ms": 50.0,
+    "siem_stale_seconds": 300
+  },
+  "scenarios": {
+    "normal": {
+      "display_name": "Normal Service-Provider Operation",
+      "expected_state": "PASS",
+      "event_id": "EVT-0000",
+      "devices": {
+        "bgp_neighbors": {"up": 8, "expected": 8},
+        "ospf_neighbors": {"up": 12, "expected": 12},
+        "mpls_lsp_status": "healthy",
+        "customer_sites": {"up": 3, "expected": 3},
+        "firewall_status": "healthy",
+        "suricata_status": "healthy",
+        "siem_last_event_age_seconds": 12
+      },
+      "metrics": {
+        "circuit_utilization_percent": 38.0,
+        "syn_rate_pps": 214,
+        "packet_loss_percent": 0.0,
+        "average_latency_ms": 8.2,
+        "critical_alerts": 0,
+        "high_alerts": 0
+      },
+      "security": {
+        "rare_dns_queries": 0,
+        "suspicious_powershell_events": 0,
+        "unauthorized_prefix_rejected": false
+      },
+      "observations": [
+        "All control-plane adjacencies are established.",
+        "Customer A site-to-site service is reachable.",
+        "Customer B remains isolated from Customer A."
+      ]
+    },
+    "ddos": {
+      "display_name": "DDoS Against Customer A Web Service",
+      "expected_state": "CRITICAL",
+      "event_id": "IR-01",
+      "devices": {
+        "bgp_neighbors": {"up": 8, "expected": 8},
+        "ospf_neighbors": {"up": 12, "expected": 12},
+        "mpls_lsp_status": "healthy",
+        "customer_sites": {"up": 2, "expected": 3},
+        "firewall_status": "protecting",
+        "suricata_status": "healthy",
+        "siem_last_event_age_seconds": 4
+      },
+      "metrics": {
+        "circuit_utilization_percent": 98.0,
+        "syn_rate_pps": 12844,
+        "packet_loss_percent": 18.4,
+        "average_latency_ms": 184.0,
+        "critical_alerts": 1,
+        "high_alerts": 3
+      },
+      "security": {
+        "rare_dns_queries": 0,
+        "suspicious_powershell_events": 0,
+        "unauthorized_prefix_rejected": false
+      },
+      "observations": [
+        "SYN-only demand exceeds the synthetic critical threshold.",
+        "The modeled customer circuit is saturated.",
+        "Local NGFW controls cannot recover upstream bandwidth."
+      ]
+    },
+    "compromise": {
+      "display_name": "Compromised Customer Web Server",
+      "expected_state": "CRITICAL",
+      "event_id": "IR-02",
+      "devices": {
+        "bgp_neighbors": {"up": 8, "expected": 8},
+        "ospf_neighbors": {"up": 12, "expected": 12},
+        "mpls_lsp_status": "healthy",
+        "customer_sites": {"up": 3, "expected": 3},
+        "firewall_status": "healthy",
+        "suricata_status": "healthy",
+        "siem_last_event_age_seconds": 8
+      },
+      "metrics": {
+        "circuit_utilization_percent": 42.0,
+        "syn_rate_pps": 230,
+        "packet_loss_percent": 0.0,
+        "average_latency_ms": 9.1,
+        "critical_alerts": 1,
+        "high_alerts": 2
+      },
+      "security": {
+        "rare_dns_queries": 3,
+        "suspicious_powershell_events": 2,
+        "unauthorized_prefix_rejected": false
+      },
+      "observations": [
+        "A web-service parent process launched PowerShell.",
+        "Rare DNS was followed by outbound TLS.",
+        "Host containment and evidence preservation are recommended."
+      ]
+    },
+    "routing_failure": {
+      "display_name": "Provider Core Link Failure",
+      "expected_state": "WARNING",
+      "event_id": "NOC-01",
+      "devices": {
+        "bgp_neighbors": {"up": 8, "expected": 8},
+        "ospf_neighbors": {"up": 10, "expected": 12},
+        "mpls_lsp_status": "rerouted",
+        "customer_sites": {"up": 3, "expected": 3},
+        "firewall_status": "healthy",
+        "suricata_status": "healthy",
+        "siem_last_event_age_seconds": 7
+      },
+      "metrics": {
+        "circuit_utilization_percent": 61.0,
+        "syn_rate_pps": 205,
+        "packet_loss_percent": 0.4,
+        "average_latency_ms": 16.8,
+        "critical_alerts": 0,
+        "high_alerts": 1
+      },
+      "security": {
+        "rare_dns_queries": 0,
+        "suspicious_powershell_events": 0,
+        "unauthorized_prefix_rejected": false
+      },
+      "observations": [
+        "BFD and OSPF report the PE1-to-P1 path down.",
+        "An alternate label-switched path is installed.",
+        "Customer service remains reachable after convergence."
+      ]
+    },
+    "route_leak": {
+      "display_name": "Unauthorized Customer Route Advertisement",
+      "expected_state": "WARNING",
+      "event_id": "RSEC-01",
+      "devices": {
+        "bgp_neighbors": {"up": 8, "expected": 8},
+        "ospf_neighbors": {"up": 12, "expected": 12},
+        "mpls_lsp_status": "healthy",
+        "customer_sites": {"up": 3, "expected": 3},
+        "firewall_status": "healthy",
+        "suricata_status": "healthy",
+        "siem_last_event_age_seconds": 6
+      },
+      "metrics": {
+        "circuit_utilization_percent": 39.0,
+        "syn_rate_pps": 219,
+        "packet_loss_percent": 0.0,
+        "average_latency_ms": 8.6,
+        "critical_alerts": 0,
+        "high_alerts": 1
+      },
+      "security": {
+        "rare_dns_queries": 0,
+        "suspicious_powershell_events": 0,
+        "unauthorized_prefix_rejected": true,
+        "rejected_prefix": "0.0.0.0/0",
+        "accepted_customer_prefix": "10.50.10.0/24"
+      },
+      "observations": [
+        "The CE-A1 default-route advertisement is rejected.",
+        "The CUST_A forwarding table remains unchanged.",
+        "The rejected update is retained as a routing-security event."
+      ]
+    }
+  }
+}

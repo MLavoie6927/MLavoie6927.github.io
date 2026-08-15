@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Marc Lavoie's simulated Service Provider NOC Security Engineering Lab covering MPLS, BGP, OSPF, NGFW, SIEM, DDoS defense, incident response, and automation.">
+  <title>Service Provider NOC Security Engineering Lab | Marc Lavoie</title>
+  <link rel="stylesheet" href="lab.css">
+  <script src="lab.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to project</a>
+
+  <header class="lab-header">
+    <a class="brand" href="../../index.html#network-engineering" aria-label="Return to Marc Lavoie's cybersecurity portfolio">
+      <span class="brand-mark" aria-hidden="true">ML</span>
+      <span><strong>Marc Lavoie</strong><small>Cybersecurity Portfolio</small></span>
+    </a>
+    <nav aria-label="Project navigation">
+      <a href="#architecture">Architecture</a>
+      <a href="#build">Build</a>
+      <a href="#incidents">Incidents</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#downloads">Files</a>
+    </nav>
+    <a class="return-link" href="../../index.html#network-engineering">Portfolio</a>
+  </header>
+
+  <main id="main-content">
+    <section class="operations-hero" aria-labelledby="project-title">
+      <div class="hero-title">
+        <div>
+          <p class="eyebrow">Featured Engineering Project</p>
+          <h1 id="project-title">Service Provider NOC Security Engineering Lab</h1>
+          <p class="hero-summary">Secure MPLS/IP transport, BGP/OSPF, next-generation firewall policy, SIEM monitoring, DDoS mitigation, threat hunting, digital forensics, incident response, and automation in one simulated operational environment.</p>
+        </div>
+        <div class="project-state" aria-label="Project status">
+          <span class="state-indicator" aria-hidden="true"></span>
+          <div><strong>Engineering package complete</strong><small>Static configurations and synthetic evidence</small></div>
+        </div>
+      </div>
+
+      <div class="scenario-control" role="group" aria-label="Operations scenario">
+        <button type="button" class="scenario-button active" data-scenario="normal" aria-pressed="true">Normal</button>
+        <button type="button" class="scenario-button" data-scenario="ddos" aria-pressed="false">DDoS</button>
+        <button type="button" class="scenario-button" data-scenario="compromise" aria-pressed="false">Compromise</button>
+        <button type="button" class="scenario-button" data-scenario="routing" aria-pressed="false">Routing Failure</button>
+        <button type="button" class="scenario-button" data-scenario="leak" aria-pressed="false">Route Leak</button>
+      </div>
+
+      <div class="noc-dashboard" aria-live="polite">
+        <section class="dashboard-summary" aria-labelledby="current-scenario-title">
+          <p class="panel-label">Active Scenario</p>
+          <h2 id="current-scenario-title">Normal Service-Provider Operation</h2>
+          <p id="scenario-description">All provider adjacencies, label-switched paths, customer VPNs, security controls, and telemetry pipelines are healthy.</p>
+          <div class="status-line"><span id="scenario-severity" class="severity severity-normal">Operational</span><span id="scenario-clock">14:32:18 UTC</span></div>
+        </section>
+
+        <section class="metric-panel" aria-labelledby="network-health-title">
+          <p class="panel-label" id="network-health-title">Network Health</p>
+          <div class="metric-list">
+            <div><span>BGP neighbors</span><strong id="metric-bgp">8 / 8</strong></div>
+            <div><span>OSPF neighbors</span><strong id="metric-ospf">12 / 12</strong></div>
+            <div><span>MPLS LSPs</span><strong id="metric-lsp">Healthy</strong></div>
+            <div><span>Customer sites</span><strong id="metric-sites">3 / 3</strong></div>
+          </div>
+        </section>
+
+        <section class="metric-panel" aria-labelledby="traffic-health-title">
+          <p class="panel-label" id="traffic-health-title">Traffic &amp; Security</p>
+          <div class="metric-list">
+            <div><span>Internet utilization</span><strong id="metric-utilization">38%</strong></div>
+            <div><span>SYN rate</span><strong id="metric-syn">214 pps</strong></div>
+            <div><span>Critical alerts</span><strong id="metric-critical">0</strong></div>
+            <div><span>SIEM ingestion</span><strong id="metric-siem">Healthy</strong></div>
+          </div>
+        </section>
+
+        <section class="event-panel" aria-labelledby="event-title">
+          <div class="event-heading"><p class="panel-label" id="event-title">NOC Event</p><span id="event-id">EVT-0000</span></div>
+          <h3 id="event-name">No active incident</h3>
+          <p id="event-detail">Baseline traffic is within threshold and no customer-impacting event is present.</p>
+          <div class="event-path" id="event-path" aria-label="Current investigation path">
+            <span>Telemetry</span><span>Baseline</span><span>Service healthy</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href="#build">Review Build Commands</a>
+        <a class="button button-secondary" href="README.md">Open Technical README</a>
+      </div>
+    </section>
+
+    <section class="project-band project-intro" aria-labelledby="design-intent-title">
+      <div class="band-inner split-intro">
+        <div>
+          <p class="eyebrow">Design Intent</p>
+          <h2 id="design-intent-title">Built around the decisions a hybrid NOC and security engineer must make.</h2>
+        </div>
+        <div class="intro-copy">
+          <p>A customer outage can originate at the transport, routing, firewall, application, or threat layer. This project ties those layers together so the investigation can move from service impact to protocol state, security telemetry, containment, recovery, and prevention.</p>
+          <p class="boundary-note"><strong>Credibility boundary:</strong> This is an original, vendor-aware simulation for portfolio use. It is not affiliated with any employer, does not represent access to a production carrier network, and does not claim hands-on administration of physical Ciena, Nokia, Calix, Alcatel, or Metaswitch equipment.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-band" id="architecture" aria-labelledby="architecture-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Architecture</p>
+          <h2 id="architecture-title">A redundant provider core with explicit trust and telemetry boundaries.</h2>
+          <p>Ten routing nodes, one NGFW, two customer VPNs, a public service edge, and a centralized SOC/NOC stack use documentation and private lab address space only.</p>
+        </div>
+        <figure class="architecture-figure">
+          <a href="architecture.svg" aria-label="Open the full-resolution service provider lab architecture diagram">
+            <img src="architecture.svg" alt="Diagram of the simulated Internet edge, Palo Alto firewall, redundant MPLS provider core, customer VRFs, and security monitoring stack">
+          </a>
+          <figcaption>Blue paths represent Internet and edge routing, green paths represent MPLS core transport, purple and red paths represent isolated VPN services, and yellow paths represent telemetry.</figcaption>
+        </figure>
+
+        <div class="architecture-ledger" aria-label="Architecture component ledger">
+          <div><strong>Internet edge</strong><span>ISP-1, EDGE-1, eBGP, default-only import, owned-prefix export, RTBH handoff</span></div>
+          <div><strong>Provider core</strong><span>PE1, PE2, P1, P2, P3, OSPF Area 0, BFD, MPLS LDP, MP-BGP VPNv4</span></div>
+          <div><strong>Customer services</strong><span>CUST_A dual-site L3VPN, CUST_B isolated L3VPN, strict PE-CE prefix policy</span></div>
+          <div><strong>Security edge</strong><span>NGFW zones, DNAT, least-privilege policy, threat profiles, flood controls, logging</span></div>
+          <div><strong>Observability</strong><span>SIEM, Suricata, Sysmon, NetFlow/IPFIX, DNS, firewall logs, packet capture</span></div>
+          <div><strong>Operations</strong><span>Runbooks, bounded test traffic, chain of custody, rollback, post-incident tuning</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-band project-band-dark" id="build" aria-labelledby="build-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Complete Build</p>
+          <h2 id="build-title">Staged implementation with configuration, validation, and rollback at every layer.</h2>
+          <p>The complete command set is supplied as downloadable text, while the sequence below shows how the topology is brought online without hiding dependencies between protocols.</p>
+        </div>
+
+        <ol class="build-sequence">
+          <li><span>01</span><div><strong>Secure the control plane</strong><p>Hostnames, AAA, SSH-only management, NTP, logging, SNMPv3, management ACLs, and configuration archive.</p></div></li>
+          <li><span>02</span><div><strong>Establish the underlay</strong><p>Address point-to-point links, advertise loopbacks in OSPF Area 0, enable BFD, and verify equal-cost core paths.</p></div></li>
+          <li><span>03</span><div><strong>Enable label transport</strong><p>Activate MPLS and LDP only on provider-facing links, pin LDP router IDs to loopbacks, and verify label bindings.</p></div></li>
+          <li><span>04</span><div><strong>Build customer VPNs</strong><p>Create CUST_A and CUST_B VRFs, assign unique RD/RT values, form MP-BGP VPNv4, and apply strict PE-CE route policy.</p></div></li>
+          <li><span>05</span><div><strong>Secure the Internet edge</strong><p>Import only an approved default, export only the lab-owned documentation prefix, enforce maximum-prefix, and prepare upstream RTBH.</p></div></li>
+          <li><span>06</span><div><strong>Deploy NGFW services</strong><p>Create zones, routes, DNAT, application policy, log forwarding, threat profiles, zone protection, DoS policy, and rollback snapshots.</p></div></li>
+          <li><span>07</span><div><strong>Connect telemetry</strong><p>Forward firewall, routing, flow, DNS, IDS, and endpoint data; normalize fields; install correlation searches and health alarms.</p></div></li>
+          <li><span>08</span><div><strong>Prove normal operation</strong><p>Validate adjacencies, routes, labels, VRF isolation, public-service policy, telemetry freshness, latency, packet loss, and recovery paths.</p></div></li>
+        </ol>
+
+        <div class="command-ledger">
+          <details open>
+            <summary><span>Provider underlay</span><code>OSPF + BFD + MPLS/LDP</code></summary>
+            <div class="command-body">
+              <pre><code>interface Loopback0
+ ip address 10.255.255.11 255.255.255.255
+!
+interface GigabitEthernet0/0
+ description PE1_to_P1
+ ip address 10.255.0.0 255.255.255.254
+ ip ospf network point-to-point
+ ip ospf 100 area 0
+ ip ospf bfd
+ mpls ip
+!
+router ospf 100
+ router-id 10.255.255.11
+ passive-interface Loopback0
+ mpls ldp sync
+!
+mpls label protocol ldp
+mpls ldp router-id Loopback0 force</code></pre>
+              <div class="validation-line"><strong>Validate</strong><code>show ip ospf neighbor</code><code>show bfd neighbors</code><code>show mpls ldp neighbor</code><code>show mpls forwarding-table</code></div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Customer L3VPN</span><code>VRF + MP-BGP + PE-CE eBGP</code></summary>
+            <div class="command-body">
+              <pre><code>vrf definition CUST_A
+ rd 65000:100
+ address-family ipv4
+  route-target export 65000:100
+  route-target import 65000:100
+ exit-address-family
+!
+router bgp 65000
+ neighbor 10.255.255.12 remote-as 65000
+ neighbor 10.255.255.12 update-source Loopback0
+ address-family vpnv4
+  neighbor 10.255.255.12 activate
+  neighbor 10.255.255.12 send-community both
+ exit-address-family
+ address-family ipv4 vrf CUST_A
+  neighbor 172.20.101.2 remote-as 65101
+  neighbor 172.20.101.2 route-map CUST-A-SITE1-IN in
+  neighbor 172.20.101.2 maximum-prefix 5 80 restart 5
+ exit-address-family</code></pre>
+              <div class="validation-line"><strong>Validate</strong><code>show bgp vpnv4 unicast all</code><code>show ip route vrf CUST_A</code><code>show ip cef vrf CUST_A</code></div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>Routing security</span><code>Prefix allowlist + default deny</code></summary>
+            <div class="command-body">
+              <pre><code>ip prefix-list CUST-A-SITE1-IN seq 5 permit 10.50.10.0/24
+ip prefix-list CUST-A-SITE1-IN seq 100 deny 0.0.0.0/0 le 32
+!
+route-map CUST-A-SITE1-IN permit 10
+ match ip address prefix-list CUST-A-SITE1-IN
+route-map CUST-A-SITE1-IN deny 100
+!
+ip prefix-list ISP-IN seq 5 permit 0.0.0.0/0
+ip prefix-list ISP-IN seq 100 deny 0.0.0.0/0 le 32</code></pre>
+              <div class="validation-line"><strong>Negative test</strong><span>Attempted customer default-route advertisement is rejected and logged without altering the forwarding table.</span></div>
+            </div>
+          </details>
+
+          <details>
+            <summary><span>NGFW policy</span><code>PAN-OS-style candidate commands</code></summary>
+            <div class="command-body">
+              <pre><code>set address CUST-A-WEB01 ip-netmask 10.50.10.10/32
+set address PUBLIC-WEB-VIP ip-netmask 198.51.100.50/32
+set rulebase security rules ALLOW-PUBLIC-WEB from untrust
+set rulebase security rules ALLOW-PUBLIC-WEB to customer-services
+set rulebase security rules ALLOW-PUBLIC-WEB source any
+set rulebase security rules ALLOW-PUBLIC-WEB destination PUBLIC-WEB-VIP
+set rulebase security rules ALLOW-PUBLIC-WEB application [ web-browsing ssl ]
+set rulebase security rules ALLOW-PUBLIC-WEB action allow
+set rulebase security rules ALLOW-PUBLIC-WEB log-start yes
+set rulebase security rules ALLOW-PUBLIC-WEB log-end yes
+set rulebase security rules DENY-UNTRUST-ICMP application ping
+set rulebase security rules DENY-UNTRUST-ICMP action deny
+set rulebase security rules DEFAULT-DENY action deny</code></pre>
+              <div class="validation-line"><strong>Control</strong><span>Flood profiles, session limits, and upstream mitigation remain necessary because allowed services can still be attacked.</span></div>
+            </div>
+          </details>
+        </div>
+
+        <div class="download-callout">
+          <div><p class="eyebrow">Full Command Set</p><h3>Every device, policy, test, and rollback command is included.</h3><p>The complete configuration file covers ISP-1, EDGE-1, P1-P3, PE1-PE2, CE-A1, CE-A2, CE-B1, management hardening, routing policy, and show-command verification.</p></div>
+          <a class="button button-primary" href="ROUTER-CONFIGURATIONS.txt">Open Router Configurations</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-band" id="incidents" aria-labelledby="incidents-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Incident Operations</p>
+          <h2 id="incidents-title">Four scenarios prove the difference between detecting a symptom and restoring a service.</h2>
+        </div>
+
+        <div class="incident-grid">
+          <article>
+            <span class="incident-id">IR-01</span>
+            <h3>DDoS against an L3VPN customer</h3>
+            <p>SIEM rate alarm, firewall and NetFlow correlation, SYN/ACK packet validation, local flood controls, upstream escalation, service restoration, and post-incident tuning.</p>
+            <dl><div><dt>Target</dt><dd>198.51.100.50</dd></div><div><dt>Constraint</dt><dd>1-Gbps customer circuit</dd></div><div><dt>Decision</dt><dd>Local control vs. upstream mitigation</dd></div></dl>
+          </article>
+          <article>
+            <span class="incident-id">IR-02</span>
+            <h3>Compromised customer server</h3>
+            <p>Rare DNS, outbound TLS, suspicious PowerShell, endpoint persistence, process-tree reconstruction, scoped containment, evidence preservation, and eradication.</p>
+            <dl><div><dt>Host</dt><dd>CUST-A-WEB01</dd></div><div><dt>Telemetry</dt><dd>Sysmon, DNS, NGFW, IDS</dd></div><div><dt>Decision</dt><dd>Contain host without widening outage</dd></div></dl>
+          </article>
+          <article>
+            <span class="incident-id">NOC-01</span>
+            <h3>Core path failure</h3>
+            <p>BFD and OSPF detect loss, SPF selects the alternate LSP, customer reachability returns, and the analyst distinguishes transport failure from malicious activity.</p>
+            <dl><div><dt>Failure</dt><dd>PE1 to P1 link</dd></div><div><dt>Recovery</dt><dd>PE1 to P2 to P3 path</dd></div><div><dt>Decision</dt><dd>Operations event, not intrusion</dd></div></dl>
+          </article>
+          <article>
+            <span class="incident-id">RSEC-01</span>
+            <h3>Unauthorized BGP advertisement</h3>
+            <p>A customer attempts to advertise a default route. Prefix policy rejects it, maximum-prefix remains healthy, and the event becomes an auditable routing-security alert.</p>
+            <dl><div><dt>Attempt</dt><dd>0.0.0.0/0</dd></div><div><dt>Expected</dt><dd>Only 10.50.10.0/24</dd></div><div><dt>Decision</dt><dd>Reject, alert, verify no route change</dd></div></dl>
+          </article>
+        </div>
+
+        <div class="capacity-model" aria-label="DDoS capacity and mitigation model">
+          <div><span>4 Gbps</span><strong>Simulated attack demand</strong></div>
+          <div class="capacity-arrow" aria-hidden="true">&rarr;</div>
+          <div class="capacity-bottleneck"><span>1 Gbps</span><strong>Internet circuit saturated</strong></div>
+          <div class="capacity-arrow" aria-hidden="true">&rarr;</div>
+          <div><span>NGFW</span><strong>Cannot recover upstream bandwidth</strong></div>
+          <div class="capacity-arrow" aria-hidden="true">&rarr;</div>
+          <div class="capacity-upstream"><span>Provider</span><strong>Scrubbing / FlowSpec / RTBH</strong></div>
+        </div>
+
+        <blockquote class="engineering-statement">Before applying a block, identify whether the event is volumetric saturation, state exhaustion, protocol abuse, or application-layer demand. The correct mitigation depends on both attack type and bottleneck location.</blockquote>
+      </div>
+    </section>
+
+    <section class="project-band project-band-dark" id="evidence" aria-labelledby="evidence-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Evidence &amp; Validation</p>
+          <h2 id="evidence-title">Every conclusion has a source, expected result, and operational boundary.</h2>
+        </div>
+
+        <div class="evidence-table-wrap">
+          <table>
+            <thead><tr><th>Question</th><th>Primary evidence</th><th>Validation</th><th>Decision supported</th></tr></thead>
+            <tbody>
+              <tr><td>Is the underlay healthy?</td><td>OSPF, BFD, interfaces</td><td><code>show ip ospf neighbor</code></td><td>Core reachability and failover state</td></tr>
+              <tr><td>Are labels usable?</td><td>LDP and LFIB</td><td><code>show mpls forwarding-table</code></td><td>Label-switched transport health</td></tr>
+              <tr><td>Are VPN routes isolated?</td><td>VPNv4, RTs, VRF RIB/FIB</td><td><code>show bgp vpnv4 unicast all</code></td><td>Customer route import/export correctness</td></tr>
+              <tr><td>Is traffic malicious?</td><td>SIEM, flow, NGFW, IDS</td><td>Baseline and cross-source correlation</td><td>Severity, scope, and containment</td></tr>
+              <tr><td>What crossed the network?</td><td>PCAP</td><td>Wireshark filters and TCP flag ratios</td><td>Packet-level corroboration</td></tr>
+              <tr><td>Did the response work?</td><td>Service checks and counters</td><td>Before/after latency, loss, PPS, sessions</td><td>Restoration and control efficacy</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="forensics-flow" aria-label="Incident response lifecycle">
+          <span>Detect</span><span>Validate</span><span>Correlate</span><span>Scope</span><span>Contain</span><span>Preserve</span><span>Eradicate</span><span>Recover</span><span>Improve</span>
+        </div>
+
+        <div class="evidence-columns">
+          <section>
+            <p class="panel-label">Chain of Custody</p>
+            <h3>Evidence remains attributable and reproducible.</h3>
+            <ul>
+              <li>Use UTC collection timestamps and synchronized NTP sources.</li>
+              <li>Record collector, source, method, original location, and case ID.</li>
+              <li>Calculate SHA-256 before analysis and verify it after transfer.</li>
+              <li>Analyze copies while preserving the original artifact read-only.</li>
+              <li>Document every transfer, access event, and disposition.</li>
+            </ul>
+          </section>
+          <section>
+            <p class="panel-label">Validation Status</p>
+            <h3>What is complete and what still requires an authorized runtime.</h3>
+            <ul>
+              <li>Complete addressing, routing, VRF, firewall, SIEM, and runbook design.</li>
+              <li>Executable offline Python health-check using synthetic telemetry.</li>
+              <li>Static checks for required devices, policies, files, and scenario fields.</li>
+              <li>Device boot, protocol convergence, PAN-OS commit, and live packet evidence remain runtime validation steps.</li>
+              <li>Production thresholds require observed baselines and formal change control.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-band" aria-labelledby="transport-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Transport Awareness</p>
+          <h2 id="transport-title">Carrier access and transport platforms are placed honestly in the service path.</h2>
+        </div>
+        <div class="transport-path" aria-label="Carrier service path">
+          <div><strong>Subscriber / Enterprise</strong><span>Customer traffic and service SLA</span></div>
+          <div><strong>Calix / Nokia access</strong><span>PON, aggregation, subscriber edge</span></div>
+          <div><strong>Ciena transport</strong><span>Ethernet and optical transport</span></div>
+          <div><strong>MPLS/IP core</strong><span>Routing, labels, VPN services</span></div>
+          <div><strong>NGFW / data center</strong><span>Security policy and applications</span></div>
+        </div>
+        <p class="boundary-note">The project reproduces the IP/MPLS and security behavior surrounding these systems. It does not represent production operation of vendor-specific optical, access, or voice platforms.</p>
+      </div>
+    </section>
+
+    <section class="project-band project-band-dark" id="downloads" aria-labelledby="downloads-title">
+      <div class="band-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Technical Package</p>
+          <h2 id="downloads-title">Recruiter summary, implementation detail, and incident evidence are separated by purpose.</h2>
+        </div>
+        <div class="file-list">
+          <a href="README.md"><span>01</span><div><strong>Technical README</strong><small>Scope, architecture, role mapping, repository map, and validation status</small></div><b>MD</b></a>
+          <a href="BUILD-RUNBOOK.md"><span>02</span><div><strong>Build &amp; Validation Runbook</strong><small>Staging, node deployment, service hosts, safe tests, verification, rollback</small></div><b>MD</b></a>
+          <a href="ROUTER-CONFIGURATIONS.txt"><span>03</span><div><strong>Complete Router Configurations</strong><small>ISP, edge, P/PE/CE, OSPF, BFD, MPLS, MP-BGP, VRFs, policy, show commands</small></div><b>TXT</b></a>
+          <a href="PALO-ALTO-CONFIGURATION.txt"><span>04</span><div><strong>NGFW Candidate Configuration</strong><small>Interfaces, zones, routing, NAT, security policy, logging, flood defense, rollback</small></div><b>TXT</b></a>
+          <a href="SIEM-AND-DETECTION.txt"><span>05</span><div><strong>SIEM, IDS &amp; Packet Analysis</strong><small>SPL, KQL, Suricata, Wireshark filters, thresholds, tuning, MITRE mapping</small></div><b>TXT</b></a>
+          <a href="INCIDENT-RESPONSE.md"><span>06</span><div><strong>Incident Response Casebook</strong><small>DDoS, compromise, routing failure, route leak, forensics, executive reporting</small></div><b>MD</b></a>
+          <a href="noc_security_health_check.py"><span>07</span><div><strong>Python Health Check</strong><small>Offline scenario validation, thresholds, findings, recommendations, JSON output</small></div><b>PY</b></a>
+          <a href="sample_telemetry.json"><span>08</span><div><strong>Synthetic Telemetry</strong><small>Five reproducible scenarios with no production data or real identifiers</small></div><b>JSON</b></a>
+          <a href="VALIDATION.md"><span>09</span><div><strong>Acceptance &amp; Validation Matrix</strong><small>Pass criteria, negative tests, evidence requirements, and runtime gaps</small></div><b>MD</b></a>
+          <a href="validate_project.py"><span>10</span><div><strong>Static Acceptance Gate</strong><small>Files, links, roles, controls, scenarios, safety limits, and public-address validation</small></div><b>PY</b></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Marc Lavoie</strong><span>Service Provider NOC Security Engineering Lab</span></div>
+    <a href="../../index.html#network-engineering">Return to Network Engineering</a>
+  </footer>
+</body>
+</html>

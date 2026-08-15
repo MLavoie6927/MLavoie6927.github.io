@@ -1,0 +1,330 @@
+SERVICE PROVIDER NOC SECURITY ENGINEERING LAB
+SIEM, IDS, flow, packet-analysis, and detection package
+Author: Marc Lavoie
+
+DATA MODEL
+==========
+All examples are synthetic. Normalize source fields into:
+
+@timestamp          UTC event time
+event.dataset       firewall.traffic, netflow, suricata.eve, dns, sysmon,
+                    network.routing, system.health
+observer.name       PE1, PE2, EDGE-1, NGFW-1, IDS01
+source.ip           Initiator
+source.port         Initiator port
+destination.ip      Responder
+destination.port    Responder port
+network.transport   tcp, udp, icmp
+network.packets     Packet count
+network.bytes       Byte count
+tcp.flags.syn       Boolean
+tcp.flags.ack       Boolean
+event.action        allow, deny, reset, prefix-reject, neighbor-down
+rule.name           Firewall, IDS, or detection rule name
+host.name           Endpoint or network device
+process.name        Endpoint process
+process.command_line Command line after public-safe review
+dns.question.name   DNS query after public-safe review
+routing.protocol    bgp, ospf, ldp, bfd
+routing.peer        Public-safe peer identifier
+routing.prefix      Candidate prefix
+
+Do not publish raw production logs, customer IP addresses, hostnames, domains,
+commands, usernames, tokens, or payload content.
+
+
+DETECTION 01 - SYN RATE ANOMALY AGAINST PUBLIC WEB VIP
+=====================================================
+Purpose:
+Detect a significant increase in SYN packets without corresponding ACKs toward
+the simulated customer web VIP. Separate baseline deviation from a fixed
+threshold so normal campaigns and maintenance can be tuned.
+
+Splunk SPL:
+index=network (sourcetype=netflow OR sourcetype=suricata:flow)
+destination.ip="198.51.100.50" destination.port=443 network.transport=tcp
+| bin _time span=1m
+| stats sum(eval(if(tcp.flags.syn=true AND tcp.flags.ack=false,1,0))) AS syn_only
+        sum(eval(if(tcp.flags.syn=true AND tcp.flags.ack=true,1,0))) AS syn_ack
+        dc(source.ip) AS unique_sources
+        sum(network.bytes) AS bytes
+  BY _time destination.ip destination.port
+| eval syn_ack_ratio=round(syn_only/max(syn_ack,1),2)
+| where syn_only>6000 AND syn_ack_ratio>8
+| eval severity=case(bytes>900000000,"critical",unique_sources>100,"high",true(),"medium")
+| table _time destination.ip destination.port syn_only syn_ack unique_sources bytes syn_ack_ratio severity
+
+Elastic KQL filter:
+event.dataset:(netflow or suricata.eve) and
+destination.ip:"198.51.100.50" and destination.port:443 and
+network.transport:tcp and tcp.flags.syn:true and not tcp.flags.ack:true
+
+Microsoft Sentinel KQL:
+CommonSecurityLog
+| where DestinationIP == "198.51.100.50" and DestinationPort == 443
+| where AdditionalExtensions has "tcp_syn=true" and AdditionalExtensions has "tcp_ack=false"
+| summarize SynOnly=count(), UniqueSources=dcount(SourceIP), Bytes=sum(SentBytes)
+  by bin(TimeGenerated, 1m), DestinationIP, DestinationPort
+| where SynOnly > 6000 and UniqueSources > 50
+| extend Severity = iff(Bytes > 900000000, "Critical", "High")
+
+Required enrichment:
+- Interface utilization and circuit capacity
+- NGFW session utilization and SYN-cookie counters
+- Flow source distribution and autonomous-system enrichment if authorized
+- Server health, completed connections, and application response time
+- Current maintenance, scan, and load-test windows
+
+False positives:
+- Authorized load testing
+- Flash crowd or product release
+- Health-check misconfiguration
+- Monitoring loop
+
+False negatives:
+- Layer-7 request flood with normal TCP handshake
+- Low-and-slow connection exhaustion
+- Attack below threshold but above server capacity
+- Telemetry sampling that undercounts packets
+
+Response decision:
+Local zone/DoS protection is appropriate when the circuit retains headroom.
+Upstream scrubbing, FlowSpec, provider ACL, or RTBH is required when the circuit
+itself is saturated. RTBH restores infrastructure availability by sacrificing
+reachability to the targeted address; it requires explicit authorization.
+
+
+DETECTION 02 - RARE DNS FOLLOWED BY OUTBOUND TLS AND POWERSHELL
+==============================================================
+Purpose:
+Correlate endpoint execution with network behavior instead of treating a rare
+domain alone as malicious.
+
+Splunk SPL - DNS rarity:
+index=dns source.ip="10.50.10.10"
+| stats count earliest(_time) AS first_seen latest(_time) AS last_seen
+  dc(destination.ip) AS resolver_count BY dns.question.name
+| eventstats sum(count) AS host_query_total
+| eval frequency=round(count/host_query_total,5)
+| where count<=3 AND frequency<0.01
+| sort count
+
+Splunk SPL - endpoint and network correlation:
+index=sysmon host.name="CUST-A-WEB01" (EventCode=1 OR EventCode=3)
+| eval join_key=coalesce(DestinationIp,destination.ip)
+| transaction host.name maxspan=10m startswith=(EventCode=1) endswith=(EventCode=3)
+| search (ParentImage="*\\w3wp.exe" OR ParentImage="*\\nginx*")
+         (Image="*\\powershell.exe" OR process.name="powershell.exe")
+| table _time host.name user ParentImage Image CommandLine DestinationIp DestinationPort
+
+Elastic EQL sequence:
+sequence by host.name with maxspan=10m
+  [process where process.name : ("powershell.exe", "pwsh.exe") and
+    process.parent.name : ("w3wp.exe", "nginx", "apache2")]
+  [dns where dns.question.name != null]
+  [network where network.transport == "tcp" and destination.port == 443 and
+    not cidrmatch(destination.ip, "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16")]
+
+MITRE ATT&CK mapping:
+- T1059.001 PowerShell
+- T1071.004 DNS
+- T1071.001 Web Protocols
+- T1547 Persistence only if a matching artifact is confirmed
+
+Triage:
+1. Validate host, user/service account, process signature, and time.
+2. Build process ancestry and inspect command-line context.
+3. Review DNS response, resolver, domain age/intelligence if authorized.
+4. Correlate NGFW, flow, proxy, TLS metadata, and IDS events.
+5. Identify persistence, credential access, lateral movement, and exfiltration.
+6. Preserve volatile and durable evidence before destructive remediation.
+
+
+DETECTION 03 - ROUTING OR BFD NEIGHBOR LOSS
+===========================================
+Purpose:
+Create a NOC event with security context without prematurely calling every
+adjacency change an attack.
+
+Splunk SPL:
+index=network sourcetype=network:routing
+(event.action="neighbor-down" OR message="*ADJCHG*DOWN*" OR message="*BFD*Down*")
+| bin _time span=5m
+| stats count values(routing.protocol) AS protocols
+        values(routing.peer) AS peers
+        values(interface.name) AS interfaces
+        values(reason) AS reasons
+  BY _time observer.name
+| eval severity=if(mvcount(peers)>=2,"high","medium")
+| table _time observer.name protocols peers interfaces reasons severity
+
+Investigation split:
+Network failure indicators:
+- Interface carrier loss or increasing physical errors
+- BFD then OSPF down on one expected link
+- Alternate route and LSP install correctly
+- No configuration or authentication anomaly
+
+Security indicators:
+- Repeated distributed adjacency resets
+- Unauthorized configuration event
+- Unexpected peer/source
+- Authentication failure or malformed protocol traffic
+- Route change inconsistent with the physical failure
+
+Response:
+Preserve routing logs and change records, validate the forwarding path, restore
+redundancy, and escalate to security only when evidence supports malicious or
+unauthorized behavior.
+
+
+DETECTION 04 - BGP PREFIX REJECT OR MAXIMUM-PREFIX EVENT
+=======================================================
+Purpose:
+Detect routing-security controls working, not only controls failing.
+
+Splunk SPL:
+index=network sourcetype=network:routing routing.protocol=bgp
+(event.action="prefix-reject" OR message="*maximum-prefix*" OR message="*route-map*deny*")
+| rex field=message "(?<candidate_prefix>\d{1,3}(?:\.\d{1,3}){3}/\d{1,2})"
+| stats count values(candidate_prefix) AS prefixes values(routing.peer) AS peers
+        values(policy.name) AS policies BY _time observer.name
+| eval severity=case(mvfind(prefixes,"0.0.0.0/0")>=0,"high",count>5,"high",true(),"medium")
+| table _time observer.name peers prefixes policies count severity
+
+Expected policy:
+- CE-A1 may advertise only 10.50.10.0/24.
+- CE-A2 may advertise only 10.50.20.0/24.
+- CE-B1 may advertise only 10.60.10.0/24.
+- EDGE-1 may advertise only 198.51.100.0/24 and an explicitly authorized
+  more-specific RTBH route carrying the pre-agreed community.
+
+Validation:
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 routes
+show bgp ipv4 unicast vrf CUST_A neighbors 172.20.101.2 received-routes
+show ip route vrf CUST_A 0.0.0.0
+show ip prefix-list CUST-A-SITE1-IN
+show route-map CUST-A-SITE1-IN
+
+
+DETECTION 05 - TELEMETRY INGESTION STALENESS
+============================================
+Purpose:
+Monitoring that silently stops is a security and availability problem.
+
+Splunk SPL:
+| tstats latest(_time) AS last_event count WHERE index=* BY host sourcetype
+| eval age_seconds=now()-last_event
+| where age_seconds>300
+| eval severity=case(age_seconds>1800,"critical",age_seconds>900,"high",true(),"medium")
+| convert ctime(last_event)
+| table host sourcetype last_event age_seconds count severity
+
+Expected sources:
+NGFW-1 traffic/threat/system
+EDGE-1 and PE1/PE2 routing/syslog
+IDS01 Suricata EVE
+WEB01 Sysmon or Linux audit/process telemetry
+DNS01 query and service logs
+NetFlow/IPFIX collector
+
+
+SURICATA LAB RULES
+==================
+Use only after `suricata -T` succeeds. SIDs are local example values.
+
+alert tcp any any -> 10.50.10.10 443 (
+ msg:"NOC LAB high SYN rate candidate";
+ flags:S,12;
+ flow:stateless;
+ threshold:type both, track by_dst, count 100, seconds 1;
+ classtype:attempted-dos;
+ sid:9901001; rev:1;
+)
+
+alert dns 10.50.10.10 any -> any 53 (
+ msg:"NOC LAB web server outbound DNS";
+ dns.query;
+ classtype:policy-violation;
+ sid:9901002; rev:1;
+)
+
+alert tls 10.50.10.10 any -> !$HOME_NET any (
+ msg:"NOC LAB customer web server outbound TLS";
+ flow:established,to_server;
+ classtype:trojan-activity;
+ sid:9901003; rev:1;
+)
+
+These rules are triage signals. They do not prove compromise or DDoS by
+themselves. Tune HOME_NET, thresholds, and flow direction for the sensor.
+
+
+WIRESHARK DISPLAY FILTERS
+=========================
+Customer web server:
+ip.addr == 10.50.10.10
+
+Public web VIP:
+ip.addr == 198.51.100.50
+
+Initial SYN without ACK:
+tcp.flags.syn == 1 && tcp.flags.ack == 0
+
+SYN/ACK response:
+tcp.flags.syn == 1 && tcp.flags.ack == 1
+
+TCP resets:
+tcp.flags.reset == 1
+
+DNS from Customer A web server:
+ip.src == 10.50.10.10 && dns
+
+TLS egress from Customer A web server:
+ip.src == 10.50.10.10 && tcp.port == 443
+
+OSPF and LDP control plane:
+ospf || ldp
+
+BGP updates:
+tcp.port == 179 && bgp
+
+Retransmissions and zero-window symptoms:
+tcp.analysis.retransmission || tcp.analysis.fast_retransmission || tcp.analysis.zero_window
+
+Packet-level statement:
+The SIEM identifies where and when to investigate. Flow data quantifies scope.
+Firewall and routing state explain policy and path. Wireshark corroborates what
+actually crossed the monitored segment.
+
+
+DDOS INVESTIGATION PIVOT ORDER
+==============================
+1. Confirm customer impact, service, destination, and first-seen time.
+2. Compare current PPS/BPS/CPS, sessions, and utilization to baseline.
+3. Identify SYN, UDP, ICMP, DNS, HTTP, or mixed behavior.
+4. Determine source distribution and spoofing likelihood.
+5. Verify SYN/ACK ratio and server response in packet evidence.
+6. Locate the bottleneck: server, firewall, customer link, peering, or transit.
+7. Apply the least disruptive authorized control.
+8. Escalate upstream before the local circuit is fully saturated.
+9. Measure service recovery and watch for attack adaptation.
+10. Preserve evidence and tune the control after the incident.
+
+
+TUNING RECORD
+=============
+For every rule change, record:
+- Rule name and version
+- Owner and approver
+- Data sources and required fields
+- Baseline period and percentile
+- Trigger logic and severity
+- Known false positives
+- Known false negatives
+- Suppression and maintenance logic
+- MITRE mapping when applicable
+- Test cases and expected outcomes
+- Rollback condition
+- Before/after alert volume and detection efficacy
+
