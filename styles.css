@@ -828,6 +828,164 @@ main {
   gap: 0.75rem;
 }
 
+.ethical-hacking-section {
+  border-block: 1px solid rgba(75, 180, 255, 0.14);
+  background: #09111a;
+}
+
+.ethical-boundary {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.24fr) minmax(0, 1fr);
+  max-width: 1040px;
+  margin: 0 auto 1.5rem;
+  border: 1px solid rgba(247, 201, 72, 0.38);
+  border-left: 4px solid var(--warning);
+  background: rgba(247, 201, 72, 0.06);
+}
+
+.ethical-boundary strong,
+.ethical-boundary span {
+  padding: 0.9rem 1rem;
+}
+
+.ethical-boundary strong {
+  display: flex;
+  align-items: center;
+  color: var(--warning);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.ethical-boundary span {
+  border-left: 1px solid rgba(247, 201, 72, 0.24);
+  color: var(--text-muted);
+}
+
+.ethical-report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.ethical-report {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
+}
+
+.ethical-report-preview {
+  display: grid;
+  height: 355px;
+  place-items: center;
+  min-width: 0;
+  padding: 1rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background:
+    linear-gradient(90deg, rgba(75, 180, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(54, 211, 153, 0.06) 1px, transparent 1px),
+    #050b12;
+  background-size: 32px 32px;
+}
+
+.ethical-report-preview img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid rgba(75, 180, 255, 0.24);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.36);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.ethical-report-preview:hover img,
+.ethical-report-preview:focus-visible img {
+  border-color: rgba(54, 211, 153, 0.72);
+  transform: translateY(-2px);
+}
+
+.ethical-report-content {
+  align-content: start;
+  padding: 1.35rem;
+}
+
+.ethical-report-heading {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.ethical-report-heading h3 {
+  font-size: 1.35rem;
+}
+
+.ethical-report-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: end;
+  gap: 0.7rem;
+  margin-top: auto;
+}
+
+.ethical-report-actions .button {
+  flex: 1 1 150px;
+}
+
+.htb-roadmap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: 2rem;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-block: 1px solid var(--border);
+}
+
+.htb-roadmap > div {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.htb-roadmap h3 {
+  font-size: 1.55rem;
+}
+
+.htb-roadmap ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.htb-roadmap li {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+  padding: 0.65rem 1rem;
+  border-left: 1px solid var(--border);
+}
+
+.htb-roadmap li strong {
+  color: var(--accent);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.htb-roadmap li span {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 .project-kicker {
   color: var(--accent-alt);
   font-size: 0.78rem;
@@ -1775,8 +1933,14 @@ main {
   #gcp-labs .project-grid,
   #windows-hardening .windows-hardening-gallery,
   .public-recognition-layout,
+  .ethical-report-grid,
+  .htb-roadmap,
   .network-showcase {
     grid-template-columns: 1fr;
+  }
+
+  .ethical-report-preview {
+    height: 380px;
   }
 
   .network-report-preview,
@@ -1919,6 +2083,37 @@ main {
   .skills-list,
   .detection-gallery {
     grid-template-columns: 1fr;
+  }
+
+  .ethical-boundary {
+    grid-template-columns: 1fr;
+  }
+
+  .ethical-boundary span {
+    border-top: 1px solid rgba(247, 201, 72, 0.24);
+    border-left: 0;
+  }
+
+  .ethical-report-preview {
+    height: 300px;
+    padding: 0.75rem;
+  }
+
+  .ethical-report-content {
+    padding: 1rem;
+  }
+
+  .htb-roadmap {
+    gap: 1.25rem;
+  }
+
+  .htb-roadmap ul {
+    grid-template-columns: 1fr;
+  }
+
+  .htb-roadmap li {
+    border-top: 1px solid var(--border);
+    border-left: 0;
   }
 
   .interview-method-steps li {
