@@ -461,6 +461,169 @@ main {
   gap: 1.25rem;
 }
 
+.soc-case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.soc-case-study {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
+}
+
+.soc-case-study-true {
+  border-top: 3px solid #e34b5f;
+}
+
+.soc-case-study-benign {
+  border-top: 3px solid #1b9a6d;
+}
+
+.soc-case-preview {
+  display: grid;
+  height: 390px;
+  place-items: center;
+  overflow: hidden;
+  padding: 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background:
+    linear-gradient(rgba(75, 180, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 180, 255, 0.06) 1px, transparent 1px),
+    #050c13;
+  background-size: 30px 30px;
+}
+
+.soc-case-preview img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 350px;
+  height: 100%;
+  object-fit: contain;
+  border: 1px solid rgba(75, 180, 255, 0.28);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.soc-case-preview:hover img,
+.soc-case-preview:focus-visible img {
+  border-color: rgba(54, 211, 153, 0.75);
+  transform: translateY(-2px);
+}
+
+.soc-case-content {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: 1.35rem;
+}
+
+.soc-case-content h3 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.soc-case-content p {
+  color: var(--text-muted);
+}
+
+.soc-case-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.soc-verdict,
+.soc-report-meta {
+  display: inline-flex;
+  min-height: 1.85rem;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.soc-verdict-true {
+  background: rgba(227, 75, 95, 0.17);
+  color: #ff8292;
+  border: 1px solid rgba(227, 75, 95, 0.4);
+}
+
+.soc-verdict-benign {
+  background: rgba(27, 154, 109, 0.17);
+  color: #59e2ae;
+  border: 1px solid rgba(27, 154, 109, 0.42);
+}
+
+.soc-report-meta {
+  color: #a9c3d2;
+  border: 1px solid rgba(75, 180, 255, 0.26);
+  background: rgba(75, 180, 255, 0.08);
+}
+
+.soc-case-finding {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid var(--accent);
+  background: rgba(54, 211, 153, 0.07);
+}
+
+.soc-case-study-true .soc-case-finding {
+  border-left-color: #e34b5f;
+  background: rgba(227, 75, 95, 0.07);
+}
+
+.soc-case-finding strong {
+  color: var(--text);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.soc-case-finding span {
+  color: var(--text-muted);
+}
+
+.soc-case-content dl {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.soc-case-content dl > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.soc-case-content dt {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.soc-case-content dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.soc-case-content .button {
+  width: fit-content;
+  margin-top: auto;
+}
+
 .project-card {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -1933,6 +2096,7 @@ main {
   #gcp-labs .project-grid,
   #windows-hardening .windows-hardening-gallery,
   .public-recognition-layout,
+  .soc-case-study-grid,
   .ethical-report-grid,
   .htb-roadmap,
   .network-showcase {
@@ -2097,6 +2261,19 @@ main {
   .ethical-report-preview {
     height: 300px;
     padding: 0.75rem;
+  }
+
+  .soc-case-preview {
+    height: 320px;
+    padding: 0.75rem;
+  }
+
+  .soc-case-preview img {
+    max-height: 294px;
+  }
+
+  .soc-case-content {
+    padding: 1rem;
   }
 
   .ethical-report-content {
