@@ -483,7 +483,7 @@ main {
   border-top: 3px solid #e34b5f;
 }
 
-.soc-case-study-benign {
+.soc-case-study-false {
   border-top: 3px solid #1b9a6d;
 }
 
@@ -561,7 +561,7 @@ main {
   border: 1px solid rgba(227, 75, 95, 0.4);
 }
 
-.soc-verdict-benign {
+.soc-verdict-false {
   background: rgba(27, 154, 109, 0.17);
   color: #59e2ae;
   border: 1px solid rgba(27, 154, 109, 0.42);

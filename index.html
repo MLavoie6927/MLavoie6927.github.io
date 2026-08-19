@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=sentinel-soc-20260818c">
+  <link rel="stylesheet" href="styles.css?v=crowdstrike-soc-20260818a">
 </head>
 
 <body>
@@ -111,78 +111,78 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">SOC Analyst Projects</p>
-          <h2>Alert triage, evidence correlation, Sentinel classification, and Windows threat analysis.</h2>
+          <h2>Alert triage, packet validation, endpoint correlation, and defensible SOC decisions.</h2>
           <p>
-            Public-safe examples of SOC analyst practice, including true-positive validation, benign-positive triage, false-positive tuning, endpoint review, malware investigation, and repeatable evidence-based decision workflows.
+            Two matched investigations test the same suspected C2-beaconing hypothesis against raw firewall records, Wireshark packets, CrowdStrike Falcon telemetry, and Sysmon evidence to reach opposite, evidence-supported dispositions.
           </p>
         </div>
 
-        <div class="soc-case-study-grid" aria-label="Featured Microsoft Sentinel case studies">
+        <div class="soc-case-study-grid" aria-label="Featured CrowdStrike Falcon SOC investigations">
           <article class="soc-case-study soc-case-study-true">
-            <a class="soc-case-preview" href="output/pdf/Marc_Lavoie_Microsoft_Sentinel_True_Positive_Investigation_Lab.pdf" target="_blank" rel="noopener" aria-label="Open Microsoft Sentinel True-Positive Investigation Lab PDF">
-              <img src="assets/soc-projects/sentinel-true-positive-cover.jpg" alt="Cover of Marc Lavoie's Microsoft Sentinel True-Positive Investigation Lab report">
+            <a class="soc-case-preview" href="output/pdf/Marc_Lavoie_CrowdStrike_Falcon_Wireshark_Sysmon_True_Positive_Investigation.pdf" target="_blank" rel="noopener" aria-label="Open CrowdStrike Falcon true-positive C2 investigation PDF">
+              <img src="assets/soc-projects/crowdstrike-true-positive-cover.svg" alt="Cover of Marc Lavoie's CrowdStrike Falcon, Wireshark, and Sysmon true-positive investigation report">
             </a>
 
             <div class="soc-case-content">
               <div class="soc-case-badges" aria-label="Report classification and length">
                 <span class="soc-verdict soc-verdict-true">True Positive</span>
-                <span class="soc-report-meta">13-page case study</span>
+                <span class="soc-report-meta">16-page case study</span>
               </div>
 
-              <h3>Microsoft Sentinel True-Positive Investigation Lab</h3>
-              <p>A recruiter-ready SOC investigation framework covering 25 endpoint, identity, network, DNS, cloud, and Microsoft 365 scenarios.</p>
+              <h3>CrowdStrike Falcon True-Positive C2 Investigation</h3>
+              <p>A validated beaconing case in which four independent telemetry sources reconstruct the same outbound network activity and malicious endpoint process chain.</p>
 
               <div class="soc-case-finding">
-                <strong>Verification result</strong>
-                <span>Classification methodology verified. The report clearly separates suspicious behavior from confirmed malicious lab ground truth and identifies the execution evidence still needed.</span>
+                <strong>Disposition evidence</strong>
+                <span>Allowed outbound TLS sessions, repeated callbacks, process lineage, DNS activity, file creation, and Run-key persistence converge on a confirmed incident.</span>
               </div>
 
               <dl>
                 <div>
                   <dt>Evidence sources</dt>
-                  <dd>SecurityAlert, DeviceProcessEvents, SigninLogs, AuditLogs, AzureActivity, OfficeActivity, DNS and firewall telemetry</dd>
+                  <dd>Raw firewall records, Wireshark, Falcon NetworkConnectIP4 and ProcessRollup2, and Sysmon Event IDs 1, 3, 11, 13, and 22</dd>
                 </div>
                 <div>
                   <dt>Skill demonstrated</dt>
-                  <dd>Incident validation, cross-table correlation, ATT&amp;CK mapping, containment planning, and defensible analyst writing</dd>
+                  <dd>C2 validation, process attribution, cross-source timeline reconstruction, incident response planning, and detection validation</dd>
                 </div>
               </dl>
 
-              <a class="button button-primary" href="output/pdf/Marc_Lavoie_Microsoft_Sentinel_True_Positive_Investigation_Lab.pdf" target="_blank" rel="noopener">Open True-Positive Report</a>
+              <a class="button button-primary" href="output/pdf/Marc_Lavoie_CrowdStrike_Falcon_Wireshark_Sysmon_True_Positive_Investigation.pdf" target="_blank" rel="noopener">Open True-Positive Report</a>
             </div>
           </article>
 
-          <article class="soc-case-study soc-case-study-benign">
-            <a class="soc-case-preview" href="output/pdf/Marc_Lavoie_Microsoft_Sentinel_Benign_Positive_Triage_Lab.pdf" target="_blank" rel="noopener" aria-label="Open Microsoft Sentinel Benign-Positive Triage and False-Positive Tuning Lab PDF">
-              <img src="assets/soc-projects/sentinel-benign-positive-cover.jpg" alt="Cover of Marc Lavoie's Microsoft Sentinel Benign-Positive Triage and False-Positive Tuning report">
+          <article class="soc-case-study soc-case-study-false">
+            <a class="soc-case-preview" href="output/pdf/Marc_Lavoie_CrowdStrike_Falcon_Wireshark_Sysmon_False_Positive_Investigation.pdf" target="_blank" rel="noopener" aria-label="Open CrowdStrike Falcon false-positive C2 investigation PDF">
+              <img src="assets/soc-projects/crowdstrike-false-positive-cover.svg" alt="Cover of Marc Lavoie's CrowdStrike Falcon, Wireshark, and Sysmon false-positive investigation report">
             </a>
 
             <div class="soc-case-content">
               <div class="soc-case-badges" aria-label="Report classification and length">
-                <span class="soc-verdict soc-verdict-benign">Benign Positive</span>
-                <span class="soc-report-meta">13-page case study</span>
+                <span class="soc-verdict soc-verdict-false">False Positive</span>
+                <span class="soc-report-meta">16-page case study</span>
               </div>
 
-              <h3>Sentinel Benign-Positive Triage &amp; False-Positive Tuning</h3>
-              <p>A precise guide to closing suspicious-but-expected activity, correcting inaccurate detections, and tuning without hiding real attacks.</p>
+              <h3>CrowdStrike Falcon False-Positive C2 Investigation</h3>
+              <p>A detection-engineering case that disproves the alert narrative through raw direction and disposition fields, packet validation, and healthy endpoint telemetry.</p>
 
               <div class="soc-case-finding">
-                <strong>Taxonomy correction</strong>
-                <span>The supplied scenarios are benign positives because the alert logic can be correct while the activity is authorized. Sentinel reserves false positive for incorrect rule logic or inaccurate data.</span>
+                <strong>Root cause confirmed</strong>
+                <span>The parser dropped direction and action fields, causing periodic denied inbound SYNs with zero session bytes to be misclassified as successful outbound C2 beaconing.</span>
               </div>
 
               <dl>
                 <div>
-                  <dt>Decision model</dt>
-                  <dd>True Positive, Benign Positive, False Positive, and Undetermined with documented ground-truth requirements</dd>
+                  <dt>Evidence sources</dt>
+                  <dd>Raw firewall records, Wireshark, Falcon NetworkConnectIP4 and ProcessRollup2, Sysmon, parser output, and correlation-rule metadata</dd>
                 </div>
                 <div>
                   <dt>Skill demonstrated</dt>
-                  <dd>Alert disposition, exception design, tuning guardrails, closure-note quality, and false-negative risk control</dd>
+                  <dd>False-positive validation, telemetry-health checks, parser root-cause analysis, rule correction, and regression-test design</dd>
                 </div>
               </dl>
 
-              <a class="button button-secondary" href="output/pdf/Marc_Lavoie_Microsoft_Sentinel_Benign_Positive_Triage_Lab.pdf" target="_blank" rel="noopener">Open Triage &amp; Tuning Report</a>
+              <a class="button button-secondary" href="output/pdf/Marc_Lavoie_CrowdStrike_Falcon_Wireshark_Sysmon_False_Positive_Investigation.pdf" target="_blank" rel="noopener">Open False-Positive Report</a>
             </div>
           </article>
         </div>

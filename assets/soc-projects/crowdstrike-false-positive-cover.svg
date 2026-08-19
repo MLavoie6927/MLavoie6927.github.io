@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 850" role="img" aria-labelledby="title desc">
+  <title id="title">False-positive SOC investigation cover</title>
+  <desc id="desc">CrowdStrike Falcon, Wireshark, and Sysmon false-positive C2 investigation by Marc Lavoie.</desc>
+  <rect width="1300" height="850" fill="#07111d"/>
+  <rect x="900" width="400" height="850" fill="#0b1725"/>
+  <rect width="1300" height="8" fill="#36d399"/>
+  <rect x="895" width="5" height="850" fill="#36d399"/>
+  <g stroke="#213448" stroke-width="1">
+    <path d="M938 72V790M1018 72V790M1098 72V790M1178 72V790M932 220H1260M932 340H1260M932 460H1260M932 580H1260M932 700H1260"/>
+  </g>
+  <g fill="#36d399" font-family="Arial, sans-serif" font-weight="700">
+    <text x="74" y="95" font-size="18">SOC INVESTIGATION CASE FILE</text>
+    <text x="932" y="485" font-size="16">EVIDENCE WORKFLOW</text>
+  </g>
+  <g fill="#f7fafc" font-family="Arial, sans-serif" font-weight="700" font-size="44">
+    <text x="74" y="220">CrowdStrike Falcon +</text>
+    <text x="74" y="278">Wireshark +</text>
+    <text x="74" y="336">Sysmon False Positive Investigation</text>
+  </g>
+  <text x="74" y="402" fill="#d8e2ec" font-family="Arial, sans-serif" font-size="20">Suspected C2 beaconing disproved by packet and endpoint evidence</text>
+  <rect x="74" y="454" width="315" height="44" rx="6" fill="#36d399"/>
+  <text x="231.5" y="483" text-anchor="middle" fill="#07111d" font-family="Arial, sans-serif" font-size="16" font-weight="700">FALSE POSITIVE</text>
+  <text x="74" y="540" fill="#d8e2ec" font-family="Arial, sans-serif" font-size="17" font-weight="700">Detection defect identified and corrected</text>
+  <g fill="none" stroke="#36d399" stroke-width="4">
+    <path d="M1012 115l176 52-20 151c-12 86-118 121-168 52-12-16-18-34-21-52l-20-151z"/>
+    <path d="M1000 190l62 61 65-71" stroke-width="3"/>
+    <circle cx="1000" cy="190" r="7"/><circle cx="1062" cy="251" r="7"/><circle cx="1127" cy="180" r="7"/>
+  </g>
+  <text x="932" y="101" fill="#8193a6" font-family="Consolas, monospace" font-size="13">FALCON / WIRESHARK / SYSMON</text>
+  <g font-family="Consolas, monospace" font-size="14" fill="#d8e2ec">
+    <text x="932" y="530">01  ALERT INTAKE</text><path d="M932 544H1240" stroke="#36d399"/>
+    <text x="932" y="575">02  RAW SOURCE VALIDATION</text><path d="M932 589H1240" stroke="#36d399"/>
+    <text x="932" y="620">03  PACKET + ENDPOINT REVIEW</text><path d="M932 634H1240" stroke="#36d399"/>
+    <text x="932" y="665">04  CROSS-SOURCE CORRELATION</text><path d="M932 679H1240" stroke="#36d399"/>
+    <text x="932" y="710" fill="#36d399">05  DISPOSITION + ENGINEERING</text><path d="M932 724H1240" stroke="#36d399" stroke-width="2"/>
+  </g>
+  <text x="74" y="770" fill="#f7fafc" font-family="Arial, sans-serif" font-size="15" font-weight="700">MARC LAVOIE</text>
+  <text x="184" y="770" fill="#8193a6" font-family="Arial, sans-serif" font-size="14">CYBERSECURITY PORTFOLIO</text>
+  <text x="932" y="785" fill="#8193a6" font-family="Consolas, monospace" font-size="12">SYNTHETIC LAB SCENARIO</text>
+</svg>
