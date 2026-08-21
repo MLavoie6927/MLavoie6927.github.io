@@ -624,6 +624,237 @@ main {
   margin-top: auto;
 }
 
+.security-stacks-section {
+  background: #0a1119;
+  border-top: 1px solid rgba(75, 180, 255, 0.12);
+  border-bottom: 1px solid rgba(54, 211, 153, 0.12);
+}
+
+.security-stack-tabs {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.security-stack-tab-list {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.3rem;
+  border: 1px solid rgba(75, 180, 255, 0.22);
+  border-radius: 6px;
+  background: rgba(7, 13, 20, 0.86);
+}
+
+.security-stack-tab {
+  min-height: 46px;
+  padding: 0.65rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.security-stack-tab:hover,
+.security-stack-tab:focus-visible {
+  color: var(--text);
+  background: rgba(75, 180, 255, 0.08);
+}
+
+.security-stack-tab.is-active,
+.security-stack-tab[aria-selected="true"] {
+  color: #ffffff;
+  border-color: rgba(54, 211, 153, 0.48);
+  background: rgba(54, 211, 153, 0.13);
+}
+
+.security-stack-panel[hidden] {
+  display: none;
+}
+
+.security-stack-project {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-top: 3px solid #39d6a0;
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
+}
+
+.security-stack-project-crowdstrike {
+  border-top-color: #e44757;
+}
+
+.security-stack-preview {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  padding: 1.25rem;
+  border-right: 1px solid var(--border);
+  background:
+    linear-gradient(rgba(75, 180, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 180, 255, 0.06) 1px, transparent 1px),
+    #050c13;
+  background-size: 30px 30px;
+}
+
+.security-stack-preview img {
+  display: block;
+  width: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  border: 1px solid rgba(75, 180, 255, 0.26);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.4);
+}
+
+a.security-stack-preview img {
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+a.security-stack-preview:hover img,
+a.security-stack-preview:focus-visible img {
+  border-color: rgba(54, 211, 153, 0.75);
+  transform: translateY(-2px);
+}
+
+.security-stack-preview-placeholder img {
+  aspect-ratio: 16 / 9;
+}
+
+.security-stack-content {
+  display: grid;
+  align-content: center;
+  gap: 1.15rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.security-stack-content h3 {
+  margin: 0.35rem 0 0.65rem;
+  font-size: clamp(1.55rem, 2.5vw, 2.15rem);
+}
+
+.security-stack-content p,
+.security-stack-content dd {
+  color: var(--text-muted);
+}
+
+.security-stack-badges,
+.security-stack-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.security-stack-badge,
+.security-stack-meta {
+  display: inline-flex;
+  min-height: 1.9rem;
+  align-items: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.security-stack-badge-microsoft {
+  color: #68e2b4;
+  border: 1px solid rgba(54, 211, 153, 0.42);
+  background: rgba(54, 211, 153, 0.13);
+}
+
+.security-stack-badge-crowdstrike {
+  color: #ff8793;
+  border: 1px solid rgba(228, 71, 87, 0.42);
+  background: rgba(228, 71, 87, 0.13);
+}
+
+.security-stack-meta {
+  color: #a9c3d2;
+  border: 1px solid rgba(75, 180, 255, 0.26);
+  background: rgba(75, 180, 255, 0.08);
+}
+
+.security-lifecycle {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid rgba(75, 180, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.security-lifecycle li {
+  min-width: 0;
+  padding: 0.7rem 0.35rem;
+  color: var(--text);
+  font-size: 0.73rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  background: rgba(75, 180, 255, 0.06);
+}
+
+.security-lifecycle li + li {
+  border-left: 1px solid rgba(75, 180, 255, 0.18);
+}
+
+.security-stack-content dl {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.security-stack-content dl > div {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.security-stack-content dt {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.security-stack-content dd {
+  margin: 0;
+}
+
+.security-stack-finding {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border-left: 3px solid #39d6a0;
+  background: rgba(54, 211, 153, 0.07);
+}
+
+.security-stack-finding-crowdstrike {
+  border-left-color: #e44757;
+  background: rgba(228, 71, 87, 0.07);
+}
+
+.security-stack-finding strong {
+  color: var(--text);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.security-stack-finding span {
+  color: var(--text-muted);
+}
+
 .project-card {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -2011,7 +2242,7 @@ main {
   font-weight: 800;
 }
 
-@media (min-width: 1581px) {
+@media (min-width: 1881px) {
   .nav {
     gap: 0.5rem;
     padding-inline: 0.75rem;
@@ -2046,7 +2277,7 @@ main {
   }
 }
 
-@media (max-width: 1580px) {
+@media (max-width: 1880px) {
   .nav-toggle {
     display: inline-block;
   }
@@ -2099,8 +2330,19 @@ main {
   .soc-case-study-grid,
   .ethical-report-grid,
   .htb-roadmap,
-  .network-showcase {
+  .network-showcase,
+  .security-stack-project {
     grid-template-columns: 1fr;
+  }
+
+  .security-stack-preview {
+    min-height: 360px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .security-stack-preview img {
+    max-height: 440px;
   }
 
   .ethical-report-preview {
@@ -2274,6 +2516,36 @@ main {
 
   .soc-case-content {
     padding: 1rem;
+  }
+
+  .security-stack-tab-list {
+    width: 100%;
+  }
+
+  .security-stack-tab {
+    flex: 1 1 50%;
+    padding-inline: 0.65rem;
+  }
+
+  .security-stack-preview {
+    min-height: 240px;
+    padding: 0.75rem;
+  }
+
+  .security-stack-content {
+    padding: 1rem;
+  }
+
+  .security-lifecycle {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .security-lifecycle li:nth-child(4) {
+    border-left: 0;
+  }
+
+  .security-lifecycle li:nth-child(n + 4) {
+    border-top: 1px solid rgba(75, 180, 255, 0.18);
   }
 
   .ethical-report-content {

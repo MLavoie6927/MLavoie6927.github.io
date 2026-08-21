@@ -11,12 +11,14 @@
   }
 
   ready(function () {
-    var mobileQuery = window.matchMedia("(max-width: 1580px)");
+    var mobileQuery = window.matchMedia("(max-width: 1880px)");
     var navToggle = document.querySelector(".nav-toggle");
     var navMenu = document.querySelector("#primary-menu");
     var navItems = Array.prototype.slice.call(document.querySelectorAll("#primary-menu a"));
     var siteHeader = document.querySelector(".site-header");
     var currentYear = document.querySelector("#current-year");
+    var stackTabs = Array.prototype.slice.call(document.querySelectorAll("[data-stack-tab]"));
+    var stackPanels = Array.prototype.slice.call(document.querySelectorAll("[data-stack-panel]"));
     var sections = navItems
       .map(function (link) {
         var href = link.getAttribute("href");
@@ -35,6 +37,50 @@
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear().toString();
     }
+
+    function activateStackTab(tab, moveFocus) {
+      var stackName = tab.getAttribute("data-stack-tab");
+
+      stackTabs.forEach(function (candidate) {
+        var isActive = candidate === tab;
+        candidate.classList.toggle("is-active", isActive);
+        candidate.setAttribute("aria-selected", isActive ? "true" : "false");
+        candidate.setAttribute("tabindex", isActive ? "0" : "-1");
+      });
+
+      stackPanels.forEach(function (panel) {
+        panel.hidden = panel.getAttribute("data-stack-panel") !== stackName;
+      });
+
+      if (moveFocus) {
+        tab.focus();
+      }
+    }
+
+    stackTabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () {
+        activateStackTab(tab, false);
+      });
+
+      tab.addEventListener("keydown", function (event) {
+        var nextIndex = null;
+
+        if (event.key === "ArrowRight") {
+          nextIndex = (index + 1) % stackTabs.length;
+        } else if (event.key === "ArrowLeft") {
+          nextIndex = (index - 1 + stackTabs.length) % stackTabs.length;
+        } else if (event.key === "Home") {
+          nextIndex = 0;
+        } else if (event.key === "End") {
+          nextIndex = stackTabs.length - 1;
+        }
+
+        if (nextIndex !== null) {
+          event.preventDefault();
+          activateStackTab(stackTabs[nextIndex], true);
+        }
+      });
+    });
 
     function setMenuOpen(open) {
       if (!navToggle || !navMenu) {

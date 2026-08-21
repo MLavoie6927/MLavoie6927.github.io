@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring SOC analyst projects, SIEM labs, detection rules, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, certifications, public recognition, and resume information.">
+  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring SOC investigations, Microsoft security stack architecture, SIEM labs, detection engineering, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, certifications, and resume information.">
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=crowdstrike-soc-20260818a">
+  <link rel="stylesheet" href="styles.css?v=security-stacks-20260821a">
 </head>
 
 <body>
@@ -44,6 +44,7 @@
         <li><a href="#ethical-hacking">Pentesting</a></li>
         <li><a href="#network-engineering" aria-label="Network Engineering">Network Eng.</a></li>
         <li><a href="#firewall-security">Firewall</a></li>
+        <li><a href="#security-stacks">Security Stacks</a></li>
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#cybrary-certificates">Cybrary Certs</a></li>
         <li><a href="#ine-certificates">INE Certs</a></li>
@@ -971,6 +972,118 @@
             </div>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="section security-stacks-section" id="security-stacks">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Security Stack Portfolios</p>
+          <h2>Platform ecosystems examined as connected security programs.</h2>
+          <p>
+            These collections group architecture, investigation, detection, response, governance, and evidence into coherent platform-specific project series. Use the tabs to review the Microsoft portfolio or the developing CrowdStrike track.
+          </p>
+        </div>
+
+        <div class="security-stack-tabs" data-security-stack-tabs>
+          <div class="security-stack-tab-list" role="tablist" aria-label="Security stack portfolio series">
+            <button class="security-stack-tab is-active" id="stack-tab-microsoft" type="button" role="tab" aria-selected="true" aria-controls="stack-panel-microsoft" tabindex="0" data-stack-tab="microsoft">
+              Microsoft Security Stack
+            </button>
+            <button class="security-stack-tab" id="stack-tab-crowdstrike" type="button" role="tab" aria-selected="false" aria-controls="stack-panel-crowdstrike" tabindex="-1" data-stack-tab="crowdstrike">
+              CrowdStrike Security Stack
+            </button>
+          </div>
+
+          <div class="security-stack-panel" id="stack-panel-microsoft" role="tabpanel" aria-labelledby="stack-tab-microsoft" data-stack-panel="microsoft">
+            <article class="security-stack-project security-stack-project-microsoft">
+              <a class="security-stack-preview" href="output/pdf/Marc_Lavoie_Project_Atlas_Microsoft_Security_Stack_Portfolio.pdf" target="_blank" rel="noopener" aria-label="Open the Project Atlas Microsoft Security Stack portfolio PDF">
+                <img src="assets/security-stacks/project-atlas-cover.jpg" alt="Cover of Project Atlas, Marc Lavoie's complete visual Microsoft Security Stack portfolio" loading="lazy">
+              </a>
+
+              <div class="security-stack-content">
+                <div class="security-stack-badges" aria-label="Project platform and report length">
+                  <span class="security-stack-badge security-stack-badge-microsoft">Microsoft Security Stack</span>
+                  <span class="security-stack-meta">78-page visual portfolio</span>
+                </div>
+
+                <div>
+                  <span class="project-kicker">Featured Security Architecture Project</span>
+                  <h3>Project Atlas: Complete Microsoft Security Stack</h3>
+                  <p>
+                    An end-to-end synthetic security program that follows protected business data and a coordinated incident across Microsoft Purview, Entra ID, Defender XDR, Sentinel, Azure, Fabric, Power BI, and Logic Apps.
+                  </p>
+                </div>
+
+                <ol class="security-lifecycle" aria-label="Project Atlas security lifecycle">
+                  <li>Data</li>
+                  <li>Protect</li>
+                  <li>Access</li>
+                  <li>Detect</li>
+                  <li>Correlate</li>
+                  <li>Preserve</li>
+                </ol>
+
+                <dl>
+                  <div>
+                    <dt>Architecture scope</dt>
+                    <dd>Information protection, identity governance, email and endpoint defense, cloud posture, SIEM correlation, automated response, data governance, and legal preservation.</dd>
+                  </div>
+                  <div>
+                    <dt>Evidence included</dt>
+                    <dd>Product screenshots, scenario artifacts, architecture maps, detection and response workflows, remediation decisions, evidence standards, and official Microsoft references.</dd>
+                  </div>
+                  <div>
+                    <dt>Skills demonstrated</dt>
+                    <dd>Security architecture, data protection, identity security, SOC operations, incident response, executive communication, and evidence-based documentation.</dd>
+                  </div>
+                </dl>
+
+                <div class="security-stack-finding">
+                  <strong>Portfolio outcome</strong>
+                  <span>A high-confidence true-positive scenario is traced from initial access through investigation, containment, remediation, and preservation without presenting synthetic diagrams as production proof.</span>
+                </div>
+
+                <div class="security-stack-actions">
+                  <a class="button button-primary" href="output/pdf/Marc_Lavoie_Project_Atlas_Microsoft_Security_Stack_Portfolio.pdf" target="_blank" rel="noopener">View Project Atlas</a>
+                  <a class="button button-secondary" href="output/pdf/Marc_Lavoie_Project_Atlas_Microsoft_Security_Stack_Portfolio.pdf" download>Download PDF</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="security-stack-panel" id="stack-panel-crowdstrike" role="tabpanel" aria-labelledby="stack-tab-crowdstrike" data-stack-panel="crowdstrike" hidden>
+            <article class="security-stack-project security-stack-project-crowdstrike">
+              <div class="security-stack-preview security-stack-preview-placeholder" aria-hidden="true">
+                <img src="assets/security-stacks/crowdstrike-series-roadmap.svg" alt="" loading="lazy">
+              </div>
+
+              <div class="security-stack-content">
+                <div class="security-stack-badges" aria-label="Project series status">
+                  <span class="security-stack-badge security-stack-badge-crowdstrike">CrowdStrike Security Stack</span>
+                  <span class="security-stack-meta">Series in development</span>
+                </div>
+
+                <div>
+                  <span class="project-kicker">Future Project Collection</span>
+                  <h3>CrowdStrike Security Stack Portfolio</h3>
+                  <p>
+                    This track is reserved for Marc's upcoming full-stack CrowdStrike portfolio. Future projects can be added here as one organized series covering Falcon endpoint telemetry, Next-Gen SIEM, identity, cloud, threat hunting, and response workflows.
+                  </p>
+                </div>
+
+                <div class="security-stack-finding security-stack-finding-crowdstrike">
+                  <strong>Evidence already available</strong>
+                  <span>The SOC Projects section currently includes paired CrowdStrike Falcon, Wireshark, and Sysmon investigations demonstrating both true-positive and false-positive decisions.</span>
+                </div>
+
+                <div class="security-stack-actions">
+                  <a class="button button-secondary" href="#soc-projects">View Current Falcon Investigations</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2067,6 +2180,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=security-stacks-20260821a"></script>
 </body>
 </html>
