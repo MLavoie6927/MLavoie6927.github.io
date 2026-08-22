@@ -1272,6 +1272,14 @@ a.security-stack-preview:focus-visible img {
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.24);
 }
 
+.ethical-report-featured {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(360px, 0.98fr) minmax(0, 1.02fr);
+  grid-template-rows: none;
+  border-color: rgba(54, 211, 153, 0.42);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.3);
+}
+
 .ethical-report-preview {
   display: grid;
   height: 355px;
@@ -1307,6 +1315,21 @@ a.security-stack-preview:focus-visible img {
   transform: translateY(-2px);
 }
 
+.taxonomy-report-preview {
+  height: auto;
+  min-height: 500px;
+  padding: 1.35rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 0;
+}
+
+.taxonomy-report-preview img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  aspect-ratio: 792 / 612;
+}
+
 .ethical-report-content {
   align-content: start;
   padding: 1.35rem;
@@ -1319,6 +1342,59 @@ a.security-stack-preview:focus-visible img {
 
 .ethical-report-heading h3 {
   font-size: 1.35rem;
+}
+
+.taxonomy-report-content {
+  gap: 1.2rem;
+  padding: clamp(1.35rem, 2.5vw, 2rem);
+}
+
+.taxonomy-report-content .ethical-report-heading h3 {
+  font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+}
+
+.taxonomy-report-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-block: 1px solid var(--border);
+  list-style: none;
+}
+
+.taxonomy-report-stats li {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.9rem 0.75rem;
+  border-left: 1px solid var(--border);
+}
+
+.taxonomy-report-stats li:first-child {
+  border-left: 0;
+}
+
+.taxonomy-report-stats strong {
+  color: var(--accent-alt);
+  font-size: 1.15rem;
+}
+
+.taxonomy-report-stats span {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+
+.taxonomy-report-note {
+  margin: 0;
+  padding: 0.8rem 0 0.8rem 1rem;
+  border-left: 3px solid var(--warning);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.taxonomy-report-note strong {
+  color: var(--warning);
 }
 
 .ethical-report-actions {
@@ -2349,6 +2425,17 @@ a.security-stack-preview:focus-visible img {
     height: 380px;
   }
 
+  .ethical-report-featured {
+    grid-template-columns: 1fr;
+  }
+
+  .taxonomy-report-preview {
+    height: auto;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
   .network-report-preview,
   .network-showcase-reverse .network-report-preview {
     order: 1;
@@ -2503,6 +2590,23 @@ a.security-stack-preview:focus-visible img {
   .ethical-report-preview {
     height: 300px;
     padding: 0.75rem;
+  }
+
+  .taxonomy-report-preview {
+    height: auto;
+    padding: 0.75rem;
+  }
+
+  .taxonomy-report-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .taxonomy-report-stats li:nth-child(3) {
+    border-left: 0;
+  }
+
+  .taxonomy-report-stats li:nth-child(n + 3) {
+    border-top: 1px solid var(--border);
   }
 
   .soc-case-preview {
