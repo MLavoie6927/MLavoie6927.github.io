@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring CrowdStrike and Microsoft security stack architecture, SOC investigations, SIEM labs, detection engineering, applied cryptography, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, a CompTIA Security+ SY0-701 study guide, certifications, and resume information.">
+  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring interactive cross-platform detection engineering, CrowdStrike and Microsoft security stack architecture, SOC investigations, SIEM labs, applied cryptography, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, a CompTIA Security+ SY0-701 study guide, certifications, and resume information.">
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=cryptography-lab-20260828a">
+  <link rel="stylesheet" href="styles.css?v=detection-lab-20260828a">
 </head>
 
 <body>
@@ -341,63 +341,301 @@
       </div>
     </section>
 
-    <section class="section" id="detection-rules">
+    <section class="section detection-engineering-section" id="detection-rules">
       <div class="section-inner">
         <div class="section-heading">
-          <p class="eyebrow">Detection Rules</p>
-          <h2>Readable detection examples.</h2>
+          <p class="eyebrow">Detection Engineering</p>
+          <h2>One analytic objective. Multiple SIEM and XDR implementations.</h2>
+          <p>
+            Explore how three defensive hypotheses translate into 24 portfolio-safe rule variants
+            across major SIEM, XDR, and open detection formats. Each implementation includes its
+            telemetry, ATT&amp;CK context, triage sequence, tuning rationale, and validation standard.
+          </p>
         </div>
 
-        <div class="project-grid">
-          <article class="project-card project-card-wide">
-            <div class="detection-gallery" aria-label="Cross-platform detection rule examples">
-              <figure class="detection-example">
-                <a href="assets/detection-rules/microsoft-sentinel-detection-rule.svg" target="_blank" rel="noopener" aria-label="View the full Microsoft Sentinel detection rule example">
-                  <img src="assets/detection-rules/microsoft-sentinel-detection-rule.svg" alt="Microsoft Sentinel delivered phishing email detection rule example" loading="lazy" decoding="async">
-                </a>
-                <figcaption>Microsoft Sentinel</figcaption>
-              </figure>
-
-              <figure class="detection-example">
-                <a href="assets/detection-rules/ibm-qradar-detection-rule.svg" target="_blank" rel="noopener" aria-label="View the full IBM QRadar detection rule example">
-                  <img src="assets/detection-rules/ibm-qradar-detection-rule.svg" alt="IBM QRadar phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
-                </a>
-                <figcaption>IBM QRadar</figcaption>
-              </figure>
-
-              <figure class="detection-example">
-                <a href="assets/detection-rules/crowdstrike-detection-rule.svg" target="_blank" rel="noopener" aria-label="View the full CrowdStrike detection rule example">
-                  <img src="assets/detection-rules/crowdstrike-detection-rule.svg" alt="CrowdStrike phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
-                </a>
-                <figcaption>CrowdStrike Falcon</figcaption>
-              </figure>
-
-              <figure class="detection-example">
-                <a href="assets/detection-rules/google-chronicle-detection-rule.svg" target="_blank" rel="noopener" aria-label="View the full Google Chronicle detection rule example">
-                  <img src="assets/detection-rules/google-chronicle-detection-rule.svg" alt="Google Chronicle phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
-                </a>
-                <figcaption>Google SecOps / Chronicle</figcaption>
-              </figure>
+        <article class="detection-lab" data-detection-lab aria-describedby="detection-lab-boundary">
+          <header class="detection-lab-header">
+            <div class="detection-lab-title">
+              <span class="project-kicker">Interactive Detection Engineering Lab</span>
+              <h3>Cross-Platform Rule Translation</h3>
+              <p>
+                Select a detection scenario and platform to inspect the implementation,
+                telemetry requirements, ATT&amp;CK mapping, triage path, tuning notes, and validation plan.
+              </p>
             </div>
 
-            <div class="project-content">
-              <h3>Cross-Platform Detection Rule Examples</h3>
-              <p>Phishing detection examples showing rule metadata, severity, data sources, MITRE ATT&amp;CK mapping, correlation logic, entity grouping, and analyst response guidance.</p>
-
-              <dl>
-                <div>
-                  <dt>Tools used</dt>
-                  <dd>Microsoft Sentinel, IBM QRadar, CrowdStrike Falcon, Google SecOps / Chronicle, MITRE ATT&amp;CK</dd>
-                </div>
-
-                <div>
-                  <dt>Skill demonstrated</dt>
-                  <dd>Cross-platform detection engineering, correlation logic, and SOC response design</dd>
-                </div>
-              </dl>
+            <div class="detection-lab-status" aria-label="Detection lab status">
+              <span><strong>8</strong> Platforms</span>
+              <span><strong>3</strong> Detection Scenarios</span>
+              <span><strong>24</strong> Rule Variants</span>
             </div>
-          </article>
-        </div>
+          </header>
+
+          <noscript>
+            <p class="detection-noscript">The interactive rule explorer requires JavaScript. The four visual rule examples remain available below.</p>
+          </noscript>
+
+          <div class="detection-control-bar">
+            <label class="detection-scenario-picker" for="detection-scenario-select">
+              <span>Detection scenario</span>
+              <select id="detection-scenario-select" data-detection-scenario>
+                <option value="phishing">Phishing → Suspicious PowerShell</option>
+                <option value="beaconing">Periodic Outbound C2 Beaconing</option>
+                <option value="credential">Credential Dumping / LSASS Access</option>
+              </select>
+            </label>
+
+            <div class="detection-platform-tabs"
+                 role="tablist"
+                 aria-label="Detection rule platform"
+                 data-detection-tabs>
+              <button class="detection-platform-tab is-active"
+                      id="detect-tab-sentinel"
+                      type="button"
+                      role="tab"
+                      aria-selected="true"
+                      aria-controls="detect-panel"
+                      tabindex="0"
+                      data-platform="sentinel">Microsoft Sentinel</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-crowdstrike"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="crowdstrike">CrowdStrike</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-qradar"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="qradar">IBM QRadar</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-chronicle"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="chronicle">Google SecOps</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-splunk"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="splunk">Splunk</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-elastic"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="elastic">Elastic</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-wazuh"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="wazuh">Wazuh</button>
+
+              <button class="detection-platform-tab"
+                      id="detect-tab-sigma"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="detect-panel"
+                      tabindex="-1"
+                      data-platform="sigma">Sigma</button>
+            </div>
+          </div>
+
+          <section class="detection-workspace"
+                   id="detect-panel"
+                   role="tabpanel"
+                   aria-labelledby="detect-tab-sentinel"
+                   tabindex="0"
+                   data-detection-panel>
+
+            <p class="visually-hidden" data-detection-announcer aria-live="polite" aria-atomic="true"></p>
+
+            <div class="detection-workspace-heading">
+              <div>
+                <span class="detection-platform-name" data-platform-name>Microsoft Sentinel</span>
+                <h3 data-rule-title>Phishing Delivery Followed by Suspicious PowerShell</h3>
+              </div>
+
+              <div class="detection-badges" aria-label="Rule metadata">
+                <span class="detection-badge detection-badge-severity" data-severity>High</span>
+                <span class="detection-badge" data-language>KQL</span>
+                <span class="detection-badge detection-badge-status">Detection-as-Code</span>
+              </div>
+            </div>
+
+            <div class="detection-metrics" aria-label="Detection engineering metadata">
+              <div>
+                <span>ATT&amp;CK</span>
+                <strong data-attack>T1566.001 · T1059.001</strong>
+              </div>
+              <div>
+                <span>Correlation Window</span>
+                <strong data-window>15 minutes</strong>
+              </div>
+              <div>
+                <span>Primary Entities</span>
+                <strong data-entities>User · Host · Process</strong>
+              </div>
+              <div>
+                <span>Rule Objective</span>
+                <strong data-objective>Correlate delivery with execution</strong>
+              </div>
+            </div>
+
+            <div class="detection-workspace-grid">
+              <div class="detection-code-pane">
+                <div class="detection-editor-toolbar">
+                  <div class="detection-editor-file">
+                    <span class="detection-editor-dot" aria-hidden="true"></span>
+                    <code data-filename>sentinel-phishing-powershell.kql</code>
+                  </div>
+
+                  <div class="detection-editor-actions">
+                    <a class="detection-visual-link"
+                       data-visual-rule
+                       href="assets/detection-rules/microsoft-sentinel-detection-rule.svg"
+                       target="_blank"
+                       rel="noopener noreferrer">View Visual</a>
+                    <button type="button"
+                            class="detection-copy-button"
+                            data-copy-rule>
+                      Copy Rule
+                    </button>
+                    <button type="button"
+                            class="detection-copy-button detection-download-button"
+                            data-download-rule>
+                      Download Rule
+                    </button>
+                  </div>
+                </div>
+
+                <pre class="detection-code" tabindex="0" aria-label="Selected detection rule source code"><code data-rule-code></code></pre>
+
+                <div class="detection-code-footer">
+                  <span data-schema-note>
+                    Field names are representative and should be mapped to the target tenant schema before deployment.
+                  </span>
+                  <span class="copy-status" data-copy-status aria-live="polite"></span>
+                </div>
+              </div>
+
+              <aside class="detection-analysis-pane" aria-label="Detection engineering analysis">
+                <section>
+                  <p class="panel-label">Detection Logic</p>
+                  <p data-logic>
+                    Correlates a delivered attachment with suspicious PowerShell execution on the recipient endpoint.
+                  </p>
+                </section>
+
+                <section>
+                  <p class="panel-label">Required Telemetry</p>
+                  <ul data-telemetry></ul>
+                </section>
+
+                <section>
+                  <p class="panel-label">Analyst Triage</p>
+                  <ol data-triage></ol>
+                </section>
+
+                <section class="detection-tuning">
+                  <p class="panel-label">False-Positive / Tuning Notes</p>
+                  <p data-tuning></p>
+                </section>
+
+                <section class="detection-validation">
+                  <p class="panel-label">Validation Standard</p>
+                  <p data-validation></p>
+                </section>
+              </aside>
+            </div>
+
+            <div class="detection-lifecycle" aria-label="Detection engineering lifecycle">
+              <div><span>01</span><strong>Hypothesis</strong><small>Define suspicious behavior</small></div>
+              <div><span>02</span><strong>Telemetry</strong><small>Confirm required evidence</small></div>
+              <div><span>03</span><strong>Logic</strong><small>Build and correlate conditions</small></div>
+              <div><span>04</span><strong>Tuning</strong><small>Control false positives</small></div>
+              <div><span>05</span><strong>Validation</strong><small>Test benign and malicious paths</small></div>
+            </div>
+
+            <footer class="detection-workspace-footer">
+              <div>
+                <strong>Engineering boundary</strong>
+                <span id="detection-lab-boundary">
+                  These rules are portfolio-safe examples. Production deployment requires
+                  tenant-specific field mapping, baseline testing, peer review, change control,
+                  and validation against known benign and malicious test cases.
+                </span>
+              </div>
+
+              <div class="detection-nav-actions" aria-label="Detection platform navigation">
+                <button type="button" class="button button-secondary" data-prev-platform>Previous Platform</button>
+                <button type="button" class="button button-primary" data-next-platform>Next Platform</button>
+              </div>
+            </footer>
+          </section>
+        </article>
+
+        <section class="detection-evidence" aria-labelledby="detection-evidence-title">
+          <div class="detection-evidence-heading">
+            <div>
+              <p class="project-kicker">Visual Rule Evidence</p>
+              <h3 id="detection-evidence-title">Cross-platform implementation references</h3>
+            </div>
+            <p>Open the original full-size platform examples to inspect rule metadata, correlation intent, ATT&amp;CK mapping, entity grouping, and analyst response guidance.</p>
+          </div>
+
+          <div class="detection-gallery" aria-label="Cross-platform detection rule visual examples">
+            <figure class="detection-example">
+              <a href="assets/detection-rules/microsoft-sentinel-detection-rule.svg" target="_blank" rel="noopener noreferrer" aria-label="View the full Microsoft Sentinel detection rule example">
+                <img src="assets/detection-rules/microsoft-sentinel-detection-rule.svg" alt="Microsoft Sentinel delivered phishing email detection rule example" loading="lazy" decoding="async">
+              </a>
+              <figcaption>Microsoft Sentinel</figcaption>
+            </figure>
+
+            <figure class="detection-example">
+              <a href="assets/detection-rules/ibm-qradar-detection-rule.svg" target="_blank" rel="noopener noreferrer" aria-label="View the full IBM QRadar detection rule example">
+                <img src="assets/detection-rules/ibm-qradar-detection-rule.svg" alt="IBM QRadar phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
+              </a>
+              <figcaption>IBM QRadar</figcaption>
+            </figure>
+
+            <figure class="detection-example">
+              <a href="assets/detection-rules/crowdstrike-detection-rule.svg" target="_blank" rel="noopener noreferrer" aria-label="View the full CrowdStrike detection rule example">
+                <img src="assets/detection-rules/crowdstrike-detection-rule.svg" alt="CrowdStrike phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
+              </a>
+              <figcaption>CrowdStrike Falcon</figcaption>
+            </figure>
+
+            <figure class="detection-example">
+              <a href="assets/detection-rules/google-chronicle-detection-rule.svg" target="_blank" rel="noopener noreferrer" aria-label="View the full Google Chronicle detection rule example">
+                <img src="assets/detection-rules/google-chronicle-detection-rule.svg" alt="Google Chronicle phishing with endpoint follow-up detection rule example" loading="lazy" decoding="async">
+              </a>
+              <figcaption>Google SecOps / Chronicle</figcaption>
+            </figure>
+          </div>
+        </section>
       </div>
     </section>
 
@@ -2393,6 +2631,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=cryptography-lab-20260828a"></script>
+  <script src="script.js?v=detection-lab-20260828a"></script>
 </body>
 </html>
