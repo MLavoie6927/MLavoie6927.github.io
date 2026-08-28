@@ -1336,3 +1336,73 @@ tags:
 
   render();
 })();
+
+/* Accessible Cybrary and INE certificate tabs */
+(() => {
+  "use strict";
+
+  const root = document.querySelector("[data-certificate-tabs]");
+  if (!root) return;
+
+  const tabs = Array.from(root.querySelectorAll("[data-certificate-tab]"));
+  const panels = Array.from(root.querySelectorAll("[data-certificate-panel]"));
+  const platformForHash = {
+    "#cybrary-certificates": "cybrary",
+    "#ine-certificates": "ine"
+  };
+
+  if (tabs.length !== 2 || panels.length !== 2) return;
+
+  function activate(platform, focusTab) {
+    const activeTab = tabs.find((tab) => tab.dataset.certificateTab === platform);
+    const activePanel = panels.find((panel) => panel.dataset.certificatePanel === platform);
+
+    if (!activeTab || !activePanel) return;
+
+    tabs.forEach((tab) => {
+      const isActive = tab === activeTab;
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel !== activePanel;
+    });
+
+    if (focusTab) activeTab.focus();
+  }
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activate(tab.dataset.certificateTab, false));
+    tab.addEventListener("keydown", (event) => {
+      let nextIndex = null;
+
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+
+      if (nextIndex === null) return;
+      event.preventDefault();
+      activate(tabs[nextIndex].dataset.certificateTab, true);
+    });
+  });
+
+  function activateLegacyHash() {
+    const platform = platformForHash[window.location.hash];
+    if (!platform) return;
+
+    activate(platform, false);
+    window.requestAnimationFrame(() => {
+      document.querySelector("#certificates")?.scrollIntoView({ block: "start" });
+    });
+  }
+
+  window.addEventListener("hashchange", activateLegacyHash);
+  if (platformForHash[window.location.hash]) {
+    activateLegacyHash();
+  } else {
+    activate("cybrary", false);
+  }
+})();
