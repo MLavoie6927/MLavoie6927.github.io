@@ -183,6 +183,810 @@ h3 {
   cursor: pointer;
 }
 
+/* Interactive network server lab */
+.network-server-lab {
+  --nsl-bg: #071019;
+  --nsl-panel: #0d1822;
+  --nsl-panel-strong: #101e29;
+  --nsl-border: rgba(75, 180, 255, 0.2);
+  --nsl-border-strong: rgba(75, 180, 255, 0.42);
+  --nsl-cyan: #57c7ff;
+  --nsl-green: #36d399;
+  --nsl-yellow: #f7c948;
+  --nsl-red: #ff7180;
+  border-block: 1px solid rgba(75, 180, 255, 0.15);
+  background: #080f17;
+}
+
+.nsl-shell {
+  max-width: 1220px;
+}
+
+.nsl-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.35rem;
+}
+
+.nsl-intro .section-heading {
+  margin: 0;
+  text-align: left;
+}
+
+.nsl-intro .section-heading p {
+  margin-inline: 0;
+}
+
+.nsl-mode-badge,
+.nsl-profile-state,
+.nsl-topology-state {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  color: #a9c3d2;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nsl-mode-badge {
+  min-height: 38px;
+  gap: 0.55rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(54, 211, 153, 0.45);
+  border-radius: 5px;
+  color: #a8f0d1;
+  background: rgba(54, 211, 153, 0.08);
+}
+
+.nsl-mode-badge > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nsl-green);
+  box-shadow: 0 0 0 4px rgba(54, 211, 153, 0.12);
+}
+
+.nsl-boundary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(247, 201, 72, 0.3);
+  border-left: 4px solid var(--nsl-yellow);
+  border-radius: 6px;
+  background: rgba(247, 201, 72, 0.055);
+}
+
+.nsl-boundary strong {
+  color: var(--nsl-yellow);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.nsl-boundary span {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.nsl-workbench {
+  overflow: hidden;
+  border: 1px solid var(--nsl-border-strong);
+  border-radius: 8px;
+  background-color: var(--nsl-bg);
+  background-image:
+    linear-gradient(rgba(75, 180, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 180, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32);
+}
+
+.nsl-workbench-header,
+.nsl-panel-heading,
+.nsl-console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nsl-workbench-header {
+  min-height: 76px;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--nsl-border);
+  background: #08121a;
+}
+
+.nsl-workbench-header h3,
+.nsl-panel-heading h3,
+.nsl-console-header h3 {
+  margin-top: 0.25rem;
+  font-size: 1rem;
+}
+
+.nsl-small-label {
+  color: #78b9d8;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nsl-server-status {
+  display: inline-flex;
+  min-width: 118px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(255, 113, 128, 0.38);
+  border-radius: 5px;
+  color: #ffabb4;
+  background: rgba(255, 113, 128, 0.08);
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nsl-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.nsl-server-status.is-starting,
+.nsl-server-status.is-stopping {
+  color: var(--nsl-yellow);
+  border-color: rgba(247, 201, 72, 0.42);
+  background: rgba(247, 201, 72, 0.08);
+}
+
+.nsl-server-status.is-online {
+  color: var(--nsl-green);
+  border-color: rgba(54, 211, 153, 0.48);
+  background: rgba(54, 211, 153, 0.09);
+}
+
+.nsl-dashboard,
+.nsl-control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1rem 1rem 0;
+}
+
+.nsl-panel,
+.nsl-console-panel {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--nsl-border);
+  border-radius: 7px;
+  background: rgba(13, 24, 34, 0.96);
+}
+
+.nsl-dashboard .nsl-panel,
+.nsl-control-grid .nsl-panel {
+  margin: 0;
+}
+
+.nsl-panel-heading {
+  min-height: 46px;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(75, 180, 255, 0.12);
+}
+
+.nsl-profile-state {
+  color: var(--nsl-yellow);
+}
+
+.nsl-config-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.nsl-config-grid > div,
+.nsl-metrics-grid > div {
+  display: grid;
+  align-content: center;
+  min-width: 0;
+  min-height: 68px;
+  padding: 0.65rem;
+  border: 1px solid rgba(75, 180, 255, 0.12);
+  border-radius: 5px;
+  background: rgba(5, 13, 20, 0.72);
+}
+
+.nsl-config-grid dt,
+.nsl-metrics-grid span {
+  color: #8fa7b5;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.nsl-config-grid dd {
+  margin: 0.15rem 0 0;
+  color: var(--text);
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.77rem;
+  overflow-wrap: anywhere;
+}
+
+.nsl-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.nsl-metrics-grid strong {
+  color: var(--nsl-cyan);
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.nsl-topology-state {
+  max-width: 240px;
+  color: #8fa7b5;
+  text-align: right;
+}
+
+.nsl-topology {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 110px minmax(180px, 240px);
+  gap: 1rem;
+  align-items: center;
+}
+
+.nsl-client-zone {
+  min-height: 190px;
+  padding: 0.8rem;
+  border: 1px dashed var(--nsl-border-strong);
+  border-radius: 6px;
+  background: rgba(5, 13, 20, 0.55);
+}
+
+.nsl-client-zone > span,
+.nsl-message-processor > span {
+  color: #8fa7b5;
+  font-size: 0.66rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nsl-topology-clients {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.nsl-topology-client {
+  min-width: 0;
+  padding: 0.55rem;
+  border: 1px solid rgba(54, 211, 153, 0.25);
+  border-radius: 5px;
+  background: rgba(54, 211, 153, 0.06);
+  font-family: "Cascadia Code", Consolas, monospace;
+}
+
+.nsl-topology-client.is-handshaking {
+  border-color: rgba(247, 201, 72, 0.38);
+  background: rgba(247, 201, 72, 0.06);
+}
+
+.nsl-topology-client strong,
+.nsl-topology-client span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nsl-topology-client strong {
+  color: #b7f5d8;
+  font-size: 0.72rem;
+}
+
+.nsl-topology-client span {
+  color: #8fa7b5;
+  font-size: 0.63rem;
+}
+
+.nsl-empty-state {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 3rem 0.5rem;
+  color: #78909e;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.nsl-network-path {
+  display: grid;
+  min-height: 80px;
+  place-items: center;
+  color: #8fa7b5;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.66rem;
+}
+
+.nsl-network-path::before {
+  width: 100%;
+  height: 2px;
+  background: var(--nsl-cyan);
+  content: "";
+}
+
+.nsl-server-node {
+  display: flex;
+  min-height: 155px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid var(--nsl-border-strong);
+  border-radius: 7px;
+  background: rgba(75, 180, 255, 0.06);
+  text-align: center;
+  transition: border-color 160ms ease, opacity 160ms ease;
+}
+
+.nsl-server-node.is-offline {
+  opacity: 0.48;
+}
+
+.nsl-server-node.is-online {
+  border-color: rgba(54, 211, 153, 0.58);
+  opacity: 1;
+}
+
+.nsl-server-node > span:last-child {
+  color: #8fa7b5;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.7rem;
+}
+
+.nsl-server-icon {
+  display: grid;
+  width: 60px;
+  gap: 5px;
+  padding: 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: 5px;
+  color: var(--nsl-cyan);
+}
+
+.nsl-server-icon i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.nsl-processor-path {
+  grid-column: 3;
+  color: var(--nsl-cyan);
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.nsl-message-processor {
+  grid-column: 2 / 4;
+  padding: 0.8rem;
+  border: 1px solid var(--nsl-border);
+  border-radius: 6px;
+  background: rgba(5, 13, 20, 0.68);
+}
+
+.nsl-message-processor > div {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.nsl-message-processor code {
+  min-width: 0;
+  padding: 0.45rem;
+  border-radius: 4px;
+  color: #bce9ff;
+  background: rgba(75, 180, 255, 0.075);
+  font-size: 0.68rem;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.nsl-button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.nsl-btn,
+.nsl-log-clear,
+.nsl-terminal-form button {
+  min-height: 42px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--nsl-border-strong);
+  border-radius: 5px;
+  color: var(--text);
+  background: #101c26;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.nsl-btn:hover,
+.nsl-btn:focus-visible,
+.nsl-log-clear:hover,
+.nsl-log-clear:focus-visible,
+.nsl-terminal-form button:hover,
+.nsl-terminal-form button:focus-visible {
+  border-color: var(--nsl-cyan);
+  background: rgba(75, 180, 255, 0.13);
+}
+
+.nsl-btn:disabled {
+  color: #667985;
+  border-color: rgba(117, 142, 156, 0.16);
+  background: #0b141c;
+  cursor: not-allowed;
+}
+
+.nsl-btn-primary {
+  color: #bff8df;
+  border-color: rgba(54, 211, 153, 0.48);
+  background: rgba(54, 211, 153, 0.1);
+}
+
+.nsl-btn-danger,
+.nsl-btn-danger-outline {
+  color: #ffb7bf;
+  border-color: rgba(255, 113, 128, 0.38);
+}
+
+.nsl-field-label {
+  display: block;
+  margin: 0.8rem 0 0.35rem;
+  color: #9eb2bd;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.nsl-select,
+.nsl-input,
+.nsl-terminal-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--nsl-border);
+  border-radius: 5px;
+  outline: none;
+  color: var(--text);
+  background: #07111a;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.nsl-select:focus,
+.nsl-input:focus,
+.nsl-terminal-form input:focus {
+  border-color: var(--nsl-cyan);
+  box-shadow: 0 0 0 3px rgba(87, 199, 255, 0.1);
+}
+
+.nsl-client-actions {
+  margin-top: 0.6rem;
+}
+
+.nsl-table-wrap {
+  overflow-x: auto;
+}
+
+.nsl-client-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.nsl-client-table th,
+.nsl-client-table td {
+  padding: 0.75rem 0.7rem;
+  border-bottom: 1px solid rgba(75, 180, 255, 0.1);
+  text-align: left;
+}
+
+.nsl-client-table th {
+  color: #8fa7b5;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.nsl-client-table td {
+  color: #cfe3ed;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.72rem;
+}
+
+.nsl-client-table .nsl-state-connected {
+  color: var(--nsl-green);
+}
+
+.nsl-client-table .nsl-state-handshake {
+  color: var(--nsl-yellow);
+}
+
+.nsl-empty-table td {
+  padding: 1.6rem;
+  color: #78909e;
+  text-align: center;
+}
+
+.nsl-console-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.nsl-console-header {
+  min-height: 54px;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--nsl-border);
+  background: #071019;
+}
+
+.nsl-console-header > div {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.nsl-console-header h3 {
+  margin: 0;
+}
+
+.nsl-console-lights {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.nsl-console-lights i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nsl-red);
+}
+
+.nsl-console-lights i:nth-child(2) {
+  background: var(--nsl-yellow);
+}
+
+.nsl-console-lights i:nth-child(3) {
+  background: var(--nsl-green);
+}
+
+.nsl-log-clear {
+  min-height: 34px;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.68rem;
+}
+
+.nsl-console-output {
+  height: 330px;
+  overflow-y: auto;
+  padding: 0.9rem;
+  background: #02090e;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.73rem;
+  line-height: 1.65;
+  overscroll-behavior: contain;
+}
+
+.nsl-log {
+  overflow-wrap: anywhere;
+}
+
+.nsl-log-system { color: var(--nsl-cyan); }
+.nsl-log-success { color: var(--nsl-green); }
+.nsl-log-warning { color: var(--nsl-yellow); }
+.nsl-log-error { color: #ff8c98; }
+.nsl-log-command { color: #ffffff; }
+.nsl-log-muted { color: #718894; }
+
+.nsl-terminal-form {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  border-top: 1px solid var(--nsl-border);
+  background: #061019;
+}
+
+.nsl-terminal-form > span {
+  padding-left: 0.8rem;
+  color: var(--nsl-green);
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.75rem;
+}
+
+.nsl-terminal-form input {
+  min-height: 48px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-family: "Cascadia Code", Consolas, monospace;
+}
+
+.nsl-terminal-form button {
+  min-height: 48px;
+  border-width: 0 0 0 1px;
+  border-radius: 0;
+  color: var(--nsl-cyan);
+}
+
+.nsl-flow-diagram {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(90px, 0.65fr) minmax(120px, 1fr) minmax(80px, 0.65fr) minmax(120px, 1fr);
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.nsl-flow-diagram > div {
+  display: grid;
+  min-height: 84px;
+  place-content: center;
+  border: 1px solid var(--nsl-border);
+  border-radius: 6px;
+  background: rgba(5, 13, 20, 0.7);
+  text-align: center;
+}
+
+.nsl-flow-diagram > div.is-server {
+  border-color: rgba(87, 199, 255, 0.5);
+}
+
+.nsl-flow-diagram > div span,
+.nsl-flow-diagram small {
+  color: #8fa7b5;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.62rem;
+}
+
+.nsl-flow-diagram > span {
+  color: var(--nsl-cyan);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.nsl-flow-diagram > span small {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.nsl-flow-diagram > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--nsl-cyan);
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .nsl-intro,
+  .nsl-dashboard,
+  .nsl-control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nsl-mode-badge {
+    justify-self: start;
+  }
+
+  .nsl-topology {
+    grid-template-columns: 1fr;
+  }
+
+  .nsl-network-path {
+    min-height: 54px;
+  }
+
+  .nsl-network-path::before {
+    width: 2px;
+    height: 44px;
+  }
+
+  .nsl-processor-path,
+  .nsl-message-processor {
+    grid-column: auto;
+  }
+
+  .nsl-flow-diagram {
+    grid-template-columns: 1fr;
+  }
+
+  .nsl-flow-diagram > span,
+  .nsl-flow-diagram > p {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .nsl-boundary,
+  .nsl-config-grid,
+  .nsl-metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nsl-boundary {
+    grid-template-columns: 1fr;
+  }
+
+  .nsl-workbench-header,
+  .nsl-panel-heading,
+  .nsl-console-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nsl-dashboard,
+  .nsl-control-grid {
+    padding-inline: 0.7rem;
+  }
+
+  .nsl-panel,
+  .nsl-console-panel {
+    margin: 0.7rem;
+  }
+
+  .nsl-topology-clients,
+  .nsl-message-processor > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nsl-console-output {
+    height: 280px;
+  }
+}
+
+@media (max-width: 430px) {
+  .nsl-config-grid,
+  .nsl-metrics-grid,
+  .nsl-button-grid,
+  .nsl-topology-clients,
+  .nsl-message-processor > div {
+    grid-template-columns: 1fr;
+  }
+
+  .nsl-terminal-form {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .nsl-terminal-form button {
+    grid-column: 1 / -1;
+    border-width: 1px 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nsl-server-node,
+  .nsl-btn,
+  .nsl-log-clear,
+  .nsl-terminal-form button {
+    transition: none;
+  }
+}
+
 .nav-toggle[aria-expanded="true"] {
   color: var(--accent);
   border-color: rgba(54, 211, 153, 0.7);

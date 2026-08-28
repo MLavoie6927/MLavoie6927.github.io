@@ -210,6 +210,556 @@
   });
 })();
 
+/* Interactive network server lab */
+(() => {
+  "use strict";
+
+  const root = document.querySelector("[data-network-server-lab]");
+  if (!root || root.dataset.initialized === "true") return;
+  root.dataset.initialized = "true";
+
+  const byId = (id) => document.getElementById(id);
+  const ui = {
+    status: byId("nsl-server-status"),
+    statusLabel: byId("nsl-server-status-label"),
+    serverNode: byId("nsl-server-node"),
+    topologyState: byId("nsl-topology-state"),
+    topologyClients: byId("nsl-topology-clients"),
+    clientCount: byId("nsl-client-count"),
+    messageCount: byId("nsl-message-count"),
+    averageLatency: byId("nsl-average-latency"),
+    workerCount: byId("nsl-worker-count"),
+    uptime: byId("nsl-uptime"),
+    tlsState: byId("nsl-tls-state"),
+    start: byId("nsl-start-server"),
+    stop: byId("nsl-stop-server"),
+    connect: byId("nsl-connect-client"),
+    reset: byId("nsl-reset-lab"),
+    select: byId("nsl-client-select"),
+    ping: byId("nsl-ping-client"),
+    disconnect: byId("nsl-disconnect-client"),
+    messageInput: byId("nsl-message-input"),
+    send: byId("nsl-send-client"),
+    broadcast: byId("nsl-broadcast"),
+    sessionCounter: byId("nsl-session-counter"),
+    tableBody: byId("nsl-client-table-body"),
+    console: byId("nsl-console-output"),
+    clearLog: byId("nsl-clear-console"),
+    terminalForm: byId("nsl-terminal-form"),
+    terminalInput: byId("nsl-terminal-input")
+  };
+
+  if (Object.values(ui).some((element) => !element)) return;
+
+  const state = {
+    phase: "offline",
+    startedAt: null,
+    nextClientId: 10001,
+    clients: [],
+    totalMessages: 0,
+    connecting: false,
+    uptimeTimer: null,
+    operationToken: 0,
+    maxClients: 8,
+    commandHistory: [],
+    historyIndex: 0
+  };
+
+  const workers = 8;
+  ui.workerCount.textContent = String(workers);
+
+  const wait = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+  const latency = () => Math.floor(Math.random() * 31) + 8;
+
+  function formatTime(milliseconds) {
+    const seconds = Math.max(0, Math.floor(milliseconds / 1000));
+    const values = [
+      Math.floor(seconds / 3600),
+      Math.floor((seconds % 3600) / 60),
+      seconds % 60
+    ];
+    return values.map((value) => String(value).padStart(2, "0")).join(":");
+  }
+
+  function timestamp() {
+    return new Date().toLocaleTimeString([], {
+      hour12: false,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
+  }
+
+  function writeLog(message, type = "muted") {
+    const line = document.createElement("div");
+    line.className = `nsl-log nsl-log-${type}`;
+    line.textContent = `[${timestamp()}] ${message}`;
+    ui.console.appendChild(line);
+
+    while (ui.console.children.length > 140) {
+      ui.console.firstElementChild.remove();
+    }
+
+    ui.console.scrollTop = ui.console.scrollHeight;
+  }
+
+  function clearLog(announce = true) {
+    ui.console.replaceChildren();
+    if (announce) writeLog("Event log cleared.", "system");
+  }
+
+  function selectedClient() {
+    const id = Number(ui.select.value);
+    return state.clients.find((client) => client.id === id) || null;
+  }
+
+  function connectedClients() {
+    return state.clients.filter((client) => client.state === "connected");
+  }
+
+  function renderSelect() {
+    const previous = ui.select.value;
+    const fragment = document.createDocumentFragment();
+    const clients = connectedClients();
+
+    if (!clients.length) {
+      const option = document.createElement("option");
+      option.value = "";
+      option.textContent = "No connected clients";
+      fragment.appendChild(option);
+    } else {
+      clients.forEach((client) => {
+        const option = document.createElement("option");
+        option.value = String(client.id);
+        option.textContent = `Client ${client.id} - ${client.endpoint}`;
+        fragment.appendChild(option);
+      });
+    }
+
+    ui.select.replaceChildren(fragment);
+    if (clients.some((client) => String(client.id) === previous)) {
+      ui.select.value = previous;
+    }
+  }
+
+  function renderTable() {
+    const fragment = document.createDocumentFragment();
+
+    if (!state.clients.length) {
+      const row = document.createElement("tr");
+      row.className = "nsl-empty-table";
+      const cell = document.createElement("td");
+      cell.colSpan = 7;
+      cell.textContent = state.phase === "online"
+        ? "The listener is ready for simulated clients."
+        : "Start the server and add a client.";
+      row.appendChild(cell);
+      fragment.appendChild(row);
+    } else {
+      state.clients.forEach((client) => {
+        const row = document.createElement("tr");
+        const values = [
+          String(client.id),
+          client.endpoint,
+          client.state === "connected" ? "Connected" : "TLS handshake",
+          client.tls,
+          client.rtt ? `${client.rtt} ms` : "--",
+          String(client.rx),
+          String(client.tx)
+        ];
+
+        values.forEach((value, index) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          if (index === 2) {
+            cell.className = client.state === "connected"
+              ? "nsl-state-connected"
+              : "nsl-state-handshake";
+          }
+          row.appendChild(cell);
+        });
+        fragment.appendChild(row);
+      });
+    }
+
+    ui.tableBody.replaceChildren(fragment);
+  }
+
+  function renderTopology() {
+    const fragment = document.createDocumentFragment();
+
+    if (!state.clients.length) {
+      const empty = document.createElement("p");
+      empty.className = "nsl-empty-state";
+      empty.textContent = "No connected clients";
+      fragment.appendChild(empty);
+    } else {
+      state.clients.forEach((client) => {
+        const node = document.createElement("div");
+        node.className = "nsl-topology-client";
+        if (client.state !== "connected") node.classList.add("is-handshaking");
+
+        const title = document.createElement("strong");
+        title.textContent = `Client ${client.id}`;
+        const detail = document.createElement("span");
+        detail.textContent = client.state === "connected" ? client.endpoint : "Negotiating TLS";
+        node.append(title, detail);
+        fragment.appendChild(node);
+      });
+    }
+
+    ui.topologyClients.replaceChildren(fragment);
+  }
+
+  function updateButtons() {
+    const isOnline = state.phase === "online";
+    const hasClient = Boolean(selectedClient());
+    const hasPayload = Boolean(ui.messageInput.value.trim());
+    const hasConnectedClients = connectedClients().length > 0;
+    const isTransitioning = state.phase === "starting" || state.phase === "stopping";
+
+    ui.start.disabled = state.phase !== "offline";
+    ui.stop.disabled = state.phase === "offline" || state.phase === "stopping";
+    ui.connect.disabled = !isOnline || state.connecting || state.clients.length >= state.maxClients;
+    ui.reset.disabled = false;
+    ui.select.disabled = !hasConnectedClients;
+    ui.ping.disabled = !isOnline || !hasClient || isTransitioning;
+    ui.disconnect.disabled = !isOnline || !hasClient || isTransitioning;
+    ui.messageInput.disabled = !isOnline || !hasConnectedClients;
+    ui.send.disabled = !isOnline || !hasClient || !hasPayload;
+    ui.broadcast.disabled = !isOnline || !hasConnectedClients || !hasPayload;
+    root.setAttribute("aria-busy", isTransitioning ? "true" : "false");
+  }
+
+  function render() {
+    const phaseLabels = {
+      offline: "Offline",
+      starting: "Starting",
+      online: "Online",
+      stopping: "Stopping"
+    };
+    const online = state.phase === "online";
+    const clients = connectedClients();
+    const average = clients.length
+      ? Math.round(clients.reduce((sum, client) => sum + client.rtt, 0) / clients.length)
+      : null;
+
+    ui.status.className = `nsl-server-status is-${state.phase}`;
+    ui.statusLabel.textContent = phaseLabels[state.phase];
+    ui.serverNode.classList.toggle("is-online", online);
+    ui.serverNode.classList.toggle("is-offline", !online);
+    ui.clientCount.textContent = String(clients.length);
+    ui.messageCount.textContent = String(state.totalMessages);
+    ui.averageLatency.textContent = average ? `${average} ms` : "--";
+    ui.tlsState.textContent = online ? (clients.length ? "Active" : "Ready") : "Inactive";
+    ui.sessionCounter.textContent = `${clients.length} active ${clients.length === 1 ? "session" : "sessions"}`;
+    ui.topologyState.textContent = online
+      ? `Listening on simulated TCP :60000 - ${clients.length}/${state.maxClients} clients`
+      : state.phase === "starting"
+        ? "Initializing listener and worker pool"
+        : "Waiting for server startup";
+
+    renderSelect();
+    renderTable();
+    renderTopology();
+    updateButtons();
+  }
+
+  function startUptime() {
+    window.clearInterval(state.uptimeTimer);
+    ui.uptime.textContent = "00:00:00";
+    state.uptimeTimer = window.setInterval(() => {
+      if (state.startedAt) {
+        ui.uptime.textContent = formatTime(Date.now() - state.startedAt);
+      }
+    }, 1000);
+  }
+
+  async function startServer() {
+    if (state.phase !== "offline") {
+      writeLog("Start ignored: the server is not offline.", "warning");
+      return;
+    }
+
+    const token = ++state.operationToken;
+    state.phase = "starting";
+    render();
+
+    const steps = [
+      ["Initializing boost::asio::io_context...", "system"],
+      [`Creating simulated worker pool (${workers} workers)...`, "muted"],
+      ["Creating asynchronous TCP acceptor...", "muted"],
+      ["Binding simulated endpoint 127.0.0.1:60000...", "muted"],
+      ["Preparing TLS 1.3 context...", "muted"]
+    ];
+
+    for (const [message, type] of steps) {
+      writeLog(message, type);
+      await wait(150);
+      if (token !== state.operationToken) return;
+    }
+
+    state.phase = "online";
+    state.startedAt = Date.now();
+    state.totalMessages = 0;
+    state.clients = [];
+    state.nextClientId = 10001;
+    startUptime();
+    writeLog("CustomServer listening in browser simulation mode.", "success");
+    writeLog("TLS context ready; waiting for simulated client sessions.", "success");
+    render();
+  }
+
+  async function stopServer() {
+    if (state.phase === "offline" || state.phase === "stopping") return;
+
+    const token = ++state.operationToken;
+    const connectionCount = state.clients.length;
+    state.phase = "stopping";
+    render();
+    writeLog("Shutdown signal received.", "warning");
+    if (connectionCount) writeLog(`Closing ${connectionCount} simulated client session(s)...`, "muted");
+    await wait(220);
+    if (token !== state.operationToken) return;
+
+    window.clearInterval(state.uptimeTimer);
+    state.uptimeTimer = null;
+    state.phase = "offline";
+    state.startedAt = null;
+    state.clients = [];
+    state.connecting = false;
+    ui.uptime.textContent = "00:00:00";
+    writeLog("Server stopped; listener and worker pool released.", "success");
+    render();
+  }
+
+  function resetLab() {
+    state.operationToken += 1;
+    window.clearInterval(state.uptimeTimer);
+    state.phase = "offline";
+    state.startedAt = null;
+    state.nextClientId = 10001;
+    state.clients = [];
+    state.totalMessages = 0;
+    state.connecting = false;
+    state.uptimeTimer = null;
+    ui.uptime.textContent = "00:00:00";
+    ui.messageInput.value = "";
+    clearLog(false);
+    writeLog("Lab state reset.", "system");
+    writeLog("Server currently offline.", "muted");
+    render();
+  }
+
+  async function connectClient() {
+    if (state.phase !== "online" || state.connecting || state.clients.length >= state.maxClients) {
+      if (state.clients.length >= state.maxClients) {
+        writeLog(`Connection rejected: the ${state.maxClients}-client simulation limit was reached.`, "warning");
+      }
+      return null;
+    }
+
+    state.connecting = true;
+    const id = state.nextClientId++;
+    const endpoint = `192.0.2.${10 + (id - 10001)}:${50000 + (id - 10001) * 13}`;
+    const client = { id, endpoint, state: "handshake", tls: "Negotiating", rtt: 0, rx: 0, tx: 0 };
+    state.clients.push(client);
+    writeLog(`ServerAccept assigned client ID ${id} to documentation endpoint ${endpoint}.`, "system");
+    writeLog(`Client ${id}: beginning simulated TLS handshake.`, "muted");
+    render();
+
+    const token = state.operationToken;
+    await wait(300);
+    if (state.phase !== "online" || token !== state.operationToken || !state.clients.includes(client)) {
+      state.connecting = false;
+      return null;
+    }
+
+    client.state = "connected";
+    client.tls = "TLS 1.3";
+    client.rtt = latency();
+    state.totalMessages += 4;
+    state.connecting = false;
+    writeLog(`Client ${id}: TLS 1.3 established; session ready (${client.rtt} ms RTT).`, "success");
+    render();
+    return client;
+  }
+
+  function chooseClient(id) {
+    const client = state.clients.find((candidate) => candidate.id === Number(id) && candidate.state === "connected");
+    if (!client) return null;
+    ui.select.value = String(client.id);
+    updateButtons();
+    return client;
+  }
+
+  async function pingClient(id = ui.select.value) {
+    const client = chooseClient(id);
+    if (!client || state.phase !== "online") {
+      writeLog("ServerPing requires a connected client.", "warning");
+      return;
+    }
+
+    writeLog(`Client ${client.id} -> ServerPing(seq=${client.rx + 1})`, "command");
+    await wait(130);
+    if (!state.clients.includes(client) || state.phase !== "online") return;
+
+    client.rtt = latency();
+    client.rx += 1;
+    client.tx += 1;
+    state.totalMessages += 2;
+    writeLog(`Server -> Client ${client.id}: ping response (${client.rtt} ms).`, "success");
+    render();
+  }
+
+  function disconnectClient(id = ui.select.value) {
+    const client = chooseClient(id);
+    if (!client) {
+      writeLog("Disconnect requires a connected client.", "warning");
+      return;
+    }
+
+    state.clients = state.clients.filter((candidate) => candidate !== client);
+    writeLog(`Client ${client.id}: TLS close_notify; session removed.`, "warning");
+    render();
+  }
+
+  async function sendMessage(mode, payload, id = ui.select.value) {
+    const message = String(payload || "").trim();
+    if (!message) {
+      writeLog("Message rejected: payload is empty.", "warning");
+      return;
+    }
+
+    if (state.phase !== "online") {
+      writeLog("Message rejected: server is offline.", "warning");
+      return;
+    }
+
+    if (mode === "selected") {
+      const client = chooseClient(id);
+      if (!client) {
+        writeLog("ServerMessage requires a connected client.", "warning");
+        return;
+      }
+      writeLog(`ServerMessage -> Client ${client.id}: ${message}`, "command");
+      await wait(100);
+      if (!state.clients.includes(client)) return;
+      client.tx += 1;
+      state.totalMessages += 1;
+      writeLog(`Client ${client.id}: payload acknowledged.`, "success");
+    } else {
+      const recipients = connectedClients();
+      if (!recipients.length) {
+        writeLog("MessageAll requires at least one connected client.", "warning");
+        return;
+      }
+      writeLog(`MessageAll -> ${recipients.length} client(s): ${message}`, "command");
+      await wait(110);
+      recipients.forEach((client) => { client.tx += 1; });
+      state.totalMessages += recipients.length;
+      writeLog(`Broadcast delivered to ${recipients.length} simulated session(s).`, "success");
+    }
+
+    ui.messageInput.value = "";
+    render();
+  }
+
+  function logStatus() {
+    const clients = connectedClients();
+    const uptime = state.startedAt ? formatTime(Date.now() - state.startedAt) : "00:00:00";
+    writeLog(`Status: ${state.phase}; clients=${clients.length}; messages=${state.totalMessages}; workers=${workers}; uptime=${uptime}.`, "system");
+  }
+
+  async function processCommand(rawCommand) {
+    const commandLine = String(rawCommand || "").trim();
+    if (!commandLine) return;
+
+    state.commandHistory.push(commandLine);
+    if (state.commandHistory.length > 30) state.commandHistory.shift();
+    state.historyIndex = state.commandHistory.length;
+    writeLog(`server> ${commandLine}`, "command");
+
+    const parts = commandLine.split(/\s+/);
+    const command = parts.shift().toLowerCase();
+
+    if (command === "help") {
+      writeLog("Commands: start, stop, status, connect [1-4], clients, ping [id], send <id> <message>, broadcast <message>, disconnect [id], clear, reset.", "system");
+      return;
+    }
+    if (command === "start") return startServer();
+    if (command === "stop") return stopServer();
+    if (command === "status") return logStatus();
+    if (command === "clear") return clearLog();
+    if (command === "reset") return resetLab();
+
+    if (command === "connect") {
+      const requested = Math.max(1, Math.min(Number(parts[0]) || 1, 4));
+      for (let index = 0; index < requested; index += 1) {
+        if (state.clients.length >= state.maxClients) break;
+        await connectClient();
+      }
+      return;
+    }
+
+    if (command === "clients") {
+      const clients = connectedClients();
+      if (!clients.length) {
+        writeLog("No connected clients.", "muted");
+      } else {
+        clients.forEach((client) => {
+          writeLog(`Client ${client.id} ${client.endpoint} ${client.tls} RTT=${client.rtt}ms RX=${client.rx} TX=${client.tx}`, "muted");
+        });
+      }
+      return;
+    }
+
+    if (command === "ping") return pingClient(parts[0]);
+    if (command === "disconnect") return disconnectClient(parts[0] || ui.select.value);
+    if (command === "broadcast") return sendMessage("all", parts.join(" "));
+    if (command === "send") return sendMessage("selected", parts.slice(1).join(" "), parts[0]);
+
+    writeLog(`Unknown command: ${command}`, "error");
+    writeLog('Enter "help" to display supported commands.', "muted");
+  }
+
+  ui.start.addEventListener("click", () => { void startServer(); });
+  ui.stop.addEventListener("click", () => { void stopServer(); });
+  ui.connect.addEventListener("click", () => { void connectClient(); });
+  ui.reset.addEventListener("click", resetLab);
+  ui.ping.addEventListener("click", () => { void pingClient(); });
+  ui.disconnect.addEventListener("click", () => disconnectClient());
+  ui.send.addEventListener("click", () => { void sendMessage("selected", ui.messageInput.value); });
+  ui.broadcast.addEventListener("click", () => { void sendMessage("all", ui.messageInput.value); });
+  ui.clearLog.addEventListener("click", () => clearLog());
+  ui.select.addEventListener("change", updateButtons);
+  ui.messageInput.addEventListener("input", updateButtons);
+  ui.messageInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      void sendMessage("all", ui.messageInput.value);
+    }
+  });
+
+  ui.terminalForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const command = ui.terminalInput.value;
+    ui.terminalInput.value = "";
+    void processCommand(command);
+  });
+
+  ui.terminalInput.addEventListener("keydown", (event) => {
+    if (!state.commandHistory.length || (event.key !== "ArrowUp" && event.key !== "ArrowDown")) return;
+    event.preventDefault();
+    state.historyIndex += event.key === "ArrowUp" ? -1 : 1;
+    state.historyIndex = Math.max(0, Math.min(state.historyIndex, state.commandHistory.length));
+    ui.terminalInput.value = state.commandHistory[state.historyIndex] || "";
+  });
+
+  window.addEventListener("pagehide", () => window.clearInterval(state.uptimeTimer), { once: true });
+  render();
+})();
+
 
 /* =========================================================
    INTERACTIVE DETECTION ENGINEERING LAB
