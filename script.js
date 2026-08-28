@@ -19,6 +19,7 @@
     var currentYear = document.querySelector("#current-year");
     var stackTabs = Array.prototype.slice.call(document.querySelectorAll("[data-stack-tab]"));
     var stackPanels = Array.prototype.slice.call(document.querySelectorAll("[data-stack-panel]"));
+    var initialHash = window.location.hash;
     var sections = navItems
       .map(function (link) {
         var href = link.getAttribute("href");
@@ -170,6 +171,24 @@
       queueActiveLinkUpdate();
     }
 
+    function alignInitialHash() {
+      if (!initialHash || window.location.hash !== initialHash) {
+        return;
+      }
+
+      var target = document.getElementById(decodeURIComponent(initialHash.slice(1)));
+
+      if (target) {
+        target.scrollIntoView({ block: "start" });
+      }
+    }
+
+    function scheduleInitialHashAlignment() {
+      [0, 250, 750, 1500, 3000].forEach(function (delay) {
+        window.setTimeout(alignInitialHash, delay);
+      });
+    }
+
     if (typeof mobileQuery.addEventListener === "function") {
       mobileQuery.addEventListener("change", handleBreakpointChange);
     } else {
@@ -180,6 +199,12 @@
     window.addEventListener("resize", queueActiveLinkUpdate);
     window.addEventListener("orientationchange", handleBreakpointChange);
     window.addEventListener("hashchange", queueActiveLinkUpdate);
+
+    if (document.readyState === "complete") {
+      scheduleInitialHashAlignment();
+    } else {
+      window.addEventListener("load", scheduleInitialHashAlignment, { once: true });
+    }
 
     updateActiveLink();
   });

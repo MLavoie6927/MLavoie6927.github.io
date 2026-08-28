@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring CrowdStrike and Microsoft security stack architecture, SOC investigations, SIEM labs, detection engineering, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, a CompTIA Security+ SY0-701 study guide, certifications, and resume information.">
+  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring CrowdStrike and Microsoft security stack architecture, SOC investigations, SIEM labs, detection engineering, applied cryptography, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, a CompTIA Security+ SY0-701 study guide, certifications, and resume information.">
   <meta name="theme-color" content="#080b10">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=securityplus-guide-20260822a">
+  <link rel="stylesheet" href="styles.css?v=cryptography-lab-20260828a">
 </head>
 
 <body>
@@ -45,6 +45,7 @@
         <li><a href="#network-engineering" aria-label="Network Engineering">Network Eng.</a></li>
         <li><a href="#firewall-security">Firewall</a></li>
         <li><a href="#security-stacks">Security Stacks</a></li>
+        <li><a href="#cryptography">Cryptography</a></li>
         <li><a href="#securityplus-study-guide" aria-label="CompTIA Security Plus Study Guide">Security+ Guide</a></li>
         <li><a href="#certifications">Certifications</a></li>
         <li><a href="#cybrary-certificates">Cybrary Certs</a></li>
@@ -1153,7 +1154,64 @@
       </div>
     </section>
 
-    <section class="section section-muted study-guide-section" id="securityplus-study-guide">
+    <section class="section section-muted crypto-portfolio-section" id="cryptography">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Applied Cryptography</p>
+          <h2>Security properties, key lifecycles, and cryptographic failure behavior.</h2>
+          <p>
+            A browser-native engineering project connecting modern primitives to explicit security goals, versioned encrypted payloads, controlled key use, runtime verification, and post-quantum migration planning.
+          </p>
+        </div>
+
+        <article class="network-showcase network-showcase-featured crypto-showcase">
+          <a class="network-report-preview network-report-preview-landscape crypto-preview" href="projects/applied-cryptography-lab/" aria-label="Open Marc Lavoie's interactive Applied Cryptography Engineering Lab">
+            <img src="projects/applied-cryptography-lab/architecture.svg" width="1200" height="720" alt="Envelope encryption architecture for Marc Lavoie's Applied Cryptography Engineering Lab" loading="lazy" decoding="async">
+          </a>
+
+          <div class="project-content network-content">
+            <div class="network-summary">
+              <span class="featured-label">Interactive Project</span>
+              <span class="project-kicker">Cryptographic Security Engineering</span>
+              <h3>Applied Cryptography Engineering Lab</h3>
+              <p>
+                Four local Web Crypto demonstrations cover SHA-256 integrity, AES-256-GCM authenticated encryption with PBKDF2-derived demonstration keys, HMAC-SHA-256 message verification, and ephemeral RSA-OAEP key transport. An interactive control plane maps each security goal to its primitive, key material, event path, failure mode, and production boundary.
+              </p>
+            </div>
+
+            <div class="network-stats" aria-label="Applied Cryptography Lab summary">
+              <div><strong>4</strong><span>Live Labs</span></div>
+              <div><strong>4</strong><span>Self-Tests</span></div>
+              <div><strong>0</strong><span>Persistence</span></div>
+            </div>
+
+            <dl>
+              <div>
+                <dt>Technologies used</dt>
+                <dd>Web Cryptography API, AES-256-GCM, SHA-256, HMAC-SHA-256, RSA-OAEP-2048, PBKDF2-HMAC-SHA-256, CSPRNG values, versioned JSON envelopes, and responsive JavaScript</dd>
+              </div>
+
+              <div>
+                <dt>Skills demonstrated</dt>
+                <dd>Primitive selection, authenticated-encryption design, integrity and authenticity reasoning, key lifecycle architecture, negative-path validation, crypto-agility, post-quantum migration planning, and security-boundary communication</dd>
+              </div>
+            </dl>
+
+            <div class="network-verification crypto-verification" aria-label="Applied Cryptography Lab evidence boundary">
+              <strong>Native operations execute locally in the browser</strong>
+              <span>The page makes no API calls and persists no input or key material. Runtime self-tests demonstrate expected browser behavior; they are not a claim of FIPS module validation or production protocol certification.</span>
+            </div>
+
+            <div class="network-actions">
+              <a class="button button-primary" href="projects/applied-cryptography-lab/">Open Interactive Project</a>
+              <a class="button button-secondary" href="projects/applied-cryptography-lab/architecture.svg">View Architecture</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section study-guide-section" id="securityplus-study-guide">
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">CompTIA Study Guide</p>
@@ -2335,6 +2393,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=security-stacks-20260821a"></script>
+  <script src="script.js?v=cryptography-lab-20260828a"></script>
 </body>
 </html>

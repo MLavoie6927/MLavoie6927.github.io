@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
+  <title id="title">Envelope encryption reference architecture</title>
+  <desc id="description">A public-safe diagram showing a workload generating a data encryption key, protecting data with AES-GCM, wrapping the data key with a KMS or HSM key, storing a versioned envelope, and verifying authorization and integrity before releasing plaintext.</desc>
+  <rect width="1200" height="720" fill="#07101a"/>
+  <g stroke="#173142" stroke-width="1" opacity="0.5">
+    <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M0 600H1200"/>
+    <path d="M120 0V720M240 0V720M360 0V720M480 0V720M600 0V720M720 0V720M840 0V720M960 0V720M1080 0V720"/>
+  </g>
+
+  <text x="54" y="58" fill="#31d9a0" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700">APPLIED CRYPTOGRAPHY / REFERENCE ARCHITECTURE</text>
+  <text x="54" y="94" fill="#eef6f8" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">Envelope Encryption Control Flow</text>
+  <text x="54" y="122" fill="#9fb5c4" font-family="Arial, Helvetica, sans-serif" font-size="15">Separate high-volume data protection from long-lived key protection.</text>
+
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="54" y="170" fill="#43b9ff" font-size="13" font-weight="700">ENCRYPTION PATH</text>
+
+    <g transform="translate(54 194)">
+      <rect width="194" height="100" rx="6" fill="#0d1823" stroke="#2d5369"/>
+      <text x="18" y="28" fill="#43b9ff" font-size="11" font-weight="700">01 / WORKLOAD</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Create request</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">Plaintext + context</text>
+    </g>
+
+    <g transform="translate(293 194)">
+      <rect width="194" height="100" rx="6" fill="#0d1823" stroke="#2b8f70"/>
+      <text x="18" y="28" fill="#31d9a0" font-size="11" font-weight="700">02 / CSPRNG</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Generate DEK</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">Random AES-256 key</text>
+    </g>
+
+    <g transform="translate(532 194)">
+      <rect width="220" height="100" rx="6" fill="#0d1823" stroke="#2b8f70"/>
+      <text x="18" y="28" fill="#31d9a0" font-size="11" font-weight="700">03 / AEAD</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Encrypt + authenticate</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">AES-GCM + unique IV + AAD</text>
+    </g>
+
+    <g transform="translate(797 194)">
+      <rect width="349" height="100" rx="6" fill="#0d1823" stroke="#2d5369"/>
+      <text x="18" y="28" fill="#43b9ff" font-size="11" font-weight="700">04 / VERSIONED ENVELOPE</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Store protected components</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">Ciphertext | tag | IV | wrapped DEK | algorithm ID</text>
+    </g>
+
+    <g fill="none" stroke="#43b9ff" stroke-width="2">
+      <path d="M248 244H293"/>
+      <path d="M487 244H532"/>
+      <path d="M752 244H797"/>
+    </g>
+    <g fill="#43b9ff">
+      <path d="M286 239L296 244 286 249Z"/>
+      <path d="M525 239L535 244 525 249Z"/>
+      <path d="M790 239L800 244 790 249Z"/>
+    </g>
+
+    <g transform="translate(293 340)">
+      <rect width="194" height="96" rx="6" fill="#111b25" stroke="#d1a84b"/>
+      <text x="18" y="28" fill="#f2c66d" font-size="11" font-weight="700">KMS / HSM TRUST BOUNDARY</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Key-encryption key</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">Policy, audit, rotation</text>
+    </g>
+
+    <g transform="translate(532 340)">
+      <rect width="220" height="96" rx="6" fill="#111b25" stroke="#d1a84b"/>
+      <text x="18" y="28" fill="#f2c66d" font-size="11" font-weight="700">KEY OPERATION</text>
+      <text x="18" y="56" fill="#eef6f8" font-size="17" font-weight="700">Wrap the DEK</text>
+      <text x="18" y="78" fill="#9fb5c4" font-size="12">Plain DEK is not persisted</text>
+    </g>
+
+    <g fill="none" stroke="#f2c66d" stroke-width="2">
+      <path d="M487 388H532"/>
+      <path d="M642 340V294"/>
+    </g>
+    <g fill="#f2c66d">
+      <path d="M525 383L535 388 525 393Z"/>
+      <path d="M637 301L642 291 647 301Z"/>
+    </g>
+
+    <line x1="54" y1="490" x2="1146" y2="490" stroke="#274456"/>
+    <text x="54" y="526" fill="#31d9a0" font-size="13" font-weight="700">AUTHORIZED DECRYPTION PATH</text>
+
+    <g transform="translate(54 550)">
+      <rect width="240" height="104" rx="6" fill="#0d1823" stroke="#2d5369"/>
+      <text x="18" y="30" fill="#43b9ff" font-size="11" font-weight="700">01 / AUTHORIZE</text>
+      <text x="18" y="58" fill="#eef6f8" font-size="17" font-weight="700">Evaluate identity + policy</text>
+      <text x="18" y="81" fill="#9fb5c4" font-size="12">Deny before key access</text>
+    </g>
+
+    <g transform="translate(348 550)">
+      <rect width="240" height="104" rx="6" fill="#0d1823" stroke="#d1a84b"/>
+      <text x="18" y="30" fill="#f2c66d" font-size="11" font-weight="700">02 / UNWRAP</text>
+      <text x="18" y="58" fill="#eef6f8" font-size="17" font-weight="700">Recover the DEK</text>
+      <text x="18" y="81" fill="#9fb5c4" font-size="12">Audited KMS/HSM operation</text>
+    </g>
+
+    <g transform="translate(642 550)">
+      <rect width="240" height="104" rx="6" fill="#0d1823" stroke="#2b8f70"/>
+      <text x="18" y="30" fill="#31d9a0" font-size="11" font-weight="700">03 / VERIFY</text>
+      <text x="18" y="58" fill="#eef6f8" font-size="17" font-weight="700">Authenticate ciphertext</text>
+      <text x="18" y="81" fill="#9fb5c4" font-size="12">Fail closed on tag mismatch</text>
+    </g>
+
+    <g transform="translate(936 550)">
+      <rect width="210" height="104" rx="6" fill="#0d1823" stroke="#2b8f70"/>
+      <text x="18" y="30" fill="#31d9a0" font-size="11" font-weight="700">04 / RELEASE</text>
+      <text x="18" y="58" fill="#eef6f8" font-size="17" font-weight="700">Return plaintext</text>
+      <text x="18" y="81" fill="#9fb5c4" font-size="12">Use, then clear memory</text>
+    </g>
+
+    <g fill="none" stroke="#31d9a0" stroke-width="2">
+      <path d="M294 602H348M588 602H642M882 602H936"/>
+    </g>
+    <g fill="#31d9a0">
+      <path d="M341 597L351 602 341 607Z"/>
+      <path d="M635 597L645 602 635 607Z"/>
+      <path d="M929 597L939 602 929 607Z"/>
+    </g>
+
+    <text x="54" y="694" fill="#6f8e98" font-size="11">Illustrative architecture. Production designs require a documented threat model, managed keys, authorization, monitoring, recovery, and independent validation.</text>
+  </g>
+</svg>

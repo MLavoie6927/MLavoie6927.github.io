@@ -3075,3 +3075,33 @@ a.security-stack-preview:focus-visible img {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* Applied cryptography featured project */
+.crypto-portfolio-section {
+  border-block: 1px solid rgba(75, 180, 255, 0.12);
+}
+
+.crypto-showcase {
+  border-color: rgba(75, 180, 255, 0.62);
+  box-shadow: 0 20px 52px rgba(25, 120, 180, 0.1);
+}
+
+.crypto-preview {
+  padding: clamp(0.8rem, 1.5vw, 1.2rem);
+  background: #07101a;
+}
+
+.crypto-preview img {
+  max-width: 510px;
+  border-color: rgba(54, 211, 153, 0.36);
+  box-shadow: none;
+}
+
+.crypto-verification {
+  border-left-color: var(--accent-alt);
+  background: rgba(75, 180, 255, 0.08);
+}
+
+.crypto-verification strong {
+  color: var(--accent-alt);
+}

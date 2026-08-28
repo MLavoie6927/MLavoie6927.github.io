@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Marc Lavoie's interactive applied cryptography engineering lab: SHA-256, AES-256-GCM, HMAC-SHA-256, RSA-OAEP, envelope encryption, key lifecycle, and post-quantum readiness.">
+  <meta name="theme-color" content="#07101a">
+  <title>Applied Cryptography Engineering Lab | Marc Lavoie</title>
+  <link rel="preload" href="architecture.svg" as="image" type="image/svg+xml">
+  <link rel="stylesheet" href="crypto.css">
+
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Cryptography project navigation">
+      <a class="brand" href="../../index.html#cryptography" aria-label="Return to Marc Lavoie's cybersecurity portfolio">
+        <span class="brand-mark" aria-hidden="true">ML</span>
+        <span><strong>Marc Lavoie</strong><small>Applied Cryptography Lab</small></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-controls="projectMenu" aria-expanded="false">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+        <span class="visually-hidden">Toggle project navigation</span>
+      </button>
+
+      <div class="nav-links" id="projectMenu">
+        <a href="#foundations">Foundations</a>
+        <a href="#matrix">Decision Matrix</a>
+        <a href="#crypto-lab">Live Lab</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#post-quantum">Post-Quantum</a>
+        <a href="#references">Standards</a>
+      </div>
+      <a class="return-link" href="../../index.html#cryptography">Portfolio</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="container hero" id="top" aria-labelledby="page-title">
+      <div class="hero-copy-block">
+        <p class="eyebrow">Featured Project / Applied Security Engineering</p>
+        <h1 id="page-title">Applied Cryptography <span>Engineering Lab</span></h1>
+        <p class="hero-copy">
+          A browser-native project demonstrating how security requirements map to modern cryptographic primitives, versioned payloads, key lifecycle controls, failure behavior, and post-quantum migration planning.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#crypto-lab">Open Interactive Labs</a>
+          <a class="button secondary" href="#architecture">Review Architecture</a>
+        </div>
+        <div class="capability-line" aria-label="Demonstrated cryptographic capabilities">
+          <span class="chip">AES-256-GCM</span>
+          <span class="chip">SHA-256</span>
+          <span class="chip">HMAC-SHA-256</span>
+          <span class="chip">RSA-OAEP</span>
+          <span class="chip">PBKDF2</span>
+          <span class="chip">PQC READINESS</span>
+        </div>
+      </div>
+
+      <aside class="cipher-visual crypto-console" aria-labelledby="goalTitle">
+        <div class="visual-head">
+          <span>CRYPTOGRAPHIC CONTROL PLANE</span>
+          <span class="live-state">LOCAL ONLY</span>
+        </div>
+
+        <div class="goal-selector" role="group" aria-label="Select a security goal">
+          <button class="goal-button is-active" type="button" data-goal="confidentiality" aria-pressed="true">Confidentiality</button>
+          <button class="goal-button" type="button" data-goal="integrity" aria-pressed="false">Integrity</button>
+          <button class="goal-button" type="button" data-goal="authenticity" aria-pressed="false">Authenticity</button>
+          <button class="goal-button" type="button" data-goal="key-transport" aria-pressed="false">Key Transport</button>
+        </div>
+
+        <section class="goal-summary" aria-live="polite" aria-atomic="true">
+          <p class="panel-label">Selected security goal</p>
+          <h2 id="goalTitle">Confidentiality + integrity</h2>
+          <p id="goalDescription">Protect application data with authenticated encryption and reject modified ciphertext before releasing plaintext.</p>
+        </section>
+
+        <div class="console-metrics" aria-label="Selected cryptographic control">
+          <div><span>Primitive</span><strong id="goalPrimitive">AES-256-GCM</strong></div>
+          <div><span>Key material</span><strong id="goalKey">256-bit symmetric key</strong></div>
+          <div><span>Failure mode</span><strong id="goalFailure">Authentication error</strong></div>
+        </div>
+
+        <div class="event-path" id="goalPath" aria-label="Cryptographic operation path">
+          <span>Plaintext</span><span>Unique IV</span><span>AEAD</span><span>Ciphertext + tag</span>
+        </div>
+        <p class="visual-proof" id="goalBoundary"><strong>Boundary:</strong> Production deployments need managed random keys, nonce controls, authorization, rotation, recovery, and monitoring.</p>
+      </aside>
+    </section>
+
+    <section class="proof-band" aria-label="Project execution and evidence boundaries">
+      <div class="container proof-grid">
+        <div><strong>4</strong><span>Interactive labs</span></div>
+        <div><strong>4</strong><span>Runtime self-tests</span></div>
+        <div><strong>0</strong><span>Network requests</span></div>
+        <div><strong>0</strong><span>Persistent secrets</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="foundations" aria-labelledby="foundations-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / Security outcomes</p>
+            <h2 id="foundations-title">Choose the primitive by the property you need.</h2>
+          </div>
+          <p>Cryptography is not a single control. Confidentiality, integrity, authenticity, and non-repudiation require different constructions and different key-management decisions.</p>
+        </div>
+
+        <div class="principles">
+          <article class="principle">
+            <span class="principle-index">CONF / 01</span>
+            <h3>Confidentiality</h3>
+            <p>Encryption limits readable plaintext to entities that possess the correct decryption capability.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-index">INTG / 02</span>
+            <h3>Integrity</h3>
+            <p>Hashes, MACs, and signatures expose unauthorized modification—but only MACs and signatures authenticate an origin.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-index">AUTH / 03</span>
+            <h3>Authenticity</h3>
+            <p>HMAC proves possession of a shared secret. A digital signature verifies control of a private key.</p>
+          </article>
+          <article class="principle">
+            <span class="principle-index">AGIL / 04</span>
+            <h3>Crypto-agility</h3>
+            <p>Inventory, version, rotate, and replace algorithms or keys without redesigning the entire application.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="matrix" aria-labelledby="matrix-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">02 / Engineering decision matrix</p>
+            <h2 id="matrix-title">Modern primitives, mapped to purpose.</h2>
+          </div>
+          <p>The safe choice depends on the threat model, protocol, platform support, lifecycle requirements, and whether secrets can be shared.</p>
+        </div>
+
+        <div class="decision-table-wrap" tabindex="0" aria-label="Scrollable cryptographic algorithm comparison">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Primitive</th>
+                <th scope="col">Primary property</th>
+                <th scope="col">Portfolio example</th>
+                <th scope="col">Critical constraint</th>
+                <th scope="col">Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>AES-256-GCM</strong></td>
+                <td>Confidentiality + integrity</td>
+                <td>Encrypt application data with an authenticated tag</td>
+                <td>Never reuse an IV with the same key</td>
+                <td><span class="status-tag use">USE</span></td>
+              </tr>
+              <tr>
+                <td><strong>SHA-256</strong></td>
+                <td>One-way digest</td>
+                <td>File integrity and public-key fingerprints</td>
+                <td>Not password storage; no secret key</td>
+                <td><span class="status-tag use">USE</span></td>
+              </tr>
+              <tr>
+                <td><strong>HMAC-SHA-256</strong></td>
+                <td>Shared-secret authenticity</td>
+                <td>Webhook or message verification</td>
+                <td>Both sides must protect and rotate the secret</td>
+                <td><span class="status-tag use">USE</span></td>
+              </tr>
+              <tr>
+                <td><strong>RSA-OAEP-2048</strong></td>
+                <td>Public-key encryption</td>
+                <td>Small-secret transport demonstration</td>
+                <td>Use hybrid encryption for real payloads</td>
+                <td><span class="status-tag context">CONTEXT</span></td>
+              </tr>
+              <tr>
+                <td><strong>PBKDF2-HMAC-SHA-256</strong></td>
+                <td>Password-based key derivation</td>
+                <td>Derive an AES key from a passphrase</td>
+                <td>Unique salt and calibrated work factor required</td>
+                <td><span class="status-tag context">CONTEXT</span></td>
+              </tr>
+              <tr>
+                <td><strong>ML-KEM / ML-DSA</strong></td>
+                <td>Post-quantum key establishment / signatures</td>
+                <td>Migration planning and crypto inventory</td>
+                <td>Use vetted implementations and updated standards</td>
+                <td><span class="status-tag context">MIGRATE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="crypto-lab" aria-labelledby="lab-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">03 / Interactive evidence</p>
+            <h2 id="lab-title">Run the cryptography in your browser.</h2>
+          </div>
+          <p>These controls use the browser's native Web Cryptography API. They are demonstrations, not a substitute for a reviewed production protocol or managed key infrastructure.</p>
+        </div>
+
+        <div class="lab-intro runtime-panel">
+          <span class="runtime-notice" id="runtimeNotice" role="status">
+            <span class="runtime-dot" aria-hidden="true"></span>
+            <span>Checking cryptographic runtime...</span>
+          </span>
+          <div class="runtime-actions">
+            <button class="secondary" id="selfTestButton" type="button">Run Runtime Self-Test</button>
+            <button class="quiet-button" id="clearLabButton" type="button">Clear Lab Data</button>
+          </div>
+          <div class="self-test-result" id="selfTestResult" aria-live="polite">
+            <strong>Not run</strong>
+            <span>Tests SHA-256, AES-GCM, HMAC-SHA-256, and RSA-OAEP locally.</span>
+          </div>
+        </div>
+
+        <div class="labs">
+          <article class="lab-card">
+            <header class="lab-head">
+              <span class="lab-label">Lab 01 · Integrity</span>
+              <h3>SHA-256 digest</h3>
+              <p>Observe the avalanche effect: a one-character change creates a substantially different 256-bit digest.</p>
+            </header>
+            <div class="lab-body">
+              <div class="field">
+                <label for="hashInput">Message <small>UTF-8 text</small></label>
+                <textarea id="hashInput" maxlength="5000">The quick brown fox jumps over the lazy dog</textarea>
+              </div>
+              <div class="button-row">
+                <button class="primary" id="hashButton" type="button">Calculate SHA-256</button>
+              </div>
+              <div class="field">
+                <div class="label-row"><label for="hashOutput">Digest</label><button class="copy-button" type="button" data-copy="hashOutput">Copy</button></div>
+                <textarea class="output" id="hashOutput" readonly aria-live="polite" placeholder="64-character hexadecimal digest"></textarea>
+              </div>
+              <div class="result-meta" id="hashStatus" aria-live="polite"></div>
+              <p class="lab-note"><strong>Security boundary:</strong> SHA-256 can confirm that bytes match a known digest. It does not prove who created the data, and it should not be used alone to store passwords.</p>
+            </div>
+          </article>
+
+          <article class="lab-card">
+            <header class="lab-head">
+              <span class="lab-label">Lab 02 · Confidentiality + integrity</span>
+              <h3>AES-256-GCM vault</h3>
+              <p>Derive a key from a passphrase, generate a fresh salt and IV, then produce authenticated ciphertext.</p>
+            </header>
+            <div class="lab-body">
+              <div class="field">
+                <div class="label-row">
+                  <label for="aesPassphrase">Passphrase <small>Demonstration input only</small></label>
+                  <button class="copy-button" id="generateAesPassphrase" type="button">Generate Demo Value</button>
+                </div>
+                <input id="aesPassphrase" type="password" autocomplete="off" placeholder="Generate or enter a non-production demonstration value" maxlength="200">
+              </div>
+              <div class="field">
+                <label for="aesPlaintext">Plaintext <small>Maximum 5,000 characters</small></label>
+                <textarea id="aesPlaintext" maxlength="5000">Sensitive incident evidence: case IR-2026-0142</textarea>
+              </div>
+              <div class="button-row">
+                <button class="primary" id="aesEncryptButton" type="button">Encrypt</button>
+                <button class="secondary" id="aesDecryptButton" type="button">Decrypt payload</button>
+              </div>
+              <div class="field">
+                <div class="label-row"><label for="aesPayload">Portable payload</label><button class="copy-button" type="button" data-copy="aesPayload">Copy</button></div>
+                <textarea class="output tall" id="aesPayload" aria-live="polite" placeholder="Versioned JSON payload containing salt, IV, and ciphertext"></textarea>
+              </div>
+              <div class="result-meta" id="aesStatus" aria-live="polite"></div>
+              <p class="lab-note"><strong>Production boundary:</strong> Passphrase-derived encryption is appropriate only for specific threat models. Production systems should normally use managed, randomly generated keys and defined rotation, backup, and revocation procedures.</p>
+            </div>
+          </article>
+
+          <article class="lab-card">
+            <header class="lab-head">
+              <span class="lab-label">Lab 03 · Message authenticity</span>
+              <h3>HMAC sign + verify</h3>
+              <p>Create a keyed authentication code, then demonstrate that a changed message or incorrect key fails verification.</p>
+            </header>
+            <div class="lab-body">
+              <div class="field">
+                <div class="label-row">
+                  <label for="hmacSecret">Shared secret <small>Demonstration input only</small></label>
+                  <button class="copy-button" id="generateHmacSecret" type="button">Generate Demo Value</button>
+                </div>
+                <input id="hmacSecret" type="password" autocomplete="off" placeholder="Generate or enter a non-production demonstration value" maxlength="200">
+              </div>
+              <div class="field">
+                <label for="hmacMessage">Message <small>Try changing one character after signing</small></label>
+                <textarea id="hmacMessage" maxlength="5000">event_id=7391&amp;severity=high&amp;status=contained</textarea>
+              </div>
+              <div class="button-row">
+                <button class="primary" id="hmacSignButton" type="button">Generate HMAC</button>
+                <button class="secondary" id="hmacVerifyButton" type="button">Verify</button>
+              </div>
+              <div class="field">
+                <div class="label-row"><label for="hmacOutput">Authentication code</label><button class="copy-button" type="button" data-copy="hmacOutput">Copy</button></div>
+                <textarea class="output" id="hmacOutput" aria-live="polite" placeholder="64-character hexadecimal HMAC"></textarea>
+              </div>
+              <div class="result-meta" id="hmacStatus" aria-live="polite"></div>
+              <p class="lab-note"><strong>Operational boundary:</strong> HMAC establishes shared-secret authenticity, not non-repudiation. Secret distribution, rotation, and constant-time verification belong in the system design.</p>
+            </div>
+          </article>
+
+          <article class="lab-card">
+            <header class="lab-head">
+              <span class="lab-label">Lab 04 · Public-key encryption</span>
+              <h3>Ephemeral RSA-OAEP</h3>
+              <p>Generate a temporary key pair, encrypt a short message with the public key, and decrypt it with the private key.</p>
+            </header>
+            <div class="lab-body">
+              <div class="button-row">
+                <button class="primary" id="rsaGenerateButton" type="button">Generate 2048-bit key pair</button>
+              </div>
+              <div class="field">
+                <label for="rsaFingerprint">Public-key fingerprint <small>SHA-256</small></label>
+                <textarea class="output" id="rsaFingerprint" readonly aria-live="polite" placeholder="Generate a key pair to calculate its fingerprint"></textarea>
+              </div>
+              <div class="field">
+                <label for="rsaPlaintext">Short plaintext <small>Maximum 190 UTF-8 bytes</small></label>
+                <textarea id="rsaPlaintext" maxlength="190">Temporary AES session key: 9F-2C-71-A4</textarea>
+              </div>
+              <div class="button-row">
+                <button class="secondary" id="rsaEncryptButton" type="button" disabled>Encrypt</button>
+                <button class="secondary" id="rsaDecryptButton" type="button" disabled>Decrypt</button>
+              </div>
+              <div class="field">
+                <div class="label-row"><label for="rsaCiphertext">Ciphertext</label><button class="copy-button" type="button" data-copy="rsaCiphertext">Copy</button></div>
+                <textarea class="output tall" id="rsaCiphertext" readonly aria-live="polite"></textarea>
+              </div>
+              <div class="result-meta" id="rsaStatus" aria-live="polite">No key exists until you generate one. It remains only in memory.</div>
+              <p class="lab-note"><strong>Architecture boundary:</strong> RSA-OAEP encrypts only small values. Real applications use envelope encryption: a public-key mechanism protects a random symmetric data key, and AES-GCM protects the payload.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="architecture" aria-labelledby="architecture-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">04 / System design</p>
+            <h2 id="architecture-title">The hard part is the lifecycle, not the cipher.</h2>
+          </div>
+          <p>Strong primitives still fail when keys are exposed, nonces repeat, trust anchors are replaced, plaintext leaks into logs, or recovery procedures are undefined.</p>
+        </div>
+
+        <figure class="architecture-figure">
+          <a href="architecture.svg" aria-label="Open the full-resolution envelope encryption architecture diagram">
+            <img src="architecture.svg" width="1200" height="720" alt="Envelope encryption architecture showing data-key generation, AES-GCM authenticated encryption, KMS or HSM key wrapping, authorization, tag verification, and controlled plaintext release">
+          </a>
+          <figcaption>Illustrative public-safe reference architecture. No cloud tenant, production key, secret, or customer data is represented.</figcaption>
+        </figure>
+
+        <div class="architecture-grid">
+          <article class="envelope lifecycle-panel">
+            <h3>Key lifecycle control points</h3>
+            <p>The primitive is only one part of the design. Every key needs an owner, purpose, state, evidence trail, and tested failure path.</p>
+            <ol class="lifecycle-list">
+              <li><span>01</span><div><strong>Generate</strong><small>Approved CSPRNG, algorithm and size policy, key purpose, and ownership.</small></div></li>
+              <li><span>02</span><div><strong>Protect</strong><small>KMS or HSM boundary, least-privilege authorization, separation of duties, and backup decisions.</small></div></li>
+              <li><span>03</span><div><strong>Use</strong><small>Nonce uniqueness, context binding, audit events, rate limits, and plaintext handling.</small></div></li>
+              <li><span>04</span><div><strong>Rotate</strong><small>Versioned envelopes, staged re-encryption, compatibility testing, and rollback.</small></div></li>
+              <li><span>05</span><div><strong>Revoke and destroy</strong><small>Incident triggers, cryptographic erasure, retention requirements, and verification evidence.</small></div></li>
+            </ol>
+          </article>
+
+          <aside class="threat-panel">
+            <h3>What cryptography does not fix</h3>
+            <p>Encryption reduces specific risks; it does not erase the rest of the attack surface.</p>
+            <ul class="threat-list">
+              <li><b>!</b><span>Compromised endpoints reading data after legitimate decryption</span></li>
+              <li><b>!</b><span>Authorization mistakes granting the wrong principal access</span></li>
+              <li><b>!</b><span>Secrets committed to source control, logs, images, or backups</span></li>
+              <li><b>!</b><span>Weak randomness, nonce reuse, or silent algorithm downgrade</span></li>
+              <li><b>!</b><span>Unavailable keys without tested recovery and escrow decisions</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="post-quantum" aria-labelledby="pqc-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">05 / 2026 crypto-agility</p>
+            <h2 id="pqc-title">Plan the post-quantum transition now.</h2>
+          </div>
+          <p>Quantum readiness starts with discovery: locate public-key dependencies, estimate confidentiality lifetimes, identify vendor roadmaps, and design controlled hybrid migrations.</p>
+        </div>
+
+        <div class="pqc-grid">
+          <article class="pqc-card">
+            <span class="pqc-standard">NIST FIPS 203</span>
+            <h3>ML-KEM</h3>
+            <p>A module-lattice key-encapsulation mechanism for establishing shared secrets, standardized with three parameter sets. Implementers should also review NIST's published errata.</p>
+            <a href="https://csrc.nist.gov/pubs/fips/203/final" target="_blank" rel="noopener noreferrer">Read the NIST standard</a>
+          </article>
+          <article class="pqc-card">
+            <span class="pqc-standard">NIST FIPS 204</span>
+            <h3>ML-DSA</h3>
+            <p>A module-lattice digital-signature standard intended to resist adversaries with large-scale quantum computers.</p>
+            <a href="https://csrc.nist.gov/pubs/fips/204/final" target="_blank" rel="noopener noreferrer">Read the NIST standard</a>
+          </article>
+          <article class="pqc-card">
+            <span class="pqc-standard">NIST FIPS 205</span>
+            <h3>SLH-DSA</h3>
+            <p>A stateless, hash-based digital-signature standard derived from SPHINCS+ and built on different assumptions from ML-DSA.</p>
+            <a href="https://csrc.nist.gov/pubs/fips/205/final" target="_blank" rel="noopener noreferrer">Read the NIST standard</a>
+          </article>
+        </div>
+
+        <div class="roadmap" aria-label="Post-quantum migration roadmap">
+          <div class="roadmap-step"><small>01 / DISCOVER</small><strong>Inventory cryptography</strong><span>Protocols, certificates, code, libraries, HSMs, partners, firmware, and retained data.</span></div>
+          <div class="roadmap-step"><small>02 / PRIORITIZE</small><strong>Measure exposure</strong><span>Rank long-lived secrets and vulnerable public-key dependencies by business impact.</span></div>
+          <div class="roadmap-step"><small>03 / TEST</small><strong>Validate compatibility</strong><span>Benchmark sizes, latency, interoperability, rollback, observability, and failure modes.</span></div>
+          <div class="roadmap-step"><small>04 / MIGRATE</small><strong>Deploy in phases</strong><span>Use governed hybrid patterns where appropriate and preserve crypto-agility.</span></div>
+        </div>
+        <p class="standards-note"><strong>Implementation boundary:</strong> This page documents migration reasoning; it does not implement ML-KEM, ML-DSA, or SLH-DSA. Production adoption requires vetted libraries, current NIST errata, interoperability testing, validated modules where required, and a controlled rollback plan.</p>
+      </div>
+    </section>
+
+    <section class="section" id="references" aria-labelledby="references-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">06 / Technical references</p>
+            <h2 id="references-title">Standards behind the demonstrations.</h2>
+          </div>
+          <p>The labs are intentionally transparent about their limits and link to the authoritative specifications or recognized security guidance behind the implementation choices.</p>
+        </div>
+        <div class="references">
+          <a class="reference" href="https://www.w3.org/TR/WebCryptoAPI/" target="_blank" rel="noopener noreferrer"><strong>W3C Web Cryptography Level 2</strong><span>Browser API behavior for digest, MAC, encryption, decryption, key derivation, and key operations.</span></a>
+          <a class="reference" href="https://csrc.nist.gov/pubs/fips/197/final" target="_blank" rel="noopener noreferrer"><strong>NIST FIPS 197: AES</strong><span>Standard defining AES-128, AES-192, and AES-256.</span></a>
+          <a class="reference" href="https://csrc.nist.gov/pubs/sp/800/38/d/final" target="_blank" rel="noopener noreferrer"><strong>NIST SP 800-38D: GCM and GMAC</strong><span>Authenticated-encryption guidance for GCM, including IV and tag considerations.</span></a>
+          <a class="reference" href="https://csrc.nist.gov/projects/post-quantum-cryptography" target="_blank" rel="noopener noreferrer"><strong>NIST Post-Quantum Cryptography Program</strong><span>Current standards, migration material, implementation notes, and errata.</span></a>
+          <a class="reference" href="https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer"><strong>OWASP Cryptographic Storage Cheat Sheet</strong><span>Algorithm, mode, random generation, key-management, and application guidance.</span></a>
+          <a class="reference" href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" target="_blank" rel="noopener noreferrer"><strong>OWASP Password Storage Cheat Sheet</strong><span>Password hashing guidance and the PBKDF2-HMAC-SHA-256 work factor used by this demonstration.</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>Marc Lavoie / Applied Cryptography Engineering Lab</strong>
+        <p>Educational portfolio demonstrations. Do not enter production secrets. A production cryptosystem requires a documented threat model, protocol review, managed keys, secure deployment, monitoring, recovery, and independent validation.</p>
+      </div>
+      <div class="footer-actions">
+        <a href="../../index.html#cryptography">Return to Portfolio</a>
+        <a href="#top">Return to Top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="crypto.js" defer></script>
+
+</body>
+</html>
