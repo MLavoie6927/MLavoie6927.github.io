@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Marc Lavoie's Browser OS - an interactive, static cybersecurity workstation with synthetic endpoint, network, packet, log, and incident telemetry.">
+  <meta name="theme-color" content="#050d0a">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Browser OS | Marc Lavoie</title>
+  <link rel="stylesheet" href="styles.css?v=browser-os-20260828b">
+</head>
+<body>
+
+<a class="skip-link" href="#desktop">Skip to Browser OS desktop</a>
+
+<section id="boot-screen" class="boot-screen">
+  <div class="boot-shell">
+    <div class="boot-identity">
+      <span>Marc Lavoie · Portfolio Lab</span>
+      <a href="../">Return to portfolio</a>
+    </div>
+    <h1 class="boot-brand">BROWSER <span>OS</span></h1>
+    <div class="boot-version">Browser-Based Security Operations Environment · v1.0</div>
+
+    <div class="boot-boundary" role="note">
+      <strong>Static simulation boundary</strong>
+      <span>No backend</span>
+      <span>No external requests</span>
+      <span>No repository credentials</span>
+      <span>No website write path</span>
+    </div>
+
+    <div id="boot-options" class="boot-options">
+      <button class="boot-option active" type="button" data-boot-mode="standard">
+        <strong>Standard Boot</strong>
+        <span>Full desktop, network simulation and SOC tooling.</span>
+      </button>
+      <button class="boot-option" type="button" data-boot-mode="safe">
+        <strong>Safe Mode</strong>
+        <span>Minimal services. Simulated network stack disabled.</span>
+      </button>
+      <button class="boot-option" type="button" data-boot-mode="forensics">
+        <strong>Forensics Mode</strong>
+        <span>Read-only evidence workflow with network generation frozen.</span>
+      </button>
+    </div>
+
+    <div class="boot-actions">
+      <button id="boot-selected" class="primary-button" type="button">Boot Browser OS</button>
+      <button id="skip-boot" class="ghost-button" type="button">Quick Boot</button>
+    </div>
+
+    <div id="boot-output" class="boot-output" role="log" aria-live="polite" aria-label="Browser OS boot log">
+      <div class="boot-line"><span class="boot-info">[ READY ]</span><span>Select a boot mode to initialize the simulation.</span></div>
+      <div class="boot-line"><span class="boot-ok">[ OK ]</span><span>External network and repository write paths are not present.</span></div>
+      <div class="boot-line"><span class="boot-info">[ INFO ]</span><span>Awaiting operator command.</span></div>
+    </div>
+  </div>
+</section>
+
+<main id="desktop" class="desktop hidden" tabindex="-1">
+  <div class="desktop-watermark">
+    <div class="watermark-logo">BROWSER <span>OS</span></div>
+    <div class="watermark-subtitle">Marc Lavoie · Security Operations Workstation</div>
+  </div>
+
+  <aside class="desktop-brief" aria-label="Browser OS mission briefing">
+    <span class="desktop-brief-kicker">Analyst field exercise</span>
+    <strong>Investigate INC-001</strong>
+    <p>Correlate incident, process, network, packet, and log evidence before containing the synthetic endpoint.</p>
+    <button type="button" data-open-app="mission-window">Open guided mission</button>
+  </aside>
+
+  <section class="desktop-icons" aria-label="Desktop applications">
+    <button class="desktop-icon featured" data-open-app="mission-window" type="button"><span class="desktop-icon-symbol">✓</span><span>Guided Mission</span></button>
+    <button class="desktop-icon" data-open-app="terminal-window" type="button"><span class="desktop-icon-symbol">⌨</span><span>Terminal</span></button>
+    <button class="desktop-icon" data-open-app="files-window" type="button"><span class="desktop-icon-symbol">▣</span><span>File System</span></button>
+    <button class="desktop-icon" data-open-app="network-window" type="button"><span class="desktop-icon-symbol">◎</span><span>Network</span></button>
+    <button class="desktop-icon" data-open-app="process-window" type="button"><span class="desktop-icon-symbol">◫</span><span>Processes</span></button>
+    <button class="desktop-icon" data-open-app="logs-window" type="button"><span class="desktop-icon-symbol">≡</span><span>Log Viewer</span></button>
+    <button class="desktop-icon" data-open-app="packet-window" type="button"><span class="desktop-icon-symbol">⇄</span><span>Packets</span></button>
+    <button class="desktop-icon" data-open-app="browser-window" type="button"><span class="desktop-icon-symbol">◉</span><span>Browser</span></button>
+    <button class="desktop-icon" data-open-app="soc-window" type="button"><span class="desktop-icon-symbol">◆</span><span>SOC Console</span></button>
+    <button class="desktop-icon" data-open-app="security-window" type="button"><span class="desktop-icon-symbol">⬡</span><span>Security</span></button>
+    <button class="desktop-icon" data-open-app="system-window" type="button"><span class="desktop-icon-symbol">⚙</span><span>System</span></button>
+  </section>
+
+  <!-- Guided investigation -->
+  <section id="mission-window" class="os-window mission-window wide-window" data-app-name="Guided Mission" aria-label="Guided SOC investigation mission">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">✓</span>Guided Investigation · INC-001</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button" aria-label="Minimize Guided Mission">—</button>
+        <button class="window-control" data-maximize-window type="button" aria-label="Maximize Guided Mission">□</button>
+        <button class="window-control close" data-close-window type="button" aria-label="Close Guided Mission">×</button>
+      </div>
+    </header>
+    <div class="window-content mission-content">
+      <div class="mission-header">
+        <div>
+          <div class="eyebrow">ANALYST WORKFLOW</div>
+          <h2>Validate and contain encoded PowerShell activity</h2>
+          <p>Use multiple synthetic telemetry sources to determine whether the high-severity alert on WS-042 warrants containment.</p>
+        </div>
+        <div class="mission-score" aria-live="polite">
+          <strong id="mission-progress-value">0%</strong>
+          <span>Complete</span>
+        </div>
+      </div>
+      <div class="mission-progress" aria-hidden="true"><span id="mission-progress-bar"></span></div>
+      <ol class="mission-steps" id="mission-steps">
+        <li data-mission-step="incident">
+          <span class="mission-step-number">01</span>
+          <div><strong>Establish the alert hypothesis</strong><p>Review INC-001, severity, user, endpoint, and detection context.</p></div>
+          <button type="button" data-mission-open="soc-window">Open SOC Console</button>
+        </li>
+        <li data-mission-step="process">
+          <span class="mission-step-number">02</span>
+          <div><strong>Validate process lineage</strong><p>Follow PIDs 905 → 910 → 917 from WINWORD to PowerShell and Rundll32.</p></div>
+          <button type="button" data-mission-open="process-window">Open Processes</button>
+        </li>
+        <li data-mission-step="network">
+          <span class="mission-step-number">03</span>
+          <div><strong>Correlate the network session</strong><p>Trace PID 917 to the documentation address 203.0.113.91 over TLS.</p></div>
+          <button type="button" data-mission-open="network-window">Open Network</button>
+        </li>
+        <li data-mission-step="packets">
+          <span class="mission-step-number">04</span>
+          <div><strong>Inspect packet evidence</strong><p>Validate the DNS, TCP, and TLS sequence for telemetry-sync.example.</p></div>
+          <button type="button" data-mission-open="packet-window">Open Packets</button>
+        </li>
+        <li data-mission-step="logs">
+          <span class="mission-step-number">05</span>
+          <div><strong>Correlate the event timeline</strong><p>Review the WS-042 process, DNS, and firewall events in timestamp order.</p></div>
+          <button type="button" data-mission-open="logs-window">Open Logs</button>
+        </li>
+        <li data-mission-step="contain">
+          <span class="mission-step-number">06</span>
+          <div><strong>Contain and document</strong><p>Load <code>isolate WS-042</code>, then choose Run in Terminal and verify the result.</p></div>
+          <button type="button" data-mission-command="isolate WS-042">Load Containment Command</button>
+        </li>
+      </ol>
+      <div class="mission-result" id="mission-result" role="status">
+        <strong>Mission objective</strong>
+        <span>Complete all six evidence steps. Every action remains inside the Browser OS simulation.</span>
+      </div>
+      <button id="mission-reset" class="ghost-button compact" type="button">Reset Mission Progress</button>
+    </div>
+  </section>
+
+  <!-- Terminal -->
+  <section id="terminal-window" class="os-window terminal-window" data-app-name="Terminal" aria-label="Browser OS Terminal">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">⌨</span>Browser OS Terminal</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="terminal-body">
+      <div id="terminal-output" class="terminal-output"></div>
+      <form id="terminal-form" class="terminal-form">
+        <label id="terminal-prompt" class="terminal-prompt" for="terminal-input">guest@browser-os:~$</label>
+        <input id="terminal-input" class="terminal-input" type="text" maxlength="240" autocomplete="off" spellcheck="false" aria-label="Browser OS command">
+        <button class="terminal-run" type="submit">Run</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Files -->
+  <section id="files-window" class="os-window" data-app-name="File System" aria-label="Virtual File System">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">▣</span>Virtual File System</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="app-toolbar">
+        <div><strong>browser-os://filesystem</strong></div>
+        <div class="security-pill">SANDBOXED</div>
+      </div>
+      <div class="file-manager-layout">
+        <aside class="file-sidebar">
+          <button class="file-nav active" data-file-path="/home/guest" type="button">Home</button>
+          <button class="file-nav" data-file-path="/home/guest/sandbox" type="button">Sandbox</button>
+          <button class="file-nav" data-file-path="/var/log" type="button">Logs</button>
+          <button class="file-nav" data-file-path="/opt/security" type="button">Security</button>
+          <button class="file-nav" data-file-path="/etc" type="button">System</button>
+        </aside>
+        <section class="file-main">
+          <div id="file-path-display" class="file-path-display">/home/guest</div>
+          <div id="file-list" class="file-list"></div>
+          <pre id="file-preview" class="file-preview">Select a virtual file to inspect its contents.</pre>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- Network Monitor -->
+  <section id="network-window" class="os-window wide-window" data-app-name="Network Monitor" aria-label="Network Monitor">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">◎</span>Network Monitor</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="tool-header">
+        <div>
+          <div class="eyebrow">VIRTUAL NETWORK STACK</div>
+          <h2>Connections</h2>
+        </div>
+        <div id="network-mode-pill" class="status-pill good">ONLINE</div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric-card"><span>Interface</span><strong>bos0</strong></article>
+        <article class="metric-card"><span>IPv4</span><strong class="metric-small">192.0.2.10</strong></article>
+        <article class="metric-card"><span>DNS</span><strong class="metric-small">192.0.2.53</strong></article>
+        <article class="metric-card"><span>Active</span><strong id="network-active-count">0</strong></article>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>PID</th><th>Process</th><th>Local</th><th>Remote</th><th>Protocol</th><th>State</th><th>Action</th></tr></thead>
+          <tbody id="network-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Explorer -->
+  <section id="process-window" class="os-window wide-window" data-app-name="Process Explorer" aria-label="Process Explorer">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">◫</span>Process Explorer</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="tool-header">
+        <div><div class="eyebrow">PROCESS TELEMETRY</div><h2>Browser OS Processes</h2></div>
+        <div class="status-pill neutral">SIMULATED</div>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>PID</th><th>PPID</th><th>User</th><th>Process</th><th>CPU</th><th>Memory</th><th>Status</th><th>Protection</th><th>Action</th></tr></thead>
+          <tbody id="process-table-body"></tbody>
+        </table>
+      </div>
+      <div id="process-detail" class="detail-panel">Select a process to view its command line and relationships.</div>
+    </div>
+  </section>
+
+  <!-- Log Viewer -->
+  <section id="logs-window" class="os-window wide-window" data-app-name="Log Viewer" aria-label="Log Viewer">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">≡</span>Log Viewer</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="filter-bar">
+        <select id="log-source-filter" class="os-select">
+          <option value="all">All sources</option>
+          <option value="security">Security</option>
+          <option value="system">System</option>
+          <option value="dns">DNS</option>
+          <option value="browser">Browser</option>
+          <option value="firewall">Firewall</option>
+        </select>
+        <input id="log-search" class="os-input" type="search" maxlength="100" placeholder="Filter logs...">
+        <button id="log-clear-view" class="ghost-button compact" type="button">Clear simulated logs</button>
+      </div>
+      <div id="log-list" class="log-list"></div>
+    </div>
+  </section>
+
+  <!-- Packet Analyzer -->
+  <section id="packet-window" class="os-window wide-window" data-app-name="Packet Analyzer" aria-label="Packet Analyzer">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">⇄</span>Packet Analyzer</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content packet-content">
+      <div class="filter-bar">
+        <input id="packet-filter" class="os-input" type="search" maxlength="100" placeholder="Display filter: dns, tcp, tls, http, 192.0.2.10...">
+        <button id="capture-toggle" class="primary-button compact" type="button">Stop Capture</button>
+        <button id="packet-clear" class="ghost-button compact" type="button">Clear capture</button>
+      </div>
+      <div class="packet-layout">
+        <div class="table-wrapper packet-table-wrap">
+          <table class="data-table packet-table">
+            <thead><tr><th>No.</th><th>Time</th><th>Source</th><th>Destination</th><th>Proto</th><th>Info</th></tr></thead>
+            <tbody id="packet-table-body"></tbody>
+          </table>
+        </div>
+        <pre id="packet-detail" class="packet-detail">Select a packet to inspect protocol layers.</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Virtual Browser -->
+  <section id="browser-window" class="os-window browser-window wide-window" data-app-name="Browser" aria-label="Simulated Browser">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">◉</span>Browser OS Web</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="browser-shell">
+      <form id="browser-form" class="browser-toolbar">
+        <button id="browser-home" class="browser-nav-button" type="button">⌂</button>
+        <input id="browser-address" class="browser-address" type="text" maxlength="120" value="http://soc.local" autocomplete="off" spellcheck="false">
+        <button class="primary-button compact" type="submit">Go</button>
+      </form>
+      <div class="browser-bookmarks">
+        <button type="button" data-virtual-url="http://soc.local">SOC</button>
+        <button type="button" data-virtual-url="http://intranet.local">Intranet</button>
+        <button type="button" data-virtual-url="https://fileserver.local">Files</button>
+        <button type="button" data-virtual-url="http://malware-lab.local">Malware Lab</button>
+        <button type="button" data-virtual-url="https://firewall.local">Firewall</button>
+        <button type="button" data-virtual-url="https://sentinel.local">Sentinel</button>
+      </div>
+      <div id="browser-page" class="browser-page"></div>
+      <div class="browser-statusbar">
+        <span id="browser-status">Virtual network only</span>
+        <span>External navigation: BLOCKED</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOC -->
+  <section id="soc-window" class="os-window wide-window" data-app-name="SOC Console" aria-label="SOC Console">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">◆</span>SOC Console</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="tool-header">
+        <div><div class="eyebrow">SECURITY OPERATIONS</div><h2>Active Incident Queue</h2></div>
+        <div class="live-indicator"><span></span>LIVE SIMULATION</div>
+      </div>
+      <div class="metric-grid">
+        <article class="metric-card"><span>Active Incidents</span><strong id="metric-active">0</strong></article>
+        <article class="metric-card"><span>Critical</span><strong id="metric-critical">0</strong></article>
+        <article class="metric-card"><span>Contained</span><strong id="metric-contained">0</strong></article>
+        <article class="metric-card"><span>Telemetry Events</span><strong id="metric-telemetry">0</strong></article>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Incident</th><th>Severity</th><th>Endpoint</th><th>Status</th><th>Detection</th><th>Action</th></tr></thead>
+          <tbody id="incident-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Center -->
+  <section id="security-window" class="os-window" data-app-name="Security Center" aria-label="Security Center">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">⬡</span>Browser OS Security Center</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content">
+      <div class="security-hero">
+        <div class="shield-large">⬡</div>
+        <div>
+          <div class="eyebrow">HOST BOUNDARY</div>
+          <h2>Real website write access does not exist</h2>
+          <p>All mutable state is virtual and scoped to Browser OS storage keys in the current visitor's browser.</p>
+        </div>
+      </div>
+      <div class="security-module-grid">
+        <article class="security-module"><div class="module-status good">NONE</div><h3>GitHub Credentials</h3><p>No PAT, SSH private key, deployment token, password or repository credential exists in this build.</p></article>
+        <article class="security-module"><div class="module-status good">NOT IMPLEMENTED</div><h3>Repository Write API</h3><p>Browser OS does not implement GitHub create/update/delete endpoints or any deployment workflow.</p></article>
+        <article class="security-module"><div class="module-status good">ALLOWLISTED</div><h3>Terminal</h3><p>The terminal dispatches only predefined JavaScript functions. It is not Bash, PowerShell, CMD or an OS shell.</p></article>
+        <article class="security-module"><div class="module-status good">VIRTUAL ONLY</div><h3>Filesystem</h3><p>System files are JavaScript data. Only the virtual sandbox can persist visitor-created files.</p></article>
+        <article class="security-module"><div class="module-status good">INTERNAL</div><h3>Browser Stack</h3><p>The Browser OS web client resolves only predefined .local services and makes no external fetch requests.</p></article>
+        <article class="security-module"><div class="module-status good">SCOPED</div><h3>Persistence</h3><p>Only keys beginning with browserOS.v3 are modified. Browser OS never clears unrelated site storage.</p></article>
+      </div>
+      <div class="security-boundary">
+        <strong>Permanent security boundary</strong>
+        <code>Visitor → Browser OS virtual state → browserOS.v3.* browser storage</code>
+        <code class="blocked-path">Browser OS ✕ GitHub repository / website source</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- System -->
+  <section id="system-window" class="os-window" data-app-name="System" aria-label="System Information">
+    <header class="window-titlebar drag-handle">
+      <div class="window-title"><span class="window-app-icon">⚙</span>System Information</div>
+      <div class="window-controls">
+        <button class="window-control" data-minimize-window type="button">—</button>
+        <button class="window-control" data-maximize-window type="button">□</button>
+        <button class="window-control close" data-close-window type="button">×</button>
+      </div>
+    </header>
+    <div class="window-content system-content">
+      <div class="system-logo">BOS</div>
+      <h2>Browser OS</h2>
+      <p class="system-description">A static, browser-native cybersecurity workstation and synthetic telemetry environment.</p>
+      <div class="system-info-table">
+        <div><span>Edition</span><strong>Browser OS Security Edition</strong></div>
+        <div><span>Version</span><strong>1.0.0 Portfolio Edition</strong></div>
+        <div><span>Kernel</span><strong>BrowserKernel JS 3.0</strong></div>
+        <div><span>Boot Mode</span><strong id="system-boot-mode">STANDARD</strong></div>
+        <div><span>Architecture</span><strong>Client-side simulation sandbox</strong></div>
+        <div><span>Storage</span><strong id="system-storage-status">Checking browser storage</strong></div>
+        <div><span>Repository Access</span><strong class="safe-text">NONE</strong></div>
+        <div><span>Backend</span><strong>NONE</strong></div>
+        <div><span>External Network</span><strong>DISABLED BY DESIGN</strong></div>
+        <div><span>Environment</span><strong>Static GitHub Pages Compatible</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Virtual OS crash screen -->
+  <section id="kernel-panic" class="kernel-panic hidden">
+    <div class="panic-box">
+      <div class="panic-code">BROWSERKERNEL PANIC</div>
+      <h1>Virtual filesystem unavailable</h1>
+      <p>The simulated Browser OS was destroyed. Your real website and GitHub repository were not modified.</p>
+      <p class="panic-note">Reboot preserves this virtual failure state. Reinstall restores only the Browser OS simulation.</p>
+      <pre>REAL HOST STATUS
+Website................ PROTECTED
+GitHub Repository...... UNCHANGED
+Deployment Files....... UNCHANGED</pre>
+      <div class="panic-actions">
+        <button id="reinstall-os" class="primary-button" type="button">Reinstall Browser OS</button>
+        <button id="panic-reboot" class="ghost-button" type="button">Reboot</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start Menu -->
+  <section id="start-menu" class="start-menu" aria-label="Start menu">
+    <div class="start-menu-header">
+      <div class="start-avatar">ML</div>
+      <div><strong>Browser OS</strong><span id="start-mode-label">Standard session</span></div>
+    </div>
+    <div class="start-apps">
+      <button data-open-app="mission-window" type="button"><span>✓</span>Guided Mission</button>
+      <button data-open-app="terminal-window" type="button"><span>⌨</span>Terminal</button>
+      <button data-open-app="files-window" type="button"><span>▣</span>File System</button>
+      <button data-open-app="network-window" type="button"><span>◎</span>Network Monitor</button>
+      <button data-open-app="process-window" type="button"><span>◫</span>Process Explorer</button>
+      <button data-open-app="logs-window" type="button"><span>≡</span>Log Viewer</button>
+      <button data-open-app="packet-window" type="button"><span>⇄</span>Packet Analyzer</button>
+      <button data-open-app="browser-window" type="button"><span>◉</span>Browser</button>
+      <button data-open-app="soc-window" type="button"><span>◆</span>SOC Console</button>
+      <button data-open-app="security-window" type="button"><span>⬡</span>Security Center</button>
+      <button data-open-app="system-window" type="button"><span>⚙</span>System</button>
+    </div>
+    <div class="start-footer">
+      <a href="../">← Return to Portfolio</a>
+      <button id="restart-browser-os" type="button">↻ Restart Browser OS</button>
+      <button id="reset-browser-os" type="button">⟲ Reset Simulation</button>
+    </div>
+  </section>
+
+  <footer class="taskbar">
+    <button id="start-button" class="start-button" type="button" aria-label="Open Browser OS start menu"><span class="start-logo">B</span><span class="start-button-label">Browser OS</span></button>
+    <div id="taskbar-apps" class="taskbar-apps"></div>
+    <div class="taskbar-status">
+      <a class="portfolio-task-link" href="../">Portfolio</a>
+      <div id="taskbar-network" class="network-status">● SECURE</div>
+      <div id="taskbar-mode" class="mode-status">STANDARD</div>
+      <div id="taskbar-clock" class="taskbar-clock"></div>
+    </div>
+  </footer>
+</main>
+
+<script src="script.js?v=browser-os-20260828b"></script>
+</body>
+</html>
