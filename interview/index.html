@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Marc Lavoie's interactive interview practice library with 200 general, cybersecurity, networking, and portfolio questions and evidence-backed answers.">
+  <meta name="theme-color" content="#080b10">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Interview Q&amp;A | Marc Lavoie</title>
+  <link rel="stylesheet" href="styles.css?v=20260829a">
+</head>
+<body>
+  <a class="skip-link" href="#practice-library">Skip to interview questions</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../" aria-label="Return to Marc Lavoie's cybersecurity portfolio">
+        <span class="brand-mark" aria-hidden="true">ML</span>
+        <span class="brand-copy">
+          <strong>Marc Lavoie</strong>
+          <small>Cybersecurity Portfolio</small>
+        </span>
+      </a>
+      <a class="return-link" href="../">Return to Portfolio</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro-band" aria-labelledby="page-title">
+      <div class="content-shell intro-layout">
+        <div class="intro-copy">
+          <p class="eyebrow">Interactive Interview Preparation</p>
+          <h1 id="page-title">Interview Questions &amp; Answers</h1>
+          <p class="intro-lede">
+            A focused practice library covering professional communication, cybersecurity operations,
+            network engineering, and the evidence behind this portfolio.
+          </p>
+          <div class="trust-note">
+            <strong>Answer standard</strong>
+            <span>Concise reasoning, practical evidence, and honest limits. No memorized claims beyond the work shown.</span>
+          </div>
+        </div>
+
+        <div class="library-summary" aria-label="Question library summary">
+          <div><strong>200</strong><span>Total questions</span></div>
+          <div><strong>4</strong><span>Practice subjects</span></div>
+          <div><strong>125</strong><span>Network questions</span></div>
+          <div><strong>35</strong><span>Portfolio questions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="practice-band" id="practice-library" aria-labelledby="library-title">
+      <div class="content-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Practice Library</p>
+          <h2 id="library-title">Choose a subject, then open any answer.</h2>
+          <p>Search by technology, scenario, or phrase. Use Random Question for a quick phone-interview drill.</p>
+        </div>
+
+        <div class="category-tabs" role="tablist" aria-label="Interview question subjects">
+          <button class="category-tab is-active" id="tab-general" type="button" role="tab" aria-selected="true" aria-controls="question-list" data-category="general">
+            <span>General</span><strong>16</strong>
+          </button>
+          <button class="category-tab" id="tab-cyber" type="button" role="tab" aria-selected="false" aria-controls="question-list" data-category="cyber" tabindex="-1">
+            <span>Cybersecurity</span><strong>24</strong>
+          </button>
+          <button class="category-tab" id="tab-network" type="button" role="tab" aria-selected="false" aria-controls="question-list" data-category="network" tabindex="-1">
+            <span>Networking</span><strong>125</strong>
+          </button>
+          <button class="category-tab" id="tab-portfolio" type="button" role="tab" aria-selected="false" aria-controls="question-list" data-category="portfolio" tabindex="-1">
+            <span>Portfolio</span><strong>35</strong>
+          </button>
+        </div>
+
+        <div class="practice-controls" aria-label="Question controls">
+          <label class="search-field" for="question-search">
+            <span>Search this subject</span>
+            <input id="question-search" type="search" autocomplete="off" placeholder="Try: alert, BGP, firewall, or evidence">
+          </label>
+          <div class="control-actions">
+            <button class="action-button action-primary" id="random-question" type="button">Random Question</button>
+            <button class="action-button" id="expand-visible" type="button">Expand Visible</button>
+            <button class="action-button" id="collapse-all" type="button">Collapse All</button>
+          </div>
+        </div>
+
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow" id="active-category-label">General</p>
+            <h3 id="results-title">Professional communication and work habits</h3>
+          </div>
+          <p class="result-count" id="result-count" role="status" aria-live="polite">16 questions</p>
+        </div>
+
+        <div class="question-list" id="question-list" role="tabpanel" aria-labelledby="tab-general"></div>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <strong>No questions match that search.</strong>
+          <p>Try a shorter phrase or clear the search field.</p>
+          <button class="action-button" id="clear-search" type="button">Clear Search</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-band" aria-labelledby="answer-method-title">
+      <div class="content-shell method-layout">
+        <div>
+          <p class="eyebrow">Answer Method</p>
+          <h2 id="answer-method-title">Problem. Action. Evidence. Boundary.</h2>
+        </div>
+        <ol class="method-steps">
+          <li><strong>01</strong><span>State the problem or decision clearly.</span></li>
+          <li><strong>02</strong><span>Explain the action and technical reasoning.</span></li>
+          <li><strong>03</strong><span>Connect the answer to visible portfolio evidence.</span></li>
+          <li><strong>04</strong><span>Name the limitation, authorization, or next validation step.</span></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="content-shell footer-inner">
+      <span>Marc Lavoie | Interview Practice Library</span>
+      <a href="../#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script src="questions.js?v=20260829a"></script>
+  <script src="script.js?v=20260829a"></script>
+</body>
+</html>
