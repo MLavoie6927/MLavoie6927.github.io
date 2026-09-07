@@ -18,7 +18,10 @@ def build_text() -> str:
         meta = scenarios.get(cid, {})
         ticket = tickets.get(cid, {})
         files = {}
-        for p in sorted(case_dir.rglob("*")):
+        for p in sorted(
+            case_dir.rglob("*"),
+            key=lambda item: item.relative_to(case_dir).as_posix().casefold(),
+        ):
             if p.is_file() and p.suffix.lower() in {".md", ".txt", ".json", ".csv", ".log"}:
                 files[p.relative_to(case_dir).as_posix()] = read_text(p)
         payload["cases"][cid] = {
