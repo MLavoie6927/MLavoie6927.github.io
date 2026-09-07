@@ -28,7 +28,7 @@ Mitigations: UI output uses HTML escaping for dynamic text; no external script d
 
 ### Misleading portfolio claims
 Risk: synthetic data could be interpreted as production telemetry or independent professional deployment.
-Mitigations: truth model visible in recruiter mode, reporting, security boundary window, README, and known limitations.
+Mitigations: truth model visible in the guided workflow, reporting, security boundary window, README, and known limitations.
 
 ### External data exfiltration
 Risk: Browser OS could be modified to transmit visitor data.

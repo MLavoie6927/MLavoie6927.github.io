@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie's evidence-driven cybersecurity portfolio: SOC investigations, detection engineering, network security, K-12 operations, all-source intelligence analysis, SIEM/XDR, endpoint telemetry, and interactive engineering labs.">
+  <meta name="description" content="Marc Lavoie's complete technical portfolio library: SOC investigations, detection engineering, network and firewall security, digital forensics, ethical hacking, security platforms, software projects, credentials, and interactive labs.">
   <meta name="theme-color" content="#080b10">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="profile">
-  <meta property="og:title" content="Marc Lavoie | Cybersecurity Analyst Portfolio">
-  <meta property="og:description" content="Evidence-driven SOC operations, detection engineering, network security, and interactive technical case studies.">
-  <meta property="og:url" content="https://mlavoie6927.github.io/">
+  <meta property="og:title" content="Marc Lavoie | Full Technical Portfolio">
+  <meta property="og:description" content="The complete project library for Marc Lavoie's cybersecurity, network engineering, forensics, software, and security operations work.">
+  <meta property="og:url" content="https://mlavoie6927.github.io/full-portfolio.html">
   <meta property="og:image" content="https://mlavoie6927.github.io/assets/hero%20background.png">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://mlavoie6927.github.io/">
-  <title>Marc Lavoie | Cybersecurity Portfolio</title>
+  <link rel="canonical" href="https://mlavoie6927.github.io/full-portfolio.html">
+  <title>Marc Lavoie | Full Technical Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/hero%20background.png" as="image">
   <link rel="stylesheet" href="styles.css?v=portfolio-20260907a">
@@ -21,8 +21,8 @@
     {
       "@context": "https://schema.org",
       "@type": "ProfilePage",
-      "url": "https://mlavoie6927.github.io/",
-      "name": "Marc Lavoie | Cybersecurity Portfolio",
+      "url": "https://mlavoie6927.github.io/full-portfolio.html",
+      "name": "Marc Lavoie | Full Technical Portfolio",
       "mainEntity": {
         "@type": "Person",
         "name": "Marc Lavoie",
@@ -43,12 +43,12 @@
   </script>
 </head>
 
-<body class="landing-page">
+<body class="portfolio-library-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="#home" aria-label="Marc Lavoie home">
+      <a class="brand" href="index.html" aria-label="Return to Marc Lavoie's portfolio landing page">
         <span class="brand-mark" aria-hidden="true">ML</span>
         <span>
           <strong>Marc Lavoie</strong>
@@ -64,13 +64,26 @@
       </button>
 
       <ul class="nav-links" id="primary-menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#featured-projects">Featured</a></li>
-        <li><a href="#project-library">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#certificates">Credentials</a></li>
-        <li><a href="full-portfolio.html">Full Portfolio</a></li>
+        <li><a href="index.html">Landing</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#soc-projects">SOC Projects</a></li>
+        <li><a href="#wazuh-elk">Wazuh / ELK</a></li>
+        <li><a href="#detection-rules">Detection Rules</a></li>
+        <li><a href="#gcp-labs">Cyber Lab</a></li>
+        <li><a href="#windows-hardening">Windows</a></li>
+        <li><a href="#scripting-projects">Scripting</a></li>
+        <li><a href="#cpp-projects">C++ Code</a></li>
+        <li><a href="#network-server-lab">Server Lab</a></li>
+        <li><a href="browser-os/">Browser OS</a></li>
+        <li><a href="#digital-forensics">Forensics</a></li>
+        <li><a href="#ethical-hacking">Pentesting</a></li>
+        <li><a href="#network-engineering" aria-label="Network Engineering">Network Eng.</a></li>
+        <li><a href="#firewall-security">Firewall</a></li>
+        <li><a href="#security-stacks">Security Stacks</a></li>
+        <li><a href="#cryptography">Cryptography</a></li>
+        <li><a href="#securityplus-study-guide" aria-label="CompTIA Security Plus Study Guide">Security+ Guide</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#public-recognition">Public Recognition</a></li>
         <li><a href="interview/">Interview Q&amp;A</a></li>
         <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -82,14 +95,15 @@
     <section class="hero section" id="home">
       <div class="section-inner hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Cybersecurity Analyst Portfolio</p>
+          <p class="eyebrow">Complete Technical Portfolio</p>
           <h1>Marc Lavoie</h1>
-          <p class="hero-role">SOC Operations <span aria-hidden="true">|</span> Detection Engineering <span aria-hidden="true">|</span> Network Security</p>
-          <p class="hero-lede">Evidence-driven investigations and engineering across endpoint, network, SIEM/XDR, infrastructure operations, and applied intelligence.</p>
+          <p class="hero-role">Security Operations <span aria-hidden="true">|</span> Network Engineering <span aria-hidden="true">|</span> Applied Security</p>
+          <p class="hero-lede">Browse the complete project library, from SOC investigations and detection engineering to infrastructure operations, forensics, software, and security architecture.</p>
 
           <div class="hero-actions" aria-label="Portfolio actions">
-            <a class="button button-primary" href="#featured-projects">Explore Featured Work</a>
-            <a class="button button-secondary" href="#resume">View Resume</a>
+            <a class="button button-primary" href="#soc-projects">Browse All Projects</a>
+            <a class="button button-secondary" href="interview/">Interview Q&amp;A</a>
+            <a class="button button-secondary" href="index.html">Return to Landing</a>
           </div>
 
           <dl class="hero-proof" aria-label="Portfolio proof points">

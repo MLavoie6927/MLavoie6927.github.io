@@ -12,8 +12,11 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 TEXT_CHECKSUM_SUFFIXES = {".css", ".html", ".js", ".json", ".md"}
 HTML_FILES = sorted(
-    path for path in ROOT.rglob("index.html")
-    if ".git" not in path.parts and "work" not in path.parts
+    [
+        path for path in ROOT.rglob("index.html")
+        if ".git" not in path.parts and "work" not in path.parts
+    ]
+    + [ROOT / "full-portfolio.html"]
 )
 
 
@@ -78,8 +81,8 @@ def validate_html(errors: list[str]) -> None:
 def validate_home(errors: list[str]) -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
-    if not nav or nav.group(1).count("<li>") > 8:
-        errors.append("index.html: primary navigation must contain no more than eight choices")
+    if not nav or nav.group(1).count("<li>") > 10:
+        errors.append("index.html: primary navigation must contain no more than ten choices")
     for marker in (
         'id="featured-projects"',
         'id="project-library"',
@@ -87,9 +90,42 @@ def validate_home(errors: list[str]) -> None:
         'rel="canonical" href="https://mlavoie6927.github.io/"',
         'projects/operation-glass-meridian/',
         'projects/k12-network-operations/',
+        'full-portfolio.html',
+        'interview/',
     ):
         if marker not in text:
             errors.append(f"index.html: missing required recruiter-first marker {marker}")
+    if "GitHub Profile" in text:
+        errors.append("index.html: public GitHub profile button must not be present")
+
+
+def validate_full_portfolio(errors: list[str]) -> None:
+    text = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
+    if not nav or nav.group(1).count("<li>") < 23:
+        errors.append("full-portfolio.html: complete legacy navigation was not restored")
+    for marker in (
+        'id="soc-projects"',
+        'id="wazuh-elk"',
+        'id="detection-rules"',
+        'id="gcp-labs"',
+        'id="windows-hardening"',
+        'id="scripting-projects"',
+        'id="cpp-projects"',
+        'id="network-server-lab"',
+        'id="digital-forensics"',
+        'id="ethical-hacking"',
+        'id="network-engineering"',
+        'id="firewall-security"',
+        'id="security-stacks"',
+        'id="cryptography"',
+        'id="securityplus-study-guide"',
+        'id="certificates"',
+        'id="public-recognition"',
+        'interview/',
+    ):
+        if marker not in text:
+            errors.append(f"full-portfolio.html: missing recovered section marker {marker}")
 
 
 def validate_glass_meridian(errors: list[str]) -> None:
@@ -153,13 +189,14 @@ def main() -> None:
     errors: list[str] = []
     validate_html(errors)
     validate_home(errors)
+    validate_full_portfolio(errors)
     validate_glass_meridian(errors)
     if errors:
         for error in errors:
             print(f"FAIL: {error}")
         raise SystemExit(1)
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
-    print("PASS: local links, IDs, recruiter navigation, and external-tab safety")
+    print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
 
 

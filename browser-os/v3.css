@@ -44,7 +44,7 @@
 .v3-recruiter-boot{display:flex;flex-direction:column;gap:3px;width:100%;border:1px solid rgba(80,255,173,.45);border-radius:10px;padding:12px 14px;background:linear-gradient(90deg,rgba(80,255,173,.12),rgba(33,151,255,.05));color:var(--text);cursor:pointer;margin:12px 0;text-align:left}
 .v3-recruiter-boot:hover{border-color:var(--green);transform:translateY(-1px)}
 .v3-recruiter-boot strong{color:var(--green);font-size:.86rem}.v3-recruiter-boot span{color:var(--muted);font-size:.7rem}
-.v3-desktop-icon{border-color:rgba(80,255,173,.17)!important}
+.v3-desktop-icon{border-color:transparent}
 
 .v3-graph-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;min-height:570px}
 .v3-graph-canvas{position:relative;min-height:570px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:28px 28px;background-color:rgba(0,0,0,.18)}

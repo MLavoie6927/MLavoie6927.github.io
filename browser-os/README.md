@@ -4,11 +4,11 @@ Browser OS 3.0 is a static, browser-native cybersecurity portfolio workstation d
 
 The project runs on GitHub Pages with plain HTML, CSS and JavaScript. It has no application backend, no external network client, no repository credentials, and no website write path. All enterprise data and attack activity are synthetic. The implemented engineering is the state engine, event correlation, detection evaluation, evidence graph, incident workflow, response verification, reporting, local persistence and application orchestration.
 
-## The recruiter experience
+## Guided incident experience
 
 The preferred entry point is the boot-screen button:
 
-**★ Start 5-Minute Recruiter Demo**
+**★ Start Guided Incident**
 
 The demo follows a single shared incident from beginning to end:
 
@@ -48,8 +48,8 @@ The scenario deliberately does not reveal the answer at the beginning. Individua
 
 ## Browser OS 3.0 applications
 
-### Recruiter Demo
-A guided seven-step walkthrough intended for a recruiter or hiring manager who has only a few minutes. It can play the intrusion live, pause, single-step events, change speed and switch into analyst mode.
+### Incident Walkthrough
+A guided seven-step investigation that can play the intrusion live, pause, single-step events, change speed, and switch into analyst mode.
 
 ### Evidence Graph
 Builds an entity graph connecting:
@@ -183,9 +183,9 @@ Browser OS 3.0 adds:
 ```text
 v3-help
 
-recruiter start
-recruiter status
-recruiter next
+walkthrough start
+walkthrough status
+walkthrough next
 
 attack start
 attack pause
@@ -293,7 +293,7 @@ The test suite covers:
 - attack-stage schema and uniqueness;
 - detection scoring and threshold behavior;
 - false-positive suppression;
-- recruiter workflow;
+- guided incident workflow;
 - incident lifecycle transitions;
 - evidence completeness;
 - evidence graph consistency;

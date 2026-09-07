@@ -3483,6 +3483,64 @@ a.security-stack-preview:focus-visible img {
   }
 }
 
+@media (min-width: 2201px) {
+  .portfolio-library-page .nav {
+    max-width: none;
+    gap: 0.5rem;
+    padding-inline: 0.75rem;
+  }
+
+  .portfolio-library-page .nav-links {
+    gap: 0.2rem;
+  }
+
+  .portfolio-library-page .nav-links a {
+    min-height: 38px;
+    padding: 0.42rem 0.5rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 1121px) and (max-width: 2200px) {
+  .portfolio-library-page .nav-toggle {
+    display: inline-block;
+  }
+
+  .portfolio-library-page .nav-links {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-height);
+    display: none;
+    max-height: calc(100vh - var(--header-height));
+    max-height: calc(100dvh - var(--header-height));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    background:
+      linear-gradient(180deg, rgba(8, 11, 16, 0.98), rgba(8, 11, 16, 0.94)),
+      url("assets/Background%20for%20website.png") center center / cover no-repeat,
+      #080b10;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .portfolio-library-page .nav-links.is-open {
+    display: grid;
+  }
+
+  .portfolio-library-page .nav-links li,
+  .portfolio-library-page .nav-links a {
+    width: 100%;
+  }
+
+  .portfolio-library-page .nav-links a {
+    justify-content: flex-start;
+    padding: 0.85rem;
+  }
+}
+
 @media (max-width: 1120px) {
   .nav-toggle {
     display: inline-block;

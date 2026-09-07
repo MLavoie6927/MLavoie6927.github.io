@@ -1,6 +1,6 @@
 # Browser OS 3.0 Architecture
 
-Browser OS 3.0 is intentionally layered so the recruiter demo does not become a collection of unrelated mock screens.
+Browser OS 3.0 is intentionally layered so the guided incident workflow does not become a collection of unrelated mock screens.
 
 ```text
 ┌──────────────────────────────┐

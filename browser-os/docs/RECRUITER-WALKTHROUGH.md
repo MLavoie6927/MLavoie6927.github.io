@@ -3,7 +3,7 @@
 This is the intended five-minute demonstration path.
 
 ## 0:00–0:30 — Establish the truth model
-Click **Start 5-Minute Recruiter Demo** from the boot screen. The Recruiter Demo states up front that enterprise telemetry is synthetic while the correlation, rule evaluation, evidence graph, response verification, reporting and state transitions are implemented in the application.
+Click **Start Guided Incident** from the boot screen. The Incident Walkthrough states up front that enterprise telemetry is synthetic while the correlation, rule evaluation, evidence graph, response verification, reporting, and state transitions are implemented in the application.
 
 ## 0:30–1:15 — Watch evidence accumulate
 Start the live scenario. Early events are deliberately not conclusive. An external attachment is delivered, the user opens a document, Office spawns PowerShell, and additional signals appear over time. The scenario eventually develops persistence, DNS resolution, process-attributed TLS, beacon periodicity, credential-access behavior and an attempted SMB movement.

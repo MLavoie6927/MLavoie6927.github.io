@@ -182,7 +182,7 @@
   ]);
 
   const ARCHITECTURE_MODULES = Object.freeze([
-    { id: "ui", name: "UI / Window Manager", layer: 1, purpose: "Desktop, taskbar, windows, recruiter workflow, keyboard navigation.", inputs: "Operator actions", outputs: "Application intents", trust: "Presentation only" },
+    { id: "ui", name: "UI / Window Manager", layer: 1, purpose: "Desktop, taskbar, windows, guided incident workflow, keyboard navigation.", inputs: "Operator actions", outputs: "Application intents", trust: "Presentation only" },
     { id: "services", name: "Virtual OS Services", layer: 2, purpose: "Service lifecycle, process state, scheduler, identity/session simulation.", inputs: "Application intents", outputs: "State transitions", trust: "Synthetic system state" },
     { id: "eventbus", name: "State + Event Bus", layer: 3, purpose: "Normalizes attack events, analyst actions, audit events, and cross-application pivots.", inputs: "Subsystem events", outputs: "Correlated telemetry", trust: "In-memory + namespaced storage" },
     { id: "telemetry", name: "Synthetic Endpoint Telemetry", layer: 4, purpose: "Processes, logs, packets, DNS, firewall, registry, memory, identity, network flows.", inputs: "Scenario stages", outputs: "Evidence records", trust: "Synthetic, deterministic" },

@@ -1,7 +1,7 @@
 # Changelog
 
 ## 3.0.0 — Security Operations Workstation
-- Added five-minute Recruiter Mode.
+- Added a guided incident walkthrough.
 - Added live multi-stage phishing-to-lateral-movement synthetic intrusion (INC-301).
 - Added shared evidence generation across process, registry, DNS, packet, network, firewall, memory, identity, detection and SOC layers.
 - Added Evidence Graph with cross-application pivots.

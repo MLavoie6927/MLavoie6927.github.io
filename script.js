@@ -11,7 +11,8 @@
   }
 
   ready(function () {
-    var mobileQuery = window.matchMedia("(max-width: 1120px)");
+    var expandedMenuBreakpoint = document.body.classList.contains("portfolio-library-page") ? 2200 : 1120;
+    var mobileQuery = window.matchMedia("(max-width: " + expandedMenuBreakpoint + "px)");
     var navToggle = document.querySelector(".nav-toggle");
     var navMenu = document.querySelector("#primary-menu");
     var navItems = Array.prototype.slice.call(document.querySelectorAll("#primary-menu a"));

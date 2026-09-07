@@ -4,9 +4,11 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 
 ## Files
 
-- `index.html` - main portfolio page
+- `index.html` - concise recruiter-facing landing page
+- `full-portfolio.html` - complete technical portfolio with every project category restored
 - `styles.css` - responsive dark cybersecurity theme
 - `script.js` - mobile navigation and active-section highlighting
+- `interview/` - interactive 200-question interview preparation library
 - `browser-os/` - Browser OS 3.0 static security operations workstation
 - `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation

@@ -18,7 +18,7 @@ Result for this release:
 0 failed
 ```
 
-Coverage includes model/state normalization, attack-stage schema, detection scoring and tuning, recruiter workflow, incident lifecycle guards, evidence completeness, evidence graph consistency, response verification, reporting, architecture, truth-model constraints, source security invariants and engineering-artifact presence.
+Coverage includes model/state normalization, attack-stage schema, detection scoring and tuning, guided incident workflow, incident lifecycle guards, evidence completeness, evidence graph consistency, response verification, reporting, architecture, truth-model constraints, source security invariants and engineering-artifact presence.
 
 ## JavaScript syntax
 All primary JavaScript files pass Node syntax validation:

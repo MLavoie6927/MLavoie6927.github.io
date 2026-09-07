@@ -6,7 +6,7 @@
 Synthetic portfolio environments can unintentionally imply production experience.
 
 ## Decision
-Browser OS 3.0 distinguishes synthetic enterprise artifacts from implemented application logic in recruiter mode, the dedicated Truth window, reports, README, and engineering documentation.
+Browser OS 3.0 distinguishes synthetic enterprise artifacts from implemented application logic in the guided workflow, the dedicated Truth window, reports, README, and engineering documentation.
 
 ## Consequences
 - The project demonstrates capability without misrepresenting employment history.
