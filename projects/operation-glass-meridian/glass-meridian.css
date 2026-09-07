@@ -308,7 +308,7 @@
   .gm-total-row, .gm-brief-footer { align-items: stretch; flex-direction: column; }
 }
 
-/* AI-501 assignment-question workspace */
+/* Applied intelligence question workspace */
 .gm-assignment-intro h4 { margin: .35rem 0 .55rem; font-size: 1.2rem; }
 .gm-assignment-intro p { color: var(--gm-muted); line-height: 1.6; }
 .gm-question-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }

@@ -731,7 +731,7 @@
       { done: Object.values(state.ach || {}).filter(v => v && v !== "—").length >= 30, text: "Populate the ACH matrix with meaningful consistency judgments" },
       { done: state.assessmentHistory.length > 0, text: "Lock at least one probability assessment checkpoint" },
       { done: (state.gaps || []).filter(g => ["Critical","High"].includes(g.priority)).length >= 2, text: "Identify at least two critical/high intelligence gaps" },
-      { done: qPct >= 60, text: "Develop substantial responses to most AI-501 analytic questions" },
+      { done: qPct >= 60, text: "Develop substantial responses to most applied intelligence questions" },
       { done: Object.values(state.finalAssessment || {}).join("").trim().length > 250, text: "Draft the final finished-intelligence assessment" }
     ];
 
