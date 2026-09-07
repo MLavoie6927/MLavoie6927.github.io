@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Interactive K-12 regional network operations center: synthetic digital twin, guided investigations, evidence vault, assurance, capacity, and change control."><meta name="theme-color" content="#030b10"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"><title>K-12 Operations Center · Marc Lavoie</title><link rel="icon" href="../assets/portfolio/hero-network.svg" type="image/svg+xml"><link rel="stylesheet" href="v6.css?v=6.1"><link rel="stylesheet" href="v6-hardening.css?v=6.1"></head><body>
+<a class="skip-link" href="#workspaceMain">Skip to operations workspace</a>
+<section id="shiftBriefing" class="shift-briefing">
+  <div class="briefing-shell">
+    <div class="briefing-brand"><span class="logo-mark">K</span><div><strong>K-12 OPERATIONS CENTER</strong><small>Regional digital twin · v6</small></div><a href="../index.html">Case study</a><a href="https://mlavoie6927.github.io/#network-engineering">Portfolio home</a></div>
+    <p class="eyebrow">SHIFT BRIEFING</p><h1>Choose an operating scenario.</h1><p class="briefing-lede">Every mode is a deterministic, static simulation. No external systems, credentials, network requests, or repository write paths are used.</p>
+    <div class="briefing-options">
+      <button class="brief-option active" data-boot="normal"><span>NORMAL</span><strong>Standard Shift</strong><small>Review regional health, queue, assurance, and capacity.</small></button>
+      <button class="brief-option" data-boot="wan"><span>OUTAGE</span><strong>WAN Drill</strong><small>Investigate loss beyond a district provider handoff.</small></button>
+      <button class="brief-option" data-boot="security"><span>SECURITY</span><strong>Segmentation Drill</strong><small>Validate and contain a synthetic trust-boundary violation.</small></button>
+    </div>
+    <div class="briefing-actions"><button id="startShift" class="primary">Start Operations Shift</button><button id="quickShift">Quick Start</button></div>
+    <div class="briefing-log"><div><i>[ READY ]</i> 35 synthetic districts and 70 sites loaded.</div><div><i>[ SAFE ]</i> Browser session is read-only and self-contained.</div><div><i>[ INFO ]</i> Guided operator mission will track investigation progress.</div></div>
+  </div>
+</section>
+
+<div class="app-shell hidden" id="appShell">
+<aside class="sidebar">
+  <a class="logo" href="../index.html"><span class="logo-mark">K</span><div><strong>K12 OPS</strong><small>V6 · OPERATIONS CENTER</small></div></a>
+  <nav aria-label="Operations center navigation">
+    <button class="active" data-view="mission"><span>✓</span><b>Shift Mission</b></button>
+    <button data-view="overview"><span>◫</span><b>Overview</b></button>
+    <button data-view="twin"><span>◎</span><b>Digital Twin</b></button>
+    <button data-view="incident"><span>⚡</span><b>Incidents</b></button>
+    <button data-view="evidence"><span>▤</span><b>Evidence Vault</b></button>
+    <button data-view="services"><span>⌁</span><b>Services</b></button>
+    <button data-view="assurance"><span>◇</span><b>Assurance</b></button>
+    <button data-view="capacity"><span>↗</span><b>Capacity</b></button>
+    <button data-view="changes"><span>⇄</span><b>Changes</b></button>
+    <button data-view="terminal"><span>⌨</span><b>Terminal</b></button>
+    <button data-view="architecture"><span>▱</span><b>Architecture</b></button>
+  </nav>
+  <div class="sidebar-status"><div><i class="green"></i><span>STATIC LAB</span></div><small>No external requests</small><a href="../README.md">Technical README →</a><a href="https://mlavoie6927.github.io/#network-engineering">Portfolio home →</a></div>
+</aside>
+<section class="workspace">
+<header class="app-header">
+  <div><p>REGIONAL EDUCATION NETWORK · SYNTHETIC OPERATIONS</p><h1 id="viewTitle">Shift Mission</h1></div>
+  <div class="scenario-bar" role="group" aria-label="Active simulation"><button class="active" data-scenario="normal">Normal</button><button data-scenario="wan">WAN</button><button data-scenario="security">Security</button><button data-scenario="filter">Filter</button><button data-scenario="identity">Identity</button><button data-scenario="wireless">Wireless</button></div>
+  <div class="header-right"><span id="scenarioBadge" class="scenario-badge">NORMAL</span><time id="clock">--:--:--</time><div class="operator"><i></i><span>DEMO OPERATOR<small>Read-only</small></span></div></div>
+</header>
+<main id="workspaceMain">
+<section class="view active" id="mission">
+  <div class="view-head"><div><span class="eyebrow">GUIDED SHIFT</span><h2>Regional operator mission</h2><p>Complete the workflow by visiting the relevant tools and producing a defensible handoff.</p></div><div class="mission-score"><strong id="missionScore">0%</strong><span>complete</span></div></div>
+  <div class="mission-progress"><i id="missionBar"></i></div>
+  <div class="mission-layout"><ol class="mission-list" id="missionList">
+    <li data-task="queue"><span>01</span><div><strong>Establish regional context</strong><p>Review the active queue and regional health before touching a district.</p></div><button data-task-view="overview">Open Overview</button></li>
+    <li data-task="investigate"><span>02</span><div><strong>Isolate one incident</strong><p>Run the guided diagnostic sequence until a fault domain is proven.</p></div><button data-task-view="incident">Open Incident Lab</button></li>
+    <li data-task="dependency"><span>03</span><div><strong>Check dependency impact</strong><p>Identify upstream prerequisites and downstream services.</p></div><button data-task-view="services">Open Services</button></li>
+    <li data-task="drift"><span>04</span><div><strong>Review control drift</strong><p>Determine whether configuration deviation creates operational or security risk.</p></div><button data-task-view="assurance">Open Assurance</button></li>
+    <li data-task="change"><span>05</span><div><strong>Validate change readiness</strong><p>Confirm approval, rollback, scope, and verification are credible.</p></div><button data-task-view="changes">Open Changes</button></li>
+    <li data-task="handoff"><span>06</span><div><strong>Build the evidence handoff</strong><p>Inspect raw artifacts and assemble a NOC/vendor-quality escalation.</p></div><button data-task-view="evidence">Open Evidence Vault</button></li>
+  </ol><aside class="mission-panel"><span class="eyebrow">CURRENT SHIFT</span><h3 id="missionScenarioTitle">Normal operations</h3><p id="missionScenarioText">Regional services are within synthetic baseline. Review the queue and identify the highest-value operational follow-up.</p><div class="mission-rule"><strong>Operator rule</strong><p>Do not make a configuration change until the evidence identifies the failed control boundary.</p></div><button id="resetMission">Reset mission progress</button></aside></div>
+</section>
+
+<section class="view" id="overview">
+  <div class="status-cards"><article><span>REGIONAL HEALTH</span><strong id="healthKpi">—</strong><small id="healthNote">—</small></article><article><span>OPEN P1 / P2</span><strong id="priorityKpi">—</strong><small>current synthetic queue</small></article><article><span>WAN UTILIZATION</span><strong id="wanKpi">—</strong><small>regional aggregate</small></article><article><span>PACKET LOSS</span><strong id="lossKpi">—</strong><small id="lossNote">—</small></article><article><span>RESPONSE SLA</span><strong id="slaKpi">—</strong><small>first response</small></article><article><span>CONFIG ASSURANCE</span><strong id="complianceKpi">—</strong><small>sampled controls</small></article></div>
+  <div class="overview-grid"><article class="panel trend-panel"><div class="panel-head"><div><span class="eyebrow">TELEMETRY</span><h2>72-hour WAN replay</h2></div><span class="state good">deterministic</span></div><svg id="wanChart" viewBox="0 0 820 250"></svg></article><article class="panel event-panel"><div class="panel-head"><div><span class="eyebrow">ACTIVE EVENT</span><h2 id="eventId">EVT-BASELINE</h2></div><span id="eventSeverity" class="severity-pill">INFO</span></div><h3 id="eventTitle">Regional services healthy</h3><p id="eventText"></p><div id="eventPath" class="event-path"></div></article></div>
+  <article class="panel"><div class="panel-head"><div><span class="eyebrow">WORK QUEUE</span><h2>Current synthetic tickets</h2></div><button class="text-button" data-view="incident">Investigate →</button></div><div class="table-scroll"><table><thead><tr><th>Ticket</th><th>District</th><th>Priority</th><th>Domain</th><th>Owner</th><th>Status</th></tr></thead><tbody id="ticketTable"></tbody></table></div></article>
+</section>
+
+<section class="view" id="twin">
+  <div class="view-head"><div><span class="eyebrow">REGIONAL DIGITAL TWIN</span><h2>35-district service map</h2><p>Click a district node to inspect sites, assets, VLANs, ticket context, and synthetic state.</p></div><div class="twin-legend"><span><i class="healthy"></i>healthy</span><span><i class="degraded"></i>degraded</span><span><i class="critical"></i>incident</span></div></div>
+  <div class="twin-layout"><article class="panel twin-panel"><svg id="regionalTwin" viewBox="0 0 920 650" role="img" aria-label="35 district regional network map"></svg></article><article class="panel district-inspector" id="districtInspector"></article></div>
+</section>
+
+<section class="view" id="incident">
+  <div class="incident-toolbar"><div><span class="eyebrow">GUIDED INVESTIGATION</span><h2>Evidence-first incident lab</h2><p>Reveal one diagnostic result at a time. The root cause stays hidden until the path has been proven.</p></div><select id="incidentSelect"></select></div>
+  <div class="incident-grid"><article class="panel incident-main"><div class="incident-title"><div><span id="incidentId" class="eyebrow"></span><h2 id="incidentName"></h2><p id="incidentScope"></p></div><span id="incidentSeverity" class="severity-pill"></span></div><div class="path-rail" id="incidentRail"></div><div class="finding-card"><span>CURRENT FINDING</span><strong id="findingTitle">Start the investigation</strong><p id="findingText">Run the next diagnostic to establish the evidence boundary.</p></div><div class="incident-actions"><button class="primary" id="advanceBtn">Run next diagnostic</button><button id="resetBtn">Reset</button></div><div class="root-cause hidden" id="rootCause"><span>FAULT DOMAIN</span><strong id="rootDomain"></strong><p id="rootAction"></p></div></article><article class="panel evidence-live"><div class="panel-head"><div><span class="eyebrow">LIVE EVIDENCE</span><h2>Collected artifacts</h2></div><span id="evidenceCount">0 items</span></div><pre id="evidenceLog">No evidence collected yet.</pre></article></div>
+</section>
+
+<section class="view" id="evidence">
+  <div class="view-head"><div><span class="eyebrow">EVIDENCE VAULT</span><h2>Raw artifacts & escalation package</h2><p>Read the same synthetic traceroutes, config snippets, events, validation notes, and change records stored in the repository.</p></div><select id="evidenceCaseSelect"></select></div>
+  <div class="vault-layout"><div class="vault-files panel" id="vaultFiles"></div><article class="panel vault-preview"><div class="panel-head"><div><span class="eyebrow" id="vaultPath">ARTIFACT</span><h2 id="vaultTitle">Evidence preview</h2></div><button id="copyArtifact" class="text-button">Copy</button></div><pre id="vaultText">Select an artifact.</pre></article></div>
+  <article class="panel handoff"><div class="panel-head"><div><span class="eyebrow">TECHNICAL HANDOFF</span><h2>NOC / vendor escalation preview</h2></div><button id="copyHandoff" class="text-button">Copy handoff</button></div><pre id="handoffPreview"></pre></article>
+</section>
+
+<section class="view" id="services"><div class="view-head"><div><span class="eyebrow">SERVICE DEPENDENCY GRAPH</span><h2>Dependency & blast-radius explorer</h2><p>Understand what a service needs and what breaks downstream if it fails.</p></div><select id="serviceSelect"></select></div><div class="service-layout"><article class="panel"><div class="panel-head"><div><span class="eyebrow">DEPENDENCY CHAIN</span><h2 id="serviceTitle">Service</h2></div></div><div id="dependencyGraph" class="dependency-graph"></div></article><article class="panel"><div class="panel-head"><div><span class="eyebrow">BLAST RADIUS</span><h2>Downstream impact</h2></div></div><div id="blastRadius" class="blast-grid"></div></article></div></section>
+
+<section class="view" id="assurance"><div class="view-head"><div><span class="eyebrow">CONFIGURATION ASSURANCE</span><h2>Baseline drift detection</h2><p>The sample intentionally includes imperfect configurations so the control logic has something meaningful to find.</p></div></div><div class="status-cards compact"><article><span>DEVICES SAMPLED</span><strong id="driftDevices">—</strong></article><article><span>FULLY COMPLIANT</span><strong id="driftCompliant">—</strong></article><article><span>COMPLIANCE</span><strong id="driftScore">—</strong></article><article><span>FINDINGS</span><strong id="driftFindings">—</strong></article></div><article class="panel"><div class="panel-head"><div><span class="eyebrow">DEVIATIONS</span><h2>Control findings</h2></div></div><div class="table-scroll"><table><thead><tr><th>Device</th><th>Control</th><th>Expected</th><th>Observed</th><th>Severity</th></tr></thead><tbody id="driftTable"></tbody></table></div></article></section>
+
+<section class="view" id="capacity"><div class="view-head"><div><span class="eyebrow">CAPACITY ENGINEERING</span><h2>95th-percentile planning</h2><p>Eight months of synthetic history plus a transparent three-month projection.</p></div><select id="capacitySelect"></select></div><div class="overview-grid"><article class="panel trend-panel"><div class="panel-head"><div><span class="eyebrow">DISTRICT TREND</span><h2 id="capacityTitle">—</h2></div><span id="capacityRisk" class="state good">—</span></div><svg id="capacityChart" viewBox="0 0 820 250"></svg></article><article class="panel"><div class="panel-head"><div><span class="eyebrow">PLANNING DECISION</span><h2>Forecast</h2></div></div><div id="capacitySummary" class="capacity-summary"></div></article></div><article class="panel"><div class="panel-head"><div><span class="eyebrow">WATCHLIST</span><h2>Highest projected utilization</h2></div></div><div id="capacityWatch" class="watch-grid"></div></article></section>
+
+<section class="view" id="changes"><div class="view-head"><div><span class="eyebrow">CHANGE CONTROL</span><h2>Scope, risk, rollback & verification</h2><p>Correct commands are necessary; they are not sufficient. A production-quality change also needs authorization, rollback, and measurable acceptance tests.</p></div></div><div id="changeGrid" class="change-grid"></div></section>
+
+<section class="view" id="terminal"><div class="view-head"><div><span class="eyebrow">VIRTUAL OPERATIONS TERMINAL</span><h2>Query the static model</h2><p>The terminal exposes safe, deterministic operations commands backed by the same datasets as the UI.</p></div></div><div class="terminal-window"><div class="terminal-bar"><span></span><span></span><span></span><strong>operator@k12-ops</strong><small>SIMULATION ONLY</small></div><div id="terminalOutput" class="terminal-output"><div><i>[ READY ]</i> Type <b>help</b> for commands.</div></div><form id="terminalForm"><label for="terminalInput">operator@k12-ops:~$</label><input id="terminalInput" autocomplete="off" spellcheck="false" maxlength="140"><button>Run</button></form><div class="terminal-quick"><button data-command="status">status</button><button data-command="incidents">incidents</button><button data-command="district DIST-07">district DIST-07</button><button data-command="trace INC-WAN-01">trace INC-WAN-01</button><button data-command="evidence INC-WAN-01">evidence INC-WAN-01</button><button data-command="drift">drift</button><button data-command="sla">sla</button><button data-command="changes">changes</button></div></div></section>
+
+<section class="view" id="architecture"><div class="view-head"><div><span class="eyebrow">SYSTEM MODEL</span><h2>Architecture & assurance diagrams</h2><p>Technical diagrams support the operational reasoning; they are not substitutes for evidence.</p></div></div><div class="diagram-grid" id="diagramGrid"></div></section>
+</main></section></div>
+<dialog id="imageDialog"><button id="closeDialog">×</button><img id="dialogImg" alt="Expanded technical diagram"><h3 id="dialogTitle"></h3></dialog>
+<script src="../portfolio/data.js?v=6.1"></script><script src="../portfolio/v6-data.js?v=6.1"></script><script src="v6.js?v=6.1"></script></body></html>

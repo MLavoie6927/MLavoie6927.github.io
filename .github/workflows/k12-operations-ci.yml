@@ -1,0 +1,52 @@
+name: Validate K-12 Operations Project
+
+on:
+  push:
+    paths:
+      - "projects/k12-network-operations/**"
+      - "index.html"
+      - ".github/workflows/k12-operations-ci.yml"
+  pull_request:
+    paths:
+      - "projects/k12-network-operations/**"
+      - "index.html"
+      - ".github/workflows/k12-operations-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/k12-network-operations
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate inventory and operations model
+        run: python -m k12ops.cli validate --inventory data/districts.json
+      - name: Validate portfolio and case-study assets
+        run: python tools/validate_portfolio.py
+      - name: Validate operator experience
+        run: python tools/validate_v6_experience.py
+      - name: Validate JavaScript syntax
+        run: |
+          node --check portfolio/v6.js
+          node --check dashboard/v6.js
+      - name: Verify generated browser data
+        run: |
+          python tools/export_static_data.py --check
+          python tools/export_v6_experience.py --check
+      - name: Verify generated enterprise report
+        run: python tools/generate_enterprise_report.py --check
+      - name: Compile Python source
+        run: python -m compileall -q k12ops scripts/network tools tests

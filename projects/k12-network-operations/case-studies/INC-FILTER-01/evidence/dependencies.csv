@@ -1,0 +1,5 @@
+host,purpose,pre_change,required_scope
+auth.learning-example.test,authentication,ALLOW,STAFF
+api.learning-example.test,application API,BLOCK,STAFF
+cdn.learning-example.test,static content,ALLOW,STAFF
+telemetry.learning-example.test,optional telemetry,BLOCK,none

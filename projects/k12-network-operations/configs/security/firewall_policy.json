@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "defaults": {
+    "inter_vlan": "deny",
+    "internet_egress": "policy-controlled",
+    "management_plane": "mgmt-only"
+  },
+  "rules": [
+    {
+      "id": "FW-001",
+      "source": "MGMT",
+      "destination": "INFRASTRUCTURE",
+      "service": "approved-admin",
+      "action": "allow",
+      "log": true
+    },
+    {
+      "id": "FW-010",
+      "source": "STAFF",
+      "destination": "INTERNET",
+      "service": [
+        "dns",
+        "http",
+        "https"
+      ],
+      "action": "allow-via-policy",
+      "log": true
+    },
+    {
+      "id": "FW-020",
+      "source": "STUDENT",
+      "destination": "INTERNET",
+      "service": [
+        "dns",
+        "http",
+        "https"
+      ],
+      "action": "allow-via-filter",
+      "log": true
+    },
+    {
+      "id": "FW-030",
+      "source": "GUEST",
+      "destination": "RFC1918",
+      "service": "any",
+      "action": "deny",
+      "log": true
+    },
+    {
+      "id": "FW-040",
+      "source": "STUDENT",
+      "destination": "MGMT",
+      "service": "any",
+      "action": "deny",
+      "log": true
+    },
+    {
+      "id": "FW-050",
+      "source": "IOT",
+      "destination": "USER_NETWORKS",
+      "service": "any",
+      "action": "deny",
+      "log": true
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "synthetic": true,
+  "devices": [
+    {
+      "device": "DIST-01-CORE",
+      "district": "DIST-01",
+      "role": "core",
+      "snmp_version": "3",
+      "ntp_servers": [
+        "10.255.0.10",
+        "10.255.0.11"
+      ],
+      "syslog_target": "10.255.0.20",
+      "management_vlan": 40,
+      "student_to_mgmt": "deny",
+      "guest_to_internal": "deny",
+      "ssh_source": "MGMT",
+      "default_route_required": true
+    },
+    {
+      "device": "DIST-12-EDGE",
+      "district": "DIST-12",
+      "role": "edge",
+      "snmp_version": "2c",
+      "ntp_servers": [
+        "10.255.0.10"
+      ],
+      "syslog_target": "10.255.0.20",
+      "management_vlan": 40,
+      "student_to_mgmt": "deny",
+      "guest_to_internal": "deny",
+      "ssh_source": "ANY",
+      "default_route_required": true
+    },
+    {
+      "device": "DIST-19-CORE",
+      "district": "DIST-19",
+      "role": "core",
+      "snmp_version": "3",
+      "ntp_servers": [
+        "10.255.0.10",
+        "10.255.0.11"
+      ],
+      "syslog_target": "10.255.0.99",
+      "management_vlan": 40,
+      "student_to_mgmt": "deny",
+      "guest_to_internal": "deny",
+      "ssh_source": "MGMT",
+      "default_route_required": true
+    },
+    {
+      "device": "DIST-22-CORE",
+      "district": "DIST-22",
+      "role": "core",
+      "snmp_version": "3",
+      "ntp_servers": [
+        "10.255.0.10",
+        "10.255.0.11"
+      ],
+      "syslog_target": "10.255.0.20",
+      "management_vlan": 40,
+      "student_to_mgmt": "deny",
+      "guest_to_internal": "deny",
+      "ssh_source": "MGMT",
+      "default_route_required": true
+    }
+  ]
+}

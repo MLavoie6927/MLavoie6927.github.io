@@ -1,0 +1,410 @@
+[
+  {
+    "id": "INC-DNS-01",
+    "severity": "P3",
+    "summary": "One classroom cannot resolve internal learning portal",
+    "fault_domain": "DNS",
+    "actions": [
+      "Compare resolver settings",
+      "Query A/CNAME records",
+      "Test known-good internal name",
+      "Check DHCP-provided DNS"
+    ],
+    "evidence": [
+      "client IP/config",
+      "nslookup/Resolve-DnsName output",
+      "timestamp",
+      "affected VLAN"
+    ],
+    "escalation": "Escalate to DNS/AD owner if authoritative records or resolver service are incorrect."
+  },
+  {
+    "id": "INC-WAN-01",
+    "severity": "P2",
+    "summary": "Entire high school loses Internet but local resources work",
+    "fault_domain": "WAN/Provider",
+    "actions": [
+      "Confirm multiple VLANs",
+      "Test gateway",
+      "Check edge interface/routes",
+      "Trace toward provider",
+      "Check circuit alarms"
+    ],
+    "evidence": [
+      "site",
+      "circuit ID",
+      "interface state",
+      "traceroute",
+      "timestamps",
+      "recent changes"
+    ],
+    "escalation": "Escalate to upstream NOC/carrier with evidence package."
+  },
+  {
+    "id": "INC-FILTER-01",
+    "severity": "P3",
+    "summary": "Teacher instructional SaaS blocked",
+    "fault_domain": "Web Filter",
+    "actions": [
+      "Capture exact URL/FQDN",
+      "Check category/block reason",
+      "Identify auth/CDN/API dependencies",
+      "Validate business need",
+      "Create narrow approved exception"
+    ],
+    "evidence": [
+      "user/group",
+      "URL",
+      "filter log",
+      "timestamp",
+      "before/after result"
+    ],
+    "escalation": "Escalate to filter vendor only if product classification/behavior cannot be resolved locally."
+  },
+  {
+    "id": "INC-IDF-01",
+    "severity": "P2",
+    "summary": "One building wing has intermittent connectivity",
+    "fault_domain": "Access Network",
+    "actions": [
+      "Map affected rooms to IDF",
+      "Check uplink errors/flaps",
+      "Review switch stack health",
+      "Inspect fiber/transceiver",
+      "Compare unaffected VLANs"
+    ],
+    "evidence": [
+      "switch/interface",
+      "error counters",
+      "timestamps",
+      "topology",
+      "affected VLANs"
+    ],
+    "escalation": "Escalate to network engineer/hardware vendor if physical/uplink fault is indicated."
+  },
+  {
+    "id": "INC-AD-01",
+    "severity": "P3",
+    "summary": "New Windows device cannot access domain resources",
+    "fault_domain": "AD/DNS",
+    "actions": [
+      "Verify DHCP/DNS",
+      "Query AD SRV records",
+      "Check system time",
+      "Verify secure channel",
+      "Inspect device/computer object"
+    ],
+    "evidence": [
+      "ipconfig",
+      "SRV lookup",
+      "w32tm",
+      "nltest",
+      "dsregcmd"
+    ],
+    "escalation": "Escalate to identity or network owner based on failed layer."
+  },
+  {
+    "id": "INC-INTUNE-01",
+    "severity": "P3",
+    "summary": "Windows device enrolled but policy is missing",
+    "fault_domain": "Intune",
+    "actions": [
+      "Verify tenant/join state",
+      "Check last check-in",
+      "Confirm assignment/filter scope",
+      "Check conflicting profiles",
+      "Review local MDM event log"
+    ],
+    "evidence": [
+      "device ID",
+      "assignment",
+      "event IDs",
+      "check-in time"
+    ],
+    "escalation": "Escalate to Intune admin if assignment/service-side state is inconsistent."
+  },
+  {
+    "id": "INC-GOOGLE-01",
+    "severity": "P4",
+    "summary": "Chromebook user cannot open Shared Drive",
+    "fault_domain": "Google Workspace",
+    "actions": [
+      "Verify account and OU",
+      "Check Shared Drive membership",
+      "Check group membership",
+      "Review sharing restrictions",
+      "Validate browser/network path"
+    ],
+    "evidence": [
+      "user/OU",
+      "resource",
+      "permission path",
+      "timestamp"
+    ],
+    "escalation": "Escalate to Workspace admin if organization policy or ownership requires change."
+  },
+  {
+    "id": "INC-M365-01",
+    "severity": "P3",
+    "summary": "Microsoft 365 login loop on managed Windows",
+    "fault_domain": "Entra/M365",
+    "actions": [
+      "Check time",
+      "Check dsregcmd/SSO state",
+      "Review MFA/Conditional Access",
+      "Test browser profile",
+      "Check provider health"
+    ],
+    "evidence": [
+      "error/correlation ID",
+      "dsregcmd summary",
+      "timestamp",
+      "CA result if authorized"
+    ],
+    "escalation": "Escalate to identity/cloud admin with correlation evidence."
+  },
+  {
+    "id": "INC-DHCP-01",
+    "severity": "P2",
+    "summary": "Student VLAN clients receive APIPA addresses",
+    "fault_domain": "DHCP",
+    "actions": [
+      "Check scope availability",
+      "Check relay/helper",
+      "Check VLAN/trunk",
+      "Validate server reachability",
+      "Check recent network changes"
+    ],
+    "evidence": [
+      "client address",
+      "VLAN",
+      "scope usage",
+      "relay path",
+      "switchport/uplink state"
+    ],
+    "escalation": "Escalate to DHCP/network owner depending on scope/relay failure."
+  },
+  {
+    "id": "INC-PRINT-01",
+    "severity": "P4",
+    "summary": "Staff cannot print to one network printer",
+    "fault_domain": "Printer/IoT",
+    "actions": [
+      "Check device power/link",
+      "Verify IP/reservation",
+      "Ping/resolve printer",
+      "Check print queue",
+      "Validate printer VLAN ACL"
+    ],
+    "evidence": [
+      "printer IP",
+      "queue state",
+      "VLAN",
+      "error message"
+    ],
+    "escalation": "Escalate to print/device vendor only after network/queue isolation."
+  },
+  {
+    "id": "INC-SMTP-01",
+    "severity": "P3",
+    "summary": "Mail client cannot submit messages",
+    "fault_domain": "Email",
+    "actions": [
+      "Check account/auth",
+      "Resolve service endpoints",
+      "Test TCP/TLS",
+      "Review client profile",
+      "Check provider status"
+    ],
+    "evidence": [
+      "exact error",
+      "DNS result",
+      "TCP/TLS result",
+      "timestamp"
+    ],
+    "escalation": "Escalate to mail/cloud provider with protocol and correlation evidence."
+  },
+  {
+    "id": "INC-ROUTE-01",
+    "severity": "P2",
+    "summary": "One remote subnet is unreachable after planned change",
+    "fault_domain": "Routing",
+    "actions": [
+      "Compare routing tables",
+      "Verify next-hop",
+      "Check dynamic neighbor state if used",
+      "Review ACL/firewall",
+      "Compare pre-change snapshot"
+    ],
+    "evidence": [
+      "prefix",
+      "route output",
+      "neighbor state",
+      "change ID",
+      "traceroute"
+    ],
+    "escalation": "Rollback or escalate according to change plan if expected route is absent."
+  },
+  {
+    "id": "INC-SEC-01",
+    "severity": "P1",
+    "summary": "Student network can reach management interface",
+    "fault_domain": "Segmentation/Security",
+    "actions": [
+      "Confirm exposure safely",
+      "Preserve firewall/switch logs",
+      "Identify route/ACL path",
+      "Restrict exposure using approved change",
+      "Validate negative test"
+    ],
+    "evidence": [
+      "source/destination",
+      "policy/rule",
+      "logs",
+      "exposure window",
+      "verification"
+    ],
+    "escalation": "Escalate immediately through security/change process; treat as security-impacting incident."
+  },
+  {
+    "id": "INC-NTP-01",
+    "severity": "P3",
+    "summary": "Domain authentication failures correlate with clock skew",
+    "fault_domain": "NTP/Identity",
+    "actions": [
+      "Check system time/source",
+      "Check domain time hierarchy",
+      "Verify NTP reachability",
+      "Correct approved time configuration",
+      "Retest auth"
+    ],
+    "evidence": [
+      "w32tm/timedatectl",
+      "offset",
+      "NTP source",
+      "auth result"
+    ],
+    "escalation": "Escalate to identity/infrastructure owner if authoritative time source is unhealthy."
+  },
+  {
+    "id": "INC-WIFI-01",
+    "severity": "P3",
+    "summary": "One classroom has poor Wi-Fi performance",
+    "fault_domain": "Wireless",
+    "actions": [
+      "Compare clients",
+      "Identify serving AP",
+      "Check RSSI/SNR/channel utilization",
+      "Check AP uplink/errors",
+      "Test wired baseline"
+    ],
+    "evidence": [
+      "AP",
+      "SSID",
+      "time",
+      "signal metrics",
+      "uplink status"
+    ],
+    "escalation": "Escalate to wireless/network engineer with RF and wired evidence."
+  },
+  {
+    "id": "INC-DNS-02",
+    "severity": "P2",
+    "summary": "Internal DNS works but public recursion fails",
+    "fault_domain": "DNS/Firewall",
+    "actions": [
+      "Query internal name",
+      "Query public name",
+      "Check forwarders",
+      "Test TCP/UDP 53 policy",
+      "Compare second resolver"
+    ],
+    "evidence": [
+      "resolver",
+      "query outputs",
+      "firewall logs",
+      "forwarder state"
+    ],
+    "escalation": "Escalate to DNS/firewall/upstream depending on failed boundary."
+  },
+  {
+    "id": "INC-TLS-01",
+    "severity": "P3",
+    "summary": "Website resolves and TCP/443 connects but browser fails TLS",
+    "fault_domain": "TLS/Filter",
+    "actions": [
+      "Capture browser/TLS error",
+      "Inspect certificate chain",
+      "Check system clock",
+      "Check TLS inspection policy",
+      "Compare managed/unmanaged test if authorized"
+    ],
+    "evidence": [
+      "certificate/error",
+      "hostname",
+      "timestamp",
+      "filter policy"
+    ],
+    "escalation": "Escalate to filtering/certificate owner if inspection trust/path is broken."
+  },
+  {
+    "id": "INC-CAP-01",
+    "severity": "P3",
+    "summary": "WAN utilization repeatedly exceeds 90 percent",
+    "fault_domain": "Capacity",
+    "actions": [
+      "Verify duration and baseline",
+      "Identify legitimate schedule/events",
+      "Check errors/loss",
+      "Summarize trend",
+      "Create capacity recommendation"
+    ],
+    "evidence": [
+      "utilization graph",
+      "95th percentile",
+      "loss/errors",
+      "business timing"
+    ],
+    "escalation": "Escalate as capacity/project planning rather than break/fix if service remains functional."
+  },
+  {
+    "id": "INC-POWER-01",
+    "severity": "P2",
+    "summary": "IDF switch stack offline after power event",
+    "fault_domain": "MDF/IDF",
+    "actions": [
+      "Check UPS/power",
+      "Confirm stack/member state",
+      "Check environmental alarms",
+      "Verify uplink after restore",
+      "Validate VLANs/PoE"
+    ],
+    "evidence": [
+      "UPS state",
+      "switch state",
+      "site",
+      "event time"
+    ],
+    "escalation": "Escalate facilities/hardware as indicated by power or device diagnostics."
+  },
+  {
+    "id": "INC-SAAS-01",
+    "severity": "P3",
+    "summary": "Cloud application unavailable from multiple districts",
+    "fault_domain": "SaaS Provider",
+    "actions": [
+      "Confirm cross-district scope",
+      "Check DNS/TCP from multiple sites",
+      "Check provider status",
+      "Rule out regional filter change",
+      "Communicate workaround/status"
+    ],
+    "evidence": [
+      "district list",
+      "test results",
+      "provider status",
+      "timestamps"
+    ],
+    "escalation": "Escalate to SaaS provider if regional network path is healthy."
+  }
+]

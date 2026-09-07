@@ -1,0 +1,5 @@
+ticket_id,district,severity,summary,status,fault_domain
+INC-1001,DIST-01,P3,Instructional website blocked,Resolved,Web Filter
+INC-1002,DIST-02,P2,Building Internet outage,Escalated,WAN
+INC-1003,DIST-01,P4,New Windows device domain issue,Resolved,DNS
+INC-1004,DIST-02,P3,IDF intermittent connectivity,Investigating,Access Network

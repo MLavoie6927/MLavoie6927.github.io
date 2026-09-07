@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "services": [
+    {
+      "id": "svc-instructional",
+      "name": "Instructional SaaS",
+      "tier": "Tier 1",
+      "owners": [
+        "Learning Systems"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-filter",
+        "svc-wan",
+        "svc-identity"
+      ],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-m365",
+      "name": "Microsoft 365",
+      "tier": "Tier 1",
+      "owners": [
+        "Identity & Collaboration"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-wan",
+        "svc-entra"
+      ],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-google",
+      "name": "Google Workspace",
+      "tier": "Tier 1",
+      "owners": [
+        "Learning Systems"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-wan",
+        "svc-google-id"
+      ],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-ad",
+      "name": "Active Directory",
+      "tier": "Tier 1",
+      "owners": [
+        "Identity & Collaboration"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-ntp",
+        "svc-lan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 30
+    },
+    {
+      "id": "svc-entra",
+      "name": "Entra ID",
+      "tier": "Tier 1",
+      "owners": [
+        "Identity & Collaboration"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-wan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-google-id",
+      "name": "Google Identity",
+      "tier": "Tier 1",
+      "owners": [
+        "Learning Systems"
+      ],
+      "depends_on": [
+        "svc-dns",
+        "svc-wan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-identity",
+      "name": "Federated Identity",
+      "tier": "Tier 0",
+      "owners": [
+        "Identity & Collaboration"
+      ],
+      "depends_on": [
+        "svc-entra",
+        "svc-google-id"
+      ],
+      "criticality": 5,
+      "rto_minutes": 30
+    },
+    {
+      "id": "svc-intune",
+      "name": "Microsoft Intune",
+      "tier": "Tier 2",
+      "owners": [
+        "Endpoint Engineering"
+      ],
+      "depends_on": [
+        "svc-entra",
+        "svc-wan",
+        "svc-dns"
+      ],
+      "criticality": 4,
+      "rto_minutes": 240
+    },
+    {
+      "id": "svc-dns",
+      "name": "Regional DNS",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Services"
+      ],
+      "depends_on": [
+        "svc-lan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 15
+    },
+    {
+      "id": "svc-dhcp",
+      "name": "DHCP",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Services"
+      ],
+      "depends_on": [
+        "svc-lan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 15
+    },
+    {
+      "id": "svc-ntp",
+      "name": "NTP / Time",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Services"
+      ],
+      "depends_on": [
+        "svc-lan"
+      ],
+      "criticality": 4,
+      "rto_minutes": 30
+    },
+    {
+      "id": "svc-filter",
+      "name": "Internet Filtering",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Security"
+      ],
+      "depends_on": [
+        "svc-firewall",
+        "svc-wan",
+        "svc-dns"
+      ],
+      "criticality": 5,
+      "rto_minutes": 30
+    },
+    {
+      "id": "svc-firewall",
+      "name": "Regional Firewall",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Security"
+      ],
+      "depends_on": [
+        "svc-wan"
+      ],
+      "criticality": 5,
+      "rto_minutes": 15
+    },
+    {
+      "id": "svc-wan",
+      "name": "Regional WAN",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Services"
+      ],
+      "depends_on": [
+        "svc-provider"
+      ],
+      "criticality": 5,
+      "rto_minutes": 15
+    },
+    {
+      "id": "svc-provider",
+      "name": "Upstream Education Network",
+      "tier": "External",
+      "owners": [
+        "Carrier / K-20 NOC"
+      ],
+      "depends_on": [],
+      "criticality": 5,
+      "rto_minutes": 60
+    },
+    {
+      "id": "svc-lan",
+      "name": "Campus LAN",
+      "tier": "Tier 0",
+      "owners": [
+        "Network Services"
+      ],
+      "depends_on": [],
+      "criticality": 5,
+      "rto_minutes": 15
+    }
+  ]
+}

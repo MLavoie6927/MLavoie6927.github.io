@@ -1,0 +1,17 @@
+! LAB REFERENCE ONLY
+hostname DIST07-EDGE01
+!
+interface GigabitEthernet0/0
+ description TO-FIREWALL
+ ip address 10.7.254.1 255.255.255.252
+ no shutdown
+!
+interface GigabitEthernet0/1
+ description TO-UPSTREAM
+ ip address 192.0.2.2 255.255.255.252
+ no shutdown
+!
+ip route 10.7.0.0 255.255.0.0 10.7.254.2
+ip route 0.0.0.0 0.0.0.0 192.0.2.1
+!
+! Dynamic-routing examples belong in an isolated lab and require peer-specific policy.

@@ -1,0 +1,17 @@
+REGIONAL EDUCATION NETWORK
+          |
+   +------+------+
+   | DISTRICT WAN | x35
+   +------+------+
+          |
+   Firewall / Filter
+          |
+      L3 CORE / MDF
+   +------+------+------+------+
+ STAFF  STUDENT SERVER  MGMT  GUEST/IOT
+   |       |      |      |       |
+  IDFs    IDFs   AD/DNS  NMS   isolated clients
+
+Cloud dependencies: Microsoft 365 / Entra / Intune / Google Workspace / SaaS
+Monitoring: SNMPv3 + Syslog + service health
+Operations: tickets + SLA + change control + NOC/vendor escalation

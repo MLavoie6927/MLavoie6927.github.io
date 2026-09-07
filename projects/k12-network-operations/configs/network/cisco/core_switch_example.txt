@@ -1,0 +1,42 @@
+! LAB REFERENCE ONLY — replace values and validate on the target platform.
+hostname DIST07-CORE01
+ip routing
+!
+vlan 10
+ name STAFF
+vlan 20
+ name STUDENT
+vlan 30
+ name SERVER
+vlan 40
+ name MGMT
+vlan 50
+ name GUEST
+vlan 60
+ name IOT
+!
+interface Vlan10
+ description STAFF-GATEWAY
+ ip address 10.7.10.1 255.255.255.0
+ no shutdown
+interface Vlan20
+ description STUDENT-GATEWAY
+ ip address 10.7.20.1 255.255.254.0
+ no shutdown
+interface Vlan40
+ description MANAGEMENT-GATEWAY
+ ip address 10.7.40.1 255.255.255.0
+ no shutdown
+!
+! Management-plane access should be constrained to authorized admin sources.
+ip access-list standard MGMT-SOURCES
+ permit 10.7.40.0 0.0.0.255
+ deny any log
+!
+line vty 0 4
+ access-class MGMT-SOURCES in
+ transport input ssh
+!
+ntp server 10.7.30.20
+logging host 10.7.30.30
+! Prefer SNMPv3; credentials intentionally omitted from this example.

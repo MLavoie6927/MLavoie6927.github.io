@@ -1,0 +1,2070 @@
+{
+  "schema": 2,
+  "districts": [
+    {
+      "id": "DIST-01",
+      "name": "Example School District 01",
+      "sites": [
+        {
+          "id": "DIST-01-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-01-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.1.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.1.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.1.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.1.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.1.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.1.60.0/24"
+        }
+      ],
+      "asset_count": 4860,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-02",
+      "name": "Example School District 02",
+      "sites": [
+        {
+          "id": "DIST-02-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-02-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.2.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.2.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.2.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.2.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.2.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.2.60.0/24"
+        }
+      ],
+      "asset_count": 3151,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-03",
+      "name": "Example School District 03",
+      "sites": [
+        {
+          "id": "DIST-03-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-03-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.3.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.3.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.3.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.3.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.3.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.3.60.0/24"
+        }
+      ],
+      "asset_count": 2071,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-04",
+      "name": "Example School District 04",
+      "sites": [
+        {
+          "id": "DIST-04-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-04-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.4.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.4.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.4.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.4.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.4.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.4.60.0/24"
+        }
+      ],
+      "asset_count": 5619,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-05",
+      "name": "Example School District 05",
+      "sites": [
+        {
+          "id": "DIST-05-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-05-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.5.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.5.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.5.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.5.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.5.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.5.60.0/24"
+        }
+      ],
+      "asset_count": 5404,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-06",
+      "name": "Example School District 06",
+      "sites": [
+        {
+          "id": "DIST-06-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-06-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.6.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.6.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.6.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.6.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.6.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.6.60.0/24"
+        }
+      ],
+      "asset_count": 1850,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-07",
+      "name": "Example School District 07",
+      "sites": [
+        {
+          "id": "DIST-07-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-07-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.7.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.7.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.7.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.7.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.7.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.7.60.0/24"
+        }
+      ],
+      "asset_count": 4204,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-08",
+      "name": "Example School District 08",
+      "sites": [
+        {
+          "id": "DIST-08-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-08-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.8.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.8.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.8.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.8.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.8.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.8.60.0/24"
+        }
+      ],
+      "asset_count": 944,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-09",
+      "name": "Example School District 09",
+      "sites": [
+        {
+          "id": "DIST-09-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-09-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.9.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.9.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.9.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.9.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.9.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.9.60.0/24"
+        }
+      ],
+      "asset_count": 5229,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-10",
+      "name": "Example School District 10",
+      "sites": [
+        {
+          "id": "DIST-10-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-10-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.10.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.10.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.10.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.10.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.10.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.10.60.0/24"
+        }
+      ],
+      "asset_count": 979,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-11",
+      "name": "Example School District 11",
+      "sites": [
+        {
+          "id": "DIST-11-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-11-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.11.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.11.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.11.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.11.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.11.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.11.60.0/24"
+        }
+      ],
+      "asset_count": 1173,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-12",
+      "name": "Example School District 12",
+      "sites": [
+        {
+          "id": "DIST-12-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-12-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.12.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.12.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.12.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.12.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.12.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.12.60.0/24"
+        }
+      ],
+      "asset_count": 5589,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-13",
+      "name": "Example School District 13",
+      "sites": [
+        {
+          "id": "DIST-13-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-13-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.13.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.13.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.13.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.13.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.13.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.13.60.0/24"
+        }
+      ],
+      "asset_count": 2070,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-14",
+      "name": "Example School District 14",
+      "sites": [
+        {
+          "id": "DIST-14-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-14-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.14.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.14.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.14.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.14.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.14.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.14.60.0/24"
+        }
+      ],
+      "asset_count": 2536,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-15",
+      "name": "Example School District 15",
+      "sites": [
+        {
+          "id": "DIST-15-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-15-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.15.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.15.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.15.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.15.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.15.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.15.60.0/24"
+        }
+      ],
+      "asset_count": 3444,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-16",
+      "name": "Example School District 16",
+      "sites": [
+        {
+          "id": "DIST-16-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-16-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.16.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.16.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.16.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.16.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.16.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.16.60.0/24"
+        }
+      ],
+      "asset_count": 3272,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-17",
+      "name": "Example School District 17",
+      "sites": [
+        {
+          "id": "DIST-17-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-17-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.17.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.17.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.17.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.17.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.17.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.17.60.0/24"
+        }
+      ],
+      "asset_count": 1200,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-18",
+      "name": "Example School District 18",
+      "sites": [
+        {
+          "id": "DIST-18-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-18-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.18.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.18.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.18.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.18.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.18.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.18.60.0/24"
+        }
+      ],
+      "asset_count": 4186,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-19",
+      "name": "Example School District 19",
+      "sites": [
+        {
+          "id": "DIST-19-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-19-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.19.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.19.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.19.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.19.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.19.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.19.60.0/24"
+        }
+      ],
+      "asset_count": 1719,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-20",
+      "name": "Example School District 20",
+      "sites": [
+        {
+          "id": "DIST-20-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-20-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.20.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.20.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.20.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.20.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.20.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.20.60.0/24"
+        }
+      ],
+      "asset_count": 5651,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-21",
+      "name": "Example School District 21",
+      "sites": [
+        {
+          "id": "DIST-21-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-21-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.21.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.21.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.21.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.21.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.21.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.21.60.0/24"
+        }
+      ],
+      "asset_count": 1843,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-22",
+      "name": "Example School District 22",
+      "sites": [
+        {
+          "id": "DIST-22-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-22-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.22.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.22.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.22.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.22.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.22.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.22.60.0/24"
+        }
+      ],
+      "asset_count": 4630,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-23",
+      "name": "Example School District 23",
+      "sites": [
+        {
+          "id": "DIST-23-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-23-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.23.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.23.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.23.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.23.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.23.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.23.60.0/24"
+        }
+      ],
+      "asset_count": 5257,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-24",
+      "name": "Example School District 24",
+      "sites": [
+        {
+          "id": "DIST-24-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-24-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.24.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.24.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.24.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.24.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.24.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.24.60.0/24"
+        }
+      ],
+      "asset_count": 2588,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-25",
+      "name": "Example School District 25",
+      "sites": [
+        {
+          "id": "DIST-25-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-25-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.25.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.25.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.25.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.25.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.25.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.25.60.0/24"
+        }
+      ],
+      "asset_count": 960,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-26",
+      "name": "Example School District 26",
+      "sites": [
+        {
+          "id": "DIST-26-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-26-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.26.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.26.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.26.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.26.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.26.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.26.60.0/24"
+        }
+      ],
+      "asset_count": 4142,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-27",
+      "name": "Example School District 27",
+      "sites": [
+        {
+          "id": "DIST-27-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-27-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.27.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.27.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.27.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.27.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.27.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.27.60.0/24"
+        }
+      ],
+      "asset_count": 2236,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-28",
+      "name": "Example School District 28",
+      "sites": [
+        {
+          "id": "DIST-28-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-28-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.28.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.28.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.28.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.28.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.28.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.28.60.0/24"
+        }
+      ],
+      "asset_count": 6186,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-29",
+      "name": "Example School District 29",
+      "sites": [
+        {
+          "id": "DIST-29-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-29-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.29.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.29.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.29.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.29.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.29.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.29.60.0/24"
+        }
+      ],
+      "asset_count": 2749,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-30",
+      "name": "Example School District 30",
+      "sites": [
+        {
+          "id": "DIST-30-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-30-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.30.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.30.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.30.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.30.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.30.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.30.60.0/24"
+        }
+      ],
+      "asset_count": 2508,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-31",
+      "name": "Example School District 31",
+      "sites": [
+        {
+          "id": "DIST-31-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-31-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.31.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.31.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.31.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.31.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.31.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.31.60.0/24"
+        }
+      ],
+      "asset_count": 6055,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-32",
+      "name": "Example School District 32",
+      "sites": [
+        {
+          "id": "DIST-32-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 2000
+        },
+        {
+          "id": "DIST-32-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.32.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.32.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.32.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.32.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.32.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.32.60.0/24"
+        }
+      ],
+      "asset_count": 2197,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-33",
+      "name": "Example School District 33",
+      "sites": [
+        {
+          "id": "DIST-33-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-33-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 1000
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.33.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.33.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.33.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.33.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.33.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.33.60.0/24"
+        }
+      ],
+      "asset_count": 4430,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-34",
+      "name": "Example School District 34",
+      "sites": [
+        {
+          "id": "DIST-34-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-34-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.34.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.34.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.34.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.34.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.34.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.34.60.0/24"
+        }
+      ],
+      "asset_count": 4250,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    },
+    {
+      "id": "DIST-35",
+      "name": "Example School District 35",
+      "sites": [
+        {
+          "id": "DIST-35-HS",
+          "name": "Central High School",
+          "type": "High School",
+          "wan_mbps": 1000
+        },
+        {
+          "id": "DIST-35-ES",
+          "name": "North Elementary",
+          "type": "Elementary",
+          "wan_mbps": 500
+        }
+      ],
+      "vlans": [
+        {
+          "id": 10,
+          "name": "STAFF",
+          "cidr": "10.35.10.0/24"
+        },
+        {
+          "id": 20,
+          "name": "STUDENT",
+          "cidr": "10.35.20.0/23"
+        },
+        {
+          "id": 30,
+          "name": "SERVER",
+          "cidr": "10.35.30.0/24"
+        },
+        {
+          "id": 40,
+          "name": "MGMT",
+          "cidr": "10.35.40.0/24"
+        },
+        {
+          "id": 50,
+          "name": "GUEST",
+          "cidr": "10.35.50.0/24"
+        },
+        {
+          "id": 60,
+          "name": "IOT",
+          "cidr": "10.35.60.0/24"
+        }
+      ],
+      "asset_count": 1046,
+      "platforms": [
+        "Windows 11",
+        "ChromeOS",
+        "Linux",
+        "Microsoft 365",
+        "Google Workspace"
+      ],
+      "upstream": "Regional Education Network"
+    }
+  ]
+}

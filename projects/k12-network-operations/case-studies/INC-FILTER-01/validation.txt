@@ -1,0 +1,13 @@
+SYNTHETIC VALIDATION — INC-FILTER-01
+
+STAFF / teacher.demo
+- login: PASS
+- API call: PASS
+- application workflow: PASS
+
+STUDENT / student.demo control
+- unrelated policy restrictions: PASS
+- management resources: DENIED as expected
+- no global TLS/filter bypass detected
+
+Rollback tested conceptually: remove single FQDN exception.

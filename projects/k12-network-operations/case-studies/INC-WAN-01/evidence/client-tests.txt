@@ -1,0 +1,30 @@
+SYNTHETIC LAB EVIDENCE — INC-WAN-01
+Timestamp: 2026-09-02T10:11:22-07:00
+
+[STAFF CLIENT]
+IPv4: 10.2.10.44/24
+Gateway: 10.2.10.1
+DNS: 10.2.30.10
+
+ping 10.2.10.1
+Reply from 10.2.10.1: time<1ms
+Reply from 10.2.10.1: time<1ms
+
+nslookup portal.lab.example 10.2.30.10
+Address: 10.2.30.50
+
+ping 10.2.30.50
+Reply from 10.2.30.50: time=1ms
+
+TCP 203.0.113.80:443
+FAILED: connection timeout
+
+[STUDENT CLIENT]
+IPv4: 10.2.20.77/23
+Gateway: 10.2.20.1
+DNS: 10.2.30.10
+
+Gateway: PASS
+Internal DNS: PASS
+Internal application: PASS
+External HTTPS: FAIL

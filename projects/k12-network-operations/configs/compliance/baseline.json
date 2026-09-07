@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "required": {
+    "snmp_version": "3",
+    "ntp_servers": [
+      "10.255.0.10",
+      "10.255.0.11"
+    ],
+    "syslog_target": "10.255.0.20",
+    "management_vlan": 40,
+    "student_to_mgmt": "deny",
+    "guest_to_internal": "deny",
+    "ssh_source": "MGMT",
+    "default_route_required": true
+  }
+}

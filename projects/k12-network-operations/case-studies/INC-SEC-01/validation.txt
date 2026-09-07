@@ -1,0 +1,14 @@
+SYNTHETIC POST-CHANGE VALIDATION
+
+NEGATIVE CONTROL
+STUDENT 10.2.20.77 -> MGMT 10.2.40.12 TCP/443
+RESULT: DENY / expected
+LOG: generated / expected
+
+POSITIVE CONTROL
+MGMT 10.2.40.25 -> infrastructure management service
+RESULT: ALLOW / expected
+
+USER-PATH CONTROL
+STUDENT -> approved DNS + HTTPS Internet workflow
+RESULT: PASS / expected

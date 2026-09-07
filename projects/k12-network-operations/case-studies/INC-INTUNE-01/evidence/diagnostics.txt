@@ -1,0 +1,6 @@
+SYNTHETIC LAB EVIDENCE
+DNS/TCP/TLS paths to Microsoft endpoints succeed
+User authentication succeeds
+Device is Entra joined
+Intune last check-in is stale
+Conditional Access denies because device compliance is unknown

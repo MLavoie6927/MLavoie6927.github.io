@@ -1,0 +1,4 @@
+SYNTHETIC VALIDATION
+Root cause: DHCP-provided DNS configuration referenced a retired resolver.
+Action: Correct the scoped DHCP option, renew the affected client lease, and validate AD SRV plus portal resolution.
+Result: PASS

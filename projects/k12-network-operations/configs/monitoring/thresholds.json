@@ -1,0 +1,10 @@
+{
+  "wan_utilization_warn_pct": 80,
+  "wan_utilization_critical_pct": 95,
+  "interface_error_rate_warn_pct": 1,
+  "packet_loss_warn_pct": 2,
+  "device_cpu_warn_pct": 85,
+  "device_memory_warn_pct": 85,
+  "temperature_warn_c": 70,
+  "interface_flaps_15m_warn": 3
+}

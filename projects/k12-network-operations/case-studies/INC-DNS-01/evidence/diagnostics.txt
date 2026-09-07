@@ -1,0 +1,5 @@
+SYNTHETIC LAB EVIDENCE
+Client has a valid DHCP lease and default gateway
+Gateway and internal server IPs respond
+Resolve-DnsName for the internal zone fails
+Client received a retired DNS resolver through an old DHCP option

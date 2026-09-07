@@ -1,0 +1,74 @@
+[
+  {
+    "id": "CHG-2026-0042",
+    "district": "DIST-07",
+    "title": "Permit required instructional CDN hostname",
+    "type": "Filter",
+    "risk": "Low",
+    "status": "Implemented",
+    "window": "2026-08-26T18:00:00-05:00",
+    "rollback": "Remove exact FQDN exception",
+    "validation": [
+      "Staff app login succeeds",
+      "Student control policy remains enforced"
+    ],
+    "approvals": [
+      "District technology lead"
+    ]
+  },
+  {
+    "id": "CHG-2026-0043",
+    "district": "DIST-12",
+    "title": "Replace IDF uplink transceiver",
+    "type": "Network",
+    "risk": "Medium",
+    "status": "Completed",
+    "window": "2026-08-27T17:30:00-05:00",
+    "rollback": "Reinstall validated spare optic",
+    "validation": [
+      "CRC counter stable",
+      "No flap for 30 min",
+      "Affected VLANs reachable"
+    ],
+    "approvals": [
+      "Regional network lead",
+      "District technology lead"
+    ]
+  },
+  {
+    "id": "CHG-2026-0044",
+    "district": "DIST-19",
+    "title": "Correct STUDENT to MGMT ACL ordering",
+    "type": "Security",
+    "risk": "High",
+    "status": "Completed",
+    "window": "2026-08-28T19:00:00-05:00",
+    "rollback": "Restore signed pre-change ACL snapshot",
+    "validation": [
+      "STUDENT to MGMT denied",
+      "MGMT to infrastructure allowed",
+      "Student DNS/HTTPS operational"
+    ],
+    "approvals": [
+      "Network security lead",
+      "District technology lead"
+    ]
+  },
+  {
+    "id": "CHG-2026-0045",
+    "district": "DIST-22",
+    "title": "Adjust DHCP helper for new student scope",
+    "type": "Network",
+    "risk": "Medium",
+    "status": "Planned",
+    "window": "2026-09-03T18:00:00-05:00",
+    "rollback": "Restore prior SVI helper list",
+    "validation": [
+      "New clients receive 10.22.20.0/23 leases",
+      "STAFF scope unaffected"
+    ],
+    "approvals": [
+      "Regional network lead"
+    ]
+  }
+]

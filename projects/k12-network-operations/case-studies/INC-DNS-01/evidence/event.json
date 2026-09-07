@@ -1,0 +1,13 @@
+{
+  "synthetic": true,
+  "case": "INC-DNS-01",
+  "severity": "P3",
+  "district": "DIST-01",
+  "facts": [
+    "Client has a valid DHCP lease and default gateway",
+    "Gateway and internal server IPs respond",
+    "Resolve-DnsName for the internal zone fails",
+    "Client received a retired DNS resolver through an old DHCP option"
+  ],
+  "root_cause": "DHCP-provided DNS configuration referenced a retired resolver."
+}

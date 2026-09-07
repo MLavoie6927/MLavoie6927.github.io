@@ -1,0 +1,12 @@
+SYNTHETIC LAB EVIDENCE — INC-FILTER-01
+
+Resolve-DnsName learning-example.test        PASS
+Test-NetConnection learning-example.test 443 PASS
+Resolve-DnsName auth.learning-example.test   PASS
+Test-NetConnection auth.learning-example.test 443 PASS
+Resolve-DnsName api.learning-example.test    PASS
+TCP 443 api.learning-example.test            PASS
+Browser request through managed filter       BLOCK
+
+Interpretation:
+Network path is healthy. Failure occurs at policy enforcement for a specific application dependency.

@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "case": "INC-WIFI-01",
+  "severity": "P3",
+  "district": "DIST-14",
+  "facts": [
+    "WAN utilization remains normal",
+    "Wired loss is below 0.2%",
+    "Affected AP shows channel utilization above 85%",
+    "Neighboring APs share overlapping 5 GHz channel",
+    "Client RSSI is acceptable but retries are elevated"
+  ],
+  "root_cause": "RF contention and excessive retries in the classroom coverage cell."
+}

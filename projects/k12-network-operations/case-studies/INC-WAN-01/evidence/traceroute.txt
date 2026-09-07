@@ -1,0 +1,11 @@
+SYNTHETIC LAB EVIDENCE — INC-WAN-01
+Destination: 203.0.113.80
+
+ 1  10.2.10.1       <1 ms   DIST-02 L3 core
+ 2  10.2.254.1       1 ms   DIST-02 edge
+ 3  198.51.100.9      4 ms   provider handoff
+ 4  *                  *     timeout
+ 5  *                  *     timeout
+ 6  *                  *     timeout
+
+Same boundary observed from STAFF and STUDENT test clients.

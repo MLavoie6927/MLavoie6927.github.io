@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "device": "DIST-02-EDGE-01",
+  "timestamp": "2026-09-02T10:03:08-07:00",
+  "metric": "wan_reachability",
+  "state": "critical",
+  "interface_state": "up",
+  "interface_utilization_pct": 3.2,
+  "packet_loss_external_pct": 100.0,
+  "local_gateway_reachability": true
+}

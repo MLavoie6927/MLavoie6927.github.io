@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "case": "INC-INTUNE-01",
+  "severity": "P3",
+  "district": "DIST-25",
+  "facts": [
+    "DNS/TCP/TLS paths to Microsoft endpoints succeed",
+    "User authentication succeeds",
+    "Device is Entra joined",
+    "Intune last check-in is stale",
+    "Conditional Access denies because device compliance is unknown"
+  ],
+  "root_cause": "Device compliance state was stale because MDM check-in had not completed."
+}

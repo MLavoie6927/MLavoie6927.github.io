@@ -1,0 +1,9 @@
+SYNTHETIC CONFIGURATION SNAPSHOT — BEFORE
+
+ip access-list extended STUDENT-IN
+ 10 permit ip 10.2.20.0 0.0.1.255 10.2.40.0 0.0.0.255
+ 20 deny   ip 10.2.20.0 0.0.1.255 10.2.40.0 0.0.0.255 log
+ 30 permit udp 10.2.20.0 0.0.1.255 host 10.2.30.10 eq domain
+ 40 permit tcp 10.2.20.0 0.0.1.255 any eq 443
+
+Finding: sequence 10 permits the exact management subnet before the intended deny.

@@ -1,0 +1,7 @@
+district_id,site,role,device_or_service,management
+DIST-01,High School,core,Layer3-Core-Switch,SNMPv3
+DIST-01,High School,identity,AD-DNS-01,Windows Server
+DIST-01,High School,security,Edge-Firewall,Central Logging
+DIST-01,Elementary,access,IDF-Switch-01,SNMPv3
+DIST-02,Middle School,endpoint,Windows-11-Lab,Intune
+DIST-02,Middle School,endpoint,ChromeOS-Fleet,Google Admin

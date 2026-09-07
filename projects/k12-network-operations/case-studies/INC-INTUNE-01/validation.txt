@@ -1,0 +1,4 @@
+SYNTHETIC VALIDATION
+Root cause: Device compliance state was stale because MDM check-in had not completed.
+Action: Restore Intune check-in, re-evaluate compliance, and validate Microsoft 365 access without weakening Conditional Access.
+Result: PASS

@@ -1,0 +1,16 @@
+SYNTHETIC DEVICE OUTPUT — DIST-02 EDGE
+
+interface GigabitEthernet0/0
+ description WAN_TO_REGIONAL_PROVIDER
+ line protocol: up
+ physical state: up
+ input errors: 0
+ output errors: 0
+ CRC: 0
+ last flap: 18 days 04:12:09
+
+Routing:
+0.0.0.0/0 via 198.51.100.9, installed
+10.2.0.0/16 connected/internal summary
+
+Recent approved changes (24h): NONE

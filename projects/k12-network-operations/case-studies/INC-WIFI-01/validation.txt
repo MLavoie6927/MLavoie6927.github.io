@@ -1,0 +1,4 @@
+SYNTHETIC VALIDATION
+Root cause: RF contention and excessive retries in the classroom coverage cell.
+Action: Rebalance channel assignment, validate client roaming, and confirm retries/latency return to baseline.
+Result: PASS

@@ -1,0 +1,8 @@
+SYNTHETIC CONFIGURATION SNAPSHOT — AFTER
+
+ip access-list extended STUDENT-IN
+ 10 deny   ip 10.2.20.0 0.0.1.255 10.2.40.0 0.0.0.255 log
+ 20 permit udp 10.2.20.0 0.0.1.255 host 10.2.30.10 eq domain
+ 30 permit tcp 10.2.20.0 0.0.1.255 any eq 443
+
+MGMT administration is governed by a separate authorized management policy.

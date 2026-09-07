@@ -1,0 +1,17 @@
+# LAB REFERENCE ONLY. Not automatically applied.
+table inet k12_lab_filter {
+  chain input {
+    type filter hook input priority 0; policy drop;
+    ct state established,related accept
+    iif "lo" accept
+    ip saddr 10.7.40.0/24 tcp dport 22 accept
+  }
+
+  chain forward {
+    type filter hook forward priority 0; policy drop;
+    ct state established,related accept
+    ip saddr 10.7.10.0/24 tcp dport {80,443} accept
+    ip saddr 10.7.20.0/23 tcp dport {80,443} accept
+    ip saddr 10.7.50.0/24 ip daddr 10.0.0.0/8 drop
+  }
+}

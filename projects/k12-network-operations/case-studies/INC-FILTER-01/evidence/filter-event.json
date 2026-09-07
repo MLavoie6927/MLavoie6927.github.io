@@ -1,0 +1,11 @@
+{
+  "synthetic": true,
+  "timestamp": "2026-09-02T10:14:31-07:00",
+  "action": "BLOCK",
+  "user": "teacher.demo",
+  "group": "STAFF",
+  "host": "api.learning-example.test",
+  "category": "Newly-Observed",
+  "policy": "K12-Staff-Standard",
+  "reason": "Category policy"
+}

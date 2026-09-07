@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Marc Lavoie's Regional K-12 Network Operations Engineering portfolio project: a synthetic 35-district digital twin with incident response, routing, identity, filtering, configuration assurance, capacity engineering, and evidence-driven escalation.">
+  <meta name="theme-color" content="#041017">
+  <meta property="og:title" content="Regional K-12 Network Operations Engineering | Marc Lavoie">
+  <meta property="og:description" content="Interactive regional operations engineering case study with a 35-district digital twin, six evidence-rich investigations, configuration assurance, capacity forecasting, and an operator console.">
+  <meta property="og:image" content="assets/previews/k12-ops-v6-social.png">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>Regional K-12 Network Operations Engineering | Marc Lavoie</title>
+  <link rel="icon" href="assets/portfolio/hero-network.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="portfolio/v6.css?v=6.1">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to project</a>
+<div class="page-grid" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a class="brand" href="https://mlavoie6927.github.io/#network-engineering" aria-label="Return to Marc Lavoie's Network Engineering portfolio section">
+    <span class="brand-symbol brand-ml">ML</span>
+    <span><strong>Marc Lavoie</strong><small>← Return to cybersecurity portfolio</small></span>
+  </a>
+  <nav aria-label="Project navigation">
+    <a href="#mission">Mission</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#casebook">Casebook</a>
+    <a href="#systems">Engineering</a>
+    <a href="#proof">Proof</a>
+  </nav>
+  <a class="header-cta" href="dashboard/index.html">Launch Operations Center <span>↗</span></a>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-led"></span> FEATURED OPERATIONS ENGINEERING PROJECT</p>
+    <h1>Regional K–12<br><span>Network Operations</span></h1>
+    <p class="hero-lede">A safe, static, evidence-driven <strong>35-district digital twin</strong> built to demonstrate how I isolate service failures across endpoint, identity, LAN, security, WAN, cloud, and provider boundaries—then turn the result into a controlled change, defensible escalation, and verified recovery.</p>
+    <div class="hero-actions">
+      <a class="button primary" href="dashboard/index.html">Enter Operations Center</a>
+      <a class="button secondary" href="#casebook">Inspect investigations</a>
+    </div>
+    <div class="truth-boundary" role="note">
+      <strong>Portfolio truth boundary</strong>
+      <span>35 fictional districts</span><span>synthetic telemetry</span><span>real troubleshooting logic</span><span>no production access</span>
+    </div>
+  </div>
+
+  <div class="hero-console" aria-label="Interactive regional operations preview">
+    <div class="console-topline">
+      <div><span>REGIONAL DIGITAL TWIN</span><strong id="heroState">Normal operations</strong></div>
+      <div class="live-clock" id="heroClock">--:--:--</div>
+    </div>
+    <div class="scenario-switcher" role="group" aria-label="Simulation scenario">
+      <button class="active" data-sim="normal">Normal</button>
+      <button data-sim="wan">WAN</button>
+      <button data-sim="security">Security</button>
+      <button data-sim="filter">Filter</button>
+      <button data-sim="identity">Identity</button>
+      <button data-sim="wireless">Wireless</button>
+    </div>
+    <div class="hero-metrics">
+      <article><span>Regional health</span><strong id="heroHealth">97%</strong><small id="heroHealthNote">Within operating baseline</small></article>
+      <article><span>Open P1 / P2</span><strong id="heroPriority">0 / 1</strong><small id="heroIncidentNote">One provider follow-up</small></article>
+      <article><span>WAN utilization</span><strong id="heroWan">46%</strong><small id="heroWanNote">Regional aggregate</small></article>
+      <article><span>Packet loss</span><strong id="heroLoss">0.4%</strong><small id="heroLossNote">Within threshold</small></article>
+    </div>
+    <div class="twin-shell">
+      <svg id="heroTwin" viewBox="0 0 760 390" role="img" aria-label="Interactive 35-district regional network digital twin"></svg>
+      <div class="twin-legend"><span><i class="ok"></i>healthy</span><span><i class="warn"></i>degraded</span><span><i class="critical"></i>incident</span></div>
+    </div>
+    <div class="scenario-event"><span id="heroEventId">EVT-BASELINE</span><strong id="heroEventTitle">Regional services operating normally</strong><p id="heroEventText">Telemetry, identity, filtering, and upstream connectivity are within the synthetic baseline.</p></div>
+  </div>
+</section>
+
+<section class="technology-rail" aria-label="Technology coverage">
+  <span>Windows 11</span><span>Windows Server</span><span>Linux</span><span>ChromeOS</span><span>AD DS</span><span>Entra ID</span><span>Intune</span><span>Microsoft 365</span><span>Google Workspace</span><span>VLAN / OSPF / BGP</span><span>Firewall & Filtering</span><span>SNMPv3</span><span>PowerShell</span><span>Python</span>
+</section>
+
+<section class="section mission" id="mission">
+  <div class="section-heading split">
+    <div><p class="eyebrow">01 · OPERATOR MISSION</p><h2>A support ticket is only the symptom.<br><span>The job is proving where known-good behavior stops.</span></h2></div>
+    <p>The project is deliberately organized around an operator workflow rather than a technology checklist. Each investigation moves from user impact to fault boundary, action, validation, and evidence.</p>
+  </div>
+  <div class="mission-board">
+    <ol class="mission-steps">
+      <li><span>01</span><div><strong>Establish scope</strong><p>One user, one classroom, one building, one district, or the region?</p></div><i>IMPACT</i></li>
+      <li><span>02</span><div><strong>Prove the local path</strong><p>Endpoint → DHCP → DNS → gateway → VLAN → local service.</p></div><i>LOCAL</i></li>
+      <li><span>03</span><div><strong>Cross trust boundaries</strong><p>Firewall → filter → WAN → provider → identity/cloud dependency.</p></div><i>PATH</i></li>
+      <li><span>04</span><div><strong>Collect evidence</strong><p>Timestamps, source/destination, interface state, logs, route and policy context.</p></div><i>PROOF</i></li>
+      <li><span>05</span><div><strong>Change or escalate</strong><p>Use the narrowest controlled action at the proven fault domain.</p></div><i>ACTION</i></li>
+      <li><span>06</span><div><strong>Verify both directions</strong><p>Confirm the intended service works and security controls still deny what they should.</p></div><i>VERIFY</i></li>
+    </ol>
+    <aside class="mission-principle">
+      <p class="eyebrow">DECISION RULE</p>
+      <blockquote>Do not change the network because a user says “the network is down.” Change a control only after the evidence identifies that control as the failed boundary.</blockquote>
+      <div class="principle-chain"><span>symptom</span><b>→</b><span>scope</span><b>→</b><span>evidence</span><b>→</b><span>fault domain</span><b>→</b><span>verification</span></div>
+    </aside>
+  </div>
+</section>
+
+<section class="section architecture" id="architecture">
+  <div class="section-heading">
+    <p class="eyebrow">02 · SERVICE ARCHITECTURE</p>
+    <h2>One instructional application can depend on seven operational layers.</h2>
+    <p>The architecture view is intentionally service-centric. It shows why a web application failure may originate in endpoint state, identity, DNS, a local VLAN, filter policy, WAN transport, or the SaaS provider itself.</p>
+  </div>
+  <div class="service-path" aria-label="End-to-end service path">
+    <article><span>01</span><i>DEVICE</i><strong>Windows / ChromeOS</strong><small>client state · browser · certificate</small></article>
+    <b>→</b><article><span>02</span><i>IDENTITY</i><strong>AD / Entra / Google</strong><small>account · MFA · compliance</small></article>
+    <b>→</b><article><span>03</span><i>LAN</i><strong>Access / IDF / MDF</strong><small>VLAN · DHCP · DNS · gateway</small></article>
+    <b>→</b><article><span>04</span><i>SECURITY</i><strong>Firewall / Filter</strong><small>ACL · TLS · categories · FQDNs</small></article>
+    <b>→</b><article><span>05</span><i>WAN</i><strong>District / K-20</strong><small>route · circuit · loss · latency</small></article>
+    <b>→</b><article><span>06</span><i>CLOUD</i><strong>M365 / Google / SaaS</strong><small>provider health · dependencies</small></article>
+  </div>
+  <div class="architecture-showcase">
+    <figure><img src="assets/portfolio/architecture-stack.svg" alt="Regional K-12 service architecture"><figcaption><strong>End-to-end service architecture</strong><span>Endpoint, identity, LAN, security, WAN and cloud dependencies.</span></figcaption></figure>
+    <div class="architecture-ledger">
+      <article><span>FAULT DOMAIN</span><strong>Local network</strong><p>DHCP leases, DNS resolution, switching, VLAN assignment, gateways, routing, IDF/MDF uplinks.</p></article>
+      <article><span>FAULT DOMAIN</span><strong>Security edge</strong><p>Stateful firewall, segmentation, TLS inspection, category filtering, required CDN/API dependencies.</p></article>
+      <article><span>FAULT DOMAIN</span><strong>Identity / cloud</strong><p>AD, Entra, Intune compliance, Conditional Access, Google identity, shared-resource policy.</p></article>
+      <article><span>FAULT DOMAIN</span><strong>Provider / SaaS</strong><p>District circuit, upstream education network, external DNS path, cloud-provider health and escalation.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section casebook" id="casebook">
+  <div class="section-heading split">
+    <div><p class="eyebrow">03 · EVIDENCE CASEBOOK</p><h2>Six investigations. Raw artifacts included.</h2></div>
+    <p>Select a case to inspect the symptom, reasoning path, root fault domain, and the actual synthetic evidence files included in the repository.</p>
+  </div>
+  <div class="casebook-shell">
+    <div class="case-tabs" id="caseTabs" role="tablist" aria-label="Featured investigations"></div>
+    <article class="case-stage">
+      <header><div><span id="caseId" class="eyebrow">INC-WAN-01</span><h3 id="caseTitle">WAN / provider boundary outage</h3></div><span id="caseSeverity" class="severity">P2</span></header>
+      <p id="caseSummary"></p>
+      <div class="case-grid">
+        <section><span>INVESTIGATION PATH</span><ol id="caseActions"></ol></section>
+        <section><span>FAULT DOMAIN</span><strong id="caseFault"></strong><p id="caseEscalation"></p></section>
+      </div>
+      <div class="evidence-browser">
+        <div class="evidence-files" id="caseFiles"></div>
+        <pre id="caseEvidence">Select an evidence artifact.</pre>
+      </div>
+      <footer><a id="caseFolderLink" href="case-studies/INC-WAN-01/README.md">Open full case folder →</a><span id="caseFileCount"></span></footer>
+    </article>
+  </div>
+</section>
+
+<section class="section systems" id="systems">
+  <div class="section-heading"><p class="eyebrow">04 · ENGINEERING SYSTEMS</p><h2>Support engineering plus assurance, forecasting, and control.</h2></div>
+  <div class="system-grid">
+    <article><span>NETWORK</span><strong>Routed campus & WAN</strong><p>VLANs, SVIs, ACLs, DHCP relay, OSPF/BGP concepts, MDF/IDF paths, WAN handoffs and NOC evidence.</p><div><i>routing</i><i>switching</i><i>SNMPv3</i></div></article>
+    <article><span>IDENTITY</span><strong>AD → Entra → Intune</strong><p>Domain/DNS validation, device registration, MDM state, Conditional Access and Microsoft 365 dependencies.</p><div><i>AD DS</i><i>Entra</i><i>Intune</i></div></article>
+    <article><span>GOOGLE</span><strong>Workspace & ChromeOS</strong><p>Managed device state, organizational units, sharing policy, browser controls and Google identity.</p><div><i>ChromeOS</i><i>Drive</i><i>Admin</i></div></article>
+    <article><span>SECURITY</span><strong>Least-privilege service access</strong><p>Student/staff/guest segmentation, web-filter exceptions, firewall policy, privileged access and negative testing.</p><div><i>ACL</i><i>filter</i><i>firewall</i></div></article>
+    <article><span>ASSURANCE</span><strong>Configuration drift</strong><p>Machine-readable controls compare expected and observed device configuration with severity-ranked deviations.</p><div><i>baseline</i><i>drift</i><i>CI</i></div></article>
+    <article><span>CAPACITY</span><strong>95th-percentile planning</strong><p>Eight months of synthetic utilization history drives transparent trend and upgrade-watch decisions.</p><div><i>P95</i><i>forecast</i><i>WAN</i></div></article>
+  </div>
+</section>
+
+<section class="section operator-terminal" id="automation">
+  <div class="section-heading split"><div><p class="eyebrow">05 · AUTOMATION</p><h2>The repository can answer operational questions, not just display them.</h2></div><p>The Python CLI and browser terminal expose the same mental model: validate inventory, triage incidents, inspect dependencies, score change readiness, identify drift, and package evidence.</p></div>
+  <div class="terminal-shell">
+    <div class="terminal-titlebar"><span></span><span></span><span></span><strong>K12 OPS · SAFE DEMO TERMINAL</strong><small>static simulation</small></div>
+    <div class="terminal-screen" id="terminalOutput"><div><i>[READY]</i> Type <b>help</b> to inspect the operations model.</div></div>
+    <form id="terminalForm"><label for="terminalInput">operator@k12-ops:~$</label><input id="terminalInput" autocomplete="off" spellcheck="false" maxlength="120" placeholder="status"><button type="submit">Run</button></form>
+    <div class="terminal-hints"><button data-command="status">status</button><button data-command="incidents">incidents</button><button data-command="district DIST-07">district DIST-07</button><button data-command="trace INC-WAN-01">trace INC-WAN-01</button><button data-command="drift">drift</button><button data-command="sla">sla</button></div>
+  </div>
+</section>
+
+<section class="section proof" id="proof">
+  <div class="section-heading split"><div><p class="eyebrow">06 · VALIDATION & CREDIBILITY</p><h2>Portfolio quality should survive inspection.</h2></div><p>The strongest claim in this project is not “I know networking.” It is that the repository connects source data, operational reasoning, UI state, validation, and evidence in a reproducible way.</p></div>
+  <div class="proof-grid">
+    <article><span class="pass">PASS</span><strong>Automated model tests</strong><p>Inventory, triage, dependency, SLA, drift, change and capacity logic are exercised by unit tests.</p><small>Python unittest</small></article>
+    <article><span class="pass">PASS</span><strong>Static experience checks</strong><p>Required views, assets, evidence-rich cases and browser data exports are verified before packaging.</p><small>Portfolio validator</small></article>
+    <article><span class="pass">PASS</span><strong>JavaScript syntax</strong><p>The public landing page and operations center are syntax-checked with Node before release.</p><small>node --check</small></article>
+    <article><span class="safe">SAFE</span><strong>Simulation boundary</strong><p>No credentials, backend shell, production targets, repository write path, or external network requests are required.</p><small>GitHub Pages compatible</small></article>
+  </div>
+  <div class="proof-summary">
+    <div><strong>35</strong><span>districts</span></div><div><strong>70</strong><span>sites</span></div><div><strong>6</strong><span>evidence-rich cases</span></div><div><strong>20</strong><span>incident scenarios</span></div><div><strong>288</strong><span>telemetry samples</span></div><div><strong id="testCount">18+</strong><span>automated tests</span></div>
+  </div>
+</section>
+
+<section class="section launch">
+  <div><p class="eyebrow">INTERVIEW DEMO</p><h2>Run the regional operations shift.</h2><p>Start a guided mission, inject an incident, click through the district digital twin, inspect raw evidence, use the virtual terminal, and build the escalation handoff.</p></div>
+  <a class="button primary large" href="dashboard/index.html">Launch K12 Operations Center <span>↗</span></a>
+</section>
+</main>
+
+<footer>
+  <div><strong>K12 OPS · v6</strong><p>Regional K–12 Network Operations Engineering · synthetic portfolio environment.</p></div>
+  <div><span>Evidence-first</span><span>Static GitHub Pages</span><span>No production credentials</span><span>No external requests</span></div>
+</footer>
+
+<script src="portfolio/data.js?v=6.1"></script>
+<script src="portfolio/v6-data.js?v=6.1"></script>
+<script src="portfolio/v6.js?v=6.1"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "timestamp": "2026-09-02T11:22:18-07:00",
+  "source": "10.2.20.77",
+  "source_zone": "STUDENT",
+  "destination": "10.2.40.12",
+  "destination_zone": "MGMT",
+  "service": "HTTPS",
+  "observed": "allowed",
+  "expected": "denied",
+  "validation_scope": "single known management target"
+}
