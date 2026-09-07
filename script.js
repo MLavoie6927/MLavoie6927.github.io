@@ -11,7 +11,7 @@
   }
 
   ready(function () {
-    var mobileQuery = window.matchMedia("(max-width: 1880px)");
+    var mobileQuery = window.matchMedia("(max-width: 1120px)");
     var navToggle = document.querySelector(".nav-toggle");
     var navMenu = document.querySelector("#primary-menu");
     var navItems = Array.prototype.slice.call(document.querySelectorAll("#primary-menu a"));

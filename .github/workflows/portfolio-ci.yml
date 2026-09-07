@@ -1,0 +1,46 @@
+name: Validate Portfolio
+
+on:
+  push:
+    paths:
+      - "index.html"
+      - "styles.css"
+      - "script.js"
+      - "robots.txt"
+      - "sitemap.xml"
+      - "projects/operation-glass-meridian/**"
+      - "tools/validate_site.py"
+      - ".github/workflows/portfolio-ci.yml"
+  pull_request:
+    paths:
+      - "index.html"
+      - "styles.css"
+      - "script.js"
+      - "robots.txt"
+      - "sitemap.xml"
+      - "projects/operation-glass-meridian/**"
+      - "tools/validate_site.py"
+      - ".github/workflows/portfolio-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Validate site structure and boundaries
+        run: python tools/validate_site.py
+      - name: Validate JavaScript syntax
+        run: |
+          node --check script.js
+          node --check projects/operation-glass-meridian/glass-meridian.js
+          node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js

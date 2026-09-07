@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Marc Lavoie's Operation Glass Meridian: an interactive, synthetic all-source intelligence analysis lab for evidence evaluation, ACH, warning, collection management, red teaming, and executive briefing.">
+<meta name="theme-color" content="#07110f">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Operation Glass Meridian | Marc Lavoie">
+<meta property="og:description" content="An interactive all-source intelligence command lab built around evidence, competing hypotheses, warning, and decision support.">
+<meta property="og:url" content="https://mlavoie6927.github.io/projects/operation-glass-meridian/">
+<meta property="og:image" content="https://mlavoie6927.github.io/assets/hero%20background.png">
+<link rel="canonical" href="https://mlavoie6927.github.io/projects/operation-glass-meridian/">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<title>Operation Glass Meridian | Marc Lavoie</title>
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="glass-meridian.css?v=4.1">
+<link rel="stylesheet" href="project.css?v=4.1">
+</head>
+<body>
+<a class="gm-skip-link" href="#main-content">Skip to intelligence lab</a>
+<header class="gm-site-header">
+  <a class="gm-brand" href="../../#featured-projects" aria-label="Return to Marc Lavoie's portfolio">
+    <span class="gm-brand-mark" aria-hidden="true">ML</span>
+    <span><strong>Marc Lavoie</strong><small>Applied Intelligence Portfolio</small></span>
+  </a>
+  <nav aria-label="Project navigation">
+    <a href="#glass-meridian-lab">Lab</a>
+    <a href="README.md">Technical notes</a>
+    <a href="../../#featured-projects">Portfolio</a>
+  </nav>
+</header>
+<main id="main-content">
+<section id="glass-meridian-lab" class="gm-lab" aria-labelledby="gm-title">
+  <section class="gm-welcome" aria-labelledby="gm-welcome-title">
+    <div>
+      <span class="gm-label">Interactive case study | v4.1</span>
+      <h1 id="gm-welcome-title">A complete path from uncertain reporting to a defensible executive judgment.</h1>
+      <p>Review a fictional crisis, weigh contradictory evidence, challenge assumptions, identify warning indicators, task collection, and build a concise intelligence product. Progress stays only in this browser unless you export it.</p>
+    </div>
+    <div class="gm-welcome-actions" aria-label="Recommended starting points">
+      <button class="gm-btn gm-btn-primary" type="button" data-gm-view="stream">Start with intelligence</button>
+      <button class="gm-btn" type="button" data-gm-view="dashboard">Open dashboard</button>
+    </div>
+    <ol class="gm-start-steps" aria-label="Suggested workflow">
+      <li><strong>Review</strong><span>Open the 30 synthetic intelligence files.</span></li>
+      <li><strong>Evaluate</strong><span>Score source quality and diagnostic value.</span></li>
+      <li><strong>Challenge</strong><span>Test hypotheses, assumptions, and deception.</span></li>
+      <li><strong>Brief</strong><span>Record confidence, gaps, warning, and decisions.</span></li>
+    </ol>
+    <p class="gm-boundary"><strong>Portfolio truth boundary:</strong> This is a browser-only training simulation using fictional countries, synthetic reporting, and local browser storage. It has no backend, external data connection, operational intelligence access, or repository write path.</p>
+  </section>
+  <div class="gm-shell">
+    <header class="gm-hero">
+      <div class="gm-eyebrow">All-Source Intelligence Analysis · Synthetic Scenario</div>
+      <h2 id="gm-title">Operation Glass Meridian</h2>
+      <p class="gm-subtitle">Strategic Warning Under Uncertainty: The Norland–Estavia Crisis</p>
+
+      <div class="gm-mission-grid">
+        <article class="gm-mission-card">
+          <span class="gm-label">Priority Intelligence Question</span>
+          <p>What is the most likely strategic objective behind Norland's military, cyber, political, economic, diplomatic, and information activities toward Estavia during the next six months?</p>
+        </article>
+
+        <article class="gm-mission-card gm-countdown-card">
+          <span class="gm-label">Presidential Brief</span>
+          <div class="gm-clock" id="gm-clock">03:20:00</div>
+          <button class="gm-btn gm-btn-secondary" type="button" id="gm-toggle-clock">Start Simulation Clock</button>
+        </article>
+      </div>
+
+      <div class="gm-toolbar" role="toolbar" aria-label="Lab controls">
+        <button class="gm-btn gm-btn-primary" type="button" data-gm-view="dashboard">Dashboard</button>
+        <button class="gm-btn" type="button" data-gm-view="stream">Intelligence</button>
+        <button class="gm-btn" type="button" data-gm-view="evidence">Evidence Board</button>
+        <button class="gm-btn" type="button" data-gm-view="sources">Source Matrix</button>
+        <button class="gm-btn" type="button" data-gm-view="hypotheses">Hypotheses</button>
+        <button class="gm-btn" type="button" data-gm-view="ach">ACH</button>
+        <button class="gm-btn" type="button" data-gm-view="assumptions">Assumptions & Bias</button>
+        <button class="gm-btn" type="button" data-gm-view="deception">Deception / Red Team</button>
+        <button class="gm-btn" type="button" data-gm-view="timeline">Timeline</button>
+        <button class="gm-btn" type="button" data-gm-view="gaps">Collection</button>
+        <button class="gm-btn" type="button" data-gm-view="warning">Warning</button>
+        <button class="gm-btn" type="button" data-gm-view="futures">Alternative Futures</button>
+        <button class="gm-btn" type="button" data-gm-view="injects">Instructor Injects</button>
+        <button class="gm-btn" type="button" data-gm-view="assignment">Tradecraft Questions</button>
+        <button class="gm-btn" type="button" data-gm-view="paper">Paper Builder</button>
+        <button class="gm-btn" type="button" data-gm-view="research">Research Library</button>
+        <button class="gm-btn" type="button" data-gm-view="brief">Executive Brief</button>
+        <button class="gm-btn" type="button" data-gm-view="assessment">Final Assessment</button>
+        <button class="gm-btn" type="button" data-gm-view="decisionlog">Decision Log</button>
+        <button class="gm-btn" type="button" data-gm-view="quality">Quality Review</button>
+        <button class="gm-btn" type="button" id="gm-v4-export-json">Export JSON</button>
+        <button class="gm-btn" type="button" id="gm-v4-export-md">Export Markdown</button>
+        <button class="gm-btn" type="button" id="gm-v4-import">Import</button>
+        <button class="gm-btn" type="button" id="gm-v4-print">Print</button>
+        <button class="gm-btn" type="button" id="gm-reset">Reset Lab</button>
+        <input type="file" id="gm-v4-import-file" accept=".json,application/json" hidden>
+      </div>
+    </header>
+
+    <div class="gm-statusbar" aria-live="polite">
+      <div><strong id="gm-reviewed-count">0</strong>/30 reports reviewed</div>
+      <div><strong id="gm-classified-count">0</strong>/30 evidence items classified</div>
+      <div><strong id="gm-question-progress">0%</strong> assignment completion</div>
+      <div><strong id="gm-gap-count">0</strong> priority gaps</div>
+      <div><strong id="gm-confidence">Moderate</strong> analytic confidence</div>
+      <div><strong id="gm-readiness-score">0</strong>/100 briefing readiness</div>
+    </div>
+
+    <main class="gm-workspace">
+      <aside class="gm-sidebar">
+        <div class="gm-panel">
+          <h3>Competing Hypotheses</h3>
+          <div id="gm-mini-hypotheses" class="gm-mini-hypotheses"></div>
+        </div>
+
+        <div class="gm-panel">
+          <h3>Filter Intelligence</h3>
+          <label class="gm-field">
+            <span>Search</span>
+            <input id="gm-search" type="search" placeholder="fuel, cyber, deception..." autocomplete="off">
+          </label>
+          <label class="gm-field">
+            <span>Intelligence family</span>
+            <select id="gm-family-filter">
+              <option value="all">All families</option>
+            </select>
+          </label>
+          <label class="gm-field">
+            <span>Analytic effect</span>
+            <select id="gm-effect-filter">
+              <option value="all">All effects</option>
+              <option value="H1">Strengthens H1</option>
+              <option value="H2">Strengthens H2</option>
+              <option value="H3">Strengthens H3</option>
+              <option value="H4">Strengthens H4</option>
+              <option value="mixed">Mixed / dual-use</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="gm-panel">
+          <h3>Analyst Scratchpad</h3>
+          <textarea id="gm-scratchpad" rows="10" placeholder="Record assumptions, contradictions, source lineage, collection gaps..."></textarea>
+          <small>Saved locally in this browser.</small>
+        </div>
+      </aside>
+
+      <section class="gm-content">
+        <div class="gm-view is-active" id="gm-view-dashboard" data-gm-view-panel="dashboard">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Senior Analyst Workspace</span>
+              <h3>Operation Glass Meridian Dashboard</h3>
+            </div>
+            <p>Fuse reporting, test hypotheses, identify collection priorities, and prepare a defensible national-level assessment.</p>
+          </div>
+
+          <div class="gm-dashboard-grid">
+            <article class="gm-kpi-card">
+              <span class="gm-label">Reports Reviewed</span>
+              <strong id="gm-kpi-reviewed">0 / 30</strong>
+              <div class="gm-progress"><span id="gm-kpi-reviewed-bar"></span></div>
+            </article>
+            <article class="gm-kpi-card">
+              <span class="gm-label">Evidence Classified</span>
+              <strong id="gm-kpi-classified">0 / 30</strong>
+              <div class="gm-progress"><span id="gm-kpi-classified-bar"></span></div>
+            </article>
+            <article class="gm-kpi-card">
+              <span class="gm-label">Assignment Responses</span>
+              <strong id="gm-kpi-questions">0%</strong>
+              <div class="gm-progress"><span id="gm-kpi-questions-bar"></span></div>
+            </article>
+            <article class="gm-kpi-card">
+              <span class="gm-label">Briefing Readiness</span>
+              <strong id="gm-kpi-readiness">0 / 100</strong>
+              <div class="gm-progress"><span id="gm-kpi-readiness-bar"></span></div>
+            </article>
+          </div>
+
+
+          <section class="gm-workflow-strip" aria-label="Intelligence analysis workflow">
+            <div class="gm-workflow-step" data-v4-workflow="collect"><span>1</span><strong>Collect</strong><small>Review reporting</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="evaluate"><span>2</span><strong>Evaluate</strong><small>Source quality</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="analyze"><span>3</span><strong>Analyze</strong><small>ACH + assumptions</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="challenge"><span>4</span><strong>Challenge</strong><small>Red team</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="task"><span>5</span><strong>Task</strong><small>Collection gaps</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="warn"><span>6</span><strong>Warn</strong><small>Indicators</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="judge"><span>7</span><strong>Judge</strong><small>Probability</small></div>
+            <div class="gm-workflow-step" data-v4-workflow="brief"><span>8</span><strong>Brief</strong><small>Finished intelligence</small></div>
+          </section>
+
+          <div class="gm-dashboard-panels">
+            <article class="gm-panel">
+              <div class="gm-card-top">
+                <div>
+                  <span class="gm-label">Current Estimate</span>
+                  <h4>Hypothesis Ranking</h4>
+                </div>
+                <button class="gm-btn" type="button" data-gm-view="hypotheses">Adjust</button>
+              </div>
+              <div id="gm-dashboard-hypotheses"></div>
+            </article>
+
+            <article class="gm-panel">
+              <div class="gm-card-top">
+                <div>
+                  <span class="gm-label">Analytic Health</span>
+                  <h4>Outstanding Work</h4>
+                </div>
+              </div>
+              <ul id="gm-health-checklist" class="gm-health-checklist"></ul>
+            </article>
+
+            <article class="gm-panel gm-dashboard-wide">
+              <div class="gm-card-top">
+                <div>
+                  <span class="gm-label">Decision Support</span>
+                  <h4>Most Important Unresolved Questions</h4>
+                </div>
+                <button class="gm-btn" type="button" data-gm-view="gaps">Open Collection Planner</button>
+              </div>
+              <div id="gm-dashboard-gaps" class="gm-dashboard-gaps"></div>
+            </article>
+
+            <article class="gm-panel gm-dashboard-wide">
+              <div class="gm-card-top">
+                <div>
+                  <span class="gm-label">Warning Picture</span>
+                  <h4>Observed Escalation Indicators</h4>
+                </div>
+                <button class="gm-btn" type="button" data-gm-view="warning">Open Warning Board</button>
+              </div>
+              <div id="gm-dashboard-warning" class="gm-warning-summary"></div>
+            </article>
+
+            <article class="gm-panel">
+              <div class="gm-card-top"><div><span class="gm-label">Priority Evidence</span><h4>Pinned Intelligence</h4></div><button class="gm-btn" type="button" data-gm-view="evidence">Open Board</button></div>
+              <div id="gm-v4-dashboard-pinned" class="gm-v4-mini-list"></div>
+            </article>
+
+            <article class="gm-panel">
+              <div class="gm-card-top"><div><span class="gm-label">Analytic Integrity</span><h4>Tradecraft Flags</h4></div><button class="gm-btn" type="button" data-gm-view="quality">Review</button></div>
+              <div id="gm-v4-dashboard-quality" class="gm-v4-mini-list"></div>
+            </article>
+
+            <article class="gm-panel gm-dashboard-wide">
+              <div class="gm-card-top"><div><span class="gm-label">Workspace Integrity</span><h4>Local Autosave</h4></div><span id="gm-v4-save-status" class="gm-v4-save-status">Saved locally</span></div>
+              <p class="gm-muted-text">All work remains in this browser unless you explicitly export it. JSON export provides a portable backup that can later be imported.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="gm-view" id="gm-view-stream" data-gm-view-panel="stream">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Live Case File</span>
+              <h3>Thirty Intelligence Streams</h3>
+            </div>
+            <p>Open a report, evaluate it, classify the evidence, and record whether it changes your assessment.</p>
+          </div>
+          <div id="gm-report-grid" class="gm-report-grid"></div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-evidence" data-gm-view-panel="evidence">
+          <div class="gm-section-heading"><div><span class="gm-label">Diagnostic Evidence Analysis</span><h3>Evidence Board</h3></div><p>Prioritize reporting by decision relevance, analytic disposition, and deception concern rather than by volume.</p></div>
+          <div class="gm-table-wrap">
+            <table class="gm-v4-evidence-table"><thead><tr><th>Pin</th><th>File</th><th>INT</th><th>Evidence</th><th>Relevance</th><th>Disposition</th><th>Analyst rationale</th></tr></thead><tbody id="gm-v4-evidence-body"></tbody></table>
+          </div>
+        </div>
+
+        <div class="gm-view" id="gm-view-sources" data-gm-view-panel="sources">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Quality of Information Check</span>
+              <h3>Source Evaluation Matrix</h3>
+            </div>
+            <p>Evaluate reliability, access, corroboration, lineage, timeliness, deception risk, and diagnostic value for every intelligence file.</p>
+          </div>
+          <div class="gm-table-wrap">
+            <table class="gm-source-table">
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>INT</th>
+                  <th>Reliability</th>
+                  <th>Access</th>
+                  <th>Corroboration</th>
+                  <th>Lineage</th>
+                  <th>Timeliness</th>
+                  <th>Deception Risk</th>
+                  <th>Diagnostic Value</th>
+                </tr>
+              </thead>
+              <tbody id="gm-source-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="gm-view" id="gm-view-hypotheses" data-gm-view-panel="hypotheses">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Analytic Judgment</span>
+              <h3>Probability Assessment</h3>
+            </div>
+            <p>Adjust the four hypotheses. The total must equal 100% before the assessment can be locked.</p>
+          </div>
+          <div id="gm-hypothesis-editor" class="gm-hypothesis-editor"></div>
+          <div class="gm-total-row">
+            <strong>Total: <span id="gm-prob-total">100</span>%</strong>
+            <button class="gm-btn gm-btn-primary" id="gm-lock-assessment" type="button">Lock Current Assessment</button>
+          </div>
+          <div id="gm-assessment-history" class="gm-history"></div>
+        </div>
+
+        <div class="gm-view" id="gm-view-ach" data-gm-view-panel="ach">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Structured Analytic Technique</span>
+              <h3>Analysis of Competing Hypotheses</h3>
+            </div>
+            <p>Rate each item by consistency with each hypothesis. Focus on inconsistencies, not raw support counts.</p>
+          </div>
+          <div class="gm-table-wrap">
+            <table class="gm-ach-table">
+              <thead>
+                <tr>
+                  <th>Evidence</th>
+                  <th>Weight</th>
+                  <th>H1</th>
+                  <th>H2</th>
+                  <th>H3</th>
+                  <th>H4</th>
+                </tr>
+              </thead>
+              <tbody id="gm-ach-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-assumptions" data-gm-view-panel="assumptions">
+          <div class="gm-section-heading"><div><span class="gm-label">Key Assumptions Check</span><h3>Assumptions & Cognitive Bias</h3></div><p>Expose hidden premises, test consequences if they fail, and document how bias could distort analysis.</p></div>
+          <div class="gm-v4-two-col">
+            <section><div class="gm-v4-tool-head"><div><span class="gm-label">Structured Analytic Technique</span><h4>Assumption Register</h4></div><button class="gm-btn gm-btn-primary" id="gm-v4-add-assumption" type="button">Add Assumption</button></div><div id="gm-v4-assumptions"></div></section>
+            <section><div class="gm-v4-tool-head"><div><span class="gm-label">Analytic Risk</span><h4>Bias Register</h4></div></div><div id="gm-v4-biases"></div></section>
+          </div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-deception" data-gm-view-panel="deception">
+          <div class="gm-section-heading"><div><span class="gm-label">Counterdeception</span><h3>Deception & Red-Team Laboratory</h3></div><p>Analyze the adversary's incentives to expose, conceal, simulate, and distort indicators—and then attack your own principal judgment.</p></div>
+          <div class="gm-v4-redteam-grid">
+            <article class="gm-panel"><span class="gm-label">Adversary Goal A</span><h4>Make invasion appear imminent</h4><textarea data-v4-redteam="falseInvasion" rows="10" placeholder="What would Norland intentionally expose, amplify, or fabricate?"></textarea></article>
+            <article class="gm-panel"><span class="gm-label">Adversary Goal B</span><h4>Hide a real operation inside an exercise</h4><textarea data-v4-redteam="hiddenOperation" rows="10" placeholder="What would Norland conceal, normalize, compartment, or misattribute?"></textarea></article>
+            <article class="gm-panel"><span class="gm-label">Costly to Fake</span><h4>Operationally expensive indicators</h4><textarea data-v4-redteam="costly" rows="8"></textarea></article>
+            <article class="gm-panel"><span class="gm-label">Hard to Conceal</span><h4>Observable enabling activity</h4><textarea data-v4-redteam="hardToHide" rows="8"></textarea></article>
+            <article class="gm-panel gm-v4-wide"><span class="gm-label">Devil's Advocate / Red Team</span><h4>Construct the strongest case that your preferred hypothesis is wrong</h4><textarea data-v4-redteam="challenge" rows="10"></textarea></article>
+          </div>
+        </div>
+
+        <div class="gm-view" id="gm-view-timeline" data-gm-view-panel="timeline">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Timeline Analysis</span>
+              <h3>Crisis Development Timeline</h3>
+            </div>
+            <p>Sequence evidence to distinguish long-term preparation, recent escalation, and indicators that may only look important because they were discovered late.</p>
+          </div>
+          <div id="gm-timeline-list" class="gm-timeline"></div>
+        </div>
+
+        <div class="gm-view" id="gm-view-gaps" data-gm-view-panel="gaps">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Collection Management</span>
+              <h3>Intelligence Gaps & Collection Plan</h3>
+            </div>
+            <p>Prioritize gaps by decision value, then identify the best intelligence discipline, observable indicator, collection risk, and deception risk.</p>
+          </div>
+
+          <div class="gm-gap-toolbar">
+            <button class="gm-btn gm-btn-primary" type="button" id="gm-add-gap">Add Intelligence Gap</button>
+            <span class="gm-muted-text">High-priority gaps should be those capable of changing a policy decision.</span>
+          </div>
+
+          <div id="gm-gap-list" class="gm-gap-list"></div>
+        </div>
+
+        <div class="gm-view" id="gm-view-warning" data-gm-view-panel="warning">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Indicators & Warning</span>
+              <h3>Escalation Monitor</h3>
+            </div>
+            <p>Mark indicators as observed. The panel emphasizes clusters across independent intelligence disciplines.</p>
+          </div>
+          <div id="gm-warning-board" class="gm-warning-board"></div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-paper" data-gm-view-panel="paper">
+          <div class="gm-section-heading"><div><span class="gm-label">4,000–6,000 Word Analytic Product</span><h3>Assessment Paper Builder</h3></div><p>Draft a long-form assessment in the same workspace as the intelligence analysis. Section and total word counts update automatically.</p></div>
+          <div class="gm-v4-paper-meter"><div><strong id="gm-v4-paper-total">0 words</strong><span>Target: 4,000–6,000</span></div><div class="gm-progress"><span id="gm-v4-paper-bar"></span></div></div>
+          <div id="gm-v4-paper-sections"></div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-research" data-gm-view-panel="research">
+          <div class="gm-section-heading"><div><span class="gm-label">Academic Requirements</span><h3>Research & APA Source Library</h3></div><p>Track the minimum twelve scholarly or professional sources and record exactly how each supports the intelligence paper.</p></div>
+          <div class="gm-v4-tool-head"><div><strong id="gm-v4-research-count">0 / 12 sources</strong><div class="gm-progress"><span id="gm-v4-research-bar"></span></div></div><button class="gm-btn gm-btn-primary" id="gm-v4-add-source" type="button">Add Academic Source</button></div>
+          <div id="gm-v4-research-list"></div>
+        </div>
+
+        <div class="gm-view" id="gm-view-brief" data-gm-view-panel="brief">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Decision Support</span>
+              <h3>Three-Minute Executive Brief</h3>
+            </div>
+            <p>Prepare a concise, defensible briefing for the president.</p>
+          </div>
+          <form id="gm-brief-form" class="gm-brief-form">
+            <label><span>What do we assess?</span><textarea data-brief="assessment" rows="4"></textarea></label>
+            <label><span>Why?</span><textarea data-brief="why" rows="5"></textarea></label>
+            <label><span>How confident are we?</span>
+              <select data-brief="confidence">
+                <option>Low</option>
+                <option selected>Moderate</option>
+                <option>High</option>
+              </select>
+            </label>
+            <label><span>Strongest alternative?</span><textarea data-brief="alternative" rows="3"></textarea></label>
+            <label><span>What do we not know?</span><textarea data-brief="unknowns" rows="4"></textarea></label>
+            <label><span>What would change the judgment?</span><textarea data-brief="change" rows="4"></textarea></label>
+            <div class="gm-brief-footer">
+              <span id="gm-word-count">0 / 500 words</span>
+              <button class="gm-btn gm-btn-primary" type="button" id="gm-copy-brief">Copy Brief</button>
+            </div>
+          </form>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-futures" data-gm-view-panel="futures">
+          <div class="gm-section-heading"><div><span class="gm-label">Scenario Analysis</span><h3>Alternative Futures & Cone of Plausibility</h3></div><p>Separate the most likely future from dangerous alternatives and identify signposts that would move probability between pathways.</p></div>
+          <div id="gm-v4-futures" class="gm-v4-futures-grid"></div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-injects" data-gm-view-panel="injects">
+          <div class="gm-section-heading"><div><span class="gm-label">Optional Exercise Extension</span><h3>Instructor Intelligence Injects</h3></div><p>Release six additional reports sequentially to test whether judgments update when new evidence cuts across the existing assessment.</p></div>
+          <div class="gm-v4-inject-controls"><button class="gm-btn gm-btn-primary" id="gm-v4-release-inject" type="button">Release Next Inject</button><button class="gm-btn" id="gm-v4-reset-injects" type="button">Reset Injects</button><span id="gm-v4-inject-progress" class="gm-muted-text">0 / 6 released</span></div>
+          <div id="gm-v4-injects"></div>
+        </div>
+
+        <div class="gm-view" id="gm-view-assignment" data-gm-view-panel="assignment">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Applied Intelligence Tradecraft</span>
+              <h3>Graduate Assignment Questions</h3>
+            </div>
+            <p>Use these questions to turn the thirty intelligence files into a disciplined graduate-level intelligence assessment.</p>
+          </div>
+
+          <article class="gm-assignment-intro gm-panel">
+            <span class="gm-label">Strategic Warning and the Applied Intelligence Cycle</span>
+            <h4>Assessing an Emerging Hybrid Threat</h4>
+            <p><strong>Priority Intelligence Question:</strong> What is the most likely strategic objective behind Norland's current military, cyber, information, and diplomatic activities toward Estavia during the next six months?</p>
+            <p>Your assessment must distinguish between what is <strong>known, assessed, assumed, uncertain, and currently unknowable</strong>.</p>
+          </article>
+
+
+          <div class="gm-assignment-progress">
+            <div>
+              <strong id="gm-assignment-completion-text">0% complete</strong>
+              <span>Responses save automatically in this browser.</span>
+            </div>
+            <div class="gm-progress"><span id="gm-assignment-completion-bar"></span></div>
+          </div>
+
+          <div class="gm-question-grid">
+            <article class="gm-question-card">
+              <span class="gm-question-number">01</span>
+              <h4>Executive Intelligence Assessment</h4>
+              <ol>
+                <li>What is your principal intelligence judgment?</li>
+                <li>What calibrated probability term best describes that judgment?</li>
+                <li>What is your confidence level: low, moderate, or high?</li>
+                <li>What are the two to four strongest supporting judgments?</li>
+                <li>What is the strongest alternative explanation?</li>
+                <li>What indicators would most likely change the assessment?</li>
+                <li>Can a senior policymaker understand the assessment without reading the full paper?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="01" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">02</span>
+              <h4>Intelligence Question and Decision Context</h4>
+              <ol>
+                <li>What decision do policymakers actually need to make?</li>
+                <li>Why does this intelligence question matter now?</li>
+                <li>What is the relevant six-month time horizon?</li>
+                <li>What can intelligence reasonably determine?</li>
+                <li>What can intelligence not determine with certainty?</li>
+                <li>Are you answering the Priority Intelligence Question rather than a more convenient question?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="02" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">03</span>
+              <h4>Intelligence Environment</h4>
+              <ol>
+                <li>Which political developments are directly relevant to Norland's strategic objective?</li>
+                <li>Which military developments materially change Norland's operational capability?</li>
+                <li>What cyber activity represents espionage, pre-positioning, coercion, or attack preparation?</li>
+                <li>What economic or logistical changes support sustained operations?</li>
+                <li>What geographic factors shape likely routes or limited territorial objectives?</li>
+                <li>How is diplomacy being used alongside military pressure?</li>
+                <li>How is the information environment being shaped for coercion, justification, or deception?</li>
+                <li>What background information is interesting but not decision-relevant?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="03" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">04</span>
+              <h4>Collection and Source Evaluation</h4>
+              <ol>
+                <li>Which HUMINT sources have access to preparations, and which have access to leadership intent?</li>
+                <li>What does SIGINT establish about readiness, command relationships, or operational tempo?</li>
+                <li>What does GEOINT/IMINT establish physically, and what can imagery not reveal?</li>
+                <li>Which OSINT and SOCMINT reports are independently verified?</li>
+                <li>What does cyber intelligence reveal about access, capability, and pre-positioning?</li>
+                <li>What does diplomatic reporting reveal about coercion or ambiguity?</li>
+                <li>What do FININT, economic, energy, transportation, MEDINT, and TECHINT contribute?</li>
+                <li>How reliable is each important source?</li>
+                <li>How credible is the specific information?</li>
+                <li>Does the source have direct or indirect access?</li>
+                <li>Is the report independently corroborated?</li>
+                <li>Could apparent corroboration actually be circular reporting?</li>
+                <li>How timely is the reporting?</li>
+                <li>How vulnerable is it to deliberate deception?</li>
+                <li>What major intelligence gaps remain?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="04" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card gm-question-wide">
+              <span class="gm-question-number">05</span>
+              <h4>Analysis of Competing Hypotheses</h4>
+              <div class="gm-hypothesis-question-list">
+                <div><strong>H1 — Coercive Diplomacy:</strong> Norland seeks concessions through intimidation without intending major military action.</div>
+                <div><strong>H2 — Limited Military Operation:</strong> Norland is preparing a geographically restricted operation to seize territory, establish a buffer zone, or compel negotiations.</div>
+                <div><strong>H3 — Large-Scale Invasion:</strong> Norland is preparing for a sustained conventional invasion.</div>
+                <div><strong>H4 — Strategic Deception:</strong> Norland deliberately creates indicators of imminent attack while pursuing another objective.</div>
+              </div>
+              <ol>
+                <li>Which evidence is consistent with each hypothesis?</li>
+                <li>Which evidence is inconsistent with each hypothesis?</li>
+                <li>Which evidence is strongly diagnostic?</li>
+                <li>Which evidence is weakly diagnostic or dual-use?</li>
+                <li>Which expected indicators are missing despite reasonable collection coverage?</li>
+                <li>Which reports may have been deliberately exposed or manipulated?</li>
+                <li>What evidence would be difficult to explain if H1 were true?</li>
+                <li>What evidence would be difficult to explain if H2 were true?</li>
+                <li>What evidence would be difficult to explain if H3 were true?</li>
+                <li>What evidence would be difficult to explain if H4 were true?</li>
+                <li>Are you counting supporting reports instead of weighting inconsistencies?</li>
+                <li>Is an additional H5 analytically justified?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="05" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">06</span>
+              <h4>Structured Analytic Techniques</h4>
+              <ol>
+                <li>How does ACH change your initial intuition?</li>
+                <li>What are the key assumptions behind your preferred hypothesis?</li>
+                <li>Which assumptions are most vulnerable?</li>
+                <li>What indicators would warn of escalation or de-escalation?</li>
+                <li>What would a devil's advocate argue against your principal judgment?</li>
+                <li>How would a red team attempt to manipulate Estavian analysts?</li>
+                <li>If your assessment failed, what would a premortem identify as the likely analytic error?</li>
+                <li>Which alternative futures belong in the cone of plausibility?</li>
+                <li>What critical what-if event would most change the case?</li>
+                <li>What does a timeline reveal that isolated reports do not?</li>
+                <li>Which evidence fails a quality-of-information check?</li>
+                <li>Which evidence is genuinely diagnostic?</li>
+              </ol>
+              <p class="gm-question-note"><strong>Requirement:</strong> ACH plus at least two additional structured analytic techniques.</p>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="06" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">07</span>
+              <h4>Indicators and Warning Framework</h4>
+              <ol>
+                <li>What would count as an early-warning indicator weeks or months before action?</li>
+                <li>What would count as operational warning days or weeks before action?</li>
+                <li>What would count only as confirmation that execution is imminent or underway?</li>
+                <li>Would blood-bank mobilization materially increase concern?</li>
+                <li>Would large ammunition distribution materially change H3?</li>
+                <li>Would expanded field hospitals change the estimated scale of operations?</li>
+                <li>What does bridging-unit positioning reveal when combined with geography?</li>
+                <li>What would electronic-warfare deployment indicate?</li>
+                <li>What would reserve activation indicate?</li>
+                <li>What would civilian or diplomatic evacuation indicate?</li>
+                <li>What would nationwide air-defense dispersal indicate?</li>
+                <li>What would systematic military leave cancellation indicate?</li>
+                <li>When does cyber access become cyber attack preparation?</li>
+                <li>What transportation-control changes would indicate broader mobilization?</li>
+                <li>What propaganda shifts would create political justification for force?</li>
+                <li>What command-and-control changes would be difficult to fake?</li>
+                <li>Why does confirmation without sufficient warning have limited intelligence value?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="07" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">08</span>
+              <h4>Cognitive Bias and Analytic Risk</h4>
+              <ol>
+                <li>Where could confirmation bias cause analysts to overvalue invasion indicators?</li>
+                <li>How could anchoring on the starting estimate distort later judgments?</li>
+                <li>Where might mirror imaging distort interpretation of Norland's choices?</li>
+                <li>How could vivid cyberattacks or viral imagery create availability bias?</li>
+                <li>Could the newest report receive excessive weight because of recency bias?</li>
+                <li>Where could groupthink emerge inside the fusion room?</li>
+                <li>When might analysts prematurely close on H2 or H3?</li>
+                <li>Could policymaker preferences politicize the assessment?</li>
+                <li>Where is overconfidence most dangerous?</li>
+                <li>How does deliberate deception exploit cognitive bias?</li>
+                <li>Which structured techniques reduce these risks?</li>
+                <li>Which risks remain even after structured analysis?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="08" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">09</span>
+              <h4>Intelligence Gaps and Collection Strategy</h4>
+              <ol>
+                <li>What is the single most consequential intelligence gap?</li>
+                <li>Do we know whether Norland's senior leadership authorized offensive operations?</li>
+                <li>What remains unknown about ammunition distribution?</li>
+                <li>What remains unknown about reserve activation?</li>
+                <li>What remains unknown about wartime medical preparation?</li>
+                <li>What remains unknown about aviation or maritime mobilization?</li>
+                <li>What remains unknown about destructive cyber payload activation?</li>
+                <li>What remains unknown about the intended territorial objective?</li>
+                <li>Which intelligence discipline is best suited to each gap?</li>
+                <li>What specific information requirement should be tasked?</li>
+                <li>What result would increase confidence?</li>
+                <li>What result would decrease confidence?</li>
+                <li>Is the collection opportunity realistic?</li>
+                <li>What collection risks exist?</li>
+                <li>Could Norland manipulate the collection channel?</li>
+                <li>Would answering the gap materially change a policymaker's decision?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="09" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">10</span>
+              <h4>Known, Assessed, Assumed, Uncertain, Unknowable</h4>
+              <ol>
+                <li>Which facts are directly established by sufficiently reliable reporting?</li>
+                <li>Which conclusions are analytic inferences?</li>
+                <li>Which propositions are assumptions required by the analysis?</li>
+                <li>Which questions remain uncertain because evidence is incomplete or contradictory?</li>
+                <li>Which questions are currently unknowable with available collection?</li>
+                <li>Have you written an inference as though it were a fact?</li>
+                <li>Have you disguised an intelligence gap as a conclusion?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="10" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">11</span>
+              <h4>Capability Versus Intent</h4>
+              <ol>
+                <li>What military operations can Norland physically conduct with the force observed?</li>
+                <li>What can its current logistics sustain?</li>
+                <li>What can its cyber access enable?</li>
+                <li>Which capabilities are present but not activated?</li>
+                <li>What evidence speaks directly to leadership intent?</li>
+                <li>What evidence speaks only to capability?</li>
+                <li>Are you converting readiness into evidence of a political decision?</li>
+                <li>What collection would narrow the capability-intent gap?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="11" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">12</span>
+              <h4>Deception Analysis</h4>
+              <ol>
+                <li>If Norland wanted Estavia to conclude invasion was imminent, what indicators would it intentionally expose?</li>
+                <li>If Norland planned a real operation but wanted it dismissed as an exercise, what would it conceal?</li>
+                <li>Which current indicators are cheap to fake?</li>
+                <li>Which indicators are expensive to fake?</li>
+                <li>Which indicators are operationally necessary?</li>
+                <li>Which indicators are difficult to conceal?</li>
+                <li>Does the planted invasion document invalidate the independently observed physical preparations?</li>
+                <li>Can genuine military preparation and strategic deception occur simultaneously?</li>
+                <li>What evidence would distinguish deception supporting coercion from deception masking a real operation?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="12" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">13</span>
+              <h4>Probability and Confidence</h4>
+              <ol>
+                <li>What probability do you assign to H1?</li>
+                <li>What probability do you assign to H2?</li>
+                <li>What probability do you assign to H3?</li>
+                <li>What probability do you assign to H4?</li>
+                <li>Do the probabilities total 100%?</li>
+                <li>Which verbal estimative term corresponds to each probability?</li>
+                <li>What is your separate confidence judgment?</li>
+                <li>Why are probability and confidence different variables?</li>
+                <li>What evidence most limits confidence?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="13" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">14</span>
+              <h4>Falsification and Reconsideration</h4>
+              <ol>
+                <li>What evidence would cause you to increase your principal assessment?</li>
+                <li>What evidence would cause you to decrease it?</li>
+                <li>What evidence would cause you to abandon your preferred hypothesis?</li>
+                <li>What cluster of independent indicators would force rapid reassessment?</li>
+                <li>What apparent change should be ignored unless behavior changes as well?</li>
+                <li>Can your assessment actually be falsified?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="14" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card">
+              <span class="gm-question-number">15</span>
+              <h4>Final Assessment</h4>
+              <ol>
+                <li>What is the most likely outcome during the next six months?</li>
+                <li>What is the strongest alternative outcome?</li>
+                <li>What is the most dangerous plausible outcome?</li>
+                <li>Why is the most dangerous scenario not necessarily the most likely?</li>
+                <li>What is your confidence level?</li>
+                <li>What are the principal warning indicators?</li>
+                <li>What are the implications for senior decision-makers?</li>
+                <li>Under what conditions should the judgment be reconsidered?</li>
+              </ol>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="15" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card gm-question-wide">
+              <span class="gm-question-number">16</span>
+              <h4>Three-Minute Executive Brief and Oral Defense</h4>
+              <div class="gm-oral-defense-grid">
+                <div>
+                  <h5>Executive Brief</h5>
+                  <ol>
+                    <li>What do we assess?</li>
+                    <li>Why?</li>
+                    <li>How confident are we?</li>
+                    <li>What is the strongest alternative?</li>
+                    <li>What do we not know?</li>
+                    <li>What would change the judgment?</li>
+                  </ol>
+                </div>
+                <div>
+                  <h5>National Security Adviser Challenge Questions</h5>
+                  <ol>
+                    <li>How do you know your sources are independent?</li>
+                    <li>Why is the field-hospital evidence not enough to conclude war is coming?</li>
+                    <li>What evidence contradicts your preferred hypothesis?</li>
+                    <li>Are you confusing capability with intent?</li>
+                    <li>Could Norland deliberately be feeding you these indicators?</li>
+                    <li>What is your most important intelligence gap?</li>
+                    <li>Which source would you discard first?</li>
+                    <li>What would prove you wrong?</li>
+                    <li>Why is the most dangerous scenario not the most likely?</li>
+                    <li>If you had one additional collection opportunity, what would you collect and why?</li>
+                  </ol>
+                </div>
+              </div>
+
+              <label class="gm-question-response">
+                <span>Your analytical response / working notes</span>
+                <textarea data-question-response="16" rows="6" placeholder="Develop your answer, cite intelligence file numbers, identify uncertainty, and record what would change your judgment."></textarea>
+              </label>
+</article>
+
+            <article class="gm-question-card gm-question-wide">
+              <span class="gm-question-number">17</span>
+              <h4>Graduate Paper Submission Checklist</h4>
+              <ul class="gm-checklist">
+                <li>4,000–6,000 words</li>
+                <li>Graduate academic level</li>
+                <li>Minimum 12 scholarly or professional sources</li>
+                <li>APA 7th edition</li>
+                <li>Executive Intelligence Assessment no longer than 500 words</li>
+                <li>ACH plus at least two additional structured analytic techniques</li>
+                <li>Known / Assessed / Assumed / Uncertain / Unknowable explicitly distinguished</li>
+                <li>Calibrated estimative terminology used appropriately</li>
+                <li>Reliability, credibility, access, corroboration, timeliness, lineage, and deception risk evaluated</li>
+                <li>Indicators and warning framework included</li>
+                <li>Collection priorities tied to decision relevance</li>
+                <li>Conditions that would change or falsify the judgment stated explicitly</li>
+              </ul>
+              <blockquote class="gm-central-principle">The purpose is not to predict the future with certainty. The purpose is to produce a disciplined estimate of an uncertain future using incomplete, contradictory, and potentially deceptive information—and to explain precisely why that judgment deserves a policymaker's confidence.</blockquote>
+            </article>
+          </div>
+        </div>
+
+        <div class="gm-view" id="gm-view-assessment" data-gm-view-panel="assessment">
+          <div class="gm-section-heading">
+            <div>
+              <span class="gm-label">Finished Intelligence Product</span>
+              <h3>Final Assessment Builder</h3>
+            </div>
+            <p>Convert your analysis into a concise intelligence product that separates judgment, confidence, alternatives, gaps, warning, and falsification.</p>
+          </div>
+
+          <div class="gm-assessment-builder">
+            <label><span>Principal Judgment</span><textarea data-final="principal" rows="5" placeholder="We assess with [confidence] that..."></textarea></label>
+            <label><span>Supporting Judgments</span><textarea data-final="support" rows="7" placeholder="1. ...&#10;2. ...&#10;3. ..."></textarea></label>
+            <label><span>Strongest Alternative</span><textarea data-final="alternative" rows="4"></textarea></label>
+            <label><span>Most Important Intelligence Gap</span><textarea data-final="gap" rows="4"></textarea></label>
+            <label><span>Warning Indicators</span><textarea data-final="warning" rows="5"></textarea></label>
+            <label><span>Falsification Conditions</span><textarea data-final="falsification" rows="5" placeholder="I would reconsider or abandon this judgment if..."></textarea></label>
+            <label><span>Implications for Policymakers</span><textarea data-final="implications" rows="5"></textarea></label>
+          </div>
+
+          <div class="gm-final-actions">
+            <button class="gm-btn gm-btn-primary" type="button" id="gm-copy-final">Copy Final Assessment</button>
+            <button class="gm-btn" type="button" id="gm-fill-from-brief">Use Executive Brief as Starting Point</button>
+          </div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-decisionlog" data-gm-view-panel="decisionlog">
+          <div class="gm-section-heading"><div><span class="gm-label">Analytic Audit Trail</span><h3>Decision Log</h3></div><p>Record what changed, what did not change, which hypothesis gained or lost strength, and why.</p></div>
+          <article class="gm-panel"><div class="gm-gap-fields"><label><span>Hypothesis</span><select id="gm-v4-log-h"><option>H1</option><option>H2</option><option>H3</option><option>H4</option><option>All / Framework</option></select></label><label><span>Direction</span><select id="gm-v4-log-dir"><option>Strengthened</option><option>Weakened</option><option>Unchanged</option><option>Reframed</option></select></label><label><span>File references</span><input id="gm-v4-log-files" placeholder="Files 13, 15, 22"></label><label class="gm-gap-span-3"><span>Reasoning</span><textarea id="gm-v4-log-reason" rows="4"></textarea></label></div><button class="gm-btn gm-btn-primary" id="gm-v4-add-log" type="button">Add Log Entry</button></article>
+          <div id="gm-v4-decision-list"></div>
+        </div>
+
+
+        <div class="gm-view" id="gm-view-quality" data-gm-view-panel="quality">
+          <div class="gm-section-heading"><div><span class="gm-label">Analytic Tradecraft Review</span><h3>Quality, Rubric & Publication Gate</h3></div><p>Automated checks identify weak tradecraft patterns while the rubric provides a transparent graduate self-assessment.</p></div>
+          <div class="gm-v4-quality-grid"><article class="gm-panel"><span class="gm-label">Automated Review</span><h4>Analytic Integrity Checks</h4><div id="gm-v4-quality-flags"></div></article><article class="gm-panel"><span class="gm-label">Publication Gate</span><h4>Ready to Brief?</h4><div id="gm-v4-publication"></div></article></div>
+          <article class="gm-panel"><span class="gm-label">Analytic Product Rubric</span><h4>Self-Assessment</h4><div id="gm-v4-rubric"></div><div class="gm-v4-rubric-total">Self-score: <strong id="gm-v4-rubric-total">0</strong> / 100</div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="gm-modal" id="gm-report-modal" aria-hidden="true">
+    <div class="gm-modal-backdrop" data-gm-close-modal></div>
+    <article class="gm-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="gm-modal-title">
+      <button class="gm-modal-close" type="button" aria-label="Close report" data-gm-close-modal>×</button>
+      <div id="gm-modal-content"></div>
+    </article>
+  </div>
+
+  <div class="gm-toast" id="gm-toast" role="status" aria-live="polite"></div>
+</section>
+</main>
+<footer class="gm-site-footer">
+  <p>Designed and implemented by Marc Lavoie. Fictional scenario, synthetic evidence, browser-only state.</p>
+  <a href="../../#featured-projects">Return to portfolio</a>
+</footer>
+<script src="glass-meridian.js?v=4.1"></script>
+<script src="glass-meridian-v4-addon.js?v=4.1"></script>
+</body>
+</html>

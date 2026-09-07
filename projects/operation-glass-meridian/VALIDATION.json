@@ -1,0 +1,32 @@
+{
+  "release": "4.1-portfolio",
+  "validated_at": "2026-09-07",
+  "node_syntax": {
+    "glass-meridian.js": true,
+    "glass-meridian-v4-addon.js": true
+  },
+  "structure": {
+    "duplicate_html_ids": [],
+    "nav_without_panel": [],
+    "panel_without_nav": [],
+    "workspaces": 20,
+    "reports_preserved": 30,
+    "question_response_fields": 16
+  },
+  "browser_workflows": {
+    "desktop_1440x1000": true,
+    "mobile_390x844": true,
+    "report_modal": true,
+    "workspace_switching": true,
+    "evidence_rows": 30,
+    "horizontal_overflow": false,
+    "console_errors": [],
+    "unexpected_external_requests": []
+  },
+  "security_boundary": {
+    "external_connections_disabled_by_csp": true,
+    "forbidden_network_apis_found": false,
+    "repository_write_path": false,
+    "storage_scope": "glassMeridianLab.v1"
+  }
+}

@@ -3,12 +3,44 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Marc Lavoie cybersecurity and network engineering portfolio featuring Browser OS, an interactive 200-question interview library, detection engineering and network server labs, CrowdStrike and Microsoft security stack architecture, SOC investigations, SIEM labs, applied cryptography, digital forensics, authorized penetration-testing labs, MPLS networking, cloud security, Windows hardening, scripting, certifications, and resume information.">
+  <meta name="description" content="Marc Lavoie's evidence-driven cybersecurity portfolio: SOC investigations, detection engineering, network security, K-12 operations, all-source intelligence analysis, SIEM/XDR, endpoint telemetry, and interactive engineering labs.">
   <meta name="theme-color" content="#080b10">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Marc Lavoie | Cybersecurity Analyst Portfolio">
+  <meta property="og:description" content="Evidence-driven SOC operations, detection engineering, network security, and interactive technical case studies.">
+  <meta property="og:url" content="https://mlavoie6927.github.io/">
+  <meta property="og:image" content="https://mlavoie6927.github.io/assets/hero%20background.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://mlavoie6927.github.io/">
   <title>Marc Lavoie | Cybersecurity Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/hero%20background.png" as="image">
-  <link rel="stylesheet" href="styles.css?v=server-lab-20260828a">
+  <link rel="stylesheet" href="styles.css?v=portfolio-20260907a">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "url": "https://mlavoie6927.github.io/",
+      "name": "Marc Lavoie | Cybersecurity Portfolio",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Marc Lavoie",
+        "url": "https://mlavoie6927.github.io/",
+        "sameAs": [
+          "https://github.com/MLavoie6927",
+          "https://www.linkedin.com/in/marc-lavoie"
+        ],
+        "knowsAbout": [
+          "Security operations",
+          "Detection engineering",
+          "Network security",
+          "Incident investigation",
+          "SIEM and endpoint telemetry"
+        ]
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -33,26 +65,11 @@
 
       <ul class="nav-links" id="primary-menu">
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#soc-projects">SOC Projects</a></li>
-        <li><a href="#wazuh-elk">Wazuh / ELK</a></li>
-        <li><a href="#detection-rules">Detection Rules</a></li>
-        <li><a href="#gcp-labs">Cyber Lab</a></li>
-        <li><a href="#windows-hardening">Windows</a></li>
-        <li><a href="#scripting-projects">Scripting</a></li>
-        <li><a href="#cpp-projects">C++ Code</a></li>
-        <li><a href="#network-server-lab">Server Lab</a></li>
-        <li><a href="browser-os/" target="_blank" rel="noopener" aria-label="Open Browser OS interactive lab in a new tab">Browser OS</a></li>
-        <li><a href="#digital-forensics">Forensics</a></li>
-        <li><a href="#ethical-hacking">Pentesting</a></li>
-        <li><a href="#network-engineering" aria-label="Network Engineering">Network Eng.</a></li>
-        <li><a href="#firewall-security">Firewall</a></li>
-        <li><a href="#security-stacks">Security Stacks</a></li>
-        <li><a href="#cryptography">Cryptography</a></li>
-        <li><a href="#securityplus-study-guide" aria-label="CompTIA Security Plus Study Guide">Security+ Guide</a></li>
-        <li><a href="#certificates">Certificates</a></li>
-        <li><a href="#public-recognition">Public Recognition</a></li>
-        <li><a href="interview/" target="_blank" rel="noopener" aria-label="Open the interactive interview question and answer library in a new tab">Interview</a></li>
+        <li><a href="#featured-projects">Featured</a></li>
+        <li><a href="#project-library">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#certificates">Credentials</a></li>
         <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -63,13 +80,149 @@
     <section class="hero section" id="home">
       <div class="section-inner hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">Cybersecurity Portfolio</p>
+          <p class="eyebrow">Cybersecurity Analyst Portfolio</p>
           <h1>Marc Lavoie</h1>
+          <p class="hero-role">SOC Operations <span aria-hidden="true">|</span> Detection Engineering <span aria-hidden="true">|</span> Network Security</p>
+          <p class="hero-lede">Evidence-driven investigations and engineering across endpoint, network, SIEM/XDR, infrastructure operations, and applied intelligence.</p>
 
           <div class="hero-actions" aria-label="Portfolio actions">
-            <a class="button button-primary" href="#soc-projects">View Projects</a>
+            <a class="button button-primary" href="#featured-projects">Explore Featured Work</a>
             <a class="button button-secondary" href="#resume">View Resume</a>
+            <a class="button button-secondary" href="https://github.com/MLavoie6927" target="_blank" rel="noopener">GitHub Profile</a>
           </div>
+
+          <dl class="hero-proof" aria-label="Portfolio proof points">
+            <div><dt>8</dt><dd>Detection platforms</dd></div>
+            <div><dt>24</dt><dd>Rule implementations</dd></div>
+            <div><dt>70</dt><dd>Simulated K-12 sites</dd></div>
+            <div><dt>30</dt><dd>Intelligence reports</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section featured-projects-section" id="featured-projects">
+      <div class="section-inner featured-inner">
+        <div class="section-heading section-heading-left">
+          <p class="eyebrow">Featured Engineering Projects</p>
+          <h2>Difficult problems, visible evidence, defensible decisions.</h2>
+          <p>Start here for the strongest investigations, interactive systems, and technical case studies. Every featured item states its evidence boundary and links directly to the work.</p>
+        </div>
+
+        <div class="featured-grid">
+          <article class="featured-card featured-card-wide">
+            <a class="featured-visual" href="#soc-projects">
+              <img src="assets/soc-projects/crowdstrike-true-positive-cover.svg" alt="CrowdStrike true-positive investigation report cover" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">SOC Investigation</span>
+              <h3>True Positive vs. False Positive</h3>
+              <p>Matched Falcon investigations correlate firewall, packet, endpoint, process, DNS, and Sysmon evidence to prove opposite dispositions and identify a parser-driven false alert.</p>
+              <ul class="featured-evidence"><li>4 telemetry domains</li><li>2 complete case studies</li><li>Detection correction</li></ul>
+              <a class="featured-link" href="#soc-projects">Review the investigations <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-visual" href="#detection-rules">
+              <img src="assets/detection-rules/microsoft-sentinel-detection-rule.svg" alt="Microsoft Sentinel detection rule example" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">Detection Engineering</span>
+              <h3>Cross-Platform Detection Lab</h3>
+              <p>Three scenarios translated across eight platforms with implementation logic, ATT&amp;CK mapping, triage, tuning, and validation.</p>
+              <ul class="featured-evidence"><li>8 platforms</li><li>24 rules</li><li>3 scenarios</li></ul>
+              <a class="featured-link" href="#detection-rules">Open the rule workbench <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-visual" href="projects/k12-network-operations/">
+              <img src="projects/k12-network-operations/assets/previews/k12-ops-v6-card.png" alt="Regional K-12 network operations digital twin" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">Infrastructure Operations</span>
+              <h3>Regional K-12 Operations Lab</h3>
+              <p>A fictional regional digital twin with guided troubleshooting, incident evidence, service dependencies, configuration assurance, and change control.</p>
+              <ul class="featured-evidence"><li>35 districts</li><li>70 sites</li><li>23 tests</li></ul>
+              <a class="featured-link" href="projects/k12-network-operations/">Enter the operations lab <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-visual" href="projects/operation-glass-meridian/">
+              <img src="projects/operation-glass-meridian/preview.png" alt="Operation Glass Meridian intelligence analysis dashboard" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">Applied Intelligence</span>
+              <h3>Operation Glass Meridian</h3>
+              <p>A synthetic all-source crisis lab for source evaluation, weighted ACH, assumptions, deception analysis, collection management, warning, and executive briefing.</p>
+              <ul class="featured-evidence"><li>30 reports</li><li>4 hypotheses</li><li>8-stage workflow</li></ul>
+              <a class="featured-link" href="projects/operation-glass-meridian/">Open the command lab <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="featured-card">
+            <a class="featured-visual" href="browser-os/">
+              <img src="assets/browser-os-3-preview.png" alt="Browser OS security operations workstation" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">Secure Browser Simulation</span>
+              <h3>Browser OS 3.0</h3>
+              <p>A client-side security workstation with simulated processes, network telemetry, packet analysis, logs, incident response, and an explicit no-write trust boundary.</p>
+              <ul class="featured-evidence"><li>Static isolation</li><li>Cross-app telemetry</li><li>CI validated</li></ul>
+              <a class="featured-link" href="browser-os/">Launch Browser OS <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+
+          <article class="featured-card featured-card-wide">
+            <a class="featured-visual" href="projects/service-provider-noc-security-lab/">
+              <img src="projects/service-provider-noc-security-lab/architecture.svg" alt="Service-provider NOC security engineering lab architecture" loading="lazy">
+            </a>
+            <div class="featured-content">
+              <span class="project-kicker">NOC + Security Engineering</span>
+              <h3>Service Provider Security Lab</h3>
+              <p>A complete design and offline-validated carrier environment spanning OSPF, BFD, MPLS/LDP, MP-BGP, VRFs, firewall controls, SIEM/IDS detection, DDoS response, and recovery.</p>
+              <ul class="featured-evidence"><li>10 network roles</li><li>5 scenarios</li><li>67 assertions</li></ul>
+              <a class="featured-link" href="projects/service-provider-noc-security-lab/">Inspect the engineering package <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        </div>
+
+        <div class="project-library" id="project-library" aria-labelledby="project-library-title">
+          <div class="project-library-heading">
+            <p class="eyebrow">Complete Project Library</p>
+            <h3 id="project-library-title">Explore every capability without crowding the main navigation.</h3>
+          </div>
+          <div class="project-library-groups">
+            <section><h4>Security Operations</h4><a href="#soc-projects">SOC investigations</a><a href="#wazuh-elk">Wazuh / ELK</a><a href="#detection-rules">Detection engineering</a><a href="#security-stacks">Security stacks</a></section>
+            <section><h4>Engineering Systems</h4><a href="browser-os/">Browser OS</a><a href="#network-server-lab">Network server lab</a><a href="#windows-hardening">Windows hardening</a><a href="#scripting-projects">Scripting</a><a href="#cpp-projects">C++</a><a href="#cryptography">Cryptography</a></section>
+            <section><h4>Network &amp; Infrastructure</h4><a href="#network-engineering">Network engineering</a><a href="projects/k12-network-operations/">K-12 operations</a><a href="#firewall-security">Firewall &amp; DDoS</a><a href="#gcp-labs">Cloud security</a></section>
+            <section><h4>Analysis &amp; Evidence</h4><a href="projects/operation-glass-meridian/">Applied intelligence</a><a href="#digital-forensics">Digital forensics</a><a href="#ethical-hacking">Authorized pentesting</a><a href="interview/">Interview readiness</a><a href="#securityplus-study-guide">Security+ study guide</a></section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section capability-section" id="skills">
+      <div class="section-inner capability-layout">
+        <div class="capability-copy">
+          <p class="eyebrow">Investigation Method</p>
+          <h2>A repeatable path from signal to improvement.</h2>
+          <p>I approach alerts and infrastructure failures with the same discipline: validate the source, correlate independent evidence, narrow the scope, make the least-destructive decision, verify the result, and document what should improve next.</p>
+        </div>
+        <ol class="investigation-flow" aria-label="Marc Lavoie's investigation method">
+          <li><span>01</span><strong>Validate</strong><small>Confirm source, time, host, user, and logic.</small></li>
+          <li><span>02</span><strong>Correlate</strong><small>Join endpoint, identity, DNS, and network evidence.</small></li>
+          <li><span>03</span><strong>Scope</strong><small>Identify affected systems, services, and risk.</small></li>
+          <li><span>04</span><strong>Decide</strong><small>Classify, contain, escalate, or tune.</small></li>
+          <li><span>05</span><strong>Verify</strong><small>Test recovery, rule behavior, and residual risk.</small></li>
+          <li><span>06</span><strong>Improve</strong><small>Capture evidence, lessons, and next controls.</small></li>
+        </ol>
+        <div class="capability-bands" aria-label="Core capabilities">
+          <div><strong>Investigate</strong><span>Falcon, Sysmon, Wireshark, firewall, SIEM</span></div>
+          <div><strong>Engineer</strong><span>Detection logic, network segmentation, hardening</span></div>
+          <div><strong>Communicate</strong><span>Case studies, handoffs, executive summaries</span></div>
         </div>
       </div>
     </section>
@@ -78,9 +231,9 @@
       <div class="section-inner">
         <div class="section-heading">
           <p class="eyebrow">About Me</p>
-          <h2>Defensive security learner focused on practical, evidence-based work.</h2>
+          <h2>Security analyst and engineer focused on evidence, validation, and clear decisions.</h2>
           <p>
-            This portfolio is designed for recruiters and security teams to review lab work, documentation habits, and hands-on cybersecurity practice without exposing sensitive data.
+            This portfolio gives recruiters and technical teams direct access to investigations, engineering decisions, validation results, and public-safe evidence across security operations and network infrastructure.
           </p>
         </div>
 
@@ -88,10 +241,10 @@
           <div>
             <h3>Professional Focus</h3>
             <p>
-              Marc Lavoie is building a public cybersecurity portfolio around SOC analyst workflows, SIEM monitoring, detection logic, endpoint hardening, cloud security fundamentals, and repeatable scripting.
+              Marc Lavoie's work spans SOC analysis, SIEM/XDR investigations, detection engineering, endpoint telemetry, network operations, routing and segmentation, applied intelligence, hardening, cloud security, and automation.
             </p>
             <p>
-              Each project area is intentionally written with safe placeholders so public visitors can understand the work while private credentials, logs, screenshots, and environment details stay out of the website.
+              Each case study separates demonstrated work from simulated or future runtime stages. Public evidence uses fictional environments, synthetic telemetry, sanitized screenshots, and explicit limitations so technical claims remain reviewable and accurate.
             </p>
           </div>
 
@@ -214,7 +367,7 @@
                 </div>
               </dl>
 
-              <a class="project-link" href="https://github.com/MLavoie6927/sysmon-log-analysis-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+              <span class="project-evidence-note">Evidence preview included above. Public source package is being prepared.</span>
             </div>
           </article>
 
@@ -336,7 +489,7 @@
                 </div>
               </dl>
 
-              <a class="project-link" href="https://github.com/MLavoie6927/elk-stack-lab-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+              <span class="project-evidence-note">Evidence preview included above. Public source package is being prepared.</span>
             </div>
           </article>
         </div>
@@ -759,7 +912,7 @@
                 </div>
               </dl>
 
-              <a class="project-link" href="https://github.com/MLavoie6927/windows-hardening-scripts-placeholder" target="_blank" rel="noopener">Placeholder GitHub Repository</a>
+              <span class="project-evidence-note">Implementation summary and screenshots are included in this portfolio.</span>
             </div>
           </article>
         </div>
@@ -3771,6 +3924,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=server-lab-20260828a"></script>
+  <script src="script.js?v=portfolio-20260907a"></script>
 </body>
 </html>

@@ -11,6 +11,9 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation
 - `.github/workflows/k12-operations-ci.yml` - K-12 model, evidence, generated-data, and browser-source validation
+- `projects/operation-glass-meridian/` - interactive all-source intelligence analysis command lab
+- `tools/validate_site.py` - local-link, accessibility, navigation, and security-boundary validation
+- `.github/workflows/portfolio-ci.yml` - portfolio and Glass Meridian validation workflow
 - `SECURITY-CHECKLIST.md` - public publishing safety checklist
 
 ## Local Preview
@@ -36,7 +39,7 @@ To deploy with GitHub Pages:
 
 ## Updating Content
 
-Replace placeholder project links, screenshots, training entries, resume link, and contact links only after reviewing `SECURITY-CHECKLIST.md`.
+Review every new project link, screenshot, training entry, resume update, and contact link against `SECURITY-CHECKLIST.md` before publishing.
 
 Use sanitized screenshots and synthetic sample data. Do not publish real logs, credentials, private contact information, internal IP addresses, cloud project IDs, or private school or company details.
 
