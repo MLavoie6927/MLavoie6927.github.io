@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 2rem;
+  background: #061014;
+  color: #d8eee4;
+  font-family: system-ui, sans-serif;
+}
+main { max-width: 900px; margin: auto; }
+section {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #21404a;
+  border-radius: 12px;
+  background: #08171c;
+}
+strong { color: #50ffad; }
+code, pre { font-family: ui-monospace, monospace; }
+ul { line-height: 1.7; }
+.badge {
+  display: inline-flex;
+  gap: .5rem;
+  padding: .5rem .75rem;
+  border: 1px solid #50ffad;
+  border-radius: 999px;
+}
+.muted { color: #8fa7ad; }

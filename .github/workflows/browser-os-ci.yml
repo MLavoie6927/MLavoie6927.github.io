@@ -1,0 +1,37 @@
+name: Browser OS CI
+
+on:
+  push:
+    paths:
+      - 'browser-os/**'
+      - '.github/workflows/browser-os-ci.yml'
+  pull_request:
+    paths:
+      - 'browser-os/**'
+      - '.github/workflows/browser-os-ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check browser-os/script.js
+          node --check browser-os/advanced.js
+          node --check browser-os/v3-model.js
+          node --check browser-os/v3.js
+          node --check browser-os/tests/run-tests.js
+      - name: Browser OS 3.0 assertions
+        run: node browser-os/tests/run-tests.js
+      - name: Security boundary quick check
+        shell: bash
+        run: |
+          grep -Fq "connect-src 'none'" browser-os/index.html
+          ! grep -RE "github_pat_|ghp_[A-Za-z0-9]{20,}|BEGIN (OPENSSH )?PRIVATE KEY" browser-os/v3.js browser-os/v3-model.js

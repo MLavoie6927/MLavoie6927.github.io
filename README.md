@@ -7,6 +7,8 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `index.html` - main portfolio page
 - `styles.css` - responsive dark cybersecurity theme
 - `script.js` - mobile navigation and active-section highlighting
+- `browser-os/` - Browser OS 3.0 static security operations workstation
+- `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `SECURITY-CHECKLIST.md` - public publishing safety checklist
 
 ## Local Preview
