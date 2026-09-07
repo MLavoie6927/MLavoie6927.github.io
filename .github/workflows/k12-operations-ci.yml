@@ -23,13 +23,14 @@ jobs:
       run:
         working-directory: projects/k12-network-operations
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: "22"
+          package-manager-cache: false
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
       - name: Validate inventory and operations model

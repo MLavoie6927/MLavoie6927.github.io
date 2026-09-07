@@ -10,10 +10,18 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
+TEXT_CHECKSUM_SUFFIXES = {".css", ".html", ".js", ".json", ".md"}
 HTML_FILES = sorted(
     path for path in ROOT.rglob("index.html")
     if ".git" not in path.parts and "work" not in path.parts
 )
+
+
+def manifest_digest(path: Path) -> str:
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_CHECKSUM_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 class PageParser(HTMLParser):
@@ -136,7 +144,7 @@ def validate_glass_meridian(errors: list[str]) -> None:
         if not target.is_file():
             errors.append(f"Glass Meridian: checksum target is missing ({name})")
             continue
-        actual = hashlib.sha256(target.read_bytes()).hexdigest()
+        actual = manifest_digest(target)
         if actual != expected:
             errors.append(f"Glass Meridian: stale checksum for {name}")
 
