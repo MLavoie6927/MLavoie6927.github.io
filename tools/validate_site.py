@@ -132,12 +132,12 @@ def validate_atlas_upgrade(errors: list[str]) -> None:
     style_order = (
         'styles.css?v=portfolio-20260907a',
         'atlas-enterprise-v2.css?v=2.0.0',
-        'atlas-os-v3.css?v=3.0.0',
+        'atlas-os-v3.css?v=3.1.0',
     )
     script_order = (
         'script.js?v=portfolio-20260907a',
         'atlas-enterprise-v2.js?v=2.0.0',
-        'atlas-os-v3.js?v=3.0.0',
+        'atlas-os-v3.js?v=3.1.0',
     )
     for page_name in ("index.html", "full-portfolio.html"):
         text = (ROOT / page_name).read_text(encoding="utf-8")
@@ -152,7 +152,7 @@ def validate_atlas_upgrade(errors: list[str]) -> None:
 
     sources = {
         "atlas-enterprise-v2.js": ("window.ATLAS", "Browser-only simulation"),
-        "atlas-os-v3.js": ("window.ATLAS_OS", "Static GitHub Pages safe"),
+        "atlas-os-v3.js": ("window.ATLAS_OS", "Static GitHub Pages safe", 'const VERSION = "3.1.0"'),
     }
     forbidden = {
         "fetch calls": r"(?<![\w])fetch\s*\(",
@@ -171,6 +171,11 @@ def validate_atlas_upgrade(errors: list[str]) -> None:
         for label, pattern in forbidden.items():
             if re.search(pattern, without_comments):
                 errors.append(f"{name}: forbidden {label}")
+
+    atlas_css = (ROOT / "atlas-os-v3.css").read_text(encoding="utf-8")
+    for marker in ("--aos-font-md", "ATLAS OS v3.1 readability", "@media (max-width: 800px)"):
+        if marker not in atlas_css:
+            errors.append(f"atlas-os-v3.css: missing readability marker {marker}")
 
 
 def validate_glass_meridian(errors: list[str]) -> None:

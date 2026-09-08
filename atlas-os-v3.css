@@ -1035,3 +1035,316 @@
   border-radius: 7px;
   background: #07111c;
 }
+
+/* ATLAS OS v3.1 readability and responsive workspace layer */
+.atlas-os-shell {
+  --aos-font-xs: clamp(.8rem, .5vw, 1.05rem);
+  --aos-font-sm: clamp(.95rem, .58vw, 1.2rem);
+  --aos-font-md: clamp(1.05rem, .68vw, 1.4rem);
+  --aos-font-lg: clamp(1.3rem, .82vw, 1.7rem);
+  line-height: 1.45;
+}
+
+.atlas-os-boot-brand span,
+.atlas-os-boot-progress,
+.atlas-os-build,
+.atlas-os-login-card > label,
+.atlas-os-title small,
+.atlas-os-start-brand small,
+.atlas-os-start-apps h4,
+.atlas-os-start-apps small,
+.atlas-os-notify-center header small,
+#atlas-notify-badge,
+#atlas-notify-list time,
+.atlas-os-quick > header small,
+.atlas-os-quick-grid small,
+.atlas-os-toast small,
+.atlas-os-metric span,
+.atlas-os-metric small,
+.atlas-os-card > header span,
+.atlas-os-table th,
+.atlas-os-pill,
+.atlas-os-field > span,
+.atlas-os-worker-list small,
+.atlas-os-worker-list em,
+.atlas-os-service-grid header small,
+.atlas-os-incidents > button > span,
+.atlas-os-incidents small,
+.atlas-os-incidents time,
+.atlas-os-timeline > div,
+.atlas-os-log-preview > div {
+  font-size: var(--aos-font-xs);
+}
+
+.atlas-os-desktop-icons strong,
+.atlas-os-login-card p,
+.atlas-os-running-app,
+.atlas-os-health,
+.atlas-os-health em,
+#atlas-clock small,
+.atlas-os-start-menu footer button,
+.atlas-os-notify-center header button,
+#atlas-notify-list small,
+.atlas-os-quick-health > div:first-child,
+.atlas-os-toolbar button,
+.atlas-os-toolbar select,
+.atlas-os-toolbar input,
+.atlas-os-actions button,
+.atlas-os-wide,
+.atlas-os-table button,
+.atlas-os-file-toolbar button,
+.atlas-os-table,
+.atlas-os-dl,
+.atlas-os-dl .mono,
+.atlas-os-input-action input,
+.atlas-os-field input,
+.atlas-os-field select,
+.atlas-os-note,
+.atlas-os-empty,
+.atlas-os-worker-list strong,
+.atlas-os-service-grid header strong,
+.atlas-os-incidents strong,
+.atlas-os-result {
+  font-size: var(--aos-font-sm);
+}
+
+.atlas-os-title strong,
+#atlas-clock strong,
+.atlas-os-start-brand strong,
+#atlas-start-search,
+.atlas-os-start-apps strong,
+.atlas-os-notify-center header strong,
+#atlas-notify-list strong,
+.atlas-os-quick > header strong,
+.atlas-os-quick-grid strong,
+.atlas-os-toast strong,
+.atlas-os-app,
+.atlas-os-card > header h3,
+.atlas-os-result span {
+  font-size: var(--aos-font-md);
+}
+
+.atlas-os-metric strong {
+  font-size: var(--aos-font-lg);
+}
+
+.atlas-os-desktop {
+  --taskbar: 62px;
+}
+
+.atlas-os-desktop-icons {
+  left: 16px;
+  top: 16px;
+  width: 116px;
+  gap: .55rem;
+}
+
+.atlas-os-desktop-icons button {
+  width: 104px;
+  min-height: 98px;
+  gap: .45rem;
+  padding: .55rem;
+}
+
+.atlas-os-desktop-icons button > span {
+  width: 54px;
+  height: 54px;
+  font-size: 1.45rem;
+}
+
+.atlas-os-desktop-icons strong {
+  max-width: 96px;
+}
+
+.atlas-os-window {
+  min-width: 520px;
+  min-height: 420px;
+}
+
+.atlas-os-titlebar {
+  height: 54px;
+  flex-basis: 54px;
+}
+
+.atlas-os-title {
+  gap: .65rem;
+  padding-left: .85rem;
+}
+
+.atlas-os-title > span {
+  width: 34px;
+  height: 34px;
+  font-size: 1rem;
+}
+
+.atlas-os-title small {
+  max-width: 440px;
+}
+
+.atlas-os-window-controls button {
+  width: 52px;
+  font-size: 1rem;
+}
+
+.atlas-os-start-button,
+.atlas-os-pinned,
+.atlas-os-running-app,
+.atlas-os-tray button {
+  height: 50px;
+}
+
+.atlas-os-start-button {
+  width: 52px;
+}
+
+.atlas-os-start-button span {
+  width: 36px;
+  height: 36px;
+}
+
+.atlas-os-pinned {
+  width: 50px;
+  font-size: 1rem;
+}
+
+.atlas-os-running-app {
+  max-width: 220px;
+  padding: 0 .9rem;
+}
+
+.atlas-os-tray button {
+  min-width: 46px;
+}
+
+#atlas-clock {
+  min-width: 112px;
+}
+
+.atlas-os-start-menu {
+  width: min(760px, calc(100vw - 24px));
+}
+
+.atlas-os-notify-center {
+  width: min(480px, calc(100vw - 24px));
+}
+
+.atlas-os-quick {
+  right: 126px;
+  width: min(420px, calc(100vw - 24px));
+}
+
+.atlas-os-app {
+  padding: 1rem;
+}
+
+.atlas-os-toolbar {
+  gap: .5rem;
+  margin-bottom: .85rem;
+  padding: .65rem;
+}
+
+.atlas-os-toolbar button,
+.atlas-os-toolbar select,
+.atlas-os-toolbar input,
+.atlas-os-actions button,
+.atlas-os-wide,
+.atlas-os-table button,
+.atlas-os-file-toolbar button {
+  min-height: 40px;
+  padding: .5rem .7rem;
+}
+
+.atlas-os-metrics {
+  gap: .7rem;
+  margin-bottom: .8rem;
+}
+
+.atlas-os-metric,
+.atlas-os-card {
+  padding: .85rem;
+}
+
+.atlas-os-table th,
+.atlas-os-table td {
+  padding: .65rem .7rem;
+}
+
+.atlas-os-pill {
+  min-height: 26px;
+  padding: .2rem .5rem;
+}
+
+.atlas-os-worker-list > div {
+  grid-template-columns: minmax(150px, .8fr) 1fr 52px;
+  gap: .65rem;
+  padding: .55rem;
+}
+
+.atlas-os-incidents > button {
+  grid-template-columns: 74px 1fr;
+  gap: .7rem;
+  padding: .7rem;
+}
+
+.atlas-os-chart-grid canvas {
+  height: 250px;
+}
+
+@media (max-width: 1100px) {
+  .atlas-os-metrics.cols-5,
+  .atlas-os-metrics.cols-6 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .atlas-os-split.wide-left,
+  .atlas-os-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-os-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .atlas-os-desktop {
+    --taskbar: 58px;
+  }
+
+  .atlas-os-desktop-icons {
+    display: none;
+  }
+
+  .atlas-os-window {
+    min-width: min(360px, calc(100vw - 12px));
+    min-height: min(360px, calc(100vh - 72px));
+  }
+
+  .atlas-os-title small,
+  .atlas-os-running-app span:last-child,
+  .atlas-os-health em {
+    display: none;
+  }
+
+  .atlas-os-metrics.cols-3,
+  .atlas-os-metrics.cols-4,
+  .atlas-os-metrics.cols-5,
+  .atlas-os-metrics.cols-6,
+  .atlas-os-split.even,
+  .atlas-os-service-grid,
+  .atlas-os-safety {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-os-start-apps section > div {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-os-quick {
+    right: 7px;
+  }
+
+  #atlas-clock {
+    min-width: 82px;
+  }
+}

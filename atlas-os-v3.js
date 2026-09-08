@@ -1,17 +1,17 @@
 /*
- * ATLAS OS v3.0
+ * ATLAS OS v3.1
  * Browser-resident operating environment layered over ATLAS Enterprise v2.
  * Static GitHub Pages safe: no real sockets, host shell, host filesystem, or backend.
  */
 (() => {
   "use strict";
 
-  const VERSION = "3.0.0";
+  const VERSION = "3.1.0";
   const BUILD = "2026-09-08";
   const ROOT = "[data-network-server-lab]";
   const SETTINGS_KEY = "atlas.os.v3.settings";
   const FILES_KEY = "atlas.os.v3.files";
-  const LAYOUT_KEY = "atlas.os.v3.layout";
+  const LAYOUT_KEY = "atlas.os.v3.1.layout";
 
   const $ = (q, s = document) => s.querySelector(q);
   const $$ = (q, s = document) => Array.from(s.querySelectorAll(q));
@@ -397,14 +397,41 @@
     }
 
     layout(appId, app) {
+      const viewportWidth = Math.max(320, window.innerWidth);
+      const viewportHeight = Math.max(480, window.innerHeight);
+      const desktopRail = viewportWidth >= 760 ? Math.min(132, Math.round(viewportWidth * .1)) : 8;
+      const maxWidth = Math.max(280, viewportWidth - desktopRail - 20);
+      const maxHeight = Math.max(300, viewportHeight - 86);
+      const minWidth = Math.min(520, maxWidth);
+      const minHeight = Math.min(420, maxHeight);
+      const preferredWidth = Math.max(app.width || 900, Math.round(viewportWidth * (viewportWidth >= 1600 ? .76 : .82)));
+      const preferredHeight = Math.max(app.height || 620, Math.round(viewportHeight * .82));
+      const width = clamp(preferredWidth, minWidth, maxWidth);
+      const height = clamp(preferredHeight, minHeight, maxHeight);
       const saved = loadLocal(LAYOUT_KEY, {});
-      if (saved[appId]) return saved[appId];
+      const remembered = saved[appId];
+      if (remembered) {
+        const tooSmallForViewport = remembered.width < viewportWidth * .48 || remembered.height < viewportHeight * .55;
+        if (!tooSmallForViewport) {
+          const rememberedWidth = clamp(remembered.width, minWidth, maxWidth);
+          const rememberedHeight = clamp(remembered.height, minHeight, maxHeight);
+          return {
+            left: clamp(remembered.left, 6, Math.max(6, viewportWidth - rememberedWidth - 6)),
+            top: clamp(remembered.top, 6, Math.max(6, maxHeight - rememberedHeight + 10)),
+            width: rememberedWidth,
+            height: rememberedHeight,
+            maximized: remembered.maximized === true
+          };
+        }
+      }
       const offset = (this.cascade++ % 9) * 24;
+      const centeredLeft = desktopRail + Math.max(0, (viewportWidth - desktopRail - width) / 2);
+      const centeredTop = Math.max(10, (maxHeight - height) / 2 + 10);
       return {
-        left: 55 + offset,
-        top: 34 + offset,
-        width: Math.min(app.width || 900, window.innerWidth - 90),
-        height: Math.min(app.height || 620, window.innerHeight - 120),
+        left: Math.round(clamp(centeredLeft + offset, 6, Math.max(6, viewportWidth - width - 6))),
+        top: Math.round(clamp(centeredTop + offset, 6, Math.max(6, maxHeight - height + 10))),
+        width,
+        height,
         maximized: false
       };
     }
