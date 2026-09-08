@@ -4,8 +4,13 @@ on:
   push:
     paths:
       - "index.html"
+      - "full-portfolio.html"
       - "styles.css"
       - "script.js"
+      - "atlas-enterprise-v2.css"
+      - "atlas-enterprise-v2.js"
+      - "atlas-os-v3.css"
+      - "atlas-os-v3.js"
       - "robots.txt"
       - "sitemap.xml"
       - "projects/operation-glass-meridian/**"
@@ -14,8 +19,13 @@ on:
   pull_request:
     paths:
       - "index.html"
+      - "full-portfolio.html"
       - "styles.css"
       - "script.js"
+      - "atlas-enterprise-v2.css"
+      - "atlas-enterprise-v2.js"
+      - "atlas-os-v3.css"
+      - "atlas-os-v3.js"
       - "robots.txt"
       - "sitemap.xml"
       - "projects/operation-glass-meridian/**"
@@ -43,5 +53,7 @@ jobs:
       - name: Validate JavaScript syntax
         run: |
           node --check script.js
+          node --check atlas-enterprise-v2.js
+          node --check atlas-os-v3.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js

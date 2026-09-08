@@ -128,6 +128,51 @@ def validate_full_portfolio(errors: list[str]) -> None:
             errors.append(f"full-portfolio.html: missing recovered section marker {marker}")
 
 
+def validate_atlas_upgrade(errors: list[str]) -> None:
+    style_order = (
+        'styles.css?v=portfolio-20260907a',
+        'atlas-enterprise-v2.css?v=2.0.0',
+        'atlas-os-v3.css?v=3.0.0',
+    )
+    script_order = (
+        'script.js?v=portfolio-20260907a',
+        'atlas-enterprise-v2.js?v=2.0.0',
+        'atlas-os-v3.js?v=3.0.0',
+    )
+    for page_name in ("index.html", "full-portfolio.html"):
+        text = (ROOT / page_name).read_text(encoding="utf-8")
+        if 'data-network-server-lab' not in text:
+            errors.append(f"{page_name}: ATLAS-NET-01 host section is missing")
+        for assets, label in ((style_order, "styles"), (script_order, "scripts")):
+            positions = [text.find(asset) for asset in assets]
+            if any(position < 0 for position in positions):
+                errors.append(f"{page_name}: ATLAS {label} are incomplete")
+            elif positions != sorted(positions):
+                errors.append(f"{page_name}: ATLAS {label} are in the wrong load order")
+
+    sources = {
+        "atlas-enterprise-v2.js": ("window.ATLAS", "Browser-only simulation"),
+        "atlas-os-v3.js": ("window.ATLAS_OS", "Static GitHub Pages safe"),
+    }
+    forbidden = {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+        "GitHub API": r"api\.github\.com",
+    }
+    for name, markers in sources.items():
+        source = (ROOT / name).read_text(encoding="utf-8")
+        without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", source, flags=re.S)
+        for marker in markers:
+            if marker not in source:
+                errors.append(f"{name}: missing ATLAS integration marker {marker}")
+        for label, pattern in forbidden.items():
+            if re.search(pattern, without_comments):
+                errors.append(f"{name}: forbidden {label}")
+
+
 def validate_glass_meridian(errors: list[str]) -> None:
     base = ROOT / "projects" / "operation-glass-meridian"
     html = (base / "index.html").read_text(encoding="utf-8")
@@ -190,6 +235,7 @@ def main() -> None:
     validate_html(errors)
     validate_home(errors)
     validate_full_portfolio(errors)
+    validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
     if errors:
         for error in errors:
