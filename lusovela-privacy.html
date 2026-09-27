@@ -1,0 +1,117 @@
+<!doctype html>
+<!-- Original page presentation for Marc Lavoie / LusoVela. Created September 26, 2026.
+     Upstream software retains its own copyrights and licenses. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Privacy policy for LusoVela Browser for Windows, published by Marc Lavoie.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>LusoVela Browser — Privacy Policy</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07141b; --panel:#0e232c; --text:#eaf4f5; --muted:#b3cbd0; --accent:#72e4d2; --line:#29434b; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font:17px/1.75 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    a { color:var(--accent); text-underline-offset:4px; overflow-wrap:anywhere; }
+    a:focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+    .wrap { width:min(900px,100% - 40px); margin:auto; }
+    header { padding:64px 0 36px; border-bottom:1px solid var(--line); background:radial-gradient(ellipse at top right,#174a48,transparent 70%); }
+    .brand { font-size:15px; font-weight:750; letter-spacing:.16em; color:var(--accent); }
+    h1 { font-size:clamp(36px,6vw,58px); line-height:1.15; letter-spacing:-.04em; margin:16px 0; }
+    .intro { max-width:720px; font-size:20px; color:var(--muted); }
+    .date { font-size:14px; color:var(--muted); }
+    main { padding:36px 0 60px; }
+    .summary { padding:24px 28px; background:var(--panel); border:1px solid var(--line); border-radius:18px; }
+    .summary strong { color:var(--accent); }
+    nav { margin:30px 0; }
+    nav a { display:inline-block; margin:4px 18px 4px 0; }
+    section { margin-top:36px; scroll-margin-top:24px; }
+    h2 { font-size:25px; line-height:1.35; margin:0 0 12px; }
+    p { margin:0 0 16px; }
+    ul { padding-left:24px; }
+    li { margin:9px 0; }
+    .signature { font:italic 32px/1.4 "Segoe Script","Lucida Handwriting",Georgia,serif; }
+    footer { border-top:1px solid var(--line); padding:28px 0 36px; color:var(--muted); font-size:14px; }
+    @media (max-width:540px) { header { padding-top:38px; } .summary { padding:20px; } body { font-size:16px; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+    @media print { :root { --bg:#fff; --text:#111; --muted:#333; --panel:#fff; --line:#bbb; --accent:#164b48; } header { background:none; padding-top:0; } nav { display:none; } .wrap { width:100%; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand">LUSOVELA · WINDOWS BROWSER</div>
+      <h1>Privacy Policy</h1>
+      <p class="intro">Understand what stays on your device, what connects to outside services, and how you control your browser data.</p>
+      <p class="date">Published by Marc Lavoie · Effective September 26, 2026 · Applies to LusoVela Windows version 1.4.16</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="summary">
+      <strong>Your LusoVela account is local.</strong>
+      <p>Your browser history, settings, and security records stay on your device. LusoVela does not operate an account-sync service or upload browser analytics. Websites, search providers, domain protection, and protected-media services still receive the information needed to provide their services.</p>
+    </div>
+    <nav aria-label="Policy sections">
+      <a href="#local-data">Local data</a><a href="#connections">Network connections</a><a href="#controls">Your controls</a><a href="#contact">Contact &amp; support</a>
+    </nav>
+    <section>
+      <h2>1. Scope and publisher</h2>
+      <p>Marc Lavoie publishes LusoVela Browser. This policy describes the Windows desktop application and this privacy-policy page. Websites and services you visit have their own privacy policies, including Microsoft Store, search providers, banks, and streaming services.</p>
+    </section>
+    <section id="local-data">
+      <h2>2. Information stored on your device</h2>
+      <p>LusoVela stores browser history, bookmarks, preferences, local account records, security decisions, recovery checkpoints, investigation cases, and security diagnostics on your device. These records support browsing, session recovery, and explanations of security decisions.</p>
+      <p>The current build has no LusoVela advertising SDK, remote news feed, account-sync service, or LusoVela analytics uploader. Marc Lavoie does not receive your local browser records through an automatic LusoVela reporting service.</p>
+      <p>Investigation cases can include page addresses with query strings and fragments removed, limited connection information, policy-event summaries, and notes you enter. Case snapshots omit page contents, passwords, full request logs, download records, and screenshots. You control whether to export or share a case; exported files may still contain sensitive notes or addresses.</p>
+    </section>
+    <section>
+      <h2>3. Local username, password, and download protection</h2>
+      <p>Your chosen username and salted password-verification record are protected using Electron safeStorage and Windows Data Protection API (DPAPI). They are not sent to a LusoVela account server. The local login and download lock help control access and authorize downloads; they do not encrypt the entire browser profile or prevent capture by software already controlling your Windows account.</p>
+      <p>Website downloads are privately staged, checked by available local controls, and require local password authorization before release. Download metadata and security results may be recorded locally.</p>
+    </section>
+    <section id="connections">
+      <h2>4. Connections to websites and outside services</h2>
+      <ul>
+        <li><strong>Websites and searches:</strong> websites receive ordinary connection and request information, including your IP address. Search terms go to the search provider you select. Services receive information you submit, such as sign-in details, messages, or documents.</li>
+        <li><strong>Domain protection:</strong> cloud domain protection is enabled by default and uses Quad9 DNS over HTTPS. Queries send domain names and expose your network IP to Quad9. This feature does not upload URL paths, page contents, documents, cookies, or passwords. See <a href="https://www.quad9.net/privacy/policy/" rel="noreferrer">Quad9’s privacy policy</a>.</li>
+        <li><strong>Protected media:</strong> CastLabs/Widevine component initialization and component-update checks may contact external component services. Streaming providers also make their own playback and license requests under their policies.</li>
+        <li><strong>Configured update feeds:</strong> LusoVela software-update or signed-filter checks can contact a configured feed. These checks remain disabled when no endpoint and public verification key are configured. The feed host can receive ordinary connection information.</li>
+      </ul>
+      <p>Secure Quad9 mode does not fall back to unencrypted DNS when Quad9 is unavailable. Local hosts, cached addresses, and proxy-resolved traffic may not undergo a fresh Quad9 lookup. Domain protection is not remote file scanning and cannot guarantee that every site is safe.</p>
+    </section>
+    <section>
+      <h2>5. Local filtering and website permissions</h2>
+      <p>Built-in filters and configured, cryptographically signed domain-filter packs are evaluated locally. Protection Activity stores explanations for blocked requests and tracking cookies. Temporary compatibility allowances are limited to the current site and tab, expire automatically, and are unavailable in Banking and Malware Analysis profiles.</p>
+      <p>Websites may request camera, microphone, location, notifications, clipboard, or other permissions. LusoVela applies profile and secure-origin rules before prompting. If you grant a permission, the requesting website may receive the corresponding data.</p>
+    </section>
+    <section id="controls">
+      <h2>6. Your controls and data retention</h2>
+      <p>You can change cloud domain protection in Privacy &amp; Security and use browser controls to clear selected history, cookies, cache, site storage, recovery snapshots, and local security records. Clear-on-exit can automate browser cleanup. Local data remains until removed by browser controls, applicable cleanup settings, or deletion of its stored files.</p>
+      <p>Clearing browser data does not remove downloaded files saved outside the browser, exported investigation files, external backups, operating-system records, or records retained by websites and service providers. Local login records are separate from routine browsing-history cleanup.</p>
+    </section>
+    <section>
+      <h2>7. Private and disposable sessions</h2>
+      <p>Private windows use isolated in-memory browser storage and are not restored as session history. Disposable profiles use separate containers and clear their container data according to their configured lifetime. These modes do not hide network traffic from websites, employers, internet providers, network operators, or your operating system.</p>
+    </section>
+    <section>
+      <h2>8. Children and security</h2>
+      <p>LusoVela is a general-purpose browser and does not operate a service intended to collect children’s personal information. Websites visited through the browser remain responsible for their own data practices.</p>
+      <p>No browser provides complete protection against malicious sites, unknown vulnerabilities, compromised devices, or unsafe actions. Keep Windows and browser security releases current. Review exported diagnostics and cases before sharing them.</p>
+    </section>
+    <section>
+      <h2>9. This policy page</h2>
+      <p>This page uses no analytics scripts, tracking pixels, external fonts, cookies, or browser storage. It is hosted on GitHub Pages. GitHub logs visitors’ IP addresses for security purposes, as described in <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages" rel="noreferrer">GitHub’s hosting documentation</a> and <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer">GitHub’s privacy statement</a>.</p>
+    </section>
+    <section id="contact">
+      <h2>10. Contact, support, and policy changes</h2>
+      <p>For privacy questions or LusoVela support, contact Marc Lavoie through the <a href="https://github.com/MLavoie6927/MLavoie6927.github.io/issues/new" rel="noreferrer">publisher’s GitHub support channel</a>. Identify LusoVela and its version. GitHub issues are public: do not include passwords, private browsing records, financial information, or sensitive documents. GitHub may require an account to submit a request.</p>
+      <p>If you contact the publisher, the information you choose to provide is used to respond to your request. GitHub processes and retains submissions under its own policy. You can ask the publisher to remove information from a support issue they control; third-party records and backups may remain.</p>
+      <p>Material changes to this policy will be published with an updated effective date and corresponding release information.</p>
+    </section>
+  </main>
+  <footer><div class="wrap"><div class="signature">Marc Lavoie</div><p>Creator of LusoVela Browser · Originally created August 29, 2026<br>© 2026 Marc Lavoie. Third-party software retains its respective copyrights and license terms.</p></div></footer>
+</body>
+</html>
