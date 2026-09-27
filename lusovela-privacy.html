@@ -46,7 +46,7 @@
       <div class="brand">LUSOVELA · WINDOWS BROWSER</div>
       <h1>Privacy Policy</h1>
       <p class="intro">Understand what stays on your device, what connects to outside services, and how you control your browser data.</p>
-      <p class="date">Published by Marc Lavoie · Effective September 26, 2026 · Applies to LusoVela Windows version 1.4.16</p>
+      <p class="date">Published by Marc Lavoie · Effective September 26, 2026 · Applies to LusoVela Windows version 1.4.17</p>
     </div>
   </header>
   <main class="wrap">
@@ -69,18 +69,20 @@
     </section>
     <section>
       <h2>3. Local username, password, and download protection</h2>
-      <p>Your chosen username and salted password-verification record are protected using Electron safeStorage and Windows Data Protection API (DPAPI). They are not sent to a LusoVela account server. The local login and download lock help control access and authorize downloads; they do not encrypt the entire browser profile or prevent capture by software already controlling your Windows account.</p>
+      <p>Your chosen username and salted password-verification record are protected using Electron safeStorage and Windows Data Protection API (DPAPI). These credentials remain on your device. The local login and download lock help control access and authorize downloads; they do not encrypt the entire browser profile or prevent capture by software already controlling your Windows account.</p>
       <p>Website downloads are privately staged, checked by available local controls, and require local password authorization before release. Download metadata and security results may be recorded locally.</p>
     </section>
     <section id="connections">
       <h2>4. Connections to websites and outside services</h2>
       <ul>
         <li><strong>Websites and searches:</strong> websites receive ordinary connection and request information, including your IP address. Search terms go to the search provider you select. Services receive information you submit, such as sign-in details, messages, or documents.</li>
-        <li><strong>Domain protection:</strong> cloud domain protection is enabled by default and uses Quad9 DNS over HTTPS. Queries send domain names and expose your network IP to Quad9. This feature does not upload URL paths, page contents, documents, cookies, or passwords. See <a href="https://www.quad9.net/privacy/policy/" rel="noreferrer">Quad9’s privacy policy</a>.</li>
+        <li><strong>Your DNS choice:</strong> system DNS is the default and follows your Windows configuration, including your own DNS provider, network, or VPN preferences. LusoVela does not automatically select Quad9. In Privacy &amp; Security you can opt into Quad9 DNS over HTTPS or enter your own HTTPS DNS endpoint. This choice stays on your device. Upgrading from a release without an explicit DNS mode starts in system mode.</li>
+        <li><strong>Optional Quad9 protection:</strong> Quad9 can block known malicious domains. When selected, it receives domain queries and your network IP. The DNS feature does not upload URL paths, page contents, documents, cookies, or passwords. See <a href="https://www.quad9.net/privacy/policy/" rel="noreferrer">Quad9’s privacy policy</a>.</li>
+        <li><strong>Custom encrypted DNS:</strong> your chosen provider receives domain queries and your network IP under its own policy. Custom providers may not block threats. Local ad, tracker, and domain filters remain active in every DNS mode.</li>
         <li><strong>Protected media:</strong> CastLabs/Widevine component initialization and component-update checks may contact external component services. Streaming providers also make their own playback and license requests under their policies.</li>
-        <li><strong>Configured update feeds:</strong> LusoVela software-update or signed-filter checks can contact a configured feed. These checks remain disabled when no endpoint and public verification key are configured. The feed host can receive ordinary connection information.</li>
+        <li><strong>Local filters:</strong> this release has no configured LusoVela software-update or signed-filter feed. Built-in filters are evaluated locally.</li>
       </ul>
-      <p>Secure Quad9 mode does not fall back to unencrypted DNS when Quad9 is unavailable. Local hosts, cached addresses, and proxy-resolved traffic may not undergo a fresh Quad9 lookup. Domain protection is not remote file scanning and cannot guarantee that every site is safe.</p>
+      <p>Quad9 and custom encrypted DNS modes do not fall back to unencrypted DNS when the chosen service is unavailable. Existing streams may reconnect after a change. Local hosts, cached addresses, and proxy-resolved traffic may not undergo a fresh lookup through the selected service. Domain protection is not remote file scanning and cannot guarantee that every site is safe.</p>
     </section>
     <section>
       <h2>5. Local filtering and website permissions</h2>
@@ -89,7 +91,8 @@
     </section>
     <section id="controls">
       <h2>6. Your controls and data retention</h2>
-      <p>You can change cloud domain protection in Privacy &amp; Security and use browser controls to clear selected history, cookies, cache, site storage, recovery snapshots, and local security records. Clear-on-exit can automate browser cleanup. Local data remains until removed by browser controls, applicable cleanup settings, or deletion of its stored files.</p>
+      <p>You can select system DNS, optional Quad9, or a custom HTTPS DNS provider in Privacy &amp; Security. An optional Português (Portugal) toggle changes supported browser interface labels locally, including menus, settings, login, and the new-tab page. No translation service is contacted. Websites, legal notices, and user-entered content keep their original language.</p>
+      <p>Browser controls let you clear selected history, cookies, cache, site storage, recovery snapshots, and local security records. Clear-on-exit can automate browser cleanup. Local data remains until removed by browser controls, applicable cleanup settings, or deletion of its stored files.</p>
       <p>Clearing browser data does not remove downloaded files saved outside the browser, exported investigation files, external backups, operating-system records, or records retained by websites and service providers. Local login records are separate from routine browsing-history cleanup.</p>
     </section>
     <section>
