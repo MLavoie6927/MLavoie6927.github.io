@@ -238,12 +238,14 @@ def validate_glass_meridian(errors: list[str]) -> None:
 def validate_reconstructing_system(errors: list[str]) -> None:
     base = ROOT / "projects" / "reconstructing-the-system"
     manuscript_name = "Reconstructing_the_System_First_Run_HUMINT_Expanded.docx"
+    pdf_name = "Reconstructing_the_System_First_Run_HUMINT_Expanded.pdf"
     required_files = (
         "index.html",
         "project.css",
         "preview.svg",
         "README.md",
         "SHA256SUMS.txt",
+        pdf_name,
         manuscript_name,
     )
     for name in required_files:
@@ -259,7 +261,9 @@ def validate_reconstructing_system(errors: list[str]) -> None:
         "1,000",
         "protected source lines",
         "40",
+        pdf_name,
         manuscript_name,
+        "Read PDF in browser",
         "connect-src 'none'",
         "object-src 'none'",
         "script-src 'none'",
@@ -272,8 +276,13 @@ def validate_reconstructing_system(errors: list[str]) -> None:
     actual = hashlib.sha256(manuscript.read_bytes()).hexdigest().upper()
     if actual != expected:
         errors.append("Reconstructing the System: manuscript SHA-256 mismatch")
+    expected_pdf = "76DD6731170EE9D7EC8DB69592C35D60AAD705A6AE0633C97A52EAC42A8DB78D"
+    pdf = base / pdf_name
+    actual_pdf = hashlib.sha256(pdf.read_bytes()).hexdigest().upper()
+    if actual_pdf != expected_pdf:
+        errors.append("Reconstructing the System: PDF SHA-256 mismatch")
     checksum_text = (base / "SHA256SUMS.txt").read_text(encoding="utf-8")
-    if expected not in checksum_text or manuscript_name not in checksum_text:
+    if any(marker not in checksum_text for marker in (expected, manuscript_name, expected_pdf, pdf_name)):
         errors.append("Reconstructing the System: checksum manifest is incomplete")
 
     for page_name in ("index.html", "full-portfolio.html"):
