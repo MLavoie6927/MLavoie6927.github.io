@@ -235,6 +235,53 @@ def validate_glass_meridian(errors: list[str]) -> None:
             errors.append(f"Glass Meridian: stale checksum for {name}")
 
 
+def validate_reconstructing_system(errors: list[str]) -> None:
+    base = ROOT / "projects" / "reconstructing-the-system"
+    manuscript_name = "Reconstructing_the_System_First_Run_HUMINT_Expanded.docx"
+    required_files = (
+        "index.html",
+        "project.css",
+        "preview.svg",
+        "README.md",
+        "SHA256SUMS.txt",
+        manuscript_name,
+    )
+    for name in required_files:
+        if not (base / name).is_file():
+            errors.append(f"Reconstructing the System: missing required file {name}")
+    if any(not (base / name).is_file() for name in required_files):
+        return
+
+    html = (base / "index.html").read_text(encoding="utf-8")
+    for marker in (
+        "Portfolio truth boundary",
+        "fictional nation-state",
+        "1,000",
+        "protected source lines",
+        "40",
+        manuscript_name,
+        "connect-src 'none'",
+        "object-src 'none'",
+        "script-src 'none'",
+    ):
+        if marker not in html:
+            errors.append(f"Reconstructing the System: missing project marker {marker}")
+
+    expected = "D457D797FA5C943D5BB7E7351F62D4A115889B6844F548B8203A301D723B88EB"
+    manuscript = base / manuscript_name
+    actual = hashlib.sha256(manuscript.read_bytes()).hexdigest().upper()
+    if actual != expected:
+        errors.append("Reconstructing the System: manuscript SHA-256 mismatch")
+    checksum_text = (base / "SHA256SUMS.txt").read_text(encoding="utf-8")
+    if expected not in checksum_text or manuscript_name not in checksum_text:
+        errors.append("Reconstructing the System: checksum manifest is incomplete")
+
+    for page_name in ("index.html", "full-portfolio.html"):
+        page_text = (ROOT / page_name).read_text(encoding="utf-8")
+        if "projects/reconstructing-the-system/" not in page_text:
+            errors.append(f"{page_name}: HUMINT manuscript project link is missing")
+
+
 def main() -> None:
     errors: list[str] = []
     validate_html(errors)
@@ -242,6 +289,7 @@ def main() -> None:
     validate_full_portfolio(errors)
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
+    validate_reconstructing_system(errors)
     if errors:
         for error in errors:
             print(f"FAIL: {error}")
@@ -249,6 +297,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
+    print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
 
 
 if __name__ == "__main__":

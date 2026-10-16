@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Reconstructing the System source-lineage map</title>
+  <desc id="desc">Twelve protected source nodes converge through contaminated reporting chains on senior analyst Darek Miris, who separates fused events before a national warning decision.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07110f"/><stop offset="1" stop-color="#020605"/></linearGradient>
+    <radialGradient id="halo"><stop offset="0" stop-color="#68e0ae" stop-opacity=".28"/><stop offset="1" stop-color="#68e0ae" stop-opacity="0"/></radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="760" rx="22" fill="url(#bg)"/>
+  <g stroke="#16362d" stroke-width="1" opacity=".58">
+    <path d="M0 100h1200M0 200h1200M0 300h1200M0 400h1200M0 500h1200M0 600h1200M0 700h1200"/>
+    <path d="M100 0v760M200 0v760M300 0v760M400 0v760M500 0v760M600 0v760M700 0v760M800 0v760M900 0v760M1000 0v760M1100 0v760"/>
+  </g>
+  <text x="62" y="64" fill="#68e0ae" font-family="Consolas, monospace" font-size="20" font-weight="700" letter-spacing="3">PROTECTED SOURCE LINEAGE</text>
+  <text x="62" y="92" fill="#8ca69c" font-family="Segoe UI, sans-serif" font-size="17">Apparent corroboration collapses when shared origins are reconstructed.</text>
+  <g fill="none" stroke-linecap="round">
+    <g stroke="#66c9de" stroke-opacity=".42" stroke-width="3"><path d="M162 174C330 174 350 319 514 319"/><path d="M162 254C330 254 350 343 514 343"/><path d="M162 334C330 334 350 367 514 367"/><path d="M162 414C330 414 350 391 514 391"/><path d="M162 494C330 494 350 415 514 415"/><path d="M162 574C330 574 350 439 514 439"/></g>
+    <g stroke="#e8bd72" stroke-opacity=".42" stroke-width="3"><path d="M1038 174C870 174 850 319 686 319"/><path d="M1038 254C870 254 850 343 686 343"/><path d="M1038 334C870 334 850 367 686 367"/><path d="M1038 414C870 414 850 391 686 391"/><path d="M1038 494C870 494 850 415 686 415"/><path d="M1038 574C870 574 850 439 686 439"/></g>
+    <path d="M600 462V564" stroke="#68e0ae" stroke-width="5"/><path d="M600 636V690" stroke="#ef8e83" stroke-width="4" stroke-dasharray="8 9"/>
+  </g>
+  <g font-family="Consolas, monospace" font-size="14" text-anchor="middle">
+    <g fill="#0c1a17" stroke="#66c9de" stroke-width="2"><circle cx="132" cy="174" r="30"/><circle cx="132" cy="254" r="30"/><circle cx="132" cy="334" r="30"/><circle cx="132" cy="414" r="30"/><circle cx="132" cy="494" r="30"/><circle cx="132" cy="574" r="30"/></g>
+    <g fill="#c9f6ff"><text x="132" y="179">S-01</text><text x="132" y="259">S-02</text><text x="132" y="339">S-03</text><text x="132" y="419">S-04</text><text x="132" y="499">S-05</text><text x="132" y="579">S-06</text></g>
+    <g fill="#0c1a17" stroke="#e8bd72" stroke-width="2"><circle cx="1068" cy="174" r="30"/><circle cx="1068" cy="254" r="30"/><circle cx="1068" cy="334" r="30"/><circle cx="1068" cy="414" r="30"/><circle cx="1068" cy="494" r="30"/><circle cx="1068" cy="574" r="30"/></g>
+    <g fill="#ffe7b6"><text x="1068" y="179">S-07</text><text x="1068" y="259">S-08</text><text x="1068" y="339">S-09</text><text x="1068" y="419">S-10</text><text x="1068" y="499">S-11</text><text x="1068" y="579">S-12</text></g>
+  </g>
+  <circle cx="600" cy="382" r="190" fill="url(#halo)"/>
+  <g filter="url(#glow)"><rect x="500" y="292" width="200" height="180" rx="16" fill="#0d1d19" stroke="#68e0ae" stroke-width="3"/><path d="M548 342h104M548 374h104M548 406h70" stroke="#68e0ae" stroke-width="6" stroke-linecap="round" opacity=".72"/><circle cx="656" cy="416" r="18" fill="none" stroke="#66c9de" stroke-width="4"/><path d="M669 429l24 24" stroke="#66c9de" stroke-width="5" stroke-linecap="round"/></g>
+  <text x="600" y="260" fill="#ecf8f3" font-family="Segoe UI, sans-serif" font-size="30" font-weight="800" text-anchor="middle">DAREK MIRIS</text>
+  <text x="600" y="488" fill="#94afa5" font-family="Consolas, monospace" font-size="15" text-anchor="middle" letter-spacing="2">LINEAGE · DISSENT · CONFIDENCE</text>
+  <g><rect x="430" y="564" width="340" height="72" rx="9" fill="#10221c" stroke="#68e0ae" stroke-width="2"/><text x="600" y="593" fill="#68e0ae" font-family="Consolas, monospace" font-size="15" font-weight="700" text-anchor="middle">2030 WARNING JUDGMENT</text><text x="600" y="618" fill="#d8eee5" font-family="Segoe UI, sans-serif" font-size="16" text-anchor="middle">Grid alarm ≠ defense exercise</text></g>
+  <g><rect x="393" y="690" width="414" height="40" rx="20" fill="#261312" stroke="#ef8e83" stroke-width="1.5"/><text x="600" y="716" fill="#ffc2bb" font-family="Consolas, monospace" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="1">MANUFACTURED ATTACK NARRATIVE BROKEN</text></g>
+</svg>

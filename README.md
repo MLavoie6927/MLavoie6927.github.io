@@ -14,6 +14,7 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation
 - `.github/workflows/k12-operations-ci.yml` - K-12 model, evidence, generated-data, and browser-source validation
 - `projects/operation-glass-meridian/` - interactive all-source intelligence analysis command lab
+- `projects/reconstructing-the-system/` - long-form fictional HUMINT case study and canonical Word manuscript
 - `tools/validate_site.py` - local-link, accessibility, navigation, and security-boundary validation
 - `.github/workflows/portfolio-ci.yml` - portfolio and Glass Meridian validation workflow
 - `SECURITY-CHECKLIST.md` - public publishing safety checklist
