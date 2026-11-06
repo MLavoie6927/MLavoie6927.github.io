@@ -4840,6 +4840,35 @@ a.security-stack-preview:focus-visible img {
   }
 }
 
+/* Keep the expanded homepage navigation readable as a single row on wide screens. */
+@media (min-width: 1801px) {
+  .landing-page .nav { max-width: none; }
+  .landing-page .nav-links { gap: 0.25rem; }
+  .landing-page .nav-links a { padding-inline: clamp(0.42rem, 0.55vw, 0.7rem); }
+}
+
+@media (min-width: 1121px) and (max-width: 1800px) {
+  .landing-page .nav-toggle { display: inline-block; }
+  .landing-page .nav-links {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-height);
+    display: none;
+    max-height: calc(100dvh - var(--header-height));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    background: #080b10;
+    overflow-y: auto;
+  }
+  .landing-page .nav-links.is-open { display: grid; }
+  .landing-page .nav-links li,
+  .landing-page .nav-links a { width: 100%; }
+  .landing-page .nav-links a { justify-content: flex-start; padding: 0.85rem; }
+}
+
 @media (max-width: 520px) {
   .detection-metrics {
     grid-template-columns: 1fr;
