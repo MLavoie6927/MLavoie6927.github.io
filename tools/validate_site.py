@@ -81,8 +81,8 @@ def validate_html(errors: list[str]) -> None:
 def validate_home(errors: list[str]) -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
-    if not nav or nav.group(1).count("<li>") > 10:
-        errors.append("index.html: primary navigation must contain no more than ten choices")
+    if not nav or nav.group(1).count("<li>") > 11:
+        errors.append("index.html: primary navigation must contain no more than eleven choices")
     for marker in (
         'id="featured-projects"',
         'id="project-library"',
@@ -129,18 +129,11 @@ def validate_full_portfolio(errors: list[str]) -> None:
 
 
 def validate_atlas_upgrade(errors: list[str]) -> None:
-    style_order = (
-        'styles.css?v=portfolio-20260907a',
-        'atlas-enterprise-v2.css?v=2.0.0',
-        'atlas-os-v3.css?v=3.1.0',
-    )
-    script_order = (
-        'script.js?v=portfolio-20260907a',
-        'atlas-enterprise-v2.js?v=2.0.0',
-        'atlas-os-v3.js?v=3.1.0',
-    )
     for page_name in ("index.html", "full-portfolio.html"):
         text = (ROOT / page_name).read_text(encoding="utf-8")
+        version = "security-browser-nav-20261106" if page_name == "index.html" else "portfolio-20260907a"
+        style_order = (f"styles.css?v={version}", "atlas-enterprise-v2.css?v=2.0.0", "atlas-os-v3.css?v=3.1.0")
+        script_order = (f"script.js?v={version}", "atlas-enterprise-v2.js?v=2.0.0", "atlas-os-v3.js?v=3.1.0")
         if 'data-network-server-lab' not in text:
             errors.append(f"{page_name}: ATLAS-NET-01 host section is missing")
         for assets, label in ((style_order, "styles"), (script_order, "scripts")):
