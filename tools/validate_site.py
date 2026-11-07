@@ -16,7 +16,11 @@ HTML_FILES = sorted(
         path for path in ROOT.rglob("index.html")
         if ".git" not in path.parts and "work" not in path.parts
     ]
-    + [ROOT / "full-portfolio.html", ROOT / "intelligence-officer" / "study.html"]
+    + [
+        ROOT / "full-portfolio.html",
+        ROOT / "intelligence-officer" / "study.html",
+        ROOT / "intelligence-officer" / "sectors.html",
+    ]
 )
 
 
@@ -284,6 +288,39 @@ def validate_reconstructing_system(errors: list[str]) -> None:
             errors.append(f"{page_name}: HUMINT manuscript project link is missing")
 
 
+def validate_intelligence_fieldbook(errors: list[str]) -> None:
+    fieldbook = ROOT / "intelligence-officer" / "sectors.html"
+    text = fieldbook.read_text(encoding="utf-8")
+    if text.count('class="sector-brief"') != 22:
+        errors.append("Intelligence fieldbook: expected exactly 22 sector briefs")
+    if text.count("<dt>") != 110:
+        errors.append("Intelligence fieldbook: expected five analytic fields for each of 22 sectors")
+    for marker in (
+        "Questions to ask",
+        "Investigation path",
+        "Issues and indicators",
+        "Evidence and specialists",
+        "Cross-sector investigations",
+        "International relations",
+        "Environment &amp; climate systems",
+        "Water &amp; wastewater",
+    ):
+        if marker not in text:
+            errors.append(f"Intelligence fieldbook: missing marker {marker}")
+    study = (ROOT / "intelligence-officer" / "study.html").read_text(encoding="utf-8")
+    if study.count('class="question"') != 12:
+        errors.append("Intelligence study guide: expected exactly 12 scenario questions")
+    for marker in (
+        "Operation Glass Meridian",
+        "Operation Harbor Lantern",
+        "Reconstructing the System",
+        "30 intelligence source types",
+        "22-sector intelligence investigations",
+    ):
+        if marker not in study:
+            errors.append(f"Intelligence study guide: missing restored project marker {marker}")
+
+
 def main() -> None:
     errors: list[str] = []
     validate_html(errors)
@@ -292,6 +329,7 @@ def main() -> None:
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
     validate_reconstructing_system(errors)
+    validate_intelligence_fieldbook(errors)
     if errors:
         for error in errors:
             print(f"FAIL: {error}")
@@ -300,6 +338,7 @@ def main() -> None:
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
+    print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
 
 
 if __name__ == "__main__":
