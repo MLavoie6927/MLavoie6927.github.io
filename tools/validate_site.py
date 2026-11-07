@@ -20,6 +20,7 @@ HTML_FILES = sorted(
         ROOT / "full-portfolio.html",
         ROOT / "intelligence-officer" / "core-literacy.html",
         ROOT / "intelligence-officer" / "collection-workbench.html",
+        ROOT / "intelligence-officer" / "influence-analysis.html",
         ROOT / "intelligence-officer" / "study.html",
         ROOT / "intelligence-officer" / "sectors.html",
     ]
@@ -393,6 +394,66 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
     ).read_text(encoding="utf-8"):
         errors.append("Full portfolio: intelligence collection workbench link is missing")
 
+    influence = (ROOT / "intelligence-officer" / "influence-analysis.html").read_text(encoding="utf-8")
+    influence_counts = {
+        'class="doctrine-phase"': 6,
+        'class="vector-card': 6,
+        'class="matrix-row"': 6,
+        'class="proxy-role"': 6,
+        'class="indicator-check"': 12,
+    }
+    for marker, expected in influence_counts.items():
+        actual = influence.count(marker)
+        if actual != expected:
+            errors.append(
+                f"PSYOP analysis division: expected {expected} occurrences of {marker}, found {actual}"
+            )
+    for marker in (
+        "Safety and truth boundary",
+        "No legitimate method guarantees control over a person",
+        "The function exists—but it is governed, authorized, and assessed",
+        "eight-step Target Audience Analysis Model",
+        "Six-direction convergence",
+        "Operation Mirror Current",
+        "Convergence is not control",
+        "Mandatory legal and ethical gates",
+        "TM3_53x11.pdf",
+        "adp3_13.pdf",
+        "AJP-10.1%20EDA%20V1%20E.pdf",
+    ):
+        if marker not in influence:
+            errors.append(f"PSYOP analysis division: missing marker {marker}")
+
+    influence_script = (ROOT / "intelligence-officer" / "influence-analysis.js").read_text(encoding="utf-8")
+    influence_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", influence_script, flags=re.S)
+    influence_forbidden = {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }
+    for label, pattern in influence_forbidden.items():
+        if re.search(pattern, influence_without_comments):
+            errors.append(f"PSYOP analysis division: forbidden {label}")
+
+    for page_name in (
+        "index.html",
+        "core-literacy.html",
+        "collection-workbench.html",
+        "study.html",
+        "sectors.html",
+    ):
+        page = ROOT / "intelligence-officer" / page_name
+        if "influence-analysis.html" not in page.read_text(encoding="utf-8"):
+            errors.append(f"PSYOP analysis division: missing navigation link from {page_name}")
+    if "intelligence-officer/influence-analysis.html" not in (
+        ROOT / "full-portfolio.html"
+    ).read_text(encoding="utf-8"):
+        errors.append("Full portfolio: PSYOP analysis division link is missing")
+
 
 def main() -> None:
     errors: list[str] = []
@@ -414,6 +475,7 @@ def main() -> None:
     print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
     print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
     print("PASS: collection workbench has 3 requirements, 3 hypotheses, 12 evidence records, and 12 indicators")
+    print("PASS: PSYOP division has doctrine gates, 6-direction analysis, 6 roles, and 12 indicators")
 
 
 if __name__ == "__main__":
