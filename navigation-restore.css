@@ -1,0 +1,26 @@
+/* Keep primary destinations visible on desktop after the portfolio grew. */
+@media (min-width:1121px) {
+  .landing-page .nav,
+  .portfolio-library-page .nav {max-width:none;flex-wrap:wrap;align-content:center;gap:.55rem 1rem;padding:.65rem clamp(1rem,2vw,2rem)}
+  .landing-page .nav-toggle,
+  .portfolio-library-page .nav-toggle {display:none}
+  .landing-page .nav-links,
+  .portfolio-library-page .nav-links {position:static;inset:auto;display:flex;visibility:visible;max-height:none;overflow:visible;border:0;background:none;padding:0;margin:0;grid-template-columns:none;gap:.4rem;width:auto}
+  .landing-page .nav-links {flex-wrap:wrap;justify-content:flex-end;flex:1 1 850px}
+  .landing-page .nav-links li,
+  .landing-page .nav-links a,
+  .portfolio-library-page .nav-links li,
+  .portfolio-library-page .nav-links a {width:auto}
+  .landing-page .nav-links a,
+  .portfolio-library-page .nav-links a {min-height:40px;padding:.52rem .7rem;font-size:.78rem;justify-content:center}
+  .portfolio-library-page .portfolio-quick-links {display:flex;flex:1 1 auto;justify-content:flex-end;margin-left:auto}
+  .portfolio-library-page .nav-links {flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:thin;padding-bottom:.35rem}
+  .portfolio-library-page .nav-links li {flex:none}
+}
+@media (max-width:1120px) {
+  .portfolio-library-page .portfolio-quick-links {display:flex;order:3;width:100%;justify-content:flex-start;overflow-x:auto;scrollbar-width:thin}
+  .portfolio-library-page .portfolio-quick-links a {white-space:nowrap;flex:0 0 auto}
+}
+@media (min-width:1121px) and (max-width:1800px) {
+  .landing-page .nav-links {flex:1 1 100%;justify-content:flex-start}
+}

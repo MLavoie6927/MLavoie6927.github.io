@@ -16,7 +16,7 @@ HTML_FILES = sorted(
         path for path in ROOT.rglob("index.html")
         if ".git" not in path.parts and "work" not in path.parts
     ]
-    + [ROOT / "full-portfolio.html"]
+    + [ROOT / "full-portfolio.html", ROOT / "intelligence-officer" / "study.html"]
 )
 
 
