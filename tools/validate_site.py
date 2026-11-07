@@ -18,6 +18,7 @@ HTML_FILES = sorted(
     ]
     + [
         ROOT / "full-portfolio.html",
+        ROOT / "intelligence-officer" / "core-literacy.html",
         ROOT / "intelligence-officer" / "study.html",
         ROOT / "intelligence-officer" / "sectors.html",
     ]
@@ -320,6 +321,25 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         if marker not in study:
             errors.append(f"Intelligence study guide: missing restored project marker {marker}")
 
+    literacy = (ROOT / "intelligence-officer" / "core-literacy.html").read_text(encoding="utf-8")
+    if literacy.count('class="literacy-card"') != 22:
+        errors.append("Intelligence core literacy lab: expected exactly 22 sector exercises")
+    if literacy.count('class="literacy-example"') != 22:
+        errors.append("Intelligence core literacy lab: expected one fictional example per sector")
+    if literacy.count('class="literacy-question"') != 66:
+        errors.append("Intelligence core literacy lab: expected three questions per sector")
+    if literacy.count('class="literacy-data"') != 22:
+        errors.append("Intelligence core literacy lab: expected one operational data request per sector")
+    for marker in (
+        "The universal data request",
+        "Decision + unit of analysis + baseline",
+        "Operational data request",
+        "Repetition alone does not prove attribution",
+        "Turn the data into a decision product",
+    ):
+        if marker not in literacy:
+            errors.append(f"Intelligence core literacy lab: missing marker {marker}")
+
 
 def main() -> None:
     errors: list[str] = []
@@ -339,6 +359,7 @@ def main() -> None:
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
     print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
+    print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
 
 
 if __name__ == "__main__":
