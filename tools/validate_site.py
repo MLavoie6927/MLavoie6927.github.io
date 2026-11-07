@@ -19,6 +19,7 @@ HTML_FILES = sorted(
     + [
         ROOT / "full-portfolio.html",
         ROOT / "intelligence-officer" / "core-literacy.html",
+        ROOT / "intelligence-officer" / "collection-workbench.html",
         ROOT / "intelligence-officer" / "study.html",
         ROOT / "intelligence-officer" / "sectors.html",
     ]
@@ -340,6 +341,58 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         if marker not in literacy:
             errors.append(f"Intelligence core literacy lab: missing marker {marker}")
 
+    workbench = (ROOT / "intelligence-officer" / "collection-workbench.html").read_text(encoding="utf-8")
+    expected_counts = {
+        'class="requirement-card"': 3,
+        'class="hypothesis-card"': 3,
+        'class="evidence-card"': 12,
+        'class="collection-row"': 6,
+        'class="indicator-card"': 12,
+    }
+    for marker, expected in expected_counts.items():
+        actual = workbench.count(marker)
+        if actual != expected:
+            errors.append(
+                f"Intelligence collection workbench: expected {expected} occurrences of {marker}, found {actual}"
+            )
+    for marker in (
+        "Operation Cascade Line",
+        "Portfolio truth boundary",
+        "Priority intelligence requirements",
+        "Synthetic evidence ledger",
+        "Indicator and warning matrix",
+        "Interactive analyst lab",
+        "Worked decision brief",
+        'id="assessment-builder"',
+        "entirely fictional",
+    ):
+        if marker not in workbench:
+            errors.append(f"Intelligence collection workbench: missing marker {marker}")
+
+    workbench_script = (ROOT / "intelligence-officer" / "collection-workbench.js").read_text(encoding="utf-8")
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", workbench_script, flags=re.S)
+    forbidden = {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }
+    for label, pattern in forbidden.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"Intelligence collection workbench: forbidden {label}")
+
+    for page_name in ("index.html", "core-literacy.html", "study.html", "sectors.html"):
+        page = ROOT / "intelligence-officer" / page_name
+        if "collection-workbench.html" not in page.read_text(encoding="utf-8"):
+            errors.append(f"Intelligence collection workbench: missing navigation link from {page_name}")
+    if "intelligence-officer/collection-workbench.html" not in (
+        ROOT / "full-portfolio.html"
+    ).read_text(encoding="utf-8"):
+        errors.append("Full portfolio: intelligence collection workbench link is missing")
+
 
 def main() -> None:
     errors: list[str] = []
@@ -360,6 +413,7 @@ def main() -> None:
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
     print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
     print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
+    print("PASS: collection workbench has 3 requirements, 3 hypotheses, 12 evidence records, and 12 indicators")
 
 
 if __name__ == "__main__":
