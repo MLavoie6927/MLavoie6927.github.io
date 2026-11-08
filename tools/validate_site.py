@@ -307,9 +307,51 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         "International relations",
         "Environment &amp; climate systems",
         "Water &amp; wastewater",
+        "There is no universal “best” source",
+        "All 30 source types",
+        "88</b> priority questions",
+        "66</b> decision gates",
+        'id="sector-search"',
+        'id="expand-all"',
+        'id="collapse-all"',
+        'id="fieldbook-menu-toggle"',
+        'aria-controls="fieldbook-navigation"',
     ):
         if marker not in text:
             errors.append(f"Intelligence fieldbook: missing marker {marker}")
+
+    fieldbook_script = (ROOT / "intelligence-officer" / "sectors.js").read_text(encoding="utf-8")
+    catalog_block, investigation_block = fieldbook_script.split("const sectorInvestigations =", maxsplit=1)
+    investigation_block = investigation_block.split("const sourceById", maxsplit=1)[0]
+    source_catalog_ids = {
+        int(source_id)
+        for source_id in re.findall(r'\{ id: (\d+), label:', catalog_block)
+    }
+    used_source_ids = {
+        int(source_id)
+        for source_id in re.findall(r'\[(\d+), "', investigation_block)
+    }
+    if source_catalog_ids != set(range(1, 31)):
+        errors.append("Intelligence fieldbook: source effectiveness directory must define source IDs 1 through 30")
+    if used_source_ids != set(range(1, 31)):
+        errors.append("Intelligence fieldbook: sector source stacks must collectively use all 30 source types")
+    for marker, expected in {
+        'decision: "': 22,
+        "questions: [": 22,
+        "sources: [": 22,
+        "gates: [": 22,
+    }.items():
+        actual = investigation_block.count(marker)
+        if actual != expected:
+            errors.append(
+                f"Intelligence fieldbook: expected {expected} sector investigation occurrences of {marker}, found {actual}"
+            )
+    if fieldbook_script.count('createElement("li", "", question)') != 1:
+        errors.append("Intelligence fieldbook: priority-question renderer is missing")
+    if fieldbook_script.count('createElement("strong", "", label)') != 1:
+        errors.append("Intelligence fieldbook: decision-gate renderer is missing")
+    if any(pattern in fieldbook_script for pattern in ("fetch(", "XMLHttpRequest", "WebSocket", "localStorage", "sessionStorage")):
+        errors.append("Intelligence fieldbook: interactive fieldbook must remain network- and storage-free")
     study = (ROOT / "intelligence-officer" / "study.html").read_text(encoding="utf-8")
     if study.count('class="question"') != 12:
         errors.append("Intelligence study guide: expected exactly 12 scenario questions")
@@ -483,7 +525,7 @@ def main() -> None:
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
-    print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
+    print("PASS: intelligence fieldbook has 22 sectors, 88 priority questions, 30 source profiles, and 66 decision gates")
     print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
     print("PASS: collection workbench has 3 requirements, 3 hypotheses, 12 evidence records, and 12 indicators")
     print("PASS: PSYOP division has doctrine gates, 6-direction influence analysis, 6-domain coercive-control analysis, 6 roles, and 12 indicators")

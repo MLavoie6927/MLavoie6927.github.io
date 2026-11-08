@@ -15,6 +15,7 @@ on:
       - "sitemap.xml"
       - "projects/operation-glass-meridian/**"
       - "projects/reconstructing-the-system/**"
+      - "intelligence-officer/**"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   pull_request:
@@ -31,6 +32,7 @@ on:
       - "sitemap.xml"
       - "projects/operation-glass-meridian/**"
       - "projects/reconstructing-the-system/**"
+      - "intelligence-officer/**"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   workflow_dispatch:
@@ -57,5 +59,6 @@ jobs:
           node --check script.js
           node --check atlas-enterprise-v2.js
           node --check atlas-os-v3.js
+          node --check intelligence-officer/sectors.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js
