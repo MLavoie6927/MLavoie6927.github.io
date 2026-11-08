@@ -2,6 +2,61 @@
 (() => {
   'use strict';
 
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+
+  const menuToggle = document.querySelector('#influence-menu-toggle');
+  const navigation = document.querySelector('#influence-navigation');
+  const mobileNavigation = window.matchMedia('(max-width: 850px)');
+
+  if (menuToggle && navigation) {
+    const setMenu = (open) => {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      navigation.classList.toggle('is-open', open);
+    };
+
+    menuToggle.addEventListener('click', () => {
+      setMenu(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    navigation.addEventListener('click', (event) => {
+      const link = event.target.closest('a');
+      if (!mobileNavigation.matches || !link) return;
+      const destination = link.getAttribute('href');
+      if (destination && destination.startsWith('#')) {
+        const section = document.querySelector(destination);
+        if (section) {
+          event.preventDefault();
+          setMenu(false);
+          window.requestAnimationFrame(() => {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            window.history.pushState(null, '', destination);
+          });
+          return;
+        }
+      }
+      setMenu(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+
+    const handleNavigationWidth = () => {
+      if (!mobileNavigation.matches) setMenu(false);
+    };
+    if (typeof mobileNavigation.addEventListener === 'function') {
+      mobileNavigation.addEventListener('change', handleNavigationWidth);
+    } else {
+      mobileNavigation.addListener(handleNavigationWidth);
+    }
+    setMenu(false);
+  }
+
   const form = document.querySelector('#influence-lab');
   const vectorButtons = Array.from(document.querySelectorAll('.vector-toggle'));
   const indicators = Array.from(document.querySelectorAll('.indicator-check'));

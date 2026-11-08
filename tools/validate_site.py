@@ -399,6 +399,11 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         'class="doctrine-phase"': 6,
         'class="vector-card': 6,
         'class="matrix-row"': 6,
+        'class="coercive-domain ': 6,
+        'class="coercive-row"': 6,
+        'href="#coercive-control"': 2,
+        'id="influence-menu-toggle"': 1,
+        'class="hamburger-lines"': 1,
         'class="proxy-role"': 6,
         'class="indicator-check"': 12,
     }
@@ -414,6 +419,12 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         "The function exists—but it is governed, authorized, and assessed",
         "eight-step Target Audience Analysis Model",
         "Six-direction convergence",
+        "The Six-Domain Coercive-Control Matrix",
+        "Descriptive, not sequential",
+        "No domain is required",
+        "Observed harm does not prove coordinated authorship",
+        "Evidence ladder for coercive-control analysis",
+        "Open navigation menu",
         "Operation Mirror Current",
         "Convergence is not control",
         "Mandatory legal and ethical gates",
@@ -475,7 +486,7 @@ def main() -> None:
     print("PASS: intelligence fieldbook has 22 sectors, five analytic fields, and restored projects")
     print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
     print("PASS: collection workbench has 3 requirements, 3 hypotheses, 12 evidence records, and 12 indicators")
-    print("PASS: PSYOP division has doctrine gates, 6-direction analysis, 6 roles, and 12 indicators")
+    print("PASS: PSYOP division has doctrine gates, 6-direction influence analysis, 6-domain coercive-control analysis, 6 roles, and 12 indicators")
 
 
 if __name__ == "__main__":
