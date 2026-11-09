@@ -20,6 +20,7 @@ HTML_FILES = sorted(
         ROOT / "full-portfolio.html",
         ROOT / "intelligence-officer" / "core-literacy.html",
         ROOT / "intelligence-officer" / "collection-workbench.html",
+        ROOT / "intelligence-officer" / "strategy-investigations.html",
         ROOT / "intelligence-officer" / "influence-analysis.html",
         ROOT / "intelligence-officer" / "study.html",
         ROOT / "intelligence-officer" / "sectors.html",
@@ -496,6 +497,7 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         "index.html",
         "core-literacy.html",
         "collection-workbench.html",
+        "strategy-investigations.html",
         "study.html",
         "sectors.html",
     ):
@@ -506,6 +508,97 @@ def validate_intelligence_fieldbook(errors: list[str]) -> None:
         ROOT / "full-portfolio.html"
     ).read_text(encoding="utf-8"):
         errors.append("Full portfolio: PSYOP analysis division link is missing")
+
+    strategy = (ROOT / "intelligence-officer" / "strategy-investigations.html").read_text(encoding="utf-8")
+    strategy_counts = {
+        'class="level-card ': 4,
+        'class="relationship-cycle"': 1,
+        'class="pattern-grid"': 1,
+        'role="tab"': 4,
+        'id="strategy-menu-toggle"': 1,
+        'class="hamburger-lines"': 1,
+    }
+    for marker, expected in strategy_counts.items():
+        actual = strategy.count(marker)
+        if actual != expected:
+            errors.append(
+                f"Strategy investigations lab: expected {expected} occurrences of {marker}, found {actual}"
+            )
+    planning_block = strategy.split('class="planning-board"', maxsplit=1)[1].split(
+        'class="decision-equation"', maxsplit=1
+    )[0]
+    if planning_block.count("<article>") != 9:
+        errors.append("Strategy investigations lab: expected exactly nine planning tests")
+    pattern_block = strategy.split('class="pattern-grid"', maxsplit=1)[1].split(
+        '</section>', maxsplit=1
+    )[0]
+    if pattern_block.count("<article>") != 8:
+        errors.append("Strategy investigations lab: expected exactly eight defensive-recognition patterns")
+    relationship_block = strategy.split('class="relationship-cycle"', maxsplit=1)[1].split(
+        'class="relationship-comparison"', maxsplit=1
+    )[0]
+    if relationship_block.count("<article>") != 6:
+        errors.append("Strategy investigations lab: expected exactly six ethical relationship stages")
+    for marker in (
+        "Tactics are not strategy",
+        "The nine-test decision matrix",
+        "How statecraft moves through institutions",
+        "Trust is an intelligence capability—and an obligation",
+        "Eight patterns to recognize without overclaiming",
+        "Operation Long Ledger",
+        "Operation Broken Compass",
+        "Operation Civic Bridge",
+        "Operation Narrow Gate",
+        "Observed, assessed, unproven",
+        "No supplied transcript, audio performance, or video imagery is republished here",
+    ):
+        if marker not in strategy:
+            errors.append(f"Strategy investigations lab: missing marker {marker}")
+
+    strategy_script = (ROOT / "intelligence-officer" / "strategy-investigations.js").read_text(
+        encoding="utf-8"
+    )
+    for marker, expected in {
+        "hypotheses: [": 4,
+        "evidence: [": 4,
+        "required: [": 4,
+        "leading: ": 4,
+        "judgment: ": 4,
+        "trigger: ": 4,
+    }.items():
+        actual = strategy_script.count(marker)
+        if actual != expected:
+            errors.append(
+                f"Strategy investigations lab: expected {expected} case occurrences of {marker}, found {actual}"
+            )
+    strategy_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", strategy_script, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, strategy_without_comments):
+            errors.append(f"Strategy investigations lab: forbidden {label}")
+
+    for page_name in (
+        "index.html",
+        "core-literacy.html",
+        "collection-workbench.html",
+        "influence-analysis.html",
+        "study.html",
+        "sectors.html",
+    ):
+        page = ROOT / "intelligence-officer" / page_name
+        if "strategy-investigations.html" not in page.read_text(encoding="utf-8"):
+            errors.append(f"Strategy investigations lab: missing navigation link from {page_name}")
+    if "intelligence-officer/strategy-investigations.html" not in (
+        ROOT / "full-portfolio.html"
+    ).read_text(encoding="utf-8"):
+        errors.append("Full portfolio: strategy investigations lab link is missing")
 
 
 def main() -> None:
@@ -529,6 +622,7 @@ def main() -> None:
     print("PASS: core literacy lab has 22 examples, 66 questions, and 22 operational data requests")
     print("PASS: collection workbench has 3 requirements, 3 hypotheses, 12 evidence records, and 12 indicators")
     print("PASS: PSYOP division has doctrine gates, 6-direction influence analysis, 6-domain coercive-control analysis, 6 roles, and 12 indicators")
+    print("PASS: strategy lab has 4 levels, 9 planning tests, 8 defensive patterns, and 4 interactive investigations")
 
 
 if __name__ == "__main__":

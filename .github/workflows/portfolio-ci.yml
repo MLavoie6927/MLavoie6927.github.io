@@ -60,5 +60,6 @@ jobs:
           node --check atlas-enterprise-v2.js
           node --check atlas-os-v3.js
           node --check intelligence-officer/sectors.js
+          node --check intelligence-officer/strategy-investigations.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js
