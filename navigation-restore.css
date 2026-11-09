@@ -1,26 +1,194 @@
-/* Keep primary destinations visible on desktop after the portfolio grew. */
-@media (min-width:1121px) {
-  .landing-page .nav,
-  .portfolio-library-page .nav {max-width:none;flex-wrap:wrap;align-content:center;gap:.55rem 1rem;padding:.65rem clamp(1rem,2vw,2rem)}
-  .landing-page .nav-toggle,
-  .portfolio-library-page .nav-toggle {display:none}
-  .landing-page .nav-links,
-  .portfolio-library-page .nav-links {position:static;inset:auto;display:flex;visibility:visible;max-height:none;overflow:visible;border:0;background:none;padding:0;margin:0;grid-template-columns:none;gap:.4rem;width:auto}
-  .landing-page .nav-links {flex-wrap:wrap;justify-content:flex-end;flex:1 1 850px}
-  .landing-page .nav-links li,
-  .landing-page .nav-links a,
-  .portfolio-library-page .nav-links li,
-  .portfolio-library-page .nav-links a {width:auto}
-  .landing-page .nav-links a,
-  .portfolio-library-page .nav-links a {min-height:40px;padding:.52rem .7rem;font-size:.78rem;justify-content:center}
-  .portfolio-library-page .portfolio-quick-links {display:flex;flex:1 1 auto;justify-content:flex-end;margin-left:auto}
-  .portfolio-library-page .nav-links {flex:1 1 100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:thin;padding-bottom:.35rem}
-  .portfolio-library-page .nav-links li {flex:none}
+/* Persistent hamburger navigation for the landing page and Full Portfolio. */
+.nav-ready .landing-page .nav,
+.nav-ready .portfolio-library-page .nav {
+  max-width: none;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 0.55rem 1rem;
+  padding: 0.65rem clamp(1rem, 2vw, 2rem);
 }
-@media (max-width:1120px) {
-  .portfolio-library-page .portfolio-quick-links {display:flex;order:3;width:100%;justify-content:flex-start;overflow-x:auto;scrollbar-width:thin}
-  .portfolio-library-page .portfolio-quick-links a {white-space:nowrap;flex:0 0 auto}
+
+.nav-ready .landing-page .nav-toggle,
+.nav-ready .portfolio-library-page .nav-toggle {
+  position: relative;
+  z-index: 103;
+  display: inline-flex !important;
+  flex: 0 0 44px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
 }
-@media (min-width:1121px) and (max-width:1800px) {
-  .landing-page .nav-links {flex:1 1 100%;justify-content:flex-start}
+
+.nav-ready .landing-page .nav-toggle-line,
+.nav-ready .portfolio-library-page .nav-toggle-line {
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.nav-ready .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-ready .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-ready .nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav-ready .landing-page .nav-links,
+.nav-ready .portfolio-library-page .nav-links {
+  position: fixed !important;
+  z-index: 102;
+  top: var(--active-header-height, var(--header-height));
+  right: 0;
+  left: 0;
+  display: none !important;
+  visibility: hidden;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
+  max-height: calc(100vh - var(--active-header-height, var(--header-height)));
+  max-height: calc(100dvh - var(--active-header-height, var(--header-height)));
+  margin: 0;
+  padding: 1rem clamp(1rem, 2vw, 2rem) 1.15rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-bottom: 1px solid rgba(54, 211, 153, 0.3);
+  background:
+    linear-gradient(180deg, rgba(8, 11, 16, 0.99), rgba(8, 11, 16, 0.96)),
+    url("assets/Background%20for%20website.png") center / cover no-repeat,
+    #080b10;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.5);
+}
+
+.nav-ready .landing-page .nav-links.is-open,
+.nav-ready .portfolio-library-page .nav-links.is-open {
+  display: grid !important;
+  visibility: visible;
+}
+
+.nav-ready .landing-page .nav-links li,
+.nav-ready .landing-page .nav-links a,
+.nav-ready .portfolio-library-page .nav-links li,
+.nav-ready .portfolio-library-page .nav-links a {
+  width: 100%;
+}
+
+.nav-ready .landing-page .nav-links a,
+.nav-ready .portfolio-library-page .nav-links a {
+  min-height: 48px;
+  justify-content: flex-start;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.88rem;
+}
+
+.nav-ready body.nav-open {
+  overflow: hidden;
+}
+
+.nav-ready .portfolio-library-page .portfolio-quick-links {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+/* On wide computers, retain the landing-page buttons and place the menu after them. */
+@media (min-width: 1600px) {
+  .nav-ready .landing-page .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .nav-ready .landing-page .brand {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .nav-ready .landing-page .nav-links:not(.is-open) {
+    position: static !important;
+    z-index: auto;
+    display: flex !important;
+    visibility: visible;
+    grid-row: 2;
+    grid-column: 1;
+    flex: none;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: auto;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .nav-ready .landing-page .nav-links:not(.is-open) li,
+  .nav-ready .landing-page .nav-links:not(.is-open) a {
+    width: auto;
+  }
+
+  .nav-ready .landing-page .nav-links:not(.is-open) a {
+    min-height: 42px;
+    justify-content: center;
+    padding: 0.55rem 0.72rem;
+    font-size: 0.8rem;
+  }
+
+  .nav-ready .landing-page .nav-toggle {
+    grid-row: 2;
+    grid-column: 2;
+    align-self: center;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1120px) {
+  .nav-ready .landing-page .nav-links,
+  .nav-ready .portfolio-library-page .nav-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nav-ready .portfolio-library-page .portfolio-quick-links {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    scrollbar-width: thin;
+  }
+
+  .nav-ready .portfolio-library-page .portfolio-quick-links a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 620px) {
+  .nav-ready .landing-page .nav-links,
+  .nav-ready .portfolio-library-page .nav-links {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .nav-ready .landing-page .nav-links a,
+  .nav-ready .portfolio-library-page .nav-links a {
+    min-height: 46px;
+    padding: 0.7rem 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-ready .landing-page .nav-toggle-line,
+  .nav-ready .portfolio-library-page .nav-toggle-line {
+    transition: none;
+  }
 }

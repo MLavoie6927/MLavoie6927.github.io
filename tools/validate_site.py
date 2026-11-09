@@ -89,8 +89,8 @@ def validate_html(errors: list[str]) -> None:
 def validate_home(errors: list[str]) -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
-    if not nav or nav.group(1).count("<li>") > 11:
-        errors.append("index.html: primary navigation must contain no more than eleven choices")
+    if not nav or nav.group(1).count("<li>") != 12:
+        errors.append("index.html: primary navigation must contain exactly twelve choices")
     for marker in (
         'id="featured-projects"',
         'id="project-library"',
@@ -101,6 +101,7 @@ def validate_home(errors: list[str]) -> None:
         'full-portfolio.html',
         'interview/',
         'general-it/',
+        'intelligence-officer/',
         'id="general-it"',
     ):
         if marker not in text:
@@ -209,10 +210,48 @@ def validate_general_it(errors: list[str]) -> None:
         errors.append("General IT Field Desk: sitemap URL is missing")
 
 
+def validate_hamburger_navigation(errors: list[str]) -> None:
+    for page_name in ("index.html", "full-portfolio.html"):
+        text = (ROOT / page_name).read_text(encoding="utf-8")
+        if text.count('<button class="nav-toggle"') != 1:
+            errors.append(f"{page_name}: expected one persistent hamburger control")
+        if text.count('<span class="nav-toggle-line"></span>') != 3:
+            errors.append(f"{page_name}: hamburger control must contain exactly three lines")
+        for marker in (
+            'aria-controls="primary-menu"',
+            'navigation-restore.css?v=20261109a',
+            'script.js?v=hamburger-menu-20261109a',
+        ):
+            if marker not in text:
+                errors.append(f"{page_name}: missing hamburger marker {marker}")
+
+    css = (ROOT / "navigation-restore.css").read_text(encoding="utf-8")
+    for marker in (
+        ".nav-ready .landing-page .nav-toggle",
+        ".nav-ready .portfolio-library-page .nav-toggle",
+        'display: inline-flex !important',
+        '.nav-links.is-open',
+        '@media (min-width: 1600px)',
+        '@media (max-width: 620px)',
+    ):
+        if marker not in css:
+            errors.append(f"Hamburger navigation CSS: missing marker {marker}")
+
+    script = (ROOT / "script.js").read_text(encoding="utf-8")
+    for marker in (
+        'document.documentElement.classList.add("nav-ready")',
+        "var shouldOpen = Boolean(open);",
+        '"Close navigation menu"',
+        '"--active-header-height"',
+    ):
+        if marker not in script:
+            errors.append(f"Hamburger navigation script: missing marker {marker}")
+
+
 def validate_atlas_upgrade(errors: list[str]) -> None:
     for page_name in ("index.html", "full-portfolio.html"):
         text = (ROOT / page_name).read_text(encoding="utf-8")
-        version = "security-browser-nav-20261106" if page_name == "index.html" else "portfolio-20260907a"
+        version = "hamburger-menu-20261109a"
         style_order = (f"styles.css?v={version}", "atlas-enterprise-v2.css?v=2.0.0", "atlas-os-v3.css?v=3.1.0")
         script_order = (f"script.js?v={version}", "atlas-enterprise-v2.js?v=2.0.0", "atlas-os-v3.js?v=3.1.0")
         if 'data-network-server-lab' not in text:
@@ -680,6 +719,7 @@ def main() -> None:
     validate_home(errors)
     validate_full_portfolio(errors)
     validate_general_it(errors)
+    validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
     validate_reconstructing_system(errors)
@@ -691,6 +731,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
+    print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
     print("PASS: intelligence fieldbook has 22 sectors, 88 priority questions, 30 source profiles, and 66 decision gates")

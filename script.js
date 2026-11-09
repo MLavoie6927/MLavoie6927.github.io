@@ -11,8 +11,7 @@
   }
 
   ready(function () {
-    var expandedMenuBreakpoint = document.body.classList.contains("portfolio-library-page") ? 2200 : document.body.classList.contains("landing-page") ? 1800 : 1120;
-    var mobileQuery = window.matchMedia("(max-width: " + expandedMenuBreakpoint + "px)");
+    var menuLayoutQuery = window.matchMedia("(max-width: 1120px)");
     var navToggle = document.querySelector(".nav-toggle");
     var navMenu = document.querySelector("#primary-menu");
     var navItems = Array.prototype.slice.call(document.querySelectorAll("#primary-menu a"));
@@ -35,6 +34,8 @@
         return section !== null;
       });
     var updateQueued = false;
+
+    document.documentElement.classList.add("nav-ready");
 
     if (currentYear) {
       currentYear.textContent = new Date().getFullYear().toString();
@@ -89,10 +90,17 @@
         return;
       }
 
-      var shouldOpen = Boolean(open && mobileQuery.matches);
+      syncHeaderHeight();
+      var shouldOpen = Boolean(open);
       navToggle.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+      navToggle.setAttribute("aria-label", shouldOpen ? "Close navigation menu" : "Open navigation menu");
       navMenu.classList.toggle("is-open", shouldOpen);
       document.body.classList.toggle("nav-open", shouldOpen);
+    }
+
+    function syncHeaderHeight() {
+      var height = siteHeader ? Math.ceil(siteHeader.getBoundingClientRect().height) : 76;
+      document.documentElement.style.setProperty("--active-header-height", height + "px");
     }
 
     function updateActiveLink() {
@@ -168,6 +176,7 @@
     });
 
     function handleBreakpointChange() {
+      syncHeaderHeight();
       setMenuOpen(false);
       queueActiveLinkUpdate();
     }
@@ -190,14 +199,17 @@
       });
     }
 
-    if (typeof mobileQuery.addEventListener === "function") {
-      mobileQuery.addEventListener("change", handleBreakpointChange);
+    if (typeof menuLayoutQuery.addEventListener === "function") {
+      menuLayoutQuery.addEventListener("change", handleBreakpointChange);
     } else {
-      mobileQuery.addListener(handleBreakpointChange);
+      menuLayoutQuery.addListener(handleBreakpointChange);
     }
 
     window.addEventListener("scroll", queueActiveLinkUpdate, { passive: true });
-    window.addEventListener("resize", queueActiveLinkUpdate);
+    window.addEventListener("resize", function () {
+      syncHeaderHeight();
+      queueActiveLinkUpdate();
+    });
     window.addEventListener("orientationchange", handleBreakpointChange);
     window.addEventListener("hashchange", queueActiveLinkUpdate);
 
@@ -207,6 +219,7 @@
       window.addEventListener("load", scheduleInitialHashAlignment, { once: true });
     }
 
+    syncHeaderHeight();
     updateActiveLink();
   });
 })();
