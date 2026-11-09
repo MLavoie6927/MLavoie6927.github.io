@@ -103,6 +103,9 @@ def validate_home(errors: list[str]) -> None:
         'general-it/',
         'intelligence-officer/',
         'id="general-it"',
+        'id="intelligence-officer"',
+        'intelligence-officer/collection-workbench.html',
+        'intelligence-officer/strategy-investigations.html',
     ):
         if marker not in text:
             errors.append(f"index.html: missing required recruiter-first marker {marker}")

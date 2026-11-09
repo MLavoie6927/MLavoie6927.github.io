@@ -90,6 +90,10 @@
   overflow: hidden;
 }
 
+.nav-ready .section {
+  scroll-margin-top: calc(var(--active-header-height, var(--header-height)) + 12px);
+}
+
 .nav-ready .portfolio-library-page .portfolio-quick-links {
   display: flex;
   flex: 1 1 auto;
