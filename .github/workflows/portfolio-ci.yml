@@ -16,6 +16,8 @@ on:
       - "projects/operation-glass-meridian/**"
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
+      - "general-it/**"
+      - "tools/check_general_it_data.cjs"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   pull_request:
@@ -33,6 +35,8 @@ on:
       - "projects/operation-glass-meridian/**"
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
+      - "general-it/**"
+      - "tools/check_general_it_data.cjs"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   workflow_dispatch:
@@ -61,5 +65,9 @@ jobs:
           node --check atlas-os-v3.js
           node --check intelligence-officer/sectors.js
           node --check intelligence-officer/strategy-investigations.js
+          node --check general-it/data.js
+          node --check general-it/general-it.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js
+      - name: Validate General IT coverage
+        run: node tools/check_general_it_data.cjs

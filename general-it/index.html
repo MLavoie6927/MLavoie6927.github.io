@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Marc Lavoie's General IT Field Desk: 1,000 searchable troubleshooting problems and fixes plus 100 help-desk interview questions and answers.">
+  <meta name="theme-color" content="#071018">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://mlavoie6927.github.io/general-it/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../section-theme.css">
+  <link rel="stylesheet" href="general-it.css?v=20261108a">
+  <script src="data.js?v=20261108a" defer></script>
+  <script src="general-it.js?v=20261108a" defer></script>
+  <title>General IT Field Desk | Marc Lavoie</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="section-header">
+    <div class="section-header-inner">
+      <a class="section-brand" href="../index.html"><span class="section-brand-mark" aria-hidden="true">ML</span><span><strong>Marc Lavoie</strong><small>General IT Field Desk</small></span></a>
+      <button class="it-menu-toggle" id="it-menu-toggle" type="button" aria-controls="it-navigation" aria-expanded="false" aria-label="Open navigation menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span><span>Menu</span></button>
+      <nav class="section-nav it-menu" id="it-navigation" aria-label="General IT navigation">
+        <a href="../index.html">Home</a>
+        <a href="../full-portfolio.html#general-it">Full portfolio</a>
+        <a href="#method">Troubleshooting method</a>
+        <a href="#problems">1,000 problems &amp; fixes</a>
+        <a href="#interview">100 interview Q&amp;A</a>
+        <a href="#escalation">Escalation</a>
+        <a href="#sources">Official resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="it-hero wrap">
+      <div class="hero-layout">
+        <div>
+          <p class="eyebrow">General IT / desktop support / help desk / service operations</p>
+          <h1>Diagnose the layer.<br><span>Prove the fix.</span></h1>
+          <p class="lead">A searchable field desk for common support work: 1,000 problem-and-fix records, 100 help-desk interview questions with model answers, and one evidence-first method for resolving issues without creating a second problem.</p>
+          <div class="hero-actions"><a class="button" href="#problems">Search the problem library</a><a class="button ghost" href="#interview">Practice interview answers</a></div>
+        </div>
+        <aside class="coverage-board" aria-label="General IT coverage">
+          <span>Field desk coverage</span>
+          <div><b id="hero-problem-count">1,000</b><small>problems and fixes</small></div>
+          <div><b id="hero-interview-count">100</b><small>interview Q&amp;A</small></div>
+          <div><b>20</b><small>technical domains</small></div>
+          <div><b>5</b><small>support contexts</small></div>
+        </aside>
+      </div>
+      <div class="truth-boundary"><strong>Use safely</strong><span>Confirm scope, preserve data, follow organizational policy, change one relevant variable at a time, and verify the original task. Do not bypass MFA, endpoint protection, certificate warnings, encryption, access controls, or change approval to make a symptom disappear.</span></div>
+    </section>
+
+    <section class="wrap section" id="method">
+      <div class="section-heading"><p class="eyebrow">01 / Operating method</p><h2>The FIELD troubleshooting loop</h2><p>A fix is not complete because an error disappeared once. A help-desk technician needs to identify the affected layer, perform an authorized low-risk action, prove restoration, and leave a record another technician can reproduce.</p></div>
+      <div class="method-flow" aria-label="FIELD troubleshooting method">
+        <article><b>F</b><h3>Frame</h3><p>Who, what asset, which service, where, when, exact error, impact, urgency, scope, and recent change?</p></article>
+        <article><b>I</b><h3>Isolate</h3><p>User, device, application, account, network, service, policy, or physical hardware—which layer fails first?</p></article>
+        <article><b>E</b><h3>Examine</h3><p>Compare a known-good path, collect timestamps and logs, and test alternatives before changing state.</p></article>
+        <article><b>L</b><h3>Least-risk action</h3><p>Use the smallest authorized reversible change. Protect data, security controls, and the rollback path.</p></article>
+        <article><b>D</b><h3>Demonstrate</h3><p>Repeat the original task, check an independent signal, confirm with the user, document, and monitor or escalate.</p></article>
+      </div>
+      <div class="triage-grid">
+        <article><span>Impact</span><h3>How much work is blocked?</h3><p>Safety and security first, then broad outage, critical service, many users, one user, and routine request—adjusted for real business consequence.</p></article>
+        <article><span>Urgency</span><h3>How quickly does impact grow?</h3><p>Use deadlines, active exposure, loss of workaround, and cascading dependencies. Loudness alone does not establish priority.</p></article>
+        <article><span>Evidence</span><h3>What would change the next action?</h3><p>Capture the exact timestamp, error, asset, account, service, recent change, known-good comparison, and result of every material test.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap section directory" id="problems">
+      <div class="section-heading"><p class="eyebrow">02 / Searchable knowledge base</p><h2>1,000 common IT problems and fixes</h2><p>Twenty technical domains × ten issue families × five support contexts. Each record includes the symptom, likely causes, five-step safe fix, verification, tools, and escalation threshold.</p></div>
+      <div class="directory-tabs" role="tablist" aria-label="General IT library views">
+        <button type="button" role="tab" id="problem-tab" aria-selected="true" aria-controls="problem-view">Problem library <span>1,000</span></button>
+        <button type="button" role="tab" id="interview-tab" aria-selected="false" aria-controls="interview-view">Interview Q&amp;A <span>100</span></button>
+      </div>
+      <div class="library-view" id="problem-view" role="tabpanel" aria-labelledby="problem-tab">
+        <form class="filter-panel" id="problem-filters" role="search">
+          <label class="search-field"><span>Search problems, symptoms, causes, tools, or fixes</span><input id="problem-search" type="search" autocomplete="off" placeholder="Example: Wi-Fi intermittent, access denied, Outlook sync"></label>
+          <label><span>Technical domain</span><select id="problem-category"><option value="all">All 20 domains</option></select></label>
+          <label><span>Support context</span><select id="problem-context"><option value="all">All 5 contexts</option></select></label>
+          <label><span>Issue family</span><select id="problem-pattern"><option value="all">All 10 issue families</option></select></label>
+          <button class="filter-reset" id="problem-reset" type="reset">Reset filters</button>
+        </form>
+        <div class="result-bar"><p id="problem-summary" aria-live="polite">Loading 1,000 troubleshooting records…</p><div class="page-size"><label for="problem-page-size">Show</label><select id="problem-page-size"><option value="10">10</option><option value="20" selected>20</option><option value="50">50</option></select></div></div>
+        <div class="problem-list" id="problem-list"></div>
+        <nav class="pagination" aria-label="Problem library pages"><button id="problem-prev" type="button">Previous</button><span id="problem-page-status">Page 1</span><button id="problem-next" type="button">Next</button></nav>
+      </div>
+      <div class="library-view" id="interview-view" role="tabpanel" aria-labelledby="interview-tab" hidden>
+        <div id="interview" class="interview-anchor" aria-hidden="true"></div>
+        <form class="filter-panel interview-filters" id="interview-filters" role="search">
+          <label class="search-field"><span>Search interview questions and answers</span><input id="interview-search" type="search" autocomplete="off" placeholder="Example: escalation, Wi-Fi, security, documentation"></label>
+          <label><span>Technical domain</span><select id="interview-category"><option value="all">All 20 domains</option></select></label>
+          <label><span>Interview topic</span><select id="interview-topic"><option value="all">All 5 topics</option></select></label>
+          <button class="filter-reset" id="interview-reset" type="reset">Reset filters</button>
+        </form>
+        <div class="result-bar"><p id="interview-summary" aria-live="polite">Loading 100 interview questions…</p><button class="random-button" id="random-question" type="button">Choose a random question</button></div>
+        <div class="interview-list" id="interview-list"></div>
+        <nav class="pagination" aria-label="Interview question pages"><button id="interview-prev" type="button">Previous</button><span id="interview-page-status">Page 1</span><button id="interview-next" type="button">Next</button></nav>
+      </div>
+    </section>
+
+    <section class="wrap section" id="escalation">
+      <div class="section-heading"><p class="eyebrow">03 / Escalation quality</p><h2>Escalate a decision, not a mystery</h2><p>The next team should receive enough evidence to continue immediately. “Still broken” is not an escalation package.</p></div>
+      <div class="escalation-board">
+        <article><b>01</b><h3>Impact and scope</h3><p>Users, devices, locations, services, business process, workaround, safety or security effect, and time pressure.</p></article>
+        <article><b>02</b><h3>Timeline and evidence</h3><p>First known time, exact errors, correlation IDs, screenshots when appropriate, logs, recent changes, and known-good comparison.</p></article>
+        <article><b>03</b><h3>Tests and changes</h3><p>Hypotheses tested, commands or tools used, exact authorized changes, before-and-after result, and rollback state.</p></article>
+        <article><b>04</b><h3>Requested decision</h3><p>State which authority, access, specialist judgment, vendor action, or infrastructure change is needed next.</p></article>
+      </div>
+      <div class="callout"><strong>Immediate escalation</strong><p>Safety hazard, suspected compromise, data loss, lost or stolen managed device, unauthorized access, exposed sensitive information, widespread outage, destructive recovery, electrical damage, swollen battery, or any action outside your authority.</p></div>
+    </section>
+
+    <section class="wrap section" id="sources">
+      <div class="section-heading"><p class="eyebrow">04 / Currency and authority</p><h2>Use the field desk, then verify the current vendor procedure</h2><p>The library is intentionally vendor-neutral and avoids brittle menu paths where possible. Operating systems, cloud services, and management tools change. Before a consequential action, check current organizational runbooks and authoritative vendor documentation.</p></div>
+      <div class="source-grid">
+        <a href="https://support.microsoft.com/en-us/support/get-help/windows-troubleshooters"><span>Microsoft Support</span><strong>Windows troubleshooters</strong><small>Current built-in diagnostic and support paths.</small></a>
+        <a href="https://support.apple.com/macos"><span>Apple Support</span><strong>Mac support and recovery</strong><small>Current macOS setup, backup, diagnostics, and repair entry points.</small></a>
+        <a href="https://support.google.com/a/"><span>Google Workspace Admin Help</span><strong>Workspace administration</strong><small>Current account, service, application, and administrator guidance.</small></a>
+        <a href="https://www.cisa.gov/secure-our-world/recognize-and-report-phishing"><span>CISA</span><strong>Recognize and report phishing</strong><small>Security-first reporting and account-protection guidance.</small></a>
+      </div>
+      <p class="small">Educational portfolio reference, not a substitute for employer policy, vendor support, warranty service, legal requirements, or authorized administration. Product names identify troubleshooting domains; no vendor endorses this page.</p>
+    </section>
+
+    <section class="wrap section end"><h2>Continue through the technical portfolio</h2><p>Use the Full Portfolio for engineering projects, the Interview Library for cybersecurity and networking practice, or return to the landing page.</p><div class="hero-actions"><a class="button" href="../full-portfolio.html">Open the full portfolio</a><a class="button ghost" href="../interview/">Open the complete interview library</a><a class="button ghost" href="../index.html">Return home</a></div></section>
+  </main>
+  <footer class="wrap">Marc Lavoie · General IT Field Desk · Updated November 2026 · <a href="../index.html">Home</a> · <a href="../full-portfolio.html#general-it">Full portfolio</a></footer>
+</body>
+</html>

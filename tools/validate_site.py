@@ -100,6 +100,8 @@ def validate_home(errors: list[str]) -> None:
         'projects/k12-network-operations/',
         'full-portfolio.html',
         'interview/',
+        'general-it/',
+        'id="general-it"',
     ):
         if marker not in text:
             errors.append(f"index.html: missing required recruiter-first marker {marker}")
@@ -131,9 +133,80 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'id="certificates"',
         'id="public-recognition"',
         'interview/',
+        'general-it/',
+        'id="general-it"',
     ):
         if marker not in text:
             errors.append(f"full-portfolio.html: missing recovered section marker {marker}")
+
+
+def validate_general_it(errors: list[str]) -> None:
+    base = ROOT / "general-it"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "general-it.css").read_text(encoding="utf-8")
+    scripts = "\n".join(
+        (base / name).read_text(encoding="utf-8")
+        for name in ("data.js", "general-it.js")
+    )
+
+    for marker in (
+        "General IT Field Desk",
+        "1,000 common IT problems and fixes",
+        "100 interview Q&amp;A",
+        "The FIELD troubleshooting loop",
+        "Twenty technical domains × ten issue families × five support contexts",
+        "Escalate a decision, not a mystery",
+        "Do not bypass MFA, endpoint protection, certificate warnings, encryption, access controls, or change approval",
+        'id="problem-search"',
+        'id="problem-category"',
+        'id="problem-context"',
+        'id="problem-pattern"',
+        'id="interview-search"',
+        'id="random-question"',
+        'id="it-menu-toggle"',
+        'href="../full-portfolio.html#general-it"',
+    ):
+        if marker not in html:
+            errors.append(f"General IT Field Desk: missing marker {marker}")
+
+    for marker in (
+        "@media(max-width:850px)",
+        ".problem-card",
+        ".interview-card",
+        ".it-menu.is-open",
+    ):
+        if marker not in css:
+            errors.append(f"General IT Field Desk: missing responsive style marker {marker}")
+
+    for marker in (
+        "window.GENERAL_IT_DATA",
+        "Expected 1000 IT problems",
+        "Expected 100 help-desk interview questions",
+        "setLibraryView",
+        "filteredProblems",
+        "filteredInterviews",
+    ):
+        if marker not in scripts:
+            errors.append(f"General IT Field Desk: missing application marker {marker}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"General IT Field Desk: forbidden {label}")
+
+    for page_name in ("index.html", "full-portfolio.html"):
+        if "general-it/" not in (ROOT / page_name).read_text(encoding="utf-8"):
+            errors.append(f"General IT Field Desk: missing navigation link from {page_name}")
+    if "https://mlavoie6927.github.io/general-it/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("General IT Field Desk: sitemap URL is missing")
 
 
 def validate_atlas_upgrade(errors: list[str]) -> None:
@@ -606,6 +679,7 @@ def main() -> None:
     validate_html(errors)
     validate_home(errors)
     validate_full_portfolio(errors)
+    validate_general_it(errors)
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
     validate_reconstructing_system(errors)
@@ -616,6 +690,7 @@ def main() -> None:
         raise SystemExit(1)
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
+    print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")
     print("PASS: intelligence fieldbook has 22 sectors, 88 priority questions, 30 source profiles, and 66 decision gates")
