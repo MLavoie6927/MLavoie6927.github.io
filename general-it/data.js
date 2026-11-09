@@ -312,7 +312,7 @@
     {
       id: "troubleshoot",
       topic: "Troubleshooting method",
-      question: (category) => `How would you troubleshoot ${category.interviewScenario}?`,
+      question: (category) => `How would you troubleshoot this scenario: ${category.interviewScenario}?`,
       answer: (category) => `I would start by confirming the user, asset, exact task, error, time, impact, scope, and recent change. I would then use ${category.tools.slice(0, 3).join(", ")} to find the first failed layer instead of making several changes at once. ${category.diagnostics} I would apply the least disruptive authorized fix, ${category.verify.toLowerCase()} I would document the evidence, user confirmation, and any remaining risk.`
     },
     {
