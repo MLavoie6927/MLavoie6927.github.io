@@ -139,6 +139,8 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'interview/',
         'general-it/',
         'id="general-it"',
+        'geology/',
+        'id="geology"',
     ):
         if marker not in text:
             errors.append(f"full-portfolio.html: missing recovered section marker {marker}")
@@ -211,6 +213,84 @@ def validate_general_it(errors: list[str]) -> None:
             errors.append(f"General IT Field Desk: missing navigation link from {page_name}")
     if "https://mlavoie6927.github.io/general-it/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("General IT Field Desk: sitemap URL is missing")
+
+
+def validate_geology(errors: list[str]) -> None:
+    base = ROOT / "geology"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "geology.css").read_text(encoding="utf-8")
+    scripts = "\n".join(
+        (base / name).read_text(encoding="utf-8")
+        for name in ("geology-data.js", "geology.js")
+    )
+
+    for marker in (
+        "Geology Field Guide",
+        "Read the planet",
+        "The geology topic atlas",
+        "Before the first watt, there is a geological system.",
+        "Geologic hydrogen",
+        "Geologic energy &amp; carbon storage",
+        "Do not confuse “present” with “producible.”",
+        "Interactive plate-tectonics laboratory",
+        "Twenty field investigations",
+        "Observation first. Interpretation second.",
+        'id="topic-search"',
+        'id="topic-filters"',
+        'id="plate-selector"',
+        'id="investigation-select"',
+        'href="../full-portfolio.html#geology"',
+        'href="../index.html"',
+    ):
+        if marker not in html:
+            errors.append(f"Geology Field Guide: missing marker {marker}")
+    if html.count('class="energy-card"') != 6:
+        errors.append("Geology Field Guide: expected six geologic energy system cards")
+    if html.count("<article><span>0") < 11:
+        errors.append("Geology Field Guide: method and energy lifecycle architecture is incomplete")
+
+    for marker in (
+        ".topic-grid",
+        ".energy-system-grid",
+        ".energy-decision",
+        ".plate-lab",
+        ".investigation-card",
+        ".nav-links.is-open",
+        "@media (max-width: 680px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"Geology Field Guide: missing responsive style marker {marker}")
+
+    for marker in (
+        "window.GEOLOGY_DATA",
+        "renderTopics",
+        "renderPlateSetting",
+        "renderInvestigation",
+        "searchableDomain",
+    ):
+        if marker not in scripts:
+            errors.append(f"Geology Field Guide: missing application marker {marker}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"Geology Field Guide: forbidden {label}")
+
+    full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    for marker in ('id="geology"', 'href="geology/"', 'href="#geology">Geology</a>'):
+        if marker not in full_portfolio:
+            errors.append(f"Geology Field Guide: missing Full Portfolio marker {marker}")
+    if "https://mlavoie6927.github.io/geology/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("Geology Field Guide: sitemap URL is missing")
 
 
 def validate_hamburger_navigation(errors: list[str]) -> None:
@@ -722,6 +802,7 @@ def main() -> None:
     validate_home(errors)
     validate_full_portfolio(errors)
     validate_general_it(errors)
+    validate_geology(errors)
     validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
@@ -734,6 +815,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
+    print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")

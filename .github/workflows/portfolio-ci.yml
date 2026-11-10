@@ -18,7 +18,9 @@ on:
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
       - "general-it/**"
+      - "geology/**"
       - "tools/check_general_it_data.cjs"
+      - "tools/check_geology_data.cjs"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   pull_request:
@@ -38,7 +40,9 @@ on:
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
       - "general-it/**"
+      - "geology/**"
       - "tools/check_general_it_data.cjs"
+      - "tools/check_geology_data.cjs"
       - "tools/validate_site.py"
       - ".github/workflows/portfolio-ci.yml"
   workflow_dispatch:
@@ -69,7 +73,11 @@ jobs:
           node --check intelligence-officer/strategy-investigations.js
           node --check general-it/data.js
           node --check general-it/general-it.js
+          node --check geology/geology-data.js
+          node --check geology/geology.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js
       - name: Validate General IT coverage
         run: node tools/check_general_it_data.cjs
+      - name: Validate Geology coverage
+        run: node tools/check_geology_data.cjs
