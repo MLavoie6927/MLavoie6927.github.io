@@ -89,8 +89,8 @@ def validate_html(errors: list[str]) -> None:
 def validate_home(errors: list[str]) -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
-    if not nav or nav.group(1).count("<li>") != 12:
-        errors.append("index.html: primary navigation must contain exactly twelve choices")
+    if not nav or nav.group(1).count("<li>") != 13:
+        errors.append("index.html: primary navigation must contain exactly thirteen choices")
     for marker in (
         'id="featured-projects"',
         'id="project-library"',
@@ -101,6 +101,7 @@ def validate_home(errors: list[str]) -> None:
         'full-portfolio.html',
         'interview/',
         'general-it/',
+        'soc-management/',
         'intelligence-officer/',
         'id="general-it"',
         'id="intelligence-officer"',
@@ -138,6 +139,7 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'id="public-recognition"',
         'interview/',
         'general-it/',
+        'soc-management/',
         'id="general-it"',
         'geology/',
         'id="geology"',
@@ -291,6 +293,96 @@ def validate_geology(errors: list[str]) -> None:
             errors.append(f"Geology Field Guide: missing Full Portfolio marker {marker}")
     if "https://mlavoie6927.github.io/geology/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("Geology Field Guide: sitemap URL is missing")
+
+
+def validate_soc_management(errors: list[str]) -> None:
+    base = ROOT / "soc-management"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "soc-management.css").read_text(encoding="utf-8")
+    script = (base / "soc-management.js").read_text(encoding="utf-8")
+
+    for marker in (
+        "Enterprise SOC Management",
+        "From alert queue to",
+        "90-second recruiter path",
+        "A SOC is a decision system",
+        "Four views of the same incident",
+        "Management oversight",
+        "Synthetic incident SOC-2026-1142",
+        "Interactive command exercise",
+        "Measure security outcomes",
+        "Automate enrichment freely",
+        "Four reports. One incident.",
+        "The incident is not finished when the malware is removed.",
+        "NIST CSF 2.0 alignment",
+        "No live tenant, employer incident, production rule deployment",
+        'id="menu-toggle"',
+        'id="decision-room"',
+        'href="../index.html"',
+        'href="../full-portfolio.html#soc-projects"',
+    ):
+        if marker not in html:
+            errors.append(f"SOC Management: missing marker {marker}")
+
+    expected_counts = {
+        'role="tab"': 4,
+        'data-tier-panel="': 4,
+        'data-decision="': 3,
+        'class="metric-card"': 10,
+        "<article><time>": 8,
+    }
+    for marker, expected in expected_counts.items():
+        actual = html.count(marker)
+        if actual != expected:
+            errors.append(
+                f"SOC Management: expected {expected} occurrences of {marker}, found {actual}"
+            )
+
+    for marker in (
+        ".command-card",
+        ".operating-map",
+        ".role-workbench",
+        ".decision-room",
+        ".metric-grid",
+        ".authority-layout",
+        ".soar-flow",
+        ".report-stack",
+        ".backlog",
+        "@media (max-width: 640px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"SOC Management: missing responsive style marker {marker}")
+
+    for marker in (
+        "function showTier",
+        "function showDecision",
+        "function copyText",
+        'navigator.clipboard.writeText',
+        '"Close navigation menu"',
+        "Compromise confirmed; scope evolving",
+    ):
+        if marker not in script:
+            errors.append(f"SOC Management: missing interaction marker {marker}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", script, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"SOC Management: forbidden {label}")
+
+    for page_name in ("index.html", "full-portfolio.html"):
+        if "soc-management/" not in (ROOT / page_name).read_text(encoding="utf-8"):
+            errors.append(f"SOC Management: missing navigation link from {page_name}")
+    if "https://mlavoie6927.github.io/soc-management/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("SOC Management: sitemap URL is missing")
 
 
 def validate_hamburger_navigation(errors: list[str]) -> None:
@@ -803,6 +895,7 @@ def main() -> None:
     validate_full_portfolio(errors)
     validate_general_it(errors)
     validate_geology(errors)
+    validate_soc_management(errors)
     validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
     validate_glass_meridian(errors)
@@ -816,6 +909,7 @@ def main() -> None:
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
+    print("PASS: SOC Management recruiter path, four-role model, decision room, command dashboard, governance, reporting, and evidence boundary")
     print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
     print("PASS: Reconstructing the System links, truth boundary, package, and manuscript hash")

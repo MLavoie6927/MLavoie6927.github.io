@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Marc Lavoie's recruiter-facing enterprise SOC management architecture: Tier 1–3 analyst responsibilities, incident command decisions, metrics, automation governance, executive communication, and continuous improvement.">
+  <meta name="theme-color" content="#07101a">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Enterprise SOC Management | Marc Lavoie">
+  <meta property="og:description" content="From alert queue to accountable security operation: an interactive, synthetic SOC leadership case study.">
+  <meta property="og:url" content="https://mlavoie6927.github.io/soc-management/">
+  <link rel="canonical" href="https://mlavoie6927.github.io/soc-management/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="soc-management.css?v=20261112a">
+  <title>Enterprise SOC Management | Marc Lavoie</title>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" id="top">
+    <nav class="topbar" aria-label="SOC Management navigation">
+      <a class="brand" href="../index.html" aria-label="Return to Marc Lavoie's portfolio home">
+        <span class="brand-mark" aria-hidden="true">ML</span>
+        <span><strong>Marc Lavoie</strong><small>Enterprise SOC Management</small></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="page-menu" aria-expanded="false">
+        <span></span><span></span><span></span><b class="visually-hidden">Open navigation menu</b>
+      </button>
+      <div class="page-menu" id="page-menu">
+        <a href="#operating-model">Operating model</a>
+        <a href="#roles">Tier 1–3</a>
+        <a href="#incident">Incident command</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#governance">Governance</a>
+        <a href="#reporting">Reporting</a>
+        <a href="#improvement">Improvement</a>
+        <a href="../full-portfolio.html#soc-projects">Full portfolio</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-grid page-shell">
+        <div class="hero-copy">
+          <p class="eyebrow">SOC leadership architecture · synthetic portfolio case</p>
+          <h1 id="page-title">From alert queue to <span>accountable security operation.</span></h1>
+          <p class="hero-lede">This case study shows how Tier 1, Tier 2, Tier 3, and SOC Management work the same incident at different levels—then turn the evidence into authorized action, executive understanding, and durable defensive improvement.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#decision-room">Enter the decision room</a>
+            <a class="button button-secondary" href="#recruiter-readout">Recruiter readout</a>
+          </div>
+          <dl class="hero-proof" aria-label="Case-study proof points">
+            <div><dt>4</dt><dd>operating roles</dd></div>
+            <div><dt>8</dt><dd>incident milestones</dd></div>
+            <div><dt>10</dt><dd>management measures</dd></div>
+            <div><dt>1</dt><dd>closed improvement loop</dd></div>
+          </dl>
+        </div>
+
+        <aside class="command-card" aria-label="Current synthetic incident">
+          <div class="command-head">
+            <span class="status-light" aria-hidden="true"></span>
+            <span>Command view</span>
+            <strong>SEV-2</strong>
+          </div>
+          <p class="case-label">Synthetic case · SOC-2026-1142</p>
+          <h2>Office → PowerShell → DLL execution</h2>
+          <div class="command-grid">
+            <div><span>Asset</span><strong>FIN-WS-042</strong></div>
+            <div><span>Owner</span><strong>Tier 2 / IR</strong></div>
+            <div><span>State</span><strong>Contained</strong></div>
+            <div><span>Scope</span><strong>Under review</strong></div>
+          </div>
+          <div class="command-question">
+            <span>Decision now</span>
+            <p>Isolate under standing authority, scope the estate, preserve evidence, and brief the business owner without claiming unproven data theft.</p>
+          </div>
+        </aside>
+      </div>
+      <div class="truth-strip" role="note">
+        <strong>Evidence boundary:</strong> Every hostname, identity, timestamp, event, metric, and outcome on this page is fictional training data. This demonstrates authored operational reasoning—not employment as a SOC Manager, access to a production tenant, or a live incident response.
+      </div>
+    </section>
+
+    <section class="section recruiter-section" id="recruiter-readout">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">90-second recruiter path</p>
+            <h2>What this page is designed to prove</h2>
+          </div>
+          <p>Technical skill matters. Senior security work also requires judgment: deciding what the evidence supports, who owns the next action, which authority is required, and how success will be measured.</p>
+        </div>
+        <div class="readout-grid">
+          <article><span>01</span><h3>Operational design</h3><p>Clear missions, handoffs, escalation criteria, and success conditions for Tier 1 through management.</p></article>
+          <article><span>02</span><h3>Evidence discipline</h3><p>Observed events, analyst assessments, technical capabilities, and unproven claims remain separate.</p></article>
+          <article><span>03</span><h3>Decision leadership</h3><p>Containment, staffing, severity, bridge activation, business disruption, and closure are framed as decisions.</p></article>
+          <article><span>04</span><h3>Detection governance</h3><p>New rules require telemetry, true-positive, false-positive, variation, rollback, and ownership checks.</p></article>
+          <article><span>05</span><h3>Executive communication</h3><p>The same incident is translated for analysts, engineers, managers, and leaders without losing uncertainty.</p></article>
+          <article><span>06</span><h3>Continuous improvement</h3><p>Incident lessons become assigned engineering work with acceptance criteria and closure evidence.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section model-section" id="operating-model">
+      <div class="page-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Enterprise operating model</p>
+          <h2>A SOC is a decision system—not three queues stacked together.</h2>
+          <p>People, telemetry, procedure, response authority, business context, and feedback must operate as one system. A major incident can bypass ordinary tier order when urgency or impact requires it.</p>
+        </div>
+
+        <div class="operating-map" aria-label="SOC operating model">
+          <article class="manager-node">
+            <span>Accountable layer</span>
+            <h3>SOC Management</h3>
+            <p>Staffing · quality · risk · escalation · authority · communication · improvement</p>
+          </article>
+          <div class="map-connector" aria-hidden="true"></div>
+          <div class="tier-row">
+            <article><b>T1</b><h3>Recognize</h3><p>Monitor, validate, preserve, classify, escalate.</p></article>
+            <article><b>T2</b><h3>Reconstruct</h3><p>Correlate, scope, contain, document.</p></article>
+            <article><b>T3</b><h3>Engineer</h3><p>Research, hunt, detect, prevent, automate.</p></article>
+          </div>
+          <div class="ecosystem-row">
+            <span>Incident Response</span><span>Threat Intelligence</span><span>IT Operations</span><span>Identity</span><span>Network</span><span>Cloud</span><span>Legal &amp; Privacy</span><span>Business Leadership</span>
+          </div>
+        </div>
+
+        <div class="principle-band">
+          <div><strong>Tier 1 reduces uncertainty</strong><span>enough to make the next decision.</span></div>
+          <div><strong>Tier 2 establishes the incident</strong><span>with independent evidence and scope.</span></div>
+          <div><strong>Tier 3 reduces recurrence</strong><span>through tested engineering.</span></div>
+          <div><strong>Management makes it cohere</strong><span>with authority, resources, and accountability.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section roles-section" id="roles">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Role ladder</p><h2>Four views of the same incident</h2></div>
+          <p>Select a role to see its mission, evidence standard, operating questions, handoff, and definition of success.</p>
+        </div>
+
+        <div class="role-workbench">
+          <div class="role-tabs" role="tablist" aria-label="SOC roles">
+            <button class="role-tab is-active" id="tier1-tab" role="tab" aria-selected="true" aria-controls="tier1-panel" data-tier="tier1"><span>Tier 1</span>Recognize &amp; preserve</button>
+            <button class="role-tab" id="tier2-tab" role="tab" aria-selected="false" aria-controls="tier2-panel" data-tier="tier2"><span>Tier 2</span>Investigate &amp; contain</button>
+            <button class="role-tab" id="tier3-tab" role="tab" aria-selected="false" aria-controls="tier3-panel" data-tier="tier3"><span>Tier 3</span>Research &amp; engineer</button>
+            <button class="role-tab" id="manager-tab" role="tab" aria-selected="false" aria-controls="manager-panel" data-tier="manager"><span>SOC Manager</span>Direct &amp; improve</button>
+          </div>
+
+          <article class="role-panel is-active" id="tier1-panel" role="tabpanel" aria-labelledby="tier1-tab" data-tier-panel="tier1">
+            <div class="role-panel-head"><span class="role-number">01</span><div><p>Mission</p><h3>Determine whether the alert deserves investigation—and preserve the context Tier 2 will need.</h3></div></div>
+            <div class="role-detail-grid">
+              <div><h4>Evidence standard</h4><p>Original alert and event references, UTC time, device, identity, process lineage, source health, actions already taken, rationale, confidence, and open questions.</p></div>
+              <div><h4>Questions to ask</h4><ul><li>Is the record valid and the source healthy?</li><li>Is the behavior expected for this user and asset?</li><li>Did execution occur or was it only attempted?</li><li>Is there file, DNS, network, identity, or registry corroboration?</li><li>Is the threat still active?</li></ul></div>
+              <div><h4>Handoff</h4><p>Escalate when the threat is credible and investigation needs exceed initial-triage time, permissions, or technical scope. State exactly what remains unknown.</p></div>
+              <div><h4>Success</h4><p>A timely, accurately classified, evidence-rich escalation—or a documented benign disposition supported by evidence. Alert closure volume alone is not success.</p></div>
+            </div>
+          </article>
+
+          <article class="role-panel" id="tier2-panel" role="tabpanel" aria-labelledby="tier2-tab" data-tier-panel="tier2" hidden>
+            <div class="role-panel-head"><span class="role-number">02</span><div><p>Mission</p><h3>Reconstruct what happened, determine compromise and scope, and support authorized containment.</h3></div></div>
+            <div class="role-detail-grid">
+              <div><h4>Evidence standard</h4><p>A sourced timeline across EDR, Sysmon, identity, email, network, file, registry, and sandbox evidence—with provenance and visibility gaps.</p></div>
+              <div><h4>Questions to ask</h4><ul><li>Which process created and loaded the file?</li><li>Which behavior was observed versus merely possible?</li><li>Can network activity be attributed to the process?</li><li>Which other identities or devices show matching behavior?</li><li>What containment action is safe and authorized?</li></ul></div>
+              <div><h4>Handoff</h4><p>Deliver the incident timeline, affected assets, confirmed and suspected behaviors, evidence sources, containment state, scope assessment, and collection gaps.</p></div>
+              <div><h4>Success</h4><p>A defensible compromise determination, contained threat, scoped environment, preserved evidence, and clear escalation for advanced analysis or engineering.</p></div>
+            </div>
+          </article>
+
+          <article class="role-panel" id="tier3-panel" role="tabpanel" aria-labelledby="tier3-tab" data-tier-panel="tier3" hidden>
+            <div class="role-panel-head"><span class="role-number">03</span><div><p>Mission</p><h3>Understand the mechanism and build defenses that survive simple attacker changes.</h3></div></div>
+            <div class="role-detail-grid">
+              <div><h4>Evidence standard</h4><p>Reverse-engineering findings linked to observed telemetry, hunting logic, data dependencies, test results, tuning decisions, rollback, and ownership.</p></div>
+              <div><h4>Questions to ask</h4><ul><li>Would the detection survive a new hash, name, path, or domain?</li><li>Does an API import represent capability or observed execution?</li><li>Which telemetry is required and how is its health monitored?</li><li>What legitimate workflows resemble the behavior?</li><li>Can the prevention control be staged and rolled back?</li></ul></div>
+              <div><h4>Handoff</h4><p>Provide a reverse-engineering report, validated detection and hunting package, tested prevention proposal, and response-playbook update.</p></div>
+              <div><h4>Success</h4><p>Repeatable coverage for an attack class—not a one-sample rule—plus documented limitations, test evidence, deployment plan, and owner.</p></div>
+            </div>
+          </article>
+
+          <article class="role-panel" id="manager-panel" role="tabpanel" aria-labelledby="manager-tab" data-tier-panel="manager" hidden>
+            <div class="role-panel-head"><span class="role-number">04</span><div><p>Management oversight</p><h3>Ensure the right work is performed by qualified people, with the required urgency, authority, documentation, and measurable result.</h3></div></div>
+            <div class="role-detail-grid">
+              <div><h4>Seven responsibilities</h4><ol><li>Workforce and shift coverage</li><li>Incident prioritization</li><li>Containment authority and coordination</li><li>Investigation quality assurance</li><li>Performance and coverage</li><li>Business and executive communication</li><li>Security-engineering governance</li></ol></div>
+              <div><h4>Questions to ask</h4><ul><li>Who owns this incident and what decision is due next?</li><li>Does the evidence justify the stated confidence and severity?</li><li>Is business-critical context changing the response?</li><li>What authority is needed for the proposed action?</li><li>Which corrective actions will prevent recurrence?</li></ul></div>
+              <div><h4>Management output</h4><p>Priorities, staffing, decision records, response authority, stakeholder updates, risk acceptance or escalation, engineering backlog, and closure evidence.</p></div>
+              <div><h4>Success</h4><p>Real threats are found, damage is limited, operations recover safely, stakeholders understand the risk, and validated improvements remain effective over time.</p></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section incident-section" id="incident">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Synthetic incident SOC-2026-1142</p><h2>One case. Eight operational milestones.</h2></div>
+          <p>The scenario uses the documentation-only IP address <code>203.0.113.77</code> and a <code>.example</code> domain. Neither is a live threat indicator.</p>
+        </div>
+
+        <div class="attack-chain" aria-label="Synthetic process and network chain">
+          <div><span>Delivery</span><strong>Invoice_8842.docm</strong><small>Phishing email</small></div><i aria-hidden="true">→</i>
+          <div><span>Parent</span><strong>WINWORD.EXE</strong><small>Document opened</small></div><i aria-hidden="true">→</i>
+          <div><span>Script</span><strong>powershell.exe</strong><small>Hidden, encoded</small></div><i aria-hidden="true">→</i>
+          <div><span>Payload</span><strong>health.dll</strong><small>Staged file</small></div><i aria-hidden="true">→</i>
+          <div><span>Execution</span><strong>rundll32.exe</strong><small>DLL export Init</small></div><i aria-hidden="true">→</i>
+          <div><span>Behavior</span><strong>Run key + HTTPS</strong><small>Persistence and callbacks</small></div>
+        </div>
+
+        <div class="evidence-board">
+          <div class="evidence-title"><span>Evidence board</span><strong>Independent signals raise confidence</strong></div>
+          <div class="evidence-table-wrap">
+            <table>
+              <thead><tr><th>UTC</th><th>Evidence</th><th>Observation</th><th>What it supports</th><th>What it does not prove</th></tr></thead>
+              <tbody>
+                <tr><td>08:42:17</td><td>Sysmon 1</td><td>Word starts hidden PowerShell</td><td>Suspicious execution chain</td><td>Successful payload delivery</td></tr>
+                <tr><td>08:42:19</td><td>Sysmon 22</td><td>PowerShell queries a fictional domain</td><td>Related DNS activity</td><td>Data transfer or compromise</td></tr>
+                <tr><td>08:42:22</td><td>Sysmon 11</td><td>PowerShell creates <code>health.dll</code></td><td>Payload staging</td><td>That the DLL executed</td></tr>
+                <tr><td>08:42:25</td><td>Sysmon 1 / 7</td><td>rundll32 starts and loads the DLL</td><td>DLL execution</td><td>Every possible DLL capability</td></tr>
+                <tr><td>08:42:28</td><td>Sysmon 13</td><td>PowerShell writes a Run value</td><td>Persistence mechanism</td><td>That the DLL wrote the value</td></tr>
+                <tr><td>08:42:31+</td><td>Network telemetry</td><td>Recurring HTTPS pattern from rundll32</td><td>Probable active command channel</td><td>Exfiltration or lateral movement</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="management-timeline" aria-label="SOC management incident timeline">
+          <article><time>08:42</time><div><span>Tier 1</span><h3>Detection</h3><p>Assign the incident and preserve queue coverage. Direct manager intervention is not yet necessary.</p></div></article>
+          <article><time>08:44</time><div><span>T1 → T2</span><h3>Escalation</h3><p>Confirm a qualified investigator accepts the case with evidence, rationale, and open questions attached.</p></div></article>
+          <article><time>08:48</time><div><span>Tier 2</span><h3>Investigation</h3><p>Reassess severity as DLL execution and persistence are corroborated. Consider additional responders.</p></div></article>
+          <article><time>08:51</time><div><span>SOC Manager</span><h3>Response coordination</h3><p>Confirm authorized containment, initiate broader scoping, and activate an incident bridge if impact warrants it.</p></div></article>
+          <article><time>08:55</time><div><span>Tier 2 / IR</span><h3>Containment</h3><p>Verify isolation succeeded and communicate expected disruption to the affected business owner.</p></div></article>
+          <article><time>09:20</time><div><span>Tier 3</span><h3>Advanced analysis</h3><p>Prioritize malware analysis and estate hunting without delaying urgent containment or recovery.</p></div></article>
+          <article><time>Later</time><div><span>Engineering</span><h3>Defensive improvement</h3><p>Require peer review, business-impact testing, approval, monitored rollout, and rollback for new controls.</p></div></article>
+          <article><time>Review</time><div><span>SOC Manager</span><h3>Closure and learning</h3><p>Confirm recovery, record limitations, assign corrective actions, and require evidence before they are closed.</p></div></article>
+        </div>
+
+        <div class="decision-room" id="decision-room">
+          <div class="decision-copy">
+            <p class="eyebrow">Interactive command exercise</p>
+            <h2>Choose the point in the incident.</h2>
+            <p>Watch the management judgment change as evidence strength and business risk change.</p>
+            <div class="decision-buttons" role="group" aria-label="Incident decision point">
+              <button class="decision-button is-active" type="button" data-decision="alert">1 · Suspicious alert</button>
+              <button class="decision-button" type="button" data-decision="confirmed">2 · Compromise supported</button>
+              <button class="decision-button" type="button" data-decision="contained">3 · Threat contained</button>
+            </div>
+          </div>
+          <article class="decision-output" aria-live="polite">
+            <div class="decision-output-head"><span id="decision-phase">08:44 · Triage escalation</span><strong id="decision-confidence">Moderate confidence</strong></div>
+            <h3 id="decision-title">Escalate with evidence; do not overstate the alert.</h3>
+            <dl>
+              <div><dt>Known</dt><dd id="decision-known">Word launched hidden encoded PowerShell, followed by a related DNS lookup.</dd></div>
+              <div><dt>Unknown</dt><dd id="decision-unknown">Whether a payload was delivered, executed, persisted, or communicated externally.</dd></div>
+              <div><dt>Manager action</dt><dd id="decision-action">Confirm Tier 2 ownership, preserve evidence, maintain queue coverage, and check whether the asset or identity increases urgency.</dd></div>
+              <div><dt>Do not do</dt><dd id="decision-avoid">Do not call this confirmed malware or trigger disruptive automation from one suspicious process chain alone.</dd></div>
+            </dl>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dashboard-section" id="dashboard">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Command dashboard</p><h2>Measure security outcomes—not ticket velocity.</h2></div>
+          <p>All values below are illustrative 24-hour synthetic data. Metric definitions must be standardized before comparing teams or periods.</p>
+        </div>
+
+        <div class="dashboard-shell">
+          <div class="snapshot-grid" aria-label="Synthetic SOC operations snapshot">
+            <article><span>Alerts ingested</span><strong>1,200</strong><small>volume context</small></article>
+            <article><span>Incidents created</span><strong>48</strong><small>4% of alerts</small></article>
+            <article><span>Incidents triaged</span><strong>45</strong><small>93.8% of incidents</small></article>
+            <article><span>Pending triage</span><strong>3</strong><small>oldest: 11 min</small></article>
+            <article class="status-warn"><span>Open high severity</span><strong>2</strong><small>both assigned</small></article>
+            <article class="status-good"><span>Unassigned high</span><strong>0</strong><small>ownership gate met</small></article>
+          </div>
+
+          <div class="workload-panel">
+            <div class="panel-title"><div><span>Incident workload</span><strong>48 total</strong></div><small>Synthetic status counts</small></div>
+            <div class="bar-chart" aria-label="Incident counts by status">
+              <div style="--value:36"><span>36</span><i></i><b>Closed</b></div>
+              <div style="--value:7"><span>7</span><i></i><b>Investigating</b></div>
+              <div style="--value:3"><span>3</span><i></i><b>Pending</b></div>
+              <div style="--value:1"><span>1</span><i></i><b>Contained</b></div>
+              <div style="--value:1"><span>1</span><i></i><b>Recovery</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-grid" aria-label="SOC management measures">
+          <article class="metric-card"><span>MTTD</span><h3>Detection latency</h3><p>Activity onset to detection. Tests visibility and detection effectiveness.</p><small>Define the start event.</small></article>
+          <article class="metric-card"><span>MTTA</span><h3>Queue responsiveness</h3><p>Alert creation to analyst acknowledgment.</p><small>Segment by severity and shift.</small></article>
+          <article class="metric-card"><span>MTTC</span><h3>Containment speed</h3><p>Defined incident start to verified effective containment.</p><small>Record both action and result.</small></article>
+          <article class="metric-card"><span>QUALITY</span><h3>Escalation accuracy</h3><p>Correct, timely, sufficiently evidenced handoffs.</p><small>Speed without accuracy is noise.</small></article>
+          <article class="metric-card"><span>NOISE</span><h3>False-positive trend</h3><p>Benign findings among evaluated alerts, by rule and cause.</p><small>Low rates can hide under-escalation.</small></article>
+          <article class="metric-card"><span>GAPS</span><h3>Missed detection rate</h3><p>Known threats not detected by expected controls.</p><small>Exercise and incident derived.</small></article>
+          <article class="metric-card"><span>CAPACITY</span><h3>Backlog health</h3><p>Unresolved work by age, severity, owner, and dependency.</p><small>Counts need aging context.</small></article>
+          <article class="metric-card"><span>DATA</span><h3>Telemetry availability</h3><p>Health, delay, and completeness of required sources.</p><small>No data means no promised coverage.</small></article>
+          <article class="metric-card"><span>PROCESS</span><h3>Playbook compliance</h3><p>Required steps completed with justified exceptions.</p><small>Quality review, not box checking.</small></article>
+          <article class="metric-card"><span>LEARNING</span><h3>Corrective-action closure</h3><p>Improvements completed with acceptance evidence.</p><small>Closure is not merely a status change.</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section governance-section" id="governance">
+      <div class="page-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Authority, permissions, and automation</p>
+          <h2>Give responders enough authority to act—without making every action unrestricted.</h2>
+          <p>Employment titles such as Tier 1, Tier 2, and Tier 3 are not Microsoft Sentinel role names. Platform permissions should follow actual duties, least privilege, separation of responsibilities, and periodic review.</p>
+        </div>
+
+        <div class="authority-layout">
+          <div class="authority-table-wrap">
+            <table class="authority-table">
+              <thead><tr><th>Action</th><th>Typical owner</th><th>Governance gate</th></tr></thead>
+              <tbody>
+                <tr><td>Review incidents and logs</td><td>Tier 1–3</td><td>Authorized read access</td></tr>
+                <tr><td>Change status and ownership</td><td>Tier 1–2 / Shift Lead</td><td>Workflow permissions</td></tr>
+                <tr><td>Run approved hunts</td><td>Tier 1–3</td><td>Data-access authorization</td></tr>
+                <tr><td>Isolate a compromised endpoint</td><td>Authorized Tier 2 / IR</td><td>Standing policy or approval</td></tr>
+                <tr><td>Disable a compromised account</td><td>Identity / IR</td><td>Identity incident procedure</td></tr>
+                <tr><td>Block a malicious destination</td><td>Network / Security Engineering</td><td>Validated indicator and change authority</td></tr>
+                <tr><td>Deploy an analytics rule</td><td>Tier 3 / Detection Engineering</td><td>Testing, review, approval, rollback</td></tr>
+                <tr><td>Deploy enterprise ASR blocking</td><td>Endpoint Engineering</td><td>Audit, impact test, staged rollout</td></tr>
+                <tr><td>Authorize an emergency change</td><td>Designated incident authority</td><td>Emergency-change procedure</td></tr>
+                <tr><td>Approve incident closure</td><td>Incident owner / Lead</td><td>Closure criteria and recovery evidence</td></tr>
+                <tr><td>Approve improvement plan</td><td>SOC Manager</td><td>Owners, deadlines, acceptance criteria</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <aside class="permission-card">
+            <p class="card-kicker">Microsoft Sentinel access model</p>
+            <h3>Roles describe platform permission—not seniority.</h3>
+            <ul>
+              <li><strong>Reader:</strong> view data, incidents, workbooks, and resources.</li>
+              <li><strong>Responder:</strong> Reader permissions plus incident management.</li>
+              <li><strong>Contributor:</strong> broader Sentinel content and resource management.</li>
+              <li><strong>Playbook Operator:</strong> manually run authorized playbooks.</li>
+              <li><strong>Automation Contributor:</strong> service permission for automation-rule playbook execution.</li>
+            </ul>
+            <p>Logic Apps uses separate permissions. Role assignments are cumulative, so management must review the complete access path rather than one role name.</p>
+            <a href="https://learn.microsoft.com/en-us/azure/sentinel/roles">Read Microsoft’s Sentinel role guidance →</a>
+          </aside>
+        </div>
+
+        <div class="soar-panel">
+          <div class="soar-intro"><p class="eyebrow">SOAR control architecture</p><h2>Automate enrichment freely. Automate disruption carefully.</h2><p>Automation should fail visibly, record its actions, and preserve a human decision gate for high-impact response unless a specifically tested emergency policy authorizes otherwise.</p></div>
+          <div class="soar-flow" aria-label="Incident automation architecture">
+            <article><span>01</span><h3>Incident created</h3><p>Alert, entities, source, severity.</p></article><i aria-hidden="true">→</i>
+            <article><span>02</span><h3>Enrich</h3><p>Asset, identity, intelligence, history.</p></article><i aria-hidden="true">→</i>
+            <article><span>03</span><h3>Classify risk</h3><p>Evidence, activity, exposure, impact.</p></article><i aria-hidden="true">→</i>
+            <article><span>04A</span><h3>Investigation path</h3><p>Assign owner and required tasks.</p></article>
+            <article class="high-risk"><span>04B</span><h3>High-risk path</h3><p>Human gate or preapproved emergency action.</p></article><i aria-hidden="true">→</i>
+            <article><span>05</span><h3>Audit and verify</h3><p>Action, approval, result, failure, exception.</p></article>
+          </div>
+          <div class="automation-gates">
+            <div><strong>Before deployment</strong><p>Peer review · test tenants or controlled replay · least privilege · failure path · rollback · owner</p></div>
+            <div><strong>After deployment</strong><p>Execution health · error queue · false actions · business impact · permission drift · version history</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reporting-section" id="reporting">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Audience-aware communication</p><h2>Four reports. One incident. Different decisions.</h2></div>
+          <p>A strong manager preserves the facts and uncertainty while changing the technical depth for the audience.</p>
+        </div>
+
+        <div class="report-stack">
+          <article><div><span>T1 → T2</span><strong>Escalation</strong></div><p>“FIN-WS-042 shows Word spawning encoded PowerShell followed by DNS activity. Execution is suspicious, but payload delivery and full behavior remain unconfirmed. Investigate process lineage, file staging, and network activity.”</p></article>
+          <article><div><span>T2 → Manager / T3</span><strong>Incident findings</strong></div><p>“The endpoint shows DLL execution, Run-key persistence, and recurring network communication. Compromise is supported. Exfiltration and lateral movement are not established. Containment and enterprise scoping are required.”</p></article>
+          <article><div><span>T3 → Manager</span><strong>Engineering assessment</strong></div><p>“Analysis supports persistent network-worker behavior and task retrieval. We recommend behavioral coverage, Office child-process controls, DLL execution controls, and a tested response playbook. Production deployment still requires validation.”</p></article>
+          <article class="executive-report"><div><span>SOC Manager → Leadership</span><strong>Business update</strong></div><p id="executive-briefing">“We confirmed a malware infection affecting a finance workstation. The endpoint is isolated, and the team is checking for additional affected systems. There is currently no confirmed evidence of data theft. Recovery and validated preventive improvements are in progress; the next update will follow the scoping decision.”</p><button class="copy-button" id="copy-briefing" type="button">Copy briefing</button></article>
+        </div>
+
+        <div class="briefing-rule">
+          <span>Executive briefing formula</span>
+          <strong>Confirmed facts</strong><i>+</i><strong>Unresolved risk</strong><i>+</i><strong>Actions taken</strong><i>+</i><strong>Decision or next update</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section engineering-section" id="detection-engineering">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Tier 3 handoff</p><h2>Turn one incident into behavioral coverage.</h2></div>
+          <p>The query below is an illustrative Microsoft Defender XDR hunt. It assumes the listed telemetry exists and must be validated against the current tenant schema before operational use.</p>
+        </div>
+        <div class="code-layout">
+          <div class="code-panel">
+            <div class="code-head"><span>Registry persistence hunt · KQL</span><button class="copy-button" id="copy-query" type="button">Copy query</button></div>
+            <pre id="hunt-query"><code>DeviceRegistryEvents
+| where Timestamp &gt;= ago(7d)
+| where RegistryKey contains @"\CurrentVersion\Run"
+| where RegistryValueData contains "rundll32"
+| project
+    Timestamp,
+    DeviceId,
+    DeviceName,
+    ReportId,
+    RegistryKey,
+    RegistryValueName,
+    RegistryValueData,
+    InitiatingProcessFileName,
+    InitiatingProcessCommandLine,
+    InitiatingProcessUniqueId
+| order by Timestamp desc</code></pre>
+          </div>
+          <aside class="test-card">
+            <p class="card-kicker">Management acceptance criteria</p>
+            <h3>A query is not a production detection.</h3>
+            <ul class="check-list">
+              <li>Replayed malicious chain triggers expected logic</li>
+              <li>Benign Office workflow does not become a high-confidence incident</li>
+              <li>Renamed DLL and changed destination remain detectable</li>
+              <li>Missing telemetry produces a visible coverage warning</li>
+              <li>Automation follows approved authority and rollback</li>
+              <li>Rule has an owner, version, tuning history, and review date</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section improvement-section" id="improvement">
+      <div class="page-shell">
+        <div class="section-heading">
+          <p class="eyebrow">Closed-loop security operations</p>
+          <h2>The incident is not finished when the malware is removed.</h2>
+          <p>Lessons learned become an engineering backlog with accountable owners, deadlines, acceptance criteria, and validation evidence.</p>
+        </div>
+
+        <div class="backlog" aria-label="Continuous improvement backlog">
+          <div class="backlog-head"><span>Improvement</span><span>Owner</span><span>Acceptance criterion</span></div>
+          <article><h3>Update initial triage runbook</h3><strong>Tier 1 Lead</strong><p>Analysts consistently recognize and escalate the execution chain with required evidence.</p></article>
+          <article><h3>Improve multi-source investigation</h3><strong>Tier 2 Lead</strong><p>Endpoint, identity, network, and email correlations are repeatable and provenance is retained.</p></article>
+          <article><h3>Develop behavioral KQL coverage</h3><strong>Tier 3</strong><p>Variation and benign tests pass; data dependencies and residual gaps are documented.</p></article>
+          <article><h3>Evaluate Office ASR control</h3><strong>Endpoint Engineering</strong><p>Audit data reviewed, business impact tested, staged rollout and rollback approved.</p></article>
+          <article><h3>Improve network attribution</h3><strong>Network / Tier 3</strong><p>Relevant flows can be tied to devices and processes within the required retention window.</p></article>
+          <article><h3>Automate incident enrichment</h3><strong>SOAR Engineer</strong><p>Workflow is tested, least-privileged, audited, monitored, and fails visibly.</p></article>
+          <article><h3>Update malware-response playbook</h3><strong>IR / Tier 3</strong><p>Procedure is exercised, decision authority is clear, and evidence preservation is verified.</p></article>
+          <article><h3>Run a response tabletop</h3><strong>SOC Manager</strong><p>Staffing, containment authority, communications, and business decisions are exercised.</p></article>
+          <article><h3>Verify corrective-action closure</h3><strong>SOC Manager</strong><p>Each owner supplies completion and effectiveness evidence—not only a closed ticket.</p></article>
+        </div>
+
+        <div class="nist-map">
+          <div class="nist-intro"><p class="eyebrow">NIST CSF 2.0 alignment</p><h2>Incident response spans all six functions.</h2><p>NIST SP 800-61 Revision 3 frames incident response as part of cybersecurity risk management—not an isolated technical activity.</p><a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final">Read NIST SP 800-61r3 →</a></div>
+          <div class="function-grid">
+            <article><span>GOVERN</span><p>Roles, policy, authority, accountability, risk.</p></article>
+            <article><span>IDENTIFY</span><p>Assets, identities, dependencies, exposure.</p></article>
+            <article><span>PROTECT</span><p>Preventive controls and secure configuration.</p></article>
+            <article><span>DETECT</span><p>Telemetry, analytics, hunting, readiness.</p></article>
+            <article><span>RESPOND</span><p>Investigation, containment, coordination, communication.</p></article>
+            <article><span>RECOVER</span><p>Restoration, validation, learning, improvement.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section sources-section" id="sources">
+      <div class="page-shell">
+        <div class="section-heading split-heading">
+          <div><p class="eyebrow">Scope and sources</p><h2>What is authored, verified, and still unproven</h2></div>
+          <p>The operational architecture and fictional case are authored portfolio work. Standards and platform statements are linked to current authoritative documentation.</p>
+        </div>
+        <div class="boundary-grid">
+          <article><span>Authored</span><h3>Portfolio framework</h3><p>Role model, decision sequence, quality questions, dashboards, reporting examples, authority matrix, and improvement backlog.</p></article>
+          <article><span>Verified reference</span><h3>Standards and platform behavior</h3><p>NIST incident-response integration; Microsoft Sentinel roles, playbooks, incident tasks; Defender XDR schema; Defender ASR guidance.</p></article>
+          <article><span>Not claimed</span><h3>Production proof</h3><p>No live tenant, employer incident, production rule deployment, staff supervision, 24/7 operation, or real organizational performance result is represented.</p></article>
+        </div>
+        <div class="source-links">
+          <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final"><strong>NIST SP 800-61r3</strong><span>Incident response and CSF 2.0</span></a>
+          <a href="https://learn.microsoft.com/en-us/azure/sentinel/roles"><strong>Microsoft Sentinel roles</strong><span>RBAC and task permissions</span></a>
+          <a href="https://learn.microsoft.com/en-us/azure/sentinel/run-playbooks"><strong>Sentinel playbooks</strong><span>Automation and service permissions</span></a>
+          <a href="https://learn.microsoft.com/en-us/azure/sentinel/incident-tasks"><strong>Sentinel incident tasks</strong><span>Repeatable analyst workflow</span></a>
+          <a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-schema-tables"><strong>Defender XDR schema</strong><span>Advanced hunting data tables</span></a>
+          <a href="https://learn.microsoft.com/en-us/defender-endpoint/attack-surface-reduction-rules-reference"><strong>Defender ASR reference</strong><span>Office child-process control</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page-shell footer-inner">
+      <div><strong>Marc Lavoie</strong><span>Enterprise SOC Management · authored portfolio case study</span></div>
+      <nav aria-label="Footer navigation"><a href="#top">Back to top</a><a href="../index.html">Portfolio home</a><a href="../full-portfolio.html#soc-projects">SOC projects</a><a href="../interview/">Interview Q&amp;A</a></nav>
+    </div>
+  </footer>
+
+  <script src="soc-management.js?v=20261112a" defer></script>
+</body>
+</html>
