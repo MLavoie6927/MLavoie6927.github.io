@@ -89,8 +89,8 @@ def validate_html(errors: list[str]) -> None:
 def validate_home(errors: list[str]) -> None:
     text = (ROOT / "index.html").read_text(encoding="utf-8")
     nav = re.search(r'<ul class="nav-links" id="primary-menu">(.*?)</ul>', text, re.S)
-    if not nav or nav.group(1).count("<li>") != 13:
-        errors.append("index.html: primary navigation must contain exactly thirteen choices")
+    if not nav or nav.group(1).count("<li>") != 14:
+        errors.append("index.html: primary navigation must contain exactly fourteen choices")
     for marker in (
         'id="featured-projects"',
         'id="project-library"',
@@ -101,6 +101,7 @@ def validate_home(errors: list[str]) -> None:
         'full-portfolio.html',
         'interview/',
         'general-it/',
+        'href="git-mb/">GIT &amp; MB</a>',
         'soc-management/',
         'intelligence-officer/',
         'id="general-it"',
@@ -222,6 +223,120 @@ def validate_general_it(errors: list[str]) -> None:
             errors.append(f"General IT Field Desk: missing navigation link from {page_name}")
     if "https://mlavoie6927.github.io/general-it/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("General IT Field Desk: sitemap URL is missing")
+
+
+def validate_git_mb(errors: list[str]) -> None:
+    base = ROOT / "git-mb"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    page_css = (base / "page.css").read_text(encoding="utf-8")
+    page_script = (base / "page.js").read_text(encoding="utf-8")
+    atlas_css_path = base / "assets" / "hardware" / "motherboard-atlas.css"
+    atlas_script_path = base / "assets" / "hardware" / "motherboard-atlas.js"
+    atlas_css = atlas_css_path.read_text(encoding="utf-8")
+    atlas_script = atlas_script_path.read_text(encoding="utf-8")
+
+    for marker in (
+        "GIT &amp; MB",
+        "Anatomy of a <span>Computer.</span>",
+        "25</strong> board components",
+        "14</strong> chip regions",
+        "12</strong> materials",
+        "10</strong> milestones",
+        "Explore the circuit board",
+        "Follow the signals. Understand the system.",
+        "61 learning targets",
+        "Conceptual—not repair CAD",
+        "38893704296065a3f65f1c60b69b4b96c0f72d5eb2e018c16d10c909b04635d1",
+        'id="hardware-atlas"',
+        'id="atlas-menu-toggle"',
+        'data-hwat-view="board"',
+        'data-hwat-view="chip"',
+        'data-hwat-view="materials"',
+        'data-hwat-view="history"',
+        'data-hwat-trace="power"',
+        'data-hwat-trace="data"',
+        'data-hwat-tour',
+        'href="../index.html"',
+        'href="../general-it/"',
+        'href="../full-portfolio.html"',
+    ):
+        if marker not in html:
+            errors.append(f"GIT & MB atlas: missing page marker {marker}")
+
+    for marker in (
+        ".atlas-site-header",
+        ".atlas-menu.is-open",
+        ".atlas-context",
+        ".atlas-provenance-grid",
+        "@media (max-width: 700px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in page_css:
+            errors.append(f"GIT & MB atlas: missing responsive shell style {marker}")
+
+    for marker in (
+        "window.HardwareAtlas",
+        "version:'2.0.0'",
+        "board:board.length",
+        "chip:chip.length",
+        "materials:materials.length",
+        "history:history.length",
+        "data-hwat-part",
+        "data-hwat-directory",
+        "data-hwat-next-step",
+        "updateTraceButtons",
+        "zoomTo",
+        "startTour",
+        "pointerdown",
+        "keydown",
+    ):
+        if marker not in atlas_script:
+            errors.append(f"GIT & MB atlas: missing interactive module marker {marker}")
+
+    for marker in (
+        "#hardware-atlas",
+        ".hwat-hotspot",
+        ".hwat-route--power",
+        ".hwat-route--data",
+        ".hwat-materials-grid",
+        ".hwat-timeline",
+        "prefers-reduced-motion",
+    ):
+        if marker not in atlas_css:
+            errors.append(f"GIT & MB atlas: missing module style marker {marker}")
+
+    expected_hashes = {
+        atlas_css_path: "a4e90c482fa6ab990ab7e4ce8607af141fa73dbb3d096a6af5002b8fd114cf8c",
+        atlas_script_path: "0187053c12135421175df4ff66d7d30c6e5e8c8fbc533b8ddf573204c1306321",
+    }
+    for path, expected in expected_hashes.items():
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != expected:
+            errors.append(f"GIT & MB atlas: imported asset hash changed for {path.name}")
+
+    scripts = atlas_script + "\n" + page_script
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"GIT & MB atlas: forbidden {label}")
+
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    for marker in (
+        'href="git-mb/">GIT &amp; MB</a>',
+        "GIT &amp; MB · motherboard and chip atlas",
+    ):
+        if marker not in home:
+            errors.append(f"GIT & MB atlas: missing landing-page marker {marker}")
+    if "https://mlavoie6927.github.io/git-mb/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("GIT & MB atlas: sitemap URL is missing")
 
 
 def validate_geology(errors: list[str]) -> None:
@@ -1221,6 +1336,7 @@ def main() -> None:
     validate_home(errors)
     validate_full_portfolio(errors)
     validate_general_it(errors)
+    validate_git_mb(errors)
     validate_geology(errors)
     validate_archaeology(errors)
     validate_science(errors)
@@ -1238,6 +1354,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
+    print("PASS: GIT & MB atlas has a dedicated landing tab, 61 learning targets, illustrated interactions, source integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
     print("PASS: Science reference navigation, 28 disciplines, 4 inquiry investigations, PDF integrity, reader, and static-browser boundary")

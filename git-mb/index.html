@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Marc Lavoie's interactive motherboard and chip atlas: 25 motherboard components, 14 silicon regions, 12 engineering materials, hardware history, conceptual signal paths, and safe diagnostic guidance.">
+  <meta name="theme-color" content="#06101d">
+  <meta name="robots" content="index,follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GIT &amp; MB | Interactive Motherboard &amp; Chip Atlas">
+  <meta property="og:description" content="Click through an animated motherboard, inspect processor regions, trace conceptual power and data paths, and learn materials, failures, and safe checks.">
+  <meta property="og:url" content="https://mlavoie6927.github.io/git-mb/">
+  <link rel="canonical" href="https://mlavoie6927.github.io/git-mb/">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <title>GIT &amp; MB | Interactive Motherboard &amp; Chip Atlas</title>
+  <link rel="stylesheet" href="page.css?v=20261113a">
+  <link rel="stylesheet" href="assets/hardware/motherboard-atlas.css?v=2.0.0">
+</head>
+<body>
+  <a class="skip-link" href="#hardware-atlas">Skip to the interactive atlas</a>
+
+  <header class="atlas-site-header">
+    <nav class="atlas-site-nav" aria-label="GIT and motherboard navigation">
+      <a class="atlas-brand" href="../index.html" aria-label="Marc Lavoie portfolio home">
+        <span class="atlas-brand-mark" aria-hidden="true">ML</span>
+        <span><strong>GIT &amp; MB</strong><small>General IT · Motherboard &amp; Chip Atlas</small></span>
+      </a>
+      <div class="atlas-primary-links" aria-label="Primary destinations">
+        <a href="../index.html">Home</a>
+        <a href="../general-it/">General IT</a>
+        <a href="../full-portfolio.html">Full Portfolio</a>
+      </div>
+      <button class="atlas-menu-toggle" id="atlas-menu-toggle" type="button" aria-controls="atlas-menu" aria-expanded="false" aria-label="Open GIT and motherboard navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="atlas-menu" id="atlas-menu">
+        <a href="../index.html">Portfolio home</a>
+        <a href="../general-it/">General IT Field Desk</a>
+        <a href="../full-portfolio.html">Full Portfolio</a>
+        <a href="#hardware-atlas" data-atlas-view="board">Motherboard explorer</a>
+        <a href="#hardware-atlas" data-atlas-view="chip">Inside a chip</a>
+        <a href="#hardware-atlas" data-atlas-view="materials">Materials laboratory</a>
+        <a href="#hardware-atlas" data-atlas-view="history">Hardware history</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="atlas-context" aria-label="GIT and motherboard atlas introduction">
+      <div>
+        <p>GENERAL IT · HARDWARE ENGINEERING · VISUAL DIAGNOSTICS</p>
+        <h1>GIT <span>&amp;</span> MB</h1>
+      </div>
+      <p>Click the board to identify a component, understand what it connects to, review construction and failure modes, and learn the safest next diagnostic question.</p>
+      <a href="#hardware-atlas">Begin component inspection <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <div class="atlas-module-wrap">
+<!--
+  Motherboard & Silicon Atlas: drop-in tab content.
+  Insert this section INSIDE your existing website's desired tab/page.
+  Load motherboard-atlas.css and motherboard-atlas.js once.
+  Scoped to #hardware-atlas; does not replace your site's navigation.
+-->
+<section id="hardware-atlas" class="hwat" aria-labelledby="hwat-title">
+  <div class="hwat-shell">
+    <header class="hwat-hero">
+      <div class="hwat-hero-copy">
+        <p class="hwat-eyebrow"><span class="hwat-live-dot" aria-hidden="true"></span> INTERACTIVE HARDWARE ATLAS <span class="hwat-hero-edition">/ V2.0</span></p>
+        <h2 id="hwat-title">Anatomy of a <span>Computer.</span></h2>
+        <p class="hwat-lede">See the engineering hidden beneath every circuit. Explore an illustrated motherboard and processor, illuminate individual components, then discover their materials, manufacturing, and failure modes.</p>
+        <div class="hwat-hero-stats" aria-label="Atlas overview">
+          <span><strong>25</strong> board components</span>
+          <span><strong>14</strong> chip regions</span>
+          <span><strong>12</strong> materials</span>
+          <span><strong>10</strong> milestones</span>
+        </div>
+      </div>
+      <div class="hwat-hero-emblem" aria-hidden="true"><svg viewBox="0 0 260 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hwat-hero-ic" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#345f72"/><stop offset=".5" stop-color="#122a40"/><stop offset="1" stop-color="#0d192c"/></linearGradient><linearGradient id="hwat-hero-metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#bce8db"/><stop offset=".6" stop-color="#497d8d"/><stop offset="1" stop-color="#d1ecdb"/></linearGradient></defs><circle cx="129" cy="114" r="102" fill="none" stroke="#68c9c2" stroke-dasharray="2 12" opacity=".5"/><circle cx="129" cy="114" r="80" fill="#37b0b8" opacity=".045"/><g transform="translate(17 1) rotate(-13 114 112)"><path d="M57 47L169 47 221 98 109 98Z" fill="#2e5567" stroke="#7dcfd2" stroke-width="2"/><path d="M109 98L221 98 221 160 109 160Z" fill="#112b3e" stroke="#558da0"/><path d="M57 47L109 98 109 160 57 109Z" fill="#234254" stroke="#56899e"/><path d="M77 50L172 50 211 90 116 90Z" fill="url(#hwat-hero-ic)" stroke="#a5e5e2" stroke-width="2"/><path d="M116 90L211 90 211 143 116 143Z" fill="#0b1e30" stroke="#8cbdc9"/><path d="M77 50L116 90 116 143 77 103Z" fill="#225166" stroke="#8cbdc9"/><path d="M113 63l55 0 20 20-55 0z" fill="#132a3c" stroke="#65d5d2"/><path d="M147 68l22 0 11 11-22 0z" fill="#74f1e3" opacity=".28"/><g stroke="#c0ab78" stroke-width="4"><path d="M116 146v19"/><path d="M130 146v19"/><path d="M144 146v19"/><path d="M158 146v19"/><path d="M172 146v19"/><path d="M186 146v19"/><path d="M200 146v19"/><path d="M55 109l-9 11"/><path d="M68 109l-9 11"/><path d="M81 109l-9 11"/><path d="M94 109l-9 11"/><path d="M107 109l-9 11"/></g><text x="157" y="104" font-size="12" font-family="system-ui" font-weight="900" fill="#bbf9ed" transform="skewY(-1)">SILICON</text><text x="159" y="121" font-size="8" font-family="system-ui" fill="#8bc7bf">// EXPLORE</text></g><path d="M24 200h212M129 6v26M129 200v24" stroke="#5cc5c8" stroke-opacity=".25" stroke-width="1"/></svg></div>
+    </header>
+
+    <nav class="hwat-tabs" aria-label="Hardware atlas sections">
+      <button class="hwat-tab is-active" type="button" data-hwat-view="board" aria-pressed="true"><span aria-hidden="true">▦</span> Motherboard</button>
+      <button class="hwat-tab" type="button" data-hwat-view="chip" aria-pressed="false"><span aria-hidden="true">◈</span> Inside a chip</button>
+      <button class="hwat-tab" type="button" data-hwat-view="materials" aria-pressed="false"><span aria-hidden="true">⬡</span> Materials lab</button>
+      <button class="hwat-tab" type="button" data-hwat-view="history" aria-pressed="false"><span aria-hidden="true">◷</span> History</button>
+    </nav>
+
+    <div class="hwat-workspace" data-hwat-workspace>
+      <div class="hwat-explorer" data-hwat-explorer>
+        <div class="hwat-explorer-toolbar">
+          <div>
+            <p class="hwat-overline" data-hwat-stage-label>ATX architecture • conceptual map</p>
+            <h3 data-hwat-stage-heading>Explore the circuit board</h3>
+          </div>
+          <div class="hwat-toolbar-actions">
+            <label class="hwat-search-wrap"><span class="hwat-sr-only">Search components</span><span aria-hidden="true">⌕</span><input data-hwat-search type="search" placeholder="Search components…" autocomplete="off"></label>
+            <button class="hwat-minibutton" type="button" data-hwat-reset aria-label="Reset filters and selection">↺ Reset</button>
+          </div>
+        </div>
+        <div class="hwat-categories" data-hwat-categories role="group" aria-label="Filter components"></div>
+        <div class="hwat-diagram-wrap" data-hwat-diagram-wrap>
+          <div class="hwat-stage-controlbar" data-hwat-stage-controls>
+            <div class="hwat-stage-mode" aria-label="Conceptual signal path overlays">
+              <span class="hwat-stage-micro">ROUTING</span>
+              <button type="button" data-hwat-trace="off" class="is-active" aria-pressed="true">Off</button>
+              <button type="button" data-hwat-trace="power" aria-pressed="false"><i class="hwat-legend-dot hwat-legend-power" aria-hidden="true"></i> Power</button>
+              <button type="button" data-hwat-trace="data" aria-pressed="false"><i class="hwat-legend-dot hwat-legend-data" aria-hidden="true"></i> Data</button>
+            </div>
+            <div class="hwat-zoom" role="group" aria-label="Diagram zoom controls"><button type="button" data-hwat-zoom="out" aria-label="Zoom out">−</button><span data-hwat-zoom-level aria-live="polite">100%</span><button type="button" data-hwat-zoom="in" aria-label="Zoom in">+</button><button type="button" data-hwat-zoom="fit" aria-label="Fit the whole diagram">Fit</button></div>
+          </div>
+          <div class="hwat-diagram" data-hwat-diagram role="group" aria-label="Interactive motherboard component diagram"></div>
+          <div class="hwat-hover-card" data-hwat-hover-card role="status" aria-hidden="true"></div>
+          <div class="hwat-diagram-caption"><span><i class="hwat-caption-pulse" aria-hidden="true"></i> Hover to identify · click to inspect · use + to zoom</span><span>Original vector illustrations · conceptual layouts</span></div>
+        </div>
+        <div class="hwat-parts-heading"><h4 data-hwat-list-title>Component directory</h4><span data-hwat-count></span></div>
+        <div class="hwat-part-list" data-hwat-part-list aria-label="Components in current view"></div>
+      </div>
+
+      <aside class="hwat-inspector" data-hwat-inspector aria-labelledby="hwat-info-title">
+        <div class="hwat-inspector-top"><span class="hwat-inspector-kicker">COMPONENT INSPECTOR</span><span class="hwat-status"><i aria-hidden="true"></i> LIVE EXPLORER</span></div>
+        <div id="hwat-info" class="hwat-inspector-content" data-hwat-info aria-live="polite" aria-atomic="false"></div>
+      </aside>
+    </div>
+
+    <section class="hwat-learning-panel" aria-labelledby="hwat-learning-title">
+      <div class="hwat-learning-icon" aria-hidden="true">⌘</div>
+      <div><h3 id="hwat-learning-title">Follow the signals. Understand the system.</h3><p>Trace power from the EPS connector through the VRM to the CPU; then inspect memory channels, PCI Express, and storage interfaces. Enable the conceptual route overlays and explore each component in detail.</p></div>
+      <button type="button" class="hwat-primary-button" data-hwat-tour>Start guided tour <span aria-hidden="true">→</span></button>
+    </section>
+
+    <section class="hwat-footer-note" aria-label="Technical notes and sources">
+      <div><strong>Educational model</strong><p>Illustrations are original educational vector artwork. Motherboard placement, highlighted signal routes, silicon floorplan, and package stack-ups are conceptual. Actual layouts, alloys, interfaces, and failure modes vary by platform and product generation. Never work inside powered hardware; use ESD-safe practices.</p></div>
+      <div><strong>Primary references</strong><p><a href="https://www.computerhistory.org/siliconengine/timeline/" target="_blank" rel="noopener noreferrer">Computer History Museum</a> · <a href="https://www.nist.gov/system/files/documents/2024/06/28/Final%20PEA%20for%20Modernization%20and%20Expansion%20of%20Semiconductor%20Fabs%206-28-2024%20-%20OGC-508C.pdf" target="_blank" rel="noopener noreferrer">NIST fabrication overview</a> · <a href="https://www.intel.com/pressroom/archive/releases/2004/20041115comp_a.htm" target="_blank" rel="noopener noreferrer">Intel ATX history</a> · <a href="https://www.si.edu/object/intel-4004-microprocessor%3Anmah_713495" target="_blank" rel="noopener noreferrer">Smithsonian 4004</a></p></div>
+    </section>
+  </div>
+</section>
+
+    </div>
+
+    <section class="atlas-provenance" aria-labelledby="atlas-provenance-title">
+      <div>
+        <p class="atlas-kicker">Artifact integrity</p>
+        <h2 id="atlas-provenance-title">A complete, self-contained hardware learning system.</h2>
+      </div>
+      <div class="atlas-provenance-grid">
+        <article><span>Interactive coverage</span><strong>61 learning targets</strong><p>Twenty-five motherboard components, fourteen chip regions, twelve materials, and ten historical milestones.</p></article>
+        <article><span>Runtime boundary</span><strong>Static and dependency-free</strong><p>The atlas runs locally in the browser with original SVG artwork and no tracking, package installation, backend, or automatic external requests.</p></article>
+        <article><span>Evidence boundary</span><strong>Conceptual—not repair CAD</strong><p>Routes and layouts explain relationships. Always verify the exact motherboard manual, power state, ESD controls, component compatibility, and manufacturer procedures.</p></article>
+      </div>
+      <p class="atlas-integrity-line"><strong>Imported archive SHA-256:</strong> <code>38893704296065a3f65f1c60b69b4b96c0f72d5eb2e018c16d10c909b04635d1</code></p>
+    </section>
+  </main>
+
+  <footer class="atlas-footer">
+    <div><strong>Marc Lavoie</strong><p>GIT &amp; MB · Interactive Motherboard &amp; Chip Atlas</p></div>
+    <nav aria-label="GIT and motherboard footer navigation"><a href="../index.html">Home</a><a href="../general-it/">General IT</a><a href="#hardware-atlas">Atlas</a><a href="#main-content">Back to top</a></nav>
+  </footer>
+
+  <script src="assets/hardware/motherboard-atlas.js?v=2.0.0" defer></script>
+  <script src="page.js?v=20261113a" defer></script>
+</body>
+</html>
