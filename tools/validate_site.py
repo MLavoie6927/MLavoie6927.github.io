@@ -512,6 +512,130 @@ def validate_archaeology(errors: list[str]) -> None:
         errors.append("Archaeology reference: sitemap URL is missing")
 
 
+def validate_history(errors: list[str]) -> None:
+    base = ROOT / "history"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "history.css").read_text(encoding="utf-8")
+    script = (base / "history.js").read_text(encoding="utf-8")
+    data_script = (base / "history-data.js").read_text(encoding="utf-8")
+    pdf = base / "five-thousand-years-of-humanity-expanded-2026.pdf"
+    cover = base / "assets" / "five-thousand-years-cover.png"
+
+    for marker in (
+        "Five thousand years.",
+        "Human choices in evidence.",
+        "A chronology, then a challenge to the chronology.",
+        "Search 378 verified entry points.",
+        "Do not confuse access with influence.",
+        "D / I / M / U evidence scale",
+        "Read the full volume here.",
+        "The reader receives the supplied volume unchanged.",
+        "AI-assisted editorial synthesis",
+        'id="history-menu-toggle"',
+        'id="history-search"',
+        'id="history-grid"',
+        'id="history-pdf-frame"',
+        'href="../full-portfolio.html#history"',
+        'href="../index.html"',
+    ):
+        if marker not in html:
+            errors.append(f"History research atlas: missing marker {marker}")
+
+    for marker in (
+        ".history-stage",
+        ".time-map",
+        ".volume-map",
+        ".region-wheel",
+        ".record-grid",
+        ".influence-chain",
+        ".confidence-grid",
+        ".case-gallery",
+        ".pdf-shell",
+        ".integrity-grid",
+        ".nav-menu.is-open",
+        "@media (max-width: 680px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"History research atlas: missing responsive style marker {marker}")
+
+    for marker in (
+        "window.HISTORY_ATLAS",
+        "renderRecords",
+        "openReaderPage",
+        "navigator.clipboard.writeText",
+        '"Close history navigation"',
+        "Math.max(1, Math.min(530",
+        "PAGE_SIZE = 24",
+    ):
+        if marker not in script:
+            errors.append(f"History research atlas: missing application marker {marker}")
+
+    data_match = re.fullmatch(r"\s*window\.HISTORY_ATLAS\s*=\s*(\{.*\});\s*", data_script, re.S)
+    if not data_match:
+        errors.append("History research atlas: data wrapper is invalid")
+    else:
+        try:
+            payload = json.loads(data_match.group(1))
+            records = payload.get("records", [])
+            counts = {
+                kind: sum(1 for record in records if record.get("kind") == kind)
+                for kind in ("generation", "coda", "study", "dossier")
+            }
+            if payload.get("sourcePages") != 530:
+                errors.append("History research atlas: source page count must be 530")
+            if payload.get("outlineDestinations") != 491:
+                errors.append("History research atlas: outline destination count must be 491")
+            if len(records) != 378:
+                errors.append(f"History research atlas: expected 378 entry points, found {len(records)}")
+            expected_counts = {"generation": 201, "coda": 1, "study": 17, "dossier": 159}
+            if counts != expected_counts:
+                errors.append(f"History research atlas: unexpected entry counts {counts}")
+            identifiers = [(record.get("kind"), record.get("number")) for record in records]
+            if len(identifiers) != len(set(identifiers)):
+                errors.append("History research atlas: entry identifiers are not unique")
+            for record in records:
+                if not {"kind", "number", "title", "period", "page", "lens"}.issubset(record):
+                    errors.append("History research atlas: one or more entries are missing required fields")
+                    break
+                if not 1 <= int(record["page"]) <= 530:
+                    errors.append("History research atlas: one or more PDF destinations are out of range")
+                    break
+        except (TypeError, ValueError, json.JSONDecodeError) as error:
+            errors.append(f"History research atlas: data payload could not be parsed: {error}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", script + "\n" + data_script, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"History research atlas: forbidden {label}")
+
+    expected_pdf_sha256 = "a3bbeda9ef35bfc28de244b0cdfaf8633d23747c62103732ca5e3106f46d9822"
+    if not pdf.exists():
+        errors.append("History research atlas: published PDF is missing")
+    else:
+        if pdf.stat().st_size != 2252162:
+            errors.append(f"History research atlas: PDF size changed to {pdf.stat().st_size} bytes")
+        if hashlib.sha256(pdf.read_bytes()).hexdigest() != expected_pdf_sha256:
+            errors.append("History research atlas: PDF hash does not match the supplied artifact")
+    if not cover.exists() or cover.stat().st_size < 50000:
+        errors.append("History research atlas: rendered cover preview is missing or unexpectedly small")
+
+    full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    for marker in ('id="history"', 'href="history/">History</a>', 'href="#history">History</a>'):
+        if marker not in full_portfolio:
+            errors.append(f"History research atlas: missing Full Portfolio marker {marker}")
+    if "https://mlavoie6927.github.io/history/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("History research atlas: sitemap URL is missing")
+
+
 def validate_science(errors: list[str]) -> None:
     base = ROOT / "science"
     html = (base / "index.html").read_text(encoding="utf-8")
@@ -1339,6 +1463,7 @@ def main() -> None:
     validate_git_mb(errors)
     validate_geology(errors)
     validate_archaeology(errors)
+    validate_history(errors)
     validate_science(errors)
     validate_space_science(errors)
     validate_soc_management(errors)
@@ -1357,6 +1482,7 @@ def main() -> None:
     print("PASS: GIT & MB atlas has a dedicated landing tab, 61 learning targets, illustrated interactions, source integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
+    print("PASS: History research atlas has 201 generations, 17 deep studies, 159 influence dossiers, 530-page PDF integrity, reader, and static-browser boundary")
     print("PASS: Science reference navigation, 28 disciplines, 4 inquiry investigations, PDF integrity, reader, and static-browser boundary")
     print("PASS: Space Science mission desk has 26 divisions, all 650 eight-page subjects, 5,294-page PDF integrity, orbit lab, reader, and landing feature")
     print("PASS: SOC Management recruiter path, four-role model, decision room, command dashboard, governance, reporting, and evidence boundary")
