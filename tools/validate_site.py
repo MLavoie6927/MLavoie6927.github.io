@@ -105,6 +105,9 @@ def validate_home(errors: list[str]) -> None:
         'intelligence-officer/',
         'id="general-it"',
         'id="intelligence-officer"',
+        'id="space-science"',
+        'href="#space-science">Space Science</a>',
+        'space-science/',
         'intelligence-officer/collection-workbench.html',
         'intelligence-officer/strategy-investigations.html',
     ):
@@ -112,6 +115,8 @@ def validate_home(errors: list[str]) -> None:
             errors.append(f"index.html: missing required recruiter-first marker {marker}")
     if "GitHub Profile" in text:
         errors.append("index.html: public GitHub profile button must not be present")
+    if nav and 'href="#contact">Contact</a>' in nav.group(1):
+        errors.append("index.html: Contact must be replaced by Space Science in the primary navigation")
 
 
 def validate_full_portfolio(errors: list[str]) -> None:
@@ -486,6 +491,135 @@ def validate_science(errors: list[str]) -> None:
             errors.append(f"Science reference: missing Full Portfolio marker {marker}")
     if "https://mlavoie6927.github.io/science/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("Science reference: sitemap URL is missing")
+
+
+def validate_space_science(errors: list[str]) -> None:
+    base = ROOT / "space-science"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "space-science.css").read_text(encoding="utf-8")
+    landing_css = (base / "landing-space.css").read_text(encoding="utf-8")
+    script = (base / "space-science.js").read_text(encoding="utf-8")
+    catalog_script = (base / "catalog-data.js").read_text(encoding="utf-8")
+    pdf = base / "complete-encyclopedia-space-science-aerospace-engineering-2026.pdf"
+    cover = base / "assets" / "encyclopedia-cover.png"
+
+    for marker in (
+        "Space Science &amp; Aerospace Engineering",
+        "From starlight",
+        "Twenty-six divisions. One connected aerospace system.",
+        "Every subject is here.",
+        "Eight views of every subject",
+        "See how altitude changes a circular Earth orbit.",
+        "All 5,294 pages, inside the mission desk.",
+        "Complete means verifiable.",
+        "650 / 650",
+        "not a flight-qualified design, launch authorization",
+        'id="space-menu-toggle"',
+        'id="division-grid"',
+        'id="subject-search"',
+        'id="subject-grid"',
+        'id="altitude-input"',
+        'id="pdf-frame"',
+        'href="../index.html#space-science"',
+    ):
+        if marker not in html:
+            errors.append(f"Space Science mission desk: missing marker {marker}")
+
+    for marker in (
+        ".space-stage",
+        ".division-grid",
+        ".subject-grid",
+        ".treatment-grid",
+        ".orbit-lab",
+        ".pdf-shell",
+        ".integrity-grid",
+        ".nav-menu.is-open",
+        "@media(max-width:760px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"Space Science mission desk: missing responsive style marker {marker}")
+
+    for marker in (
+        ".space-home-feature",
+        ".space-home-art",
+        ".space-home-metrics",
+        "@media(max-width:560px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in landing_css:
+            errors.append(f"Space Science landing feature: missing responsive style marker {marker}")
+
+    for marker in (
+        "window.SPACE_SCIENCE_CATALOG",
+        "Expected 26 divisions and 650 Space Science subjects.",
+        "renderDivisions",
+        "renderSubjects",
+        "renderSelectedSubject",
+        "openReaderPage",
+        "updateOrbit",
+        '"Close Space Science navigation"',
+        "Math.min(5294",
+    ):
+        if marker not in catalog_script + "\n" + script:
+            errors.append(f"Space Science mission desk: missing application marker {marker}")
+
+    prefix = "window.SPACE_SCIENCE_CATALOG="
+    if not catalog_script.startswith(prefix) or not catalog_script.rstrip().endswith(";"):
+        errors.append("Space Science mission desk: catalog data wrapper is invalid")
+    else:
+        catalog = json.loads(catalog_script[len(prefix):].strip().removesuffix(";"))
+        divisions = catalog.get("divisions", [])
+        subjects = catalog.get("subjects", [])
+        if len(divisions) != 26:
+            errors.append(f"Space Science mission desk: expected 26 divisions, found {len(divisions)}")
+        if len(subjects) != 650:
+            errors.append(f"Space Science mission desk: expected 650 subjects, found {len(subjects)}")
+        ids = [item.get("id") for item in subjects]
+        if len(set(ids)) != 650:
+            errors.append("Space Science mission desk: subject IDs are not unique")
+        if any(item.get("endPage") != item.get("page", 0) + 7 for item in subjects):
+            errors.append("Space Science mission desk: one or more subject ranges are not eight pages")
+
+    scripts = catalog_script + "\n" + script
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"Space Science mission desk: forbidden {label}")
+
+    expected_pdf_sha256 = "eeb5c91be0d0daec99d33b9530fa738e69e0a49a6b1ac63c9f464b6b3fccba44"
+    if not pdf.exists():
+        errors.append("Space Science mission desk: published PDF is missing")
+    else:
+        if pdf.stat().st_size != 16822339:
+            errors.append(f"Space Science mission desk: PDF size changed to {pdf.stat().st_size} bytes")
+        if hashlib.sha256(pdf.read_bytes()).hexdigest() != expected_pdf_sha256:
+            errors.append("Space Science mission desk: PDF hash does not match the supplied artifact")
+    if not cover.exists() or cover.stat().st_size < 50000:
+        errors.append("Space Science mission desk: rendered cover preview is missing or unexpectedly small")
+
+    home = (ROOT / "index.html").read_text(encoding="utf-8")
+    for marker in (
+        'href="#space-science">Space Science</a>',
+        'id="space-science"',
+        'href="space-science/"',
+        'href="space-science/#catalog"',
+        'href="space-science/#reader"',
+        "5,294-page encyclopedia",
+        "650 / 650 MODULES ONLINE",
+    ):
+        if marker not in home:
+            errors.append(f"Space Science landing feature: missing marker {marker}")
+    if "https://mlavoie6927.github.io/space-science/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("Space Science mission desk: sitemap URL is missing")
 
 
 def validate_soc_management(errors: list[str]) -> None:
@@ -1090,6 +1224,7 @@ def main() -> None:
     validate_geology(errors)
     validate_archaeology(errors)
     validate_science(errors)
+    validate_space_science(errors)
     validate_soc_management(errors)
     validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
@@ -1106,6 +1241,7 @@ def main() -> None:
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
     print("PASS: Science reference navigation, 28 disciplines, 4 inquiry investigations, PDF integrity, reader, and static-browser boundary")
+    print("PASS: Space Science mission desk has 26 divisions, all 650 eight-page subjects, 5,294-page PDF integrity, orbit lab, reader, and landing feature")
     print("PASS: SOC Management recruiter path, four-role model, decision room, command dashboard, governance, reporting, and evidence boundary")
     print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
