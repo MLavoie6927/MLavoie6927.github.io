@@ -141,6 +141,8 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'general-it/',
         'soc-management/',
         'id="general-it"',
+        'science/',
+        'id="science"',
         'geology/',
         'id="geology"',
     ):
@@ -388,6 +390,102 @@ def validate_archaeology(errors: list[str]) -> None:
             errors.append(f"Archaeology reference: missing Full Portfolio marker {marker}")
     if "https://mlavoie6927.github.io/archaeology/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("Archaeology reference: sitemap URL is missing")
+
+
+def validate_science(errors: list[str]) -> None:
+    base = ROOT / "science"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "science.css").read_text(encoding="utf-8")
+    script = (base / "science.js").read_text(encoding="utf-8")
+    pdf = base / "general-science-reference-2026-expanded-edition.pdf"
+    cover = base / "assets" / "general-science-cover.png"
+
+    for marker in (
+        "General Science Reference",
+        "A map of science.",
+        "Built to connect ideas—not collect trivia.",
+        "Explore all 28 disciplines.",
+        "Move from signal to explanation without skipping the hard parts.",
+        "Turn a broad curiosity into a testable plan.",
+        "Read the science here.",
+        "Published with a verifiable boundary.",
+        "not original laboratory research, a professional credential",
+        'id="science-menu-toggle"',
+        'id="discipline-search"',
+        'id="discipline-grid"',
+        'id="investigation-select"',
+        'id="pdf-frame"',
+        'href="../full-portfolio.html#science"',
+        'href="../index.html"',
+    ):
+        if marker not in html:
+            errors.append(f"Science reference: missing marker {marker}")
+
+    for marker in (
+        ".cover-stage",
+        ".architecture-grid",
+        ".discipline-grid",
+        ".method-flow",
+        ".reasoning-matrix",
+        ".workbench-shell",
+        ".pdf-shell",
+        ".integrity-grid",
+        ".nav-menu.is-open",
+        "@media (max-width:760px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"Science reference: missing responsive style marker {marker}")
+
+    for marker in (
+        "var disciplines = [",
+        "var investigations = {",
+        "renderDisciplines",
+        "renderInvestigation",
+        "openReaderPage",
+        '"Close science navigation"',
+        "Math.max(1,Math.min(1195",
+    ):
+        if marker not in script:
+            errors.append(f"Science reference: missing application marker {marker}")
+
+    discipline_count = len(re.findall(r"\{n:\d+,page:\d+,domain:", script))
+    investigation_count = len(re.findall(r"^\s{4}[a-z]+:\{title:", script, re.M))
+    if discipline_count != 28:
+        errors.append(f"Science reference: expected 28 disciplines, found {discipline_count}")
+    if investigation_count != 4:
+        errors.append(f"Science reference: expected 4 illustrative investigations, found {investigation_count}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", script, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"Science reference: forbidden {label}")
+
+    expected_pdf_sha256 = "6ca68598e32dcd4a685d247b917a78ed515828328aec898a6c891776da76b637"
+    if not pdf.exists():
+        errors.append("Science reference: published PDF is missing")
+    else:
+        if pdf.stat().st_size != 3806792:
+            errors.append(f"Science reference: PDF size changed to {pdf.stat().st_size} bytes")
+        if hashlib.sha256(pdf.read_bytes()).hexdigest() != expected_pdf_sha256:
+            errors.append("Science reference: PDF hash does not match the supplied artifact")
+    if not cover.exists() or cover.stat().st_size < 50000:
+        errors.append("Science reference: rendered cover preview is missing or unexpectedly small")
+
+    full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    for marker in ('id="science"', 'href="science/"', 'href="#science">Science</a>'):
+        if marker not in full_portfolio:
+            errors.append(f"Science reference: missing Full Portfolio marker {marker}")
+    if "https://mlavoie6927.github.io/science/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("Science reference: sitemap URL is missing")
 
 
 def validate_soc_management(errors: list[str]) -> None:
@@ -991,6 +1089,7 @@ def main() -> None:
     validate_general_it(errors)
     validate_geology(errors)
     validate_archaeology(errors)
+    validate_science(errors)
     validate_soc_management(errors)
     validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
@@ -1006,6 +1105,7 @@ def main() -> None:
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
+    print("PASS: Science reference navigation, 28 disciplines, 4 inquiry investigations, PDF integrity, reader, and static-browser boundary")
     print("PASS: SOC Management recruiter path, four-role model, decision room, command dashboard, governance, reporting, and evidence boundary")
     print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
