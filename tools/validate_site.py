@@ -295,6 +295,101 @@ def validate_geology(errors: list[str]) -> None:
         errors.append("Geology Field Guide: sitemap URL is missing")
 
 
+def validate_archaeology(errors: list[str]) -> None:
+    base = ROOT / "archaeology"
+    html = (base / "index.html").read_text(encoding="utf-8")
+    css = (base / "archaeology.css").read_text(encoding="utf-8")
+    script = (base / "archaeology.js").read_text(encoding="utf-8")
+    pdf = base / "global-archaeological-record-1000-page-reference-edition.pdf"
+    cover = base / "assets" / "reference-edition-cover.png"
+
+    for marker in (
+        "The Global Archaeological Record",
+        "Dig deeper than a list of sites.",
+        "A research instrument, not a trophy shelf.",
+        "Explore 61 verified entry points.",
+        "The critical-evidence method.",
+        "Read the record here.",
+        "Published with a verifiable boundary.",
+        "not a complete census, independently audited excavation catalogue, fieldwork credential",
+        'id="archaeology-menu-toggle"',
+        'id="record-search"',
+        'id="record-grid"',
+        'id="pdf-frame"',
+        'href="../full-portfolio.html#archaeology"',
+        'href="../index.html"',
+    ):
+        if marker not in html:
+            errors.append(f"Archaeology reference: missing marker {marker}")
+
+    for marker in (
+        ".cover-stage",
+        ".purpose-grid",
+        ".record-grid",
+        ".method-flow",
+        ".evidence-matrix",
+        ".pdf-shell",
+        ".integrity-grid",
+        ".nav-menu.is-open",
+        "@media (max-width: 760px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"Archaeology reference: missing responsive style marker {marker}")
+
+    for marker in (
+        "var chapters = [",
+        "var regionNames = [",
+        "renderRecords",
+        "openReaderPage",
+        "navigator.clipboard.writeText",
+        '"Close archaeology navigation"',
+        "Math.max(1, Math.min(1000",
+    ):
+        if marker not in script:
+            errors.append(f"Archaeology reference: missing application marker {marker}")
+
+    chapter_block = re.search(r"var chapters = \[(.*?)\]\.map", script, re.S)
+    region_block = re.search(r"var regionNames = \[(.*?)\];", script, re.S)
+    chapter_count = len(re.findall(r'^\s*"[^"]+",?\s*$', chapter_block.group(1), re.M)) if chapter_block else 0
+    region_count = len(re.findall(r'^\s*"[^"]+",?\s*$', region_block.group(1), re.M)) if region_block else 0
+    if chapter_count != 39:
+        errors.append(f"Archaeology reference: expected 39 research chapters, found {chapter_count}")
+    if region_count != 22:
+        errors.append(f"Archaeology reference: expected 22 atlas regions, found {region_count}")
+
+    without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", script, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "localStorage": r"localStorage",
+        "sessionStorage": r"sessionStorage",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, without_comments):
+            errors.append(f"Archaeology reference: forbidden {label}")
+
+    expected_pdf_sha256 = "0468b3acda34f21c685fdbdf88df0a78f74c46a29de995160eff0ca99f21c6cb"
+    if not pdf.exists():
+        errors.append("Archaeology reference: published PDF is missing")
+    else:
+        if pdf.stat().st_size != 3515331:
+            errors.append(f"Archaeology reference: PDF size changed to {pdf.stat().st_size} bytes")
+        if hashlib.sha256(pdf.read_bytes()).hexdigest() != expected_pdf_sha256:
+            errors.append("Archaeology reference: PDF hash does not match the supplied artifact")
+    if not cover.exists() or cover.stat().st_size < 50000:
+        errors.append("Archaeology reference: rendered cover preview is missing or unexpectedly small")
+
+    full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    for marker in ('id="archaeology"', 'href="archaeology/"', 'href="#archaeology">Archaeology</a>'):
+        if marker not in full_portfolio:
+            errors.append(f"Archaeology reference: missing Full Portfolio marker {marker}")
+    if "https://mlavoie6927.github.io/archaeology/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
+        errors.append("Archaeology reference: sitemap URL is missing")
+
+
 def validate_soc_management(errors: list[str]) -> None:
     base = ROOT / "soc-management"
     html = (base / "index.html").read_text(encoding="utf-8")
@@ -895,6 +990,7 @@ def main() -> None:
     validate_full_portfolio(errors)
     validate_general_it(errors)
     validate_geology(errors)
+    validate_archaeology(errors)
     validate_soc_management(errors)
     validate_hamburger_navigation(errors)
     validate_atlas_upgrade(errors)
@@ -909,6 +1005,7 @@ def main() -> None:
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
+    print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
     print("PASS: SOC Management recruiter path, four-role model, decision room, command dashboard, governance, reporting, and evidence boundary")
     print("PASS: persistent three-line hamburger opens complete navigation on desktop and mobile")
     print("PASS: Glass Meridian structure, 30-report model, and no-network boundary")
