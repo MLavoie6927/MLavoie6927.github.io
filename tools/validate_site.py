@@ -525,7 +525,10 @@ def validate_history(errors: list[str]) -> None:
         "Five thousand years.",
         "Human choices in evidence.",
         "A chronology, then a challenge to the chronology.",
+        "Twenty-one eras.",
+        "Named influence investigations",
         "Search 378 verified entry points.",
+        "Choose an entry route",
         "Do not confuse access with influence.",
         "D / I / M / U evidence scale",
         "Read the full volume here.",
@@ -533,6 +536,10 @@ def validate_history(errors: list[str]) -> None:
         "AI-assisted editorial synthesis",
         'id="history-menu-toggle"',
         'id="history-search"',
+        'id="history-clear-search"',
+        'id="history-era-mosaic"',
+        'id="history-active-context"',
+        'id="history-related"',
         'id="history-grid"',
         'id="history-pdf-frame"',
         'href="../full-portfolio.html#history"',
@@ -546,6 +553,11 @@ def validate_history(errors: list[str]) -> None:
         ".time-map",
         ".volume-map",
         ".region-wheel",
+        ".history-panorama",
+        ".era-mosaic",
+        ".people-constellation",
+        ".explorer-briefing",
+        ".related-trails",
         ".record-grid",
         ".influence-chain",
         ".confidence-grid",
@@ -562,6 +574,10 @@ def validate_history(errors: list[str]) -> None:
     for marker in (
         "window.HISTORY_ATLAS",
         "renderRecords",
+        "renderEraMosaic",
+        "renderRelatedTrails",
+        "applyExplorerRoute",
+        "setActiveKind",
         "openReaderPage",
         "navigator.clipboard.writeText",
         '"Close history navigation"',
@@ -591,6 +607,11 @@ def validate_history(errors: list[str]) -> None:
             expected_counts = {"generation": 201, "coda": 1, "study": 17, "dossier": 159}
             if counts != expected_counts:
                 errors.append(f"History research atlas: unexpected entry counts {counts}")
+            era_titles = {
+                record.get("title") for record in records if record.get("kind") == "generation"
+            }
+            if len(era_titles) != 21:
+                errors.append(f"History research atlas: expected 21 chronological era bands, found {len(era_titles)}")
             identifiers = [(record.get("kind"), record.get("number")) for record in records]
             if len(identifiers) != len(set(identifiers)):
                 errors.append("History research atlas: entry identifiers are not unique")

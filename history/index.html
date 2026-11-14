@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://mlavoie6927.github.io/history/">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="history.css?v=20261113a">
+  <link rel="stylesheet" href="history.css?v=20261113b">
   <title>Five Thousand Years of Humanity | Marc Lavoie</title>
 </head>
 <body>
@@ -40,6 +40,7 @@
         <a href="../index.html">Home</a>
         <a href="../full-portfolio.html#history">Full Portfolio</a>
         <a href="#architecture">Volume Map</a>
+        <a href="#panorama">Era Panorama</a>
         <a href="#chronicle">Chronicle Explorer</a>
         <a href="#method">Evidence Method</a>
         <a href="#reader">PDF Reader</a>
@@ -189,6 +190,47 @@
       </div>
     </section>
 
+    <section class="section history-panorama" id="panorama">
+      <div class="section-shell">
+        <div class="section-heading section-heading-split panorama-heading">
+          <div>
+            <p class="eyebrow">The five-millennia panorama</p>
+            <h2>Twenty-one eras.<br>One connected wall of time.</h2>
+          </div>
+          <p>The chronology is not an empty index. It moves through 21 editorial era bands, each containing ten 25-year generations except the final present-day band. Select any era to load its verified records in the explorer below.</p>
+        </div>
+
+        <div class="panorama-scoreboard" aria-label="Historical atlas structure">
+          <article><strong>21</strong><span>chronological era bands</span><i style="--score: 100%"></i></article>
+          <article><strong>9</strong><span>regional lenses in parallel</span><i style="--score: 72%"></i></article>
+          <article><strong>491</strong><span>verified outline destinations</span><i style="--score: 88%"></i></article>
+          <article><strong>5,000+</strong><span>years represented</span><i style="--score: 96%"></i></article>
+        </div>
+
+        <div class="era-axis" aria-hidden="true">
+          <span>3000 BCE</span><span>2000 BCE</span><span>1000 BCE</span><span>1 CE</span><span>1000 CE</span><span>1800 CE</span><span>2026 CE</span>
+        </div>
+        <div class="era-mosaic" id="history-era-mosaic" aria-label="Twenty-one chronological era bands"></div>
+
+        <div class="people-wall">
+          <div class="people-wall-intro">
+            <p class="mini-kicker">Named influence investigations</p>
+            <h3>People enter the record through evidence—not decoration.</h3>
+            <p>These deep studies connect a named person to institutions, communications, public arguments, constraints, and rival explanations. Open any investigation at its exact PDF destination.</p>
+            <a class="text-link" href="#method">See the six-step influence test →</a>
+          </div>
+          <div class="people-constellation" aria-label="Featured historical investigations">
+            <button type="button" data-reader-page="353" data-reader-label="Enheduanna, Sargon and the Politics of Sacred Authority"><span>ES</span><strong>Enheduanna &amp; Sargon</strong><small>23rd century BCE · Mesopotamia</small></button>
+            <button type="button" data-reader-page="356" data-reader-label="Ashoka after Kalinga: Remorse Recorded in Royal Words"><span>AK</span><strong>Ashoka after Kalinga</strong><small>3rd century BCE · South Asia</small></button>
+            <button type="button" data-reader-page="358" data-reader-label="Mansa Musa and the Diplomacy of Pilgrimage"><span>MM</span><strong>Mansa Musa</strong><small>14th century CE · West Africa</small></button>
+            <button type="button" data-reader-page="362" data-reader-label="Abolition in Britain: Clarkson, Equiano, Wilberforce and Public Pressure"><span>AE</span><strong>Equiano &amp; abolition</strong><small>1780s–1807 · Atlantic world</small></button>
+            <button type="button" data-reader-page="366" data-reader-label="Kennedy, Khrushchev and the Secret Communication Channels of 1962"><span>KK</span><strong>Kennedy &amp; Khrushchev</strong><small>1962 · Cold War crisis</small></button>
+            <button type="button" data-reader-page="369" data-reader-label="Mandela, Sisulu and the ANC Debate over Resistance"><span>MS</span><strong>Mandela &amp; Sisulu</strong><small>1960–1964 · South Africa</small></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section-contrast" id="chronicle">
       <div class="section-shell">
         <div class="section-heading section-heading-split">
@@ -199,10 +241,24 @@
           <p>Search every generation, the 2026 coda, all 17 deep studies, and all 159 influence dossiers. Each result opens the unchanged volume at its verified PDF destination.</p>
         </div>
 
+        <div class="explorer-briefing" aria-label="Chronicle explorer overview">
+          <div>
+            <p class="mini-kicker">Choose an entry route</p>
+            <h3>Move from the broad chronology to a specific human decision.</h3>
+            <p>Use an era, a named study, an analytic lens, or a date. Search automatically checks every record type so a person such as Mandela cannot disappear behind a generation-only filter.</p>
+          </div>
+          <div class="explorer-quickstarts" aria-label="Suggested history searches">
+            <button type="button" data-history-query="First cities" data-history-kind="generation"><span>01</span><strong>First cities</strong><small>Begin at 3000 BCE</small></button>
+            <button type="button" data-history-query="empire" data-history-kind="all"><span>02</span><strong>Empires &amp; exchange</strong><small>Compare connected systems</small></button>
+            <button type="button" data-history-query="" data-history-kind="study"><span>03</span><strong>Deep studies</strong><small>Open all 17 investigations</small></button>
+            <button type="button" data-history-query="Governance" data-history-kind="dossier"><span>04</span><strong>Governance dossiers</strong><small>Trace named influence</small></button>
+          </div>
+        </div>
+
         <div class="chronicle-controls" aria-label="History explorer controls">
           <label class="search-control" for="history-search">
-            <span>Search titles, dates, lenses, and people</span>
-            <input id="history-search" type="search" placeholder="Try “Mandela,” “trade,” “Governance,” or “1200 BCE”" autocomplete="off">
+            <span>Search all titles, dates, lenses, and people</span>
+            <span class="search-field"><input id="history-search" type="search" placeholder="Try “Mandela,” “trade,” “Governance,” or “1200 BCE”" autocomplete="off"><button id="history-clear-search" type="button" aria-label="Clear history search">Clear</button></span>
           </label>
           <div class="kind-filters" role="group" aria-label="Filter history entry types">
             <button class="filter-chip is-active" type="button" data-kind="all" aria-pressed="true">All 378</button>
@@ -217,8 +273,13 @@
           <p class="result-summary" id="history-summary" aria-live="polite">Showing the first 24 of 378 entry points.</p>
           <span id="history-progress" aria-hidden="true"><i></i></span>
         </div>
+        <p class="active-context" id="history-active-context">All record types are active · 3000 BCE through 2026 CE · every result opens the source volume.</p>
         <div class="record-grid" id="history-grid"></div>
         <div class="load-more-wrap"><button class="button button-secondary" id="history-load-more" type="button">Show 24 more entries</button></div>
+        <aside class="related-trails" id="history-related" hidden>
+          <div><p class="mini-kicker">Continue around this result</p><h3>Nearby records using the same evidence format</h3><p>These entries are adjacent by record type and PDF location. They are study routes—not a claim that the people or events were directly connected.</p></div>
+          <div class="related-trails-grid" id="history-related-grid"></div>
+        </aside>
         <noscript><p class="noscript-note">JavaScript is required for the searchable chronology. The complete outline and bookmarks remain available in the PDF reader.</p></noscript>
       </div>
     </section>
@@ -362,6 +423,6 @@
   </footer>
 
   <script src="history-data.js?v=20261113a"></script>
-  <script src="history.js?v=20261113a"></script>
+  <script src="history.js?v=20261113b"></script>
 </body>
 </html>

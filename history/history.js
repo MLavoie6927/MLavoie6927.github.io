@@ -13,9 +13,14 @@
   var menuToggle = document.querySelector("#history-menu-toggle");
   var menu = document.querySelector("#history-menu");
   var searchInput = document.querySelector("#history-search");
+  var clearSearchButton = document.querySelector("#history-clear-search");
   var recordGrid = document.querySelector("#history-grid");
   var summary = document.querySelector("#history-summary");
   var progress = document.querySelector("#history-progress");
+  var activeContext = document.querySelector("#history-active-context");
+  var eraMosaic = document.querySelector("#history-era-mosaic");
+  var relatedTrails = document.querySelector("#history-related");
+  var relatedGrid = document.querySelector("#history-related-grid");
   var loadMore = document.querySelector("#history-load-more");
   var pdfFrame = document.querySelector("#history-pdf-frame");
   var pageForm = document.querySelector("#history-page-form");
@@ -43,6 +48,40 @@
     if (record.kind === "study") return "Deep study " + padded(record.number, 2);
     if (record.kind === "dossier") return "Dossier " + padded(record.number, 3);
     return "2026 coda";
+  }
+
+  function setActiveKind(kind) {
+    selectedKind = kind || "all";
+    document.querySelectorAll(".filter-chip[data-kind]").forEach(function (item) {
+      var active = item.dataset.kind === selectedKind;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function kindContext() {
+    if (selectedKind === "generation") return "201 chronological generations are active";
+    if (selectedKind === "study") return "17 deep influence studies are active";
+    if (selectedKind === "dossier") return "159 named influence dossiers are active";
+    if (selectedKind === "coda") return "The 2026 present-day coda is active";
+    return "All record types are active";
+  }
+
+  function focusExplorer() {
+    var chronicle = document.querySelector("#chronicle");
+    if (!chronicle) return;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    chronicle.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
+  }
+
+  function applyExplorerRoute(query, kind, shouldScroll) {
+    var value = String(query || "");
+    if (searchInput) searchInput.value = value;
+    searchValue = normalized(value);
+    setActiveKind(kind || "all");
+    visibleLimit = PAGE_SIZE;
+    renderRecords();
+    if (shouldScroll) focusExplorer();
   }
 
   function recordMatches(record) {
@@ -88,19 +127,101 @@
     return article;
   }
 
+  function renderEraMosaic() {
+    if (!eraMosaic) return;
+    var generations = records.filter(function (record) { return record.kind === "generation"; });
+    var groups = [];
+    generations.forEach(function (record) {
+      var group = groups.find(function (item) { return item.title === record.title; });
+      if (!group) {
+        group = { title: record.title, first: record, last: record, count: 0 };
+        groups.push(group);
+      }
+      group.last = record;
+      group.count += 1;
+    });
+
+    groups.forEach(function (group, index) {
+      var button = document.createElement("button");
+      var eraNumber = document.createElement("span");
+      var title = document.createElement("strong");
+      var period = document.createElement("small");
+      var pages = document.createElement("em");
+      button.type = "button";
+      button.className = "era-card";
+      button.dataset.historyEra = group.title;
+      button.setAttribute("aria-label", "Explore era " + (index + 1) + ": " + group.title);
+      eraNumber.textContent = "Era " + padded(index + 1) + " · " + group.count + (group.count === 1 ? " generation" : " generations");
+      title.textContent = group.title;
+      period.textContent = group.first.period + (group.last !== group.first ? " → " + group.last.period : "");
+      pages.textContent = "PDF " + group.first.page + (group.last.page !== group.first.page ? "–" + group.last.page : "");
+      button.append(eraNumber, title, period, pages);
+      eraMosaic.appendChild(button);
+    });
+  }
+
+  function renderRelatedTrails(matches) {
+    if (!relatedTrails || !relatedGrid) return;
+    relatedTrails.hidden = true;
+    relatedGrid.replaceChildren();
+    if (!searchValue || !matches.length || matches.length > 3) return;
+
+    var matchKeys = new Set(matches.map(function (record) { return record.kind + ":" + record.number; }));
+    var anchor = matches[0];
+    var related = records
+      .filter(function (record) {
+        return record.kind === anchor.kind && !matchKeys.has(record.kind + ":" + record.number);
+      })
+      .sort(function (left, right) {
+        return Math.abs(left.page - anchor.page) - Math.abs(right.page - anchor.page);
+      })
+      .slice(0, 3);
+
+    related.forEach(function (record) {
+      var button = document.createElement("button");
+      var type = document.createElement("span");
+      var title = document.createElement("strong");
+      var period = document.createElement("small");
+      button.type = "button";
+      button.dataset.readerPage = String(record.page);
+      button.dataset.readerLabel = kindLabel(record) + ": " + record.title;
+      type.textContent = kindLabel(record) + " · PDF " + record.page;
+      title.textContent = record.title;
+      period.textContent = record.period;
+      button.append(type, title, period);
+      relatedGrid.appendChild(button);
+    });
+    relatedTrails.hidden = related.length === 0;
+  }
+
   function renderRecords() {
     if (!recordGrid || !summary) return;
     var matches = records.filter(recordMatches);
     var shown = matches.slice(0, visibleLimit);
     recordGrid.replaceChildren();
+    recordGrid.classList.toggle("is-sparse", shown.length > 0 && shown.length <= 3);
     shown.forEach(function (record) {
       recordGrid.appendChild(createRecordCard(record));
     });
 
+    recordGrid.classList.toggle("is-empty", !matches.length);
     if (!matches.length) {
-      var empty = document.createElement("p");
+      var empty = document.createElement("article");
+      var mark = document.createElement("span");
+      var copy = document.createElement("div");
+      var heading = document.createElement("h3");
+      var message = document.createElement("p");
+      var reset = document.createElement("button");
       empty.className = "empty-state";
-      empty.textContent = "No matching entry point. Try a broader date, person, place, lens, or show all records.";
+      mark.setAttribute("aria-hidden", "true");
+      mark.textContent = "?";
+      heading.textContent = "This filter hides the matching record.";
+      message.textContent = searchValue ? "Search all 378 entry points to check every generation, study, coda, and dossier for this name or term." : "Return to the complete atlas or choose a different record type.";
+      reset.type = "button";
+      reset.dataset.resetHistory = "true";
+      reset.textContent = "Show all 378 records";
+      copy.append(heading, message);
+      empty.append(mark, copy, reset);
       recordGrid.appendChild(empty);
     }
 
@@ -115,6 +236,11 @@
       var remaining = Math.max(0, matches.length - shown.length);
       loadMore.textContent = "Show " + Math.min(PAGE_SIZE, remaining) + " more entries";
     }
+    if (activeContext) {
+      var searchContext = searchValue && searchInput ? " · searching for “" + searchInput.value.trim() + "”" : "";
+      activeContext.textContent = kindContext() + searchContext + " · every result opens the verified source page.";
+    }
+    renderRelatedTrails(matches);
   }
 
   function getPageLabel(page) {
@@ -174,6 +300,22 @@
 
   document.addEventListener("click", function (event) {
     if (menu && menuToggle && !menu.contains(event.target) && !menuToggle.contains(event.target)) setMenu(false);
+    var eraButton = event.target.closest("[data-history-era]");
+    if (eraButton) {
+      applyExplorerRoute(eraButton.dataset.historyEra || "", "generation", true);
+      return;
+    }
+    var queryButton = event.target.closest("[data-history-query]");
+    if (queryButton) {
+      applyExplorerRoute(queryButton.dataset.historyQuery || "", queryButton.dataset.historyKind || "all", true);
+      return;
+    }
+    var resetButton = event.target.closest("[data-reset-history]");
+    if (resetButton) {
+      applyExplorerRoute("", "all", false);
+      if (searchInput) searchInput.focus();
+      return;
+    }
     var pageButton = event.target.closest("[data-reader-page]");
     if (pageButton) openReaderPage(pageButton.dataset.readerPage, pageButton.dataset.readerLabel || "", true);
   });
@@ -185,20 +327,23 @@
   if (searchInput) {
     searchInput.addEventListener("input", function () {
       searchValue = normalized(searchInput.value);
+      if (searchValue) setActiveKind("all");
       visibleLimit = PAGE_SIZE;
       renderRecords();
     });
   }
 
-  document.querySelectorAll("[data-kind]").forEach(function (button) {
+  if (clearSearchButton) {
+    clearSearchButton.addEventListener("click", function () {
+      applyExplorerRoute("", "all", false);
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  document.querySelectorAll(".filter-chip[data-kind]").forEach(function (button) {
     button.addEventListener("click", function () {
-      selectedKind = button.dataset.kind || "all";
+      setActiveKind(button.dataset.kind || "all");
       visibleLimit = PAGE_SIZE;
-      document.querySelectorAll("[data-kind]").forEach(function (item) {
-        var active = item === button;
-        item.classList.toggle("is-active", active);
-        item.setAttribute("aria-pressed", String(active));
-      });
       renderRecords();
     });
   });
@@ -219,5 +364,6 @@
 
   if (copyHashButton) copyHashButton.addEventListener("click", copyHash);
 
+  renderEraMosaic();
   renderRecords();
 }());
