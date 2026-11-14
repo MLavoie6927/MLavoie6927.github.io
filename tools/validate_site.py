@@ -147,6 +147,9 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'general-it/',
         'soc-management/',
         'id="general-it"',
+        'class8-lab/',
+        'id="class8-engineering"',
+        'href="#class8-engineering">Class 8 Lab</a>',
         'science/',
         'id="science"',
         'geology/',
@@ -223,6 +226,171 @@ def validate_general_it(errors: list[str]) -> None:
             errors.append(f"General IT Field Desk: missing navigation link from {page_name}")
     if "https://mlavoie6927.github.io/general-it/" not in (ROOT / "sitemap.xml").read_text(encoding="utf-8"):
         errors.append("General IT Field Desk: sitemap URL is missing")
+
+
+def validate_class8_lab(errors: list[str]) -> None:
+    shell = ROOT / "class8-lab"
+    source = ROOT / "atlas-class8"
+    html = (shell / "index.html").read_text(encoding="utf-8")
+    css = (shell / "class8-lab.css").read_text(encoding="utf-8")
+    script = (shell / "class8-lab.js").read_text(encoding="utf-8")
+    data = (shell / "cdl-study-data.js").read_text(encoding="utf-8")
+
+    required_shell_files = (
+        shell / "index.html",
+        shell / "class8-lab.css",
+        shell / "class8-lab.js",
+        shell / "cdl-study-data.js",
+        shell / "INTEGRATION_NOTES.md",
+    )
+    for path in required_shell_files:
+        if not path.exists():
+            errors.append(f"Class 8 lab: missing {path.relative_to(ROOT).as_posix()}")
+
+    for marker in (
+        "Class 8 Engineering &amp; CDL Lab",
+        'id="class8-menu-toggle"',
+        'id="studio"',
+        'id="cdl-study"',
+        'id="cdl-results"',
+        'id="mini-exam"',
+        'id="gallery"',
+        'data-atlas-class8',
+        'data-atlas-src="../atlas-class8/index.html?embed=1#explorer"',
+        'src="../atlas-class8/integration/atlas-embed.js?v=3.0.0"',
+        'href="../full-portfolio.html#class8-engineering"',
+        "A1C5004457656C7028584B833BA3F8E2A22E28287716F0C26EB02F5B3FE478F0",
+        "70 original practice prompts",
+        "Practice, not an official examination.",
+    ):
+        if marker not in html:
+            errors.append(f"Class 8 lab: missing page marker {marker}")
+
+    for marker in (
+        ".class8-menu-toggle",
+        ".studio-frame-shell",
+        ".cdl-question-card",
+        ".mini-exam",
+        ".preview-gallery",
+        "@media (max-width:1120px)",
+        "@media (max-width:560px)",
+        "prefers-reduced-motion",
+    ):
+        if marker not in css:
+            errors.append(f"Class 8 lab: missing responsive style marker {marker}")
+
+    for marker in (
+        "atlas-class8-cdl-reviewed-v1",
+        "filteredQuestions",
+        "renderQuestions",
+        "chooseFlash",
+        "renderMiniExam",
+        "grade-mini-exam",
+        "class8-menu-toggle",
+    ):
+        if marker not in script:
+            errors.append(f"Class 8 lab: missing interaction marker {marker}")
+
+    question_matches = re.findall(r"\[\d+,'(general|air|combination)'", data)
+    if len(question_matches) != 70:
+        errors.append(f"Class 8 lab: expected 70 CDL study questions, found {len(question_matches)}")
+    for category, expected in (("general", 35), ("air", 20), ("combination", 15)):
+        actual = question_matches.count(category)
+        if actual != expected:
+            errors.append(f"Class 8 lab: expected {expected} {category} questions, found {actual}")
+    if data.count("Object.freeze({question:") != 5:
+        errors.append("Class 8 lab: five-question mini exam is incomplete")
+    for marker in (
+        "FMCSA — State CDL manuals",
+        "49 CFR 393.75 — Tires",
+        "Arkansas CDL testing and study guides",
+        "Tennessee commercial driver license",
+    ):
+        if marker not in data:
+            errors.append(f"Class 8 lab: missing official source marker {marker}")
+
+    wrapper_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", script + "\n" + data, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, wrapper_without_comments):
+            errors.append(f"Class 8 lab: forbidden {label}")
+
+    required_source_files = (
+        "index.html",
+        "assets/styles.css",
+        "assets/v3.css",
+        "js/catalog.js",
+        "js/training-data.js",
+        "js/blueprints.js",
+        "js/component-art.js",
+        "js/simulations.js",
+        "js/app.js",
+        "js/v3-labs.js",
+        "js/embed-frame.js",
+        "integration/atlas-embed.js",
+        "tests/test_math.js",
+        "tests/validate_data.js",
+        "ARCHITECTURE.md",
+        "README.md",
+        "SHA256.txt",
+    )
+    for relative in required_source_files:
+        if not (source / relative).exists():
+            errors.append(f"Class 8 source package: missing {relative}")
+
+    manifest_path = source / "SHA256.txt"
+    manifest_entries: list[tuple[str, str]] = []
+    for line in manifest_path.read_text(encoding="utf-8").splitlines():
+        match = re.fullmatch(r"([0-9a-f]{64})  (.+)", line.strip())
+        if match:
+            manifest_entries.append((match.group(1), match.group(2)))
+    if len(manifest_entries) != 31:
+        errors.append(f"Class 8 source package: expected 31 checksum entries, found {len(manifest_entries)}")
+    for expected, relative in manifest_entries:
+        path = source / relative
+        if not path.is_file():
+            errors.append(f"Class 8 source package: manifest target missing {relative}")
+            continue
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != expected:
+            errors.append(f"Class 8 source package: checksum mismatch for {relative}")
+
+    package_scripts = "\n".join(path.read_text(encoding="utf-8") for path in (source / "js").glob("*.js"))
+    package_scripts += "\n" + (source / "integration" / "atlas-embed.js").read_text(encoding="utf-8")
+    package_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", package_scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, package_without_comments):
+            errors.append(f"Class 8 source package: forbidden {label}")
+
+    full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
+    for marker in (
+        'id="class8-engineering"',
+        'href="#class8-engineering">Class 8 Lab</a>',
+        'href="class8-lab/">Class 8 Lab</a>',
+        'href="class8-lab/">Open the Class 8 Engineering &amp; CDL Lab</a>',
+        'href="atlas-class8/">Launch the full-screen engineering studio</a>',
+    ):
+        if marker not in full_portfolio:
+            errors.append(f"Full portfolio: missing Class 8 marker {marker}")
+
+    sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    for url in (
+        "https://mlavoie6927.github.io/class8-lab/",
+        "https://mlavoie6927.github.io/atlas-class8/",
+    ):
+        if url not in sitemap:
+            errors.append(f"sitemap.xml: missing {url}")
 
 
 def validate_git_mb(errors: list[str]) -> None:
@@ -1626,6 +1794,7 @@ def main() -> None:
     validate_home(errors)
     validate_full_portfolio(errors)
     validate_general_it(errors)
+    validate_class8_lab(errors)
     validate_git_mb(errors)
     validate_geology(errors)
     validate_archaeology(errors)
@@ -1645,6 +1814,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
+    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, 70 study prompts, 5-question checkpoint, responsive portfolio shell, and static-browser boundary")
     print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")

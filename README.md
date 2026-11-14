@@ -10,6 +10,8 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `script.js` - mobile navigation and active-section highlighting
 - `interview/` - interactive 200-question interview preparation library
 - `browser-os/` - Browser OS 3.0 static security operations workstation
+- `class8-lab/` - portfolio shell, evidence gallery, and 70-question CDL study desk for the Class 8 engineering project
+- `atlas-class8/` - checksum-preserved ATLAS Class 8 v3.0 tractor-trailer engineering studio and supplied regression tests
 - `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation
 - `.github/workflows/k12-operations-ci.yml` - K-12 model, evidence, generated-data, and browser-source validation

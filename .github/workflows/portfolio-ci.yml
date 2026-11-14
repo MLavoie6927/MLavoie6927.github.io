@@ -18,6 +18,8 @@ on:
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
       - "general-it/**"
+      - "class8-lab/**"
+      - "atlas-class8/**"
       - "geology/**"
       - "tools/check_general_it_data.cjs"
       - "tools/check_geology_data.cjs"
@@ -40,6 +42,8 @@ on:
       - "projects/reconstructing-the-system/**"
       - "intelligence-officer/**"
       - "general-it/**"
+      - "class8-lab/**"
+      - "atlas-class8/**"
       - "geology/**"
       - "tools/check_general_it_data.cjs"
       - "tools/check_geology_data.cjs"
@@ -73,11 +77,26 @@ jobs:
           node --check intelligence-officer/strategy-investigations.js
           node --check general-it/data.js
           node --check general-it/general-it.js
+          node --check class8-lab/cdl-study-data.js
+          node --check class8-lab/class8-lab.js
+          node --check atlas-class8/js/catalog.js
+          node --check atlas-class8/js/training-data.js
+          node --check atlas-class8/js/blueprints.js
+          node --check atlas-class8/js/component-art.js
+          node --check atlas-class8/js/simulations.js
+          node --check atlas-class8/js/app.js
+          node --check atlas-class8/js/v3-labs.js
+          node --check atlas-class8/js/embed-frame.js
+          node --check atlas-class8/integration/atlas-embed.js
           node --check geology/geology-data.js
           node --check geology/geology.js
           node --check projects/operation-glass-meridian/glass-meridian.js
           node --check projects/operation-glass-meridian/glass-meridian-v4-addon.js
       - name: Validate General IT coverage
         run: node tools/check_general_it_data.cjs
+      - name: Validate Class 8 engineering models and data
+        run: |
+          node atlas-class8/tests/test_math.js
+          node atlas-class8/tests/validate_data.js
       - name: Validate Geology coverage
         run: node tools/check_geology_data.cjs

@@ -1,0 +1,102 @@
+/*
+ * ATLAS Class 8 Engineering & CDL Lab
+ * Original practice-question collection supplied by Marc Lavoie.
+ * Portfolio integration: 2026-11-14.
+ * These prompts are educational study aids, not official or leaked exam items.
+ */
+'use strict';
+
+window.ATLAS_CDL_STUDY = Object.freeze({
+  categories: Object.freeze({
+    general: 'General knowledge',
+    air: 'Air brakes',
+    combination: 'Combination vehicles'
+  }),
+  questions: Object.freeze([
+    [1,'general','What is the purpose of a pre-trip inspection?','To identify defects that could make the vehicle unsafe.'],
+    [2,'general','When should you inspect your commercial vehicle?','Before every trip, monitor it during the trip, and inspect it afterward.'],
+    [3,'general','What three factors determine total stopping distance?','Perception distance, reaction distance, and braking distance.'],
+    [4,'general','What happens to stopping distance when speed doubles?','Braking distance increases approximately fourfold under similar conditions.'],
+    [5,'general','How far ahead should you look while driving?','Approximately 12–15 seconds ahead.'],
+    [6,'general','How often should you check your mirrors?','Regularly, approximately every 5–8 seconds.'],
+    [7,'general','What is the minimum tread depth for front tires?','4/32 inch in the major grooves of steering axle tires.'],
+    [8,'general','What is the minimum tread depth for most other tires?','2/32 inch.'],
+    [9,'general','What should you do if a tire blows out?','Grip the wheel, maintain control, avoid hard braking initially, and slow gradually.'],
+    [10,'general','What should you do if your vehicle begins to skid?','Ease off the accelerator, avoid abrupt braking, and steer to regain control.'],
+    [11,'general','What is hydroplaning?','Tires lose effective contact with the road because of water.'],
+    [12,'general','What should you do when entering a sharp curve?','Slow to a safe speed before entering the curve.'],
+    [13,'general','Why is excessive speed dangerous in curves?','It increases the risk of rollover and loss of control.'],
+    [14,'general','How should you descend a steep hill?','Select a low gear before descending and use engine braking with proper service-brake technique.'],
+    [15,'general','What should you do if your brakes become ineffective on a downgrade?','Use available escape routes or runaway truck ramps when necessary.'],
+    [16,'general','What is the safest following distance?','At least one second per 10 feet of vehicle length below 40 mph, plus another second above 40 mph, with more space in poor conditions.'],
+    [17,'general','What should you do in dense fog?','Reduce speed, use low-beam headlights, increase following distance, and stop safely if necessary.'],
+    [18,'general','Why should you avoid sudden lane changes?','They can cause trailer swing, rollover, or collisions.'],
+    [19,'general','How should cargo be secured?','With appropriate restraints that prevent shifting, falling, or escaping.'],
+    [20,'general','Why is an overloaded vehicle dangerous?','It affects braking, steering, handling, and component integrity.'],
+    [21,'general','What is GVWR?','Gross Vehicle Weight Rating: the manufacturer\'s specified maximum loaded vehicle weight.'],
+    [22,'general','What is GCWR?','Gross Combination Weight Rating: the specified maximum loaded weight rating of the vehicle combination.'],
+    [23,'general','What should you do if your vehicle catches fire?','Pull over safely, stop, evacuate as necessary, and contact emergency services.'],
+    [24,'general','What must you do at railroad crossings?','Obey signals, check for trains, and never enter unless there is enough space to clear the tracks completely.'],
+    [25,'general','What should you do if stuck on railroad tracks?','Evacuate, contact emergency services or the railroad using the crossing identification sign, and move away from the tracks.'],
+    [26,'general','What is off-tracking?','Rear wheels follow a shorter, more inward path than front wheels during turns.'],
+    [27,'general','What causes a vehicle to roll over?','Excessive lateral forces, often from speed, sharp steering, or cargo movement.'],
+    [28,'general','What does ABS do?','Helps prevent wheel lockup and maintain steering control during hard braking.'],
+    [29,'general','Does ABS always shorten stopping distance?','No. Its primary benefit is helping maintain control.'],
+    [30,'general','What is the safest action when becoming drowsy?','Stop in a safe place and get adequate sleep.'],
+    [31,'general','What is the federal commercial-driver alcohol concentration threshold for operating a CMV?','An alcohol concentration of 0.04% or higher is disqualifying under the federal CDL standard.'],
+    [32,'general','What are blind spots around large trucks commonly called?','No-zones.'],
+    [33,'general','What should you do before backing?','Inspect the area and use a spotter when available.'],
+    [34,'general','What is the safest way to back a large vehicle?','Avoid backing when possible; otherwise back slowly toward the driver\'s side when practical.'],
+    [35,'general','Why must drivers check cargo periodically?','To ensure cargo remains secure and vehicle handling remains safe.'],
+    [36,'air','What produces compressed air for the brake system?','The air compressor.'],
+    [37,'air','What controls compressor cut-in and cut-out?','The air compressor governor.'],
+    [38,'air','What is the purpose of air tanks?','Store compressed air for braking.'],
+    [39,'air','Why should air tanks be drained?','To remove accumulated moisture and oil.'],
+    [40,'air','What is a dual air brake system?','Two separate air brake circuits for improved safety.'],
+    [41,'air','What happens when air pressure becomes dangerously low?','A warning activates; spring brakes can eventually engage.'],
+    [42,'air','What is the low-air warning threshold?','Use the threshold in the applicable state manual and manufacturer instructions; the federal model manual says the warning should activate before pressure drops below 60 psi or the manufacturer-specified level.'],
+    [43,'air','At approximately what pressure do spring brake valves pop out?','Common training references place this in roughly the 20–45 psi range, but the applicable vehicle and state procedure controls.'],
+    [44,'air','What is the maximum applied air leakage rate for a single vehicle in the conventional test?','3 psi in one minute in the conventional federal model-manual procedure.'],
+    [45,'air','What is the maximum applied air leakage rate for a combination vehicle in the conventional test?','4 psi in one minute in the conventional federal model-manual procedure.'],
+    [46,'air','What do slack adjusters do?','Transfer brake actuator movement to the foundation brakes and maintain appropriate adjustment.'],
+    [47,'air','What is brake lag?','The delay between pedal application and brake response.'],
+    [48,'air','What is brake fade?','Reduced braking effectiveness caused by overheating or other problems.'],
+    [49,'air','What are spring brakes primarily used for?','Parking and emergency braking.'],
+    [50,'air','What should you do when the low-air warning activates while driving?','Stop safely as soon as possible and determine the cause.'],
+    [51,'air','What does an air pressure gauge display?','The pressure in the air reservoir system.'],
+    [52,'air','How do you test service brakes?','Use the exact procedure in the current state CDL manual; a common model-manual check moves slowly at about 5 mph and applies the brake firmly to assess response.'],
+    [53,'air','What does the yellow parking brake knob normally control?','The tractor or vehicle parking brakes.'],
+    [54,'air','What is the function of the air dryer?','Remove moisture from compressed air.'],
+    [55,'air','Is a vehicle safe to operate with an excessive air leak?','No. The defect must be corrected before operation.'],
+    [56,'combination','What is a combination vehicle?','A power unit towing one or more trailers.'],
+    [57,'combination','What connects a semitrailer to a tractor?','The fifth wheel and kingpin.'],
+    [58,'combination','What is a kingpin?','The trailer coupling pin that locks into the fifth wheel.'],
+    [59,'combination','What is the purpose of the fifth wheel locking jaws?','Secure the trailer kingpin.'],
+    [60,'combination','What should you check after coupling?','Locking jaws, kingpin engagement, trailer clearance, air and electrical connections, and landing gear.'],
+    [61,'combination','What is the purpose of a tug test?','Verify that the trailer is securely coupled before moving.'],
+    [62,'combination','What is trailer off-tracking?','Trailer rear wheels follow a path inside the tractor\'s path during turns.'],
+    [63,'combination','What causes trailer rollover?','Excessive speed, sudden steering, unstable loads, and a high center of gravity.'],
+    [64,'combination','What is a jackknife?','The tractor and trailer fold sharply toward each other.'],
+    [65,'combination','Why should you avoid using the trailer hand valve for routine braking?','It can cause trailer wheel lockup or skidding.'],
+    [66,'combination','What are glad hands?','Couplings that connect tractor and trailer air lines.'],
+    [67,'combination','What is the emergency or supply air line used for?','Supply trailer air reservoirs and control emergency functions.'],
+    [68,'combination','What is the service air line used for?','Deliver braking control pressure to the trailer.'],
+    [69,'combination','What should you do before uncoupling?','Park on firm, level ground, secure the trailer brakes, and properly lower the landing gear.'],
+    [70,'combination','Why must tractor-trailer drivers take turns slowly?','To prevent rollover, excessive off-tracking, and collisions.']
+  ].map(([id,category,question,answer])=>Object.freeze({id,category,question,answer}))),
+  miniExam: Object.freeze([
+    Object.freeze({question:'What are the three components of total stopping distance?',options:['Steering, braking, and acceleration','Perception, reaction, and braking','Weight, tire pressure, and speed','Engine, transmission, and brakes'],answer:1,explanation:'Total stopping distance combines perception distance, reaction distance, and braking distance.'}),
+    Object.freeze({question:'What is the minimum tread depth for steering axle tires?',options:['1/32 inch','2/32 inch','4/32 inch','6/32 inch'],answer:2,explanation:'The federal tire rule specifies at least 4/32 inch in every major groove on front wheels of a truck or truck tractor.'}),
+    Object.freeze({question:'What should you do when the low-air warning activates while driving?',options:['Continue until the next fuel stop','Pump the brake pedal repeatedly','Accelerate to rebuild pressure','Stop safely as soon as possible'],answer:3,explanation:'The warning indicates a serious loss of braking reserve. Stop safely while control remains available.'}),
+    Object.freeze({question:'What secures the semitrailer kingpin to the tractor?',options:['Fifth wheel locking jaws','Landing gear','Glad hands','Trailer electrical connector'],answer:0,explanation:'The fifth wheel locking jaws close around and retain the trailer kingpin.'}),
+    Object.freeze({question:'What is the minimum passing benchmark for CDL knowledge tests under federal standards?',options:['65%','70%','75%','80%'],answer:3,explanation:'FMCSA states that applicants must correctly answer at least 80 percent of the questions on knowledge tests.'})
+  ]),
+  officialSources: Object.freeze([
+    Object.freeze({label:'FMCSA — State CDL manuals',url:'https://www.fmcsa.dot.gov/registration/commercial-drivers-license/cdl-manual'}),
+    Object.freeze({label:'FMCSA — CDL knowledge and skills standards',url:'https://www.fmcsa.dot.gov/registration/commercial-drivers-license/states'}),
+    Object.freeze({label:'49 CFR 393.75 — Tires',url:'https://www.ecfr.gov/current/title-49/section-393.75'}),
+    Object.freeze({label:'FMCSA — Following-distance guidance',url:'https://www.fmcsa.dot.gov/safety/driver-safety/cmv-driving-tips-following-too-closely'}),
+    Object.freeze({label:'Arkansas CDL testing and study guides',url:'https://dps.arkansas.gov/law-enforcement/arkansas-state-police/services-programs/driver-examination/'}),
+    Object.freeze({label:'Tennessee commercial driver license',url:'https://www.tn.gov/safety/driver-services/commercial-driver-license.html'})
+  ])
+});

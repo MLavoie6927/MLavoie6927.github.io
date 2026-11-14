@@ -1,0 +1,26 @@
+/* 2026-11-14 | Marc Lavoie | Pure calculation regression suite */
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const sandbox={window:{}};vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync(require('path').join(__dirname,'../js/simulations.js'),'utf8'),sandbox);
+const M=sandbox.window.ATLAS_SIM;
+const near=(a,b,tol=1e-8)=>assert(Math.abs(a-b)<=tol,`${a} != ${b}`);
+assert.equal(M.tireLocations.length,18);
+const t0=M.tireLocations.find(t=>t.axle===1);
+assert.equal(M.tireCondition(t0,{tread:3.5,pressure:100,target:100,damage:false}).status,'fail');
+assert.equal(M.tireCondition(t0,{tread:4,pressure:100,target:100,damage:false}).status,'monitor');
+assert.equal(M.tireCondition(t0,{tread:14,pressure:90,target:100,damage:false}).status,'review');
+assert.equal(M.tireCondition(M.tireLocations.find(t=>t.axle===4),{tread:1,pressure:100,target:100,damage:false}).status,'fail');
+assert.equal(M.tireCondition(t0,{tread:12,pressure:100,target:100,damage:true}).status,'fail');
+const d=M.drivetrain({torque:1650,rpm:1300,gear:3.4,axle:3.36,efficiency:.88,diameter:40.5,weight:70000,grade:5});
+near(d.wheelTorque,1650*3.4*3.36*.88);
+near(d.tractiveForce,d.wheelTorque/(40.5/24));
+near(d.mph,1300*Math.PI*40.5/(3.4*3.36*1056));
+const c=M.cargo({cargo:40000,tractor:18000,trailer:14500,steerEmpty:10200,emptyPinShare:.2,pinSteerShare:.02,position:22});
+near(c.gross,72500);
+near(c.axles.reduce((a,b)=>a+b,0),72500);
+assert(c.trailerTandem<34000,'baseline illustrative load should be under trailer tandem reference');
+const forward=M.cargo({cargo:40000,tractor:18000,trailer:14500,steerEmpty:10200,emptyPinShare:.2,pinSteerShare:.02,position:5});
+const aft=M.cargo({cargo:40000,tractor:18000,trailer:14500,steerEmpty:10200,emptyPinShare:.2,pinSteerShare:.02,position:42});
+assert(forward.kingpin>aft.kingpin && forward.trailerTandem<aft.trailerTandem);
+assert.throws(()=>M.cargo({cargo:-50,tractor:18000,trailer:14500,steerEmpty:10200,emptyPinShare:.2,pinSteerShare:.02,position:22}));
+console.log('PASS — Pure engineering models: drivetrain, cargo, tire minimums and invalid inputs.');
