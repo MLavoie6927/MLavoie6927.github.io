@@ -783,6 +783,7 @@
         ${parts.filter(([_,value])=>Boolean(value)).map(([label,content])=>`<div class="hwat-detail-section"><h4>${escapeHtml(label)}</h4><p>${escapeHtml(content)}</p></div>`).join('')}
         ${!isHistory && item.group ? `<div class="hwat-detail-section"><h4>Classification</h4><span class="hwat-mini-tag">${escapeHtml(item.group)}</span><span class="hwat-mini-tag">${escapeHtml(state.view==='board'?'Motherboard':state.view==='chip'?'Chip architecture':'Materials engineering')}</span></div>` : ''}
         ${state.tourIndex >= 0 && state.view==='board' ? `<div class="hwat-detail-progress">Guided tour: ${state.tourIndex+1} of ${tour.length}</div><button type="button" class="hwat-detail-next" data-hwat-next-step>${state.tourIndex===tour.length-1?'Finish tour':'Next component →'}</button>` : ''}
+        ${(state.view==='board' || state.view==='chip') ? `<button type="button" class="hwat-open-binary" data-hwat-open-binary="${escapeHtml(item.id)}" data-hwat-origin="${escapeHtml(state.view)}">◈ Decode binary &amp; signals behind this part →</button>` : ''}
         <p class="hwat-part-note">${isHistory ? 'Dates describe documented milestones; parallel inventions and improvements occurred across organizations.' : 'Educational engineering reference. Material choices and electrical interfaces require manufacturer and standard-specific verification.'}</p>`;
     }
     function renderCategories() {
@@ -937,7 +938,7 @@
   }
 
   // Host may call this again after injecting the HTML into a client-side route.
-  window.HardwareAtlas = Object.freeze({ init, version:'2.0.0', counts:Object.freeze({board:board.length,chip:chip.length,materials:materials.length,history:history.length}) });
+  window.HardwareAtlas = Object.freeze({ init, version:'3.0.0', counts:Object.freeze({board:board.length,chip:chip.length,materials:materials.length,history:history.length}) });
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>init(),{once:true});
   else init();
 })();

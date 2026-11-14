@@ -3,18 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Explore Marc Lavoie's interactive motherboard and chip atlas: 25 motherboard components, 14 silicon regions, 12 engineering materials, hardware history, conceptual signal paths, and safe diagnostic guidance.">
+  <meta name="description" content="Explore Marc Lavoie's full-stack motherboard and silicon laboratory: an illustrated 25-component board, 14 chip regions, 39 binary profiles, system workflows, protocol timing, EDU-8 CPU simulation, real ISA encodings, assessment, and engineering references.">
   <meta name="theme-color" content="#06101d">
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GIT &amp; MB | Interactive Motherboard &amp; Chip Atlas">
-  <meta property="og:description" content="Click through an animated motherboard, inspect processor regions, trace conceptual power and data paths, and learn materials, failures, and safe checks.">
+  <meta property="og:title" content="GIT &amp; MB | Full-Stack Motherboard &amp; Silicon Lab">
+  <meta property="og:description" content="Move from board components to binary, processor execution, buses, protocol timing, and system workflows in one interactive engineering laboratory.">
   <meta property="og:url" content="https://mlavoie6927.github.io/git-mb/">
   <link rel="canonical" href="https://mlavoie6927.github.io/git-mb/">
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <title>GIT &amp; MB | Interactive Motherboard &amp; Chip Atlas</title>
-  <link rel="stylesheet" href="page.css?v=20261113a">
-  <link rel="stylesheet" href="assets/hardware/motherboard-atlas.css?v=2.0.0">
+  <title>GIT &amp; MB | Full-Stack Motherboard &amp; Silicon Lab</title>
+  <link rel="stylesheet" href="page.css?v=20261113b">
+  <link rel="stylesheet" href="assets/hardware/motherboard-atlas.css?v=4.0.0">
+  <link rel="stylesheet" href="assets/hardware/motherboard-binary.css?v=4.0.0">
+  <link rel="stylesheet" href="assets/hardware/motherboard-advanced.css?v=4.0.0">
 </head>
 <body>
   <a class="skip-link" href="#hardware-atlas">Skip to the interactive atlas</a>
@@ -29,6 +31,7 @@
         <a href="../index.html">Home</a>
         <a href="../general-it/">General IT</a>
         <a href="../full-portfolio.html">Full Portfolio</a>
+        <a href="#hardware-atlas" data-atlas-binary>Binary Lab</a>
       </div>
       <button class="atlas-menu-toggle" id="atlas-menu-toggle" type="button" aria-controls="atlas-menu" aria-expanded="false" aria-label="Open GIT and motherboard navigation">
         <span></span><span></span><span></span>
@@ -41,6 +44,8 @@
         <a href="#hardware-atlas" data-atlas-view="chip">Inside a chip</a>
         <a href="#hardware-atlas" data-atlas-view="materials">Materials laboratory</a>
         <a href="#hardware-atlas" data-atlas-view="history">Hardware history</a>
+        <a href="#hardware-atlas" data-atlas-binary>Binary &amp; chip signals</a>
+        <a href="#engineering-evidence">Engineering evidence</a>
       </div>
     </nav>
   </header>
@@ -51,8 +56,8 @@
         <p>GENERAL IT · HARDWARE ENGINEERING · VISUAL DIAGNOSTICS</p>
         <h1>GIT <span>&amp;</span> MB</h1>
       </div>
-      <p>Click the board to identify a component, understand what it connects to, review construction and failure modes, and learn the safest next diagnostic question.</p>
-      <a href="#hardware-atlas">Begin component inspection <span aria-hidden="true">↓</span></a>
+      <p>Inspect the physical board, then follow information through bytes, instructions, memory, buses, protocols, processor state, and rendered output. Every simulation identifies what is real, simplified, or conceptual.</p>
+      <a href="#hardware-atlas" data-atlas-binary>Enter the silicon lab <span aria-hidden="true">↓</span></a>
     </section>
 
     <div class="atlas-module-wrap">
@@ -66,14 +71,14 @@
   <div class="hwat-shell">
     <header class="hwat-hero">
       <div class="hwat-hero-copy">
-        <p class="hwat-eyebrow"><span class="hwat-live-dot" aria-hidden="true"></span> INTERACTIVE HARDWARE ATLAS <span class="hwat-hero-edition">/ V2.0</span></p>
+        <p class="hwat-eyebrow"><span class="hwat-live-dot" aria-hidden="true"></span> SILICON-TO-SOFTWARE INTERACTIVE REFERENCE <span class="hwat-hero-edition">/ V4.0 · MARC LAVOIE</span></p>
         <h2 id="hwat-title">Anatomy of a <span>Computer.</span></h2>
-        <p class="hwat-lede">See the engineering hidden beneath every circuit. Explore an illustrated motherboard and processor, illuminate individual components, then discover their materials, manufacturing, and failure modes.</p>
+        <p class="hwat-lede">Follow binary information from browser text to machine instructions, transistors, logic gates, processor registers, memory and motherboard interfaces. Select any component to connect its physical purpose with its electrical and digital behavior.</p>
         <div class="hwat-hero-stats" aria-label="Atlas overview">
           <span><strong>25</strong> board components</span>
           <span><strong>14</strong> chip regions</span>
           <span><strong>12</strong> materials</span>
-          <span><strong>10</strong> milestones</span>
+          <span><strong>10</strong> milestones</span><span><strong>39</strong> binary profiles</span><span><strong>11</strong> interactive labs</span>
         </div>
       </div>
       <div class="hwat-hero-emblem" aria-hidden="true"><svg viewBox="0 0 260 230" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="hwat-hero-ic" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#345f72"/><stop offset=".5" stop-color="#122a40"/><stop offset="1" stop-color="#0d192c"/></linearGradient><linearGradient id="hwat-hero-metal" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#bce8db"/><stop offset=".6" stop-color="#497d8d"/><stop offset="1" stop-color="#d1ecdb"/></linearGradient></defs><circle cx="129" cy="114" r="102" fill="none" stroke="#68c9c2" stroke-dasharray="2 12" opacity=".5"/><circle cx="129" cy="114" r="80" fill="#37b0b8" opacity=".045"/><g transform="translate(17 1) rotate(-13 114 112)"><path d="M57 47L169 47 221 98 109 98Z" fill="#2e5567" stroke="#7dcfd2" stroke-width="2"/><path d="M109 98L221 98 221 160 109 160Z" fill="#112b3e" stroke="#558da0"/><path d="M57 47L109 98 109 160 57 109Z" fill="#234254" stroke="#56899e"/><path d="M77 50L172 50 211 90 116 90Z" fill="url(#hwat-hero-ic)" stroke="#a5e5e2" stroke-width="2"/><path d="M116 90L211 90 211 143 116 143Z" fill="#0b1e30" stroke="#8cbdc9"/><path d="M77 50L116 90 116 143 77 103Z" fill="#225166" stroke="#8cbdc9"/><path d="M113 63l55 0 20 20-55 0z" fill="#132a3c" stroke="#65d5d2"/><path d="M147 68l22 0 11 11-22 0z" fill="#74f1e3" opacity=".28"/><g stroke="#c0ab78" stroke-width="4"><path d="M116 146v19"/><path d="M130 146v19"/><path d="M144 146v19"/><path d="M158 146v19"/><path d="M172 146v19"/><path d="M186 146v19"/><path d="M200 146v19"/><path d="M55 109l-9 11"/><path d="M68 109l-9 11"/><path d="M81 109l-9 11"/><path d="M94 109l-9 11"/><path d="M107 109l-9 11"/></g><text x="157" y="104" font-size="12" font-family="system-ui" font-weight="900" fill="#bbf9ed" transform="skewY(-1)">SILICON</text><text x="159" y="121" font-size="8" font-family="system-ui" fill="#8bc7bf">// EXPLORE</text></g><path d="M24 200h212M129 6v26M129 200v24" stroke="#5cc5c8" stroke-opacity=".25" stroke-width="1"/></svg></div>
@@ -84,6 +89,7 @@
       <button class="hwat-tab" type="button" data-hwat-view="chip" aria-pressed="false"><span aria-hidden="true">◈</span> Inside a chip</button>
       <button class="hwat-tab" type="button" data-hwat-view="materials" aria-pressed="false"><span aria-hidden="true">⬡</span> Materials lab</button>
       <button class="hwat-tab" type="button" data-hwat-view="history" aria-pressed="false"><span aria-hidden="true">◷</span> History</button>
+      <button class="hwat-tab" type="button" data-hwat-binary-tab aria-pressed="false"><span aria-hidden="true">01</span> Binary &amp; Chip Signals</button>
     </nav>
 
     <div class="hwat-workspace" data-hwat-workspace>
@@ -123,7 +129,127 @@
       </aside>
     </div>
 
-    <section class="hwat-learning-panel" aria-labelledby="hwat-learning-title">
+    <!-- Version 3.0: isolated interactive bit-to-motherboard laboratory. -->
+    <section class="hwat-binary-page" data-hwat-binary-page aria-label="Binary and chip signals laboratory" hidden>
+      <div class="hwat-bin-head">
+        <div><p class="hwat-bin-kicker">THE BINARY LAYER / SYSTEMS ENGINEERING</p>
+          <h3>From <em>0 &amp; 1</em> to an operating computer</h3>
+          <p>What a bit means depends on the component. A CPU executes encoded instructions; memory retains data; interfaces transport framed information; voltage regulators deliver power. Explore the real distinctions.</p>
+        </div><div class="hwat-bin-head-code" aria-hidden="true">01001000<br>01010111<br>00101110<br>01000001</div>
+      </div>
+      <nav class="hwat-bin-nav" aria-label="Binary laboratory tools">
+        <button type="button" data-bin-pane="html">HTML → binary</button>
+        <button type="button" data-bin-pane="path" aria-pressed="true" class="is-active">System data path</button>
+        <button type="button" data-bin-pane="catalog" aria-pressed="false">Every board component</button>
+        <button type="button" data-bin-pane="bits" aria-pressed="false">8-bit &amp; logic lab</button>
+        <button type="button" data-bin-pane="instructions" aria-pressed="false">Machine code lab</button>
+        <button type="button" data-bin-pane="protocols" aria-pressed="false">Bus &amp; protocol frames</button>
+        <button type="button" data-bin-pane="scenarios" aria-pressed="false">System scenarios</button>
+        <button type="button" data-bin-pane="cpu" aria-pressed="false">Run a tiny CPU</button>
+        <button type="button" data-bin-pane="scope" aria-pressed="false">Signal oscilloscope</button>
+        <button type="button" data-bin-pane="isa" aria-pressed="false">ISA bit-field decoder</button>
+        <button type="button" data-bin-pane="academy" aria-pressed="false">Engineering challenge</button>
+      </nav>
+      <div class="hwat-bin-pane" data-bin-content="html" hidden>
+        <div class="hwat-bin-columns">
+          <section class="hwat-bin-panel">
+            <div class="hwat-bin-panel-heading"><span>00 / YOUR HTML SOURCE</span><h4>Turn markup characters into real UTF-8 bytes</h4></div>
+            <p class="hwat-bin-subtext">Edit a short HTML fragment and inspect its bytes. These are source-text data; the CPU executes the browser's machine instructions to process them.</p>
+            <label class="hwat-bin-markup-label">Editable HTML source
+              <textarea data-bin-html-source spellcheck="false" rows="5" maxlength="180">&lt;h1&gt;Hi&lt;/h1&gt;</textarea>
+            </label>
+            <div class="hwat-bin-html-stats" data-bin-html-stats aria-live="polite"></div>
+            <div class="hwat-bin-panel-heading"><span>RAW TEXT ENCODING</span><h4>Hex and binary sequence</h4></div>
+            <div class="hwat-bin-html-sequence" data-bin-html-sequence aria-label="Encoded bytes of the supplied HTML source"></div>
+          </section>
+          <aside class="hwat-bin-panel">
+            <div class="hwat-bin-panel-heading"><span>00 / THREE DIFFERENT MEANINGS</span><h4>The difference between source, data structures and opcodes</h4></div>
+            <div class="hwat-bin-html-explainer"><strong>HTML / UTF-8</strong><p>The characters &lt; and h and 1 become bytes such as <code>3C 68 31</code>. The encoding describes text.</p></div>
+            <div class="hwat-bin-html-explainer"><strong>DOM / browser memory</strong><p>A browser HTML parser interprets markup into nodes. Its representation is browser-specific and maintained in system memory.</p></div>
+            <div class="hwat-bin-html-explainer"><strong>CPU / machine instructions</strong><p>The browser and operating-system code execute instructions from a CPU instruction set. For example, on x86-64 <code>B8 2A 00 00 00</code> encodes <code>MOV EAX, 42</code>; these bytes do not come from compiling the sample HTML.</p></div>
+            <div class="hwat-bin-related"><span>TRACE THESE STAGES ON THE HARDWARE</span><button type="button" data-bin-html-trace>Explore the full 8-stage route</button><button type="button" data-bin-jump="cpu-cores">CPU execution units</button><button type="button" data-bin-jump="dimm">DRAM storage</button></div>
+          </aside>
+        </div>
+      </div>
+      <div class="hwat-bin-pane" data-bin-content="path">
+        <div class="hwat-bin-columns"><section class="hwat-bin-panel">
+          <div class="hwat-bin-panel-heading"><span>01 / VISUAL TRACE</span><h4>A web page becomes visible pixels</h4></div>
+          <div class="hwat-bin-path" data-bin-path></div>
+        </section><aside class="hwat-bin-panel hwat-bin-side" aria-live="polite" data-bin-path-detail></aside></div>
+        <div class="hwat-bin-rule"><strong>Engineering fact:</strong> HTML is a markup format, not a CPU instruction set. A browser parses HTML into a DOM, CSS into styling/layout information, and JavaScript through an engine. The processor executes machine code; memory, interconnects, GPUs and display hardware complete the work. The exact pathway varies by operating system and browser.</div>
+      </div>
+      <div class="hwat-bin-pane" data-bin-content="catalog" hidden>
+        <div class="hwat-bin-filters"><label>Find a component<input type="search" data-bin-search placeholder="CPU, DRAM, VRM, SPI, PCIe, GPU…" autocomplete="off"></label><label>Hardware layer<select data-bin-layer><option value="all">All 39 components</option><option value="board">25 motherboard components</option><option value="chip">14 chip regions</option></select></label></div>
+        <div class="hwat-bin-columns hwat-bin-catalog-columns"><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>02 / CHIP-BY-CHIP</span><h4>Which bits exist at this component?</h4></div><div class="hwat-bin-index" data-bin-index></div></section>
+          <aside class="hwat-bin-panel hwat-bin-dossier" aria-live="polite" data-bin-dossier></aside></div>
+        <div class="hwat-bin-rule">A motherboard is largely a physical communication and power-distribution platform. It has no single “motherboard binary instruction set.” The relevant instruction encoding, packet framing, data bus and electrical signaling depend on the specific silicon and interface.</div>
+      </div>
+      <div class="hwat-bin-pane" data-bin-content="bits" hidden>
+        <div class="hwat-bin-columns"><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>03 / DIGITAL LOGIC</span><h4>Build an eight-bit value</h4></div><div class="hwat-bin-subtext">Toggle the cells from most-significant to least-significant bit. See decimal, hexadecimal, printable ASCII where applicable, and a conceptual logic-level waveform.</div>
+          <div class="hwat-bin-bitfield" data-bin-bits role="group" aria-label="Toggle eight bits"></div>
+          <div class="hwat-bin-numeric" data-bin-numeric aria-live="polite"></div>
+          <div class="hwat-bin-waveform" data-bin-waveform aria-label="Illustrative serial bit waveform"></div>
+          <label class="hwat-bin-number-label">Set byte (0–255)<input data-bin-byte-value type="number" min="0" max="255" step="1" value="65" inputmode="numeric"></label>
+          <div class="hwat-bin-explainer">The high and low bands represent abstract Boolean states. Real voltage thresholds, termination, differential signaling, clock recovery and coding differ by interface; this picture is <strong>not</strong> a DDR5, PCIe or USB oscilloscope trace.</div>
+        </section><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>BOOLEAN CIRCUITS</span><h4>Gate truth table and 8-bit ALU</h4></div>
+          <div class="hwat-bin-gates" data-bin-gates></div>
+          <div class="hwat-bin-alu"><label>Input A (0–255)<input data-bin-alu-a type="number" min="0" max="255" value="5"></label><label>Input B (0–255)<input data-bin-alu-b type="number" min="0" max="255" value="3"></label></div>
+          <div class="hwat-bin-alu-result" data-bin-alu-result aria-live="polite"></div>
+          <div class="hwat-bin-explainer">This is a pedagogical 8-bit unsigned adder. It wraps at 256, reports carry-out, and shows zero and signed-overflow flags. A real processor contains many arithmetic units, pipelines and control mechanisms.</div>
+        </section></div>
+      </div>
+      <div class="hwat-bin-pane" data-bin-content="instructions" hidden>
+        <div class="hwat-bin-columns"><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>04 / ISA ENCODING</span><h4>Real x86-64 machine-code bytes</h4></div><p class="hwat-bin-subtext">These example bytes use defined x86 instruction encodings. The execution illustration is a simplified learning model, not a real decoder or an emulated CPU.</p>
+          <div class="hwat-bin-instruction-list"><button data-bin-instruction="mov" class="is-active" type="button">MOV EAX, 42</button><button data-bin-instruction="add" type="button">ADD EAX, 1</button></div>
+          <div class="hwat-bin-assembly" data-bin-instruction-detail></div>
+        </section><aside class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>CPU MICROARCHITECTURE</span><h4>Fetch → Decode → Execute → Retire</h4></div><div class="hwat-bin-pipeline" data-bin-pipeline></div><div class="hwat-bin-rule">Machine code is architecture-specific. ARM64, RISC-V and x86-64 encode instructions differently. The browser’s HTML bytes are <em>not</em> the machine-code bytes shown here.</div></aside></div>
+      </div>
+      <div class="hwat-bin-pane" data-bin-content="protocols" hidden>
+        <div class="hwat-bin-columns"><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>05 / EXTERNAL LINKS</span><h4>Decode a link or chip command</h4></div><label class="hwat-bin-select-label">Interface / command<select data-bin-protocol></select></label>
+          <div class="hwat-bin-protocol-diagram" data-bin-protocol-diagram></div>
+          <div class="hwat-bin-protocol-hex" data-bin-protocol-hex></div>
+          </section><aside class="hwat-bin-panel" data-bin-protocol-detail aria-live="polite"></aside></div>
+        <div class="hwat-bin-rule"><strong>Context is essential:</strong> illustrative data payloads are not valid entire bus frames. Packet and electrical encodings may involve scrambling, CRC, framing and symbol coding. For real device debugging, use the manufacturer’s controller documentation and applicable standards.</div>
+      </div>
+
+      <!-- V4 ADVANCED LABORATORIES: independent extension, with real simulations and clearly labeled abstractions. -->
+      <div class="hwat-bin-pane hwat-v4-pane" data-bin-content="scenarios" hidden>
+        <div class="hwat-v4-section-lead"><span>06 / SYSTEM CORRELATION THEATER</span><h4>A single action crosses multiple layers of hardware</h4><p>Choose a real-world computing operation, then walk the complete logical path. Each step ties data representation to the specific component that interprets or transports it.</p></div>
+        <div class="hwat-v4-scenario-toolbar"><label>Choose a trace<select data-v4-scenario-select><option value="web">Open and render an HTML page</option><option value="boot">Power-on and UEFI boot</option><option value="storage">Read a file from an NVMe SSD</option><option value="keyboard">Press a USB keyboard key</option><option value="network">Receive an HTTPS web response</option><option value="display">Draw a frame on the display</option></select></label><div class="hwat-v4-buttons"><button type="button" data-v4-scenario-prev>← Previous</button><button type="button" data-v4-scenario-next>Next step →</button><button type="button" data-v4-scenario-first>Restart trace</button></div></div>
+        <div class="hwat-v4-trace-layout">
+          <section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>COMPONENT ROUTE / CONCEPTUAL</span><h4 data-v4-trace-title></h4></div><div class="hwat-v4-trace-map" data-v4-trace-map role="group" aria-label="Select a stage in the component route"></div><p class="hwat-v4-micro">Flow is conceptual: hardware pipelines run concurrently, and precise routes depend on system architecture.</p></section>
+          <aside class="hwat-bin-panel hwat-v4-trace-inspector" data-v4-trace-detail aria-live="polite"></aside>
+        </div>
+      </div>
+      <div class="hwat-bin-pane hwat-v4-pane" data-bin-content="cpu" hidden>
+        <div class="hwat-v4-section-lead"><span>07 / EXECUTABLE PEDAGOGICAL PROCESSOR</span><h4>Assemble instructions, step the processor, inspect registers and RAM</h4><p>EDU-8 is a deliberately invented, fully specified teaching ISA—not Intel, ARM or RISC-V. Every instruction is exactly two bytes so each execution step can be followed byte-for-byte.</p></div>
+        <div class="hwat-v4-cpu-controls"><label>Sample program<select data-v4-cpu-sample><option value="sum">Add 5 + 7 and output 12</option><option value="memory">Store and reload a byte from RAM</option><option value="countdown">Three-step countdown and branch</option><option value="xor">Exclusive-OR binary values</option></select></label><div class="hwat-v4-buttons"><button type="button" data-v4-cpu-compile>Assemble / reset</button><button type="button" data-v4-cpu-step>Execute one instruction</button><button type="button" data-v4-cpu-run>Run up to 32 steps</button></div></div>
+        <div class="hwat-v4-cpu-layout">
+          <section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>EDITABLE ASSEMBLY</span><h4>Source and machine encoding</h4></div><label class="hwat-v4-code-label" for="hwat-v4-asm">EDU-8 assembly</label><textarea data-v4-cpu-source id="hwat-v4-asm" spellcheck="false" rows="10" maxlength="2400" aria-describedby="hwat-v4-asm-help"></textarea><p class="hwat-v4-micro" id="hwat-v4-asm-help">Use one instruction per line: <code>LDI 5</code>, <code>ADD 7</code>, <code>STA 0x80</code>, <code>JNZ label</code>. Labels end with <code>:</code>; comments start with <code>;</code>.</p><div data-v4-cpu-error class="hwat-v4-cpu-error" role="status"></div><div class="hwat-v4-disassembly" data-v4-cpu-disassembly aria-label="Assembled instruction bytes"></div></section>
+          <section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>PROCESSOR STATE</span><h4>Registers, flags and execution trace</h4></div><div class="hwat-v4-reg-grid" data-v4-cpu-registers aria-live="polite"></div><div class="hwat-v4-microsteps" data-v4-cpu-microsteps></div><div class="hwat-v4-cpu-output" data-v4-cpu-output></div><div class="hwat-v4-cpu-log" data-v4-cpu-log></div></section>
+        </div>
+        <section class="hwat-bin-panel hwat-v4-memory-panel"><div class="hwat-bin-panel-heading"><span>FULL 256-BYTE RAM / 0x00–0xFF</span><h4>Inspect program bytes and data memory</h4></div><div class="hwat-v4-memory" data-v4-cpu-memory role="group" aria-label="256 addresses in conceptual eight-bit memory"></div><div class="hwat-v4-memory-detail" data-v4-cpu-memory-detail aria-live="polite"></div></section>
+        <div class="hwat-bin-rule">EDU-8 models an accumulator, a program counter, zero/carry flags, RAM, and an output port. Its opcodes and timing are fictional. Real cores have architecture-specific instruction sets, sophisticated memory subsystems, concurrency and fault models.</div>
+      </div>
+      <div class="hwat-bin-pane hwat-v4-pane" data-bin-content="scope" hidden>
+        <div class="hwat-v4-section-lead"><span>08 / TIMING AND WIRE FORMATS</span><h4>How a logical byte turns into sampled signal edges</h4><p>Compare two distinct serial transport conventions. Change the transmitted byte, select a sampling edge, and inspect which bit is currently on the wire.</p></div>
+        <div class="hwat-v4-scope-controls"><label>Interface<select data-v4-scope-mode><option value="spi">SPI mode 0 · 8 clock cycles</option><option value="uart">UART 8N1 · one character</option></select></label><label>Transmit byte (hex)<input data-v4-scope-hex maxlength="2" value="9F" spellcheck="false" inputmode="text" aria-label="Two hexadecimal digits"/></label><div class="hwat-v4-scope-presets"><button type="button" data-v4-scope-preset="9F">SPI 9F</button><button type="button" data-v4-scope-preset="03">SPI 03</button><button type="button" data-v4-scope-preset="41">ASCII A</button></div></div>
+        <div class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>ILLUSTRATIVE IDEAL DIGITAL SIGNALS · NOT A PHYSICAL OSCILLOSCOPE</span><h4 data-v4-scope-heading></h4></div><div class="hwat-v4-scope-svg" data-v4-scope-chart></div><label class="hwat-v4-scope-slider-label">Selected sample position <input type="range" min="0" max="7" step="1" value="0" data-v4-scope-position/></label><div class="hwat-v4-scope-readout" data-v4-scope-readout aria-live="polite"></div><div class="hwat-v4-bit-row" data-v4-scope-bits></div></div><div class="hwat-bin-rule" data-v4-scope-fact></div>
+      </div>
+      <div class="hwat-bin-pane hwat-v4-pane" data-bin-content="isa" hidden>
+        <div class="hwat-v4-section-lead"><span>09 / INSTRUCTION SET ENCODING</span><h4>Decode actual x86 and RISC-V instruction fields</h4><p>See how two real ISAs encode a register assignment. They do not share the same opcode format—even though both manipulate binary numbers.</p></div>
+        <div class="hwat-v4-isa-controls"><div class="hwat-v4-switch" role="group" aria-label="Choose instruction architecture"><button data-v4-isa-mode="x86" class="is-active" aria-pressed="true" type="button">x86-64 · MOV EAX, imm32</button><button data-v4-isa-mode="riscv" aria-pressed="false" type="button">RV32I · ADDI x5, x0, imm12</button></div><label>Immediate value <input data-v4-isa-value type="number" step="1" value="42"/></label></div>
+        <div class="hwat-v4-isa-layout"><section class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>MACHINE-CODE ENCODING</span><h4 data-v4-isa-title></h4></div><div class="hwat-v4-isa-bytes" data-v4-isa-bytes aria-live="polite"></div><div class="hwat-v4-isa-bitfields" data-v4-isa-fields></div><div class="hwat-v4-isa-note" data-v4-isa-note></div></section><aside class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>SEMANTIC DECODING</span><h4>What the processor does</h4></div><div data-v4-isa-details></div></aside></div>
+        <div class="hwat-bin-rule">Instruction bytes in memory are not direct representations of HTML source text. The ISA decoder examples are valid educational encodings; dynamic binary translation, caching, speculative pipelines and actual browser compilation are outside this lab.</div>
+      </div>
+      <div class="hwat-bin-pane hwat-v4-pane" data-bin-content="academy" hidden>
+        <div class="hwat-v4-section-lead"><span>10 / VERIFY YOUR ENGINEERING MODEL</span><h4>The chip-to-browser knowledge challenge</h4><p>Practice the distinctions that prevent architectural mistakes: machine instruction versus protocol command; physical routing versus data interpretation; encoding versus execution.</p></div>
+        <div class="hwat-v4-quiz-layout"><section class="hwat-bin-panel"><div class="hwat-v4-quiz-progress" data-v4-quiz-progress></div><div class="hwat-v4-quiz-question" data-v4-quiz-question></div><div class="hwat-v4-quiz-choices" data-v4-quiz-choices role="group" aria-label="Select an answer"></div><div class="hwat-v4-quiz-explanation" data-v4-quiz-explanation aria-live="polite"></div><div class="hwat-v4-buttons hwat-v4-quiz-actions"><button data-v4-quiz-next type="button">Next question →</button><button data-v4-quiz-reset type="button">Restart challenge</button></div></section><aside class="hwat-bin-panel"><div class="hwat-bin-panel-heading"><span>REFERENCE INDEX</span><h4>Engineering glossary</h4></div><label class="hwat-v4-code-label">Search terms<input type="search" data-v4-glossary-search placeholder="opcode, MOSFET, DOM, byte, SPI…"/></label><div class="hwat-v4-glossary" data-v4-glossary></div></aside></div><div class="hwat-bin-rule">Scores live only in this page session; no account, backend, tracking, or external data collection is used.</div>
+      </div>
+      <footer class="hwat-bin-footer"><span>Hardware Atlas 4.0 / Full Stack Silicon Lab</span><span>Original research architecture and website integration: <strong>Marc Lavoie · 2026-11-13</strong></span><span>Offline educational simulator, not a hardware emulator or wiring diagram</span></footer>
+    </section>
+
+    <section data-hwat-learning-panel class="hwat-learning-panel" aria-labelledby="hwat-learning-title">
       <div class="hwat-learning-icon" aria-hidden="true">⌘</div>
       <div><h3 id="hwat-learning-title">Follow the signals. Understand the system.</h3><p>Trace power from the EPS connector through the VRM to the CPU; then inspect memory channels, PCI Express, and storage interfaces. Enable the conceptual route overlays and explore each component in detail.</p></div>
       <button type="button" class="hwat-primary-button" data-hwat-tour>Start guided tour <span aria-hidden="true">→</span></button>
@@ -138,26 +264,93 @@
 
     </div>
 
-    <section class="atlas-provenance" aria-labelledby="atlas-provenance-title">
+    <section class="atlas-provenance" id="engineering-evidence" aria-labelledby="atlas-provenance-title">
       <div>
-        <p class="atlas-kicker">Artifact integrity</p>
-        <h2 id="atlas-provenance-title">A complete, self-contained hardware learning system.</h2>
+        <p class="atlas-kicker">Engineering evidence · Version 4.0</p>
+        <h2 id="atlas-provenance-title">A motherboard atlas that connects the physical stack to software behavior.</h2>
+        <p class="atlas-provenance-lede">The original illustrated atlas is preserved in full and extended into a recruiter-reviewable engineering system: observable interactions, explainable data paths, executable teaching models, documented assumptions, and reproducible package evidence.</p>
       </div>
       <div class="atlas-provenance-grid">
-        <article><span>Interactive coverage</span><strong>61 learning targets</strong><p>Twenty-five motherboard components, fourteen chip regions, twelve materials, and ten historical milestones.</p></article>
-        <article><span>Runtime boundary</span><strong>Static and dependency-free</strong><p>The atlas runs locally in the browser with original SVG artwork and no tracking, package installation, backend, or automatic external requests.</p></article>
-        <article><span>Evidence boundary</span><strong>Conceptual—not repair CAD</strong><p>Routes and layouts explain relationships. Always verify the exact motherboard manual, power state, ESD controls, component compatibility, and manufacturer procedures.</p></article>
+        <article><span>Illustrated foundation</span><strong>61 visual learning targets</strong><p>Twenty-five motherboard components, fourteen chip regions, twelve engineering materials, and ten hardware milestones remain directly explorable.</p></article>
+        <article><span>Binary intelligence</span><strong>39 component profiles</strong><p>Search the board and chip catalog to see the data, instructions, packets, electrical role, example encoding, and verification boundary associated with each region.</p></article>
+        <article><span>System reasoning</span><strong>6 end-to-end workflows</strong><p>Step through page rendering, UEFI boot, NVMe reads, keyboard input, HTTPS response handling, and display output while correlating each stage to hardware.</p></article>
+        <article><span>Executable learning</span><strong>11 interactive laboratories</strong><p>Edit UTF-8 source, build bytes, operate an 8-bit ALU, decode protocols, assemble and step EDU-8, inspect RAM, compare timing, and decode x86/RISC-V fields.</p></article>
+        <article><span>Knowledge verification</span><strong>15 questions · 35 terms</strong><p>The engineering challenge explains every answer and pairs it with a searchable glossary covering architecture, buses, firmware, logic, and silicon.</p></article>
+        <article><span>Runtime boundary</span><strong>Static and dependency-free</strong><p>The lab runs locally in the browser with no tracking, account, backend, package installation, automatic external requests, or execution of user-supplied code.</p></article>
       </div>
-      <p class="atlas-integrity-line"><strong>Imported archive SHA-256:</strong> <code>38893704296065a3f65f1c60b69b4b96c0f72d5eb2e018c16d10c909b04635d1</code></p>
+      <div class="atlas-boundary" aria-label="Evidence and safety boundary">
+        <strong>Evidence boundary</strong>
+        <p>The board and system routes are educational abstractions, not repair CAD, oscilloscope captures, vendor firmware, or a cycle-accurate hardware emulator. EDU-8 is an invented teaching ISA; x86 and RISC-V examples are identified separately as real instruction encodings. Always verify the exact board manual, power state, ESD controls, component compatibility, and manufacturer procedures before physical work.</p>
+      </div>
+
+      <section class="atlas-reference-library" aria-labelledby="atlas-reference-title">
+        <div>
+          <p class="atlas-kicker">Published technical record</p>
+          <h3 id="atlas-reference-title">Read the architecture behind the interaction.</h3>
+          <p>The handoff’s research notes, data maps, security review, and instruction-set specification are published alongside the lab so a reviewer can evaluate the model rather than relying on presentation alone.</p>
+        </div>
+        <div class="atlas-reference-links">
+          <a href="reference/ARCHITECTURE-AND-DATA-FLOW.md"><span>System design</span><strong>Architecture &amp; data flow</strong><small>Module ownership, initialization, state, and cross-navigation</small></a>
+          <a href="reference/EDU8-INSTRUCTION-SET.md"><span>Executable model</span><strong>EDU-8 instruction set</strong><small>Opcodes, registers, flags, memory, and examples</small></a>
+          <a href="reference/CHIP-PROFILES.md"><span>Hardware catalog</span><strong>39 chip profiles</strong><small>Component-by-component binary and signal reference</small></a>
+          <a href="reference/chip-to-binary-map.csv"><span>Machine-readable</span><strong>CSV component map</strong><small>Portable mapping for review and analysis</small></a>
+          <a href="reference/chip-to-binary-map.json"><span>Machine-readable</span><strong>JSON component map</strong><small>Structured source for tooling and validation</small></a>
+          <a href="reference/QA-AND-SECURITY.md"><span>Assurance</span><strong>QA &amp; security review</strong><small>Threat model, limits, accessibility, and regression scope</small></a>
+          <a href="reference/SOURCE-REFERENCE-NOTES.md"><span>Research</span><strong>Source reference notes</strong><small>Standards and technical source boundaries</small></a>
+          <a href="reference/PACKAGE-MANIFEST.json"><span>Provenance</span><strong>Package manifest</strong><small>Versioned contents, ownership, and release record</small></a>
+          <a href="reference/SITE-INTEGRATION-NOTES.md"><span>Deployment record</span><strong>Site integration notes</strong><small>Verified inputs, architecture, correction, QA, and evidence limits</small></a>
+        </div>
+      </section>
+
+      <section class="atlas-proof-gallery" aria-labelledby="atlas-proof-title">
+        <div class="atlas-proof-heading"><div><p class="atlas-kicker">Interface proof</p><h3 id="atlas-proof-title">The complete visual record, connected to one live model.</h3></div><p>Representative captures from both verified handoffs preserve the illustrated foundation, advanced laboratories, and responsive states. Use the live controls above for the full experience.</p></div>
+        <div class="atlas-proof-grid">
+          <figure><img src="assets/previews/v4-board-1280.png" loading="lazy" width="1280" height="720" alt="Interactive motherboard component explorer"><figcaption>Board explorer</figcaption></figure>
+          <figure><img src="assets/previews/v4-chip-1280.png" loading="lazy" width="1280" height="720" alt="Interactive processor chip cutaway"><figcaption>Silicon regions</figcaption></figure>
+          <figure><img src="assets/previews/08-binary-chip-profiles.png" loading="lazy" width="1280" height="720" alt="Searchable binary and chip component profiles"><figcaption>Binary profiles</figcaption></figure>
+          <figure><img src="assets/previews/v4-scenarios-1280.png" loading="lazy" width="1280" height="720" alt="System correlation scenario explorer"><figcaption>System workflows</figcaption></figure>
+          <figure><img src="assets/previews/v4-cpu-1280.png" loading="lazy" width="1280" height="720" alt="EDU-8 processor and memory simulator"><figcaption>CPU simulator</figcaption></figure>
+          <figure><img src="assets/previews/v4-scope-1280.png" loading="lazy" width="1280" height="720" alt="SPI and UART ideal timing laboratory"><figcaption>Signal timing</figcaption></figure>
+          <figure><img src="assets/previews/v4-isa-1280.png" loading="lazy" width="1280" height="720" alt="x86 and RISC-V instruction encoding comparison"><figcaption>ISA encoding</figcaption></figure>
+          <figure><img src="assets/previews/v4-academy-1280.png" loading="lazy" width="1280" height="720" alt="Hardware engineering assessment and glossary"><figcaption>Engineering challenge</figcaption></figure>
+          <figure><img src="assets/previews/03-materials-lab.png" loading="lazy" width="1280" height="720" alt="Engineering materials laboratory from the illustrated atlas"><figcaption>Materials laboratory</figcaption></figure>
+          <figure><img src="assets/previews/04-hardware-history.png" loading="lazy" width="1280" height="720" alt="Interactive hardware history timeline"><figcaption>Hardware history</figcaption></figure>
+          <figure><img src="assets/previews/05-illuminated-power-route.png" loading="lazy" width="1280" height="720" alt="Conceptual motherboard power route illuminated across the board"><figcaption>Power-route overlay</figcaption></figure>
+          <figure><img src="assets/previews/06-full-desktop-page.png" loading="lazy" width="1280" height="720" alt="Full desktop view of the original motherboard atlas"><figcaption>Original desktop system</figcaption></figure>
+          <figure><img src="assets/previews/07-mobile-full-page.png" loading="lazy" width="390" height="844" alt="Full mobile view of the original motherboard atlas"><figcaption>Original mobile system</figcaption></figure>
+        </div>
+        <details class="atlas-responsive-proof">
+          <summary>Open every additional source capture</summary>
+          <div>
+            <a href="assets/previews/01-motherboard-illustration.png">Original motherboard illustration</a>
+            <a href="assets/previews/02-chip-cutaway.png">Original chip cutaway</a>
+            <a href="assets/previews/v4-board-390.png">V4 board · 390 px</a>
+            <a href="assets/previews/v4-cpu-390.png">V4 CPU lab · 390 px</a>
+            <a href="assets/previews/v4-isa-390.png">V4 ISA lab · 390 px</a>
+            <a href="assets/previews/v4-scenarios-390.png">V4 scenarios · 390 px</a>
+            <a href="assets/previews/v4-scope-390.png">V4 signal lab · 390 px</a>
+            <a href="assets/previews/v4-academy-390.png">V4 academy · 390 px</a>
+          </div>
+        </details>
+      </section>
+
+      <div class="atlas-integrity-line">
+        <strong>Verified source packages</strong>
+        <span>V2 illustrated atlas · <code>38893704296065a3f65f1c60b69b4b96c0f72d5eb2e018c16d10c909b04635d1</code></span>
+        <span>V4 full-stack silicon lab · <code>a1f8a4b1b9f988eb1779b2feb6dd76a3e113a466cce872483972fb7207310d63</code></span>
+        <small>Package records: <a href="reference/v2-README-CODEX.md">V2 handoff</a> · <a href="reference/v2-CHANGELOG.md">V2 changelog</a> · <a href="reference/v2-SHA256SUMS.txt">V2 checksums</a> · <a href="reference/README-CODEX.md">V4 handoff</a> · <a href="reference/CHANGELOG.md">V4 changelog</a> · <a href="reference/SHA256SUMS.txt">V4 checksums</a></small>
+      </div>
     </section>
   </main>
 
   <footer class="atlas-footer">
-    <div><strong>Marc Lavoie</strong><p>GIT &amp; MB · Interactive Motherboard &amp; Chip Atlas</p></div>
-    <nav aria-label="GIT and motherboard footer navigation"><a href="../index.html">Home</a><a href="../general-it/">General IT</a><a href="#hardware-atlas">Atlas</a><a href="#main-content">Back to top</a></nav>
+    <div><strong>Marc Lavoie</strong><p>GIT &amp; MB · Full-Stack Motherboard &amp; Silicon Lab</p></div>
+    <nav aria-label="GIT and motherboard footer navigation"><a href="../index.html">Home</a><a href="../general-it/">General IT</a><a href="#hardware-atlas">Atlas</a><a href="#engineering-evidence">Evidence</a><a href="#main-content">Back to top</a></nav>
   </footer>
 
-  <script src="assets/hardware/motherboard-atlas.js?v=2.0.0" defer></script>
-  <script src="page.js?v=20261113a" defer></script>
+  <script src="assets/hardware/motherboard-atlas.js?v=4.0.0" defer></script>
+  <script src="assets/hardware/motherboard-binary.js?v=4.0.0" defer></script>
+  <script src="assets/hardware/motherboard-advanced.js?v=4.0.1" defer></script>
+  <script src="page.js?v=20261113b" defer></script>
 </body>
 </html>

@@ -30,6 +30,16 @@
   });
 
   document.addEventListener('click', function (event) {
+    var binaryShortcut = event.target.closest('[data-atlas-binary]');
+    if (!binaryShortcut) return;
+    event.preventDefault();
+    var binaryTab = document.querySelector('#hardware-atlas [data-hwat-binary-tab]');
+    if (binaryTab) binaryTab.click();
+    document.getElementById('hardware-atlas').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    closeMenu();
+  });
+
+  document.addEventListener('click', function (event) {
     if (!menu.contains(event.target) && !toggle.contains(event.target)) closeMenu();
   });
 

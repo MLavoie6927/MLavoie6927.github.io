@@ -1,0 +1,168 @@
+/* =======================================================================
+ * Motherboard & Silicon Atlas v3 / Binary Signals extension
+ * Authored for Marc Lavoie | 2026-11-13
+ * All styles scoped to #hardware-atlas; safe to embed in existing website.
+ * ======================================================================= */
+#hardware-atlas [hidden] { display: none !important; }
+#hardware-atlas .hwat-bin-head, #hardware-atlas .hwat-bin-panel, #hardware-atlas .hwat-bin-rule,
+#hardware-atlas .hwat-bin-nav { box-sizing:border-box; }
+#hardware-atlas .hwat-bin-head {display:flex;justify-content:space-between;align-items:center;gap:26px;padding:29px 30px;margin: 6px 0 13px; background:radial-gradient(circle at 90% 25%,#1a5053 0,transparent 35%),linear-gradient(125deg,#112c3d,#111c31 66%);border:1px solid #2b6570;border-radius:18px;}
+#hardware-atlas .hwat-bin-head>div:first-child {max-width:780px;}
+#hardware-atlas .hwat-bin-kicker {color:#71f2df;font-size:11px;letter-spacing:.16em;font-weight:850;margin:0 0 6px;}
+#hardware-atlas .hwat-bin-head h3 {font-size:clamp(26px,3vw,38px);line-height:1.16;color:#f4faff;letter-spacing:-.045em; margin:0 0 11px;}
+#hardware-atlas .hwat-bin-head h3 em {font-style:normal;color:#73f6d4;}
+#hardware-atlas .hwat-bin-head p:not(.hwat-bin-kicker) {color:#aec6d6;font-size:14px;line-height:1.7;max-width:740px;}
+#hardware-atlas .hwat-bin-head-code {font:800 22px/1.48 ui-monospace,SFMono-Regular,Consolas,monospace;color:#85f3d5;letter-spacing:.1em;text-shadow:0 0 22px #58e3c48f;padding:10px 12px;border-left:2px solid #317c80;white-space:nowrap;}
+#hardware-atlas .hwat-bin-nav {display:flex;gap:6px;overflow-x:auto;padding:7px;margin:0 0 15px;background:#0d1e30;border-radius:12px;border:1px solid #2d485c;}
+#hardware-atlas .hwat-bin-nav button {border:1px solid transparent;border-radius:8px;padding:11px 14px;min-width:max-content;flex:1;background:transparent;color:#a9c3d3;font-weight:700;font-size:12px;cursor:pointer;}
+#hardware-atlas .hwat-bin-nav button:hover {background:#1b3644;color:#fff;}
+#hardware-atlas .hwat-bin-nav button.is-active {background:#1d4d53;color:#80ffe6;border-color:#347e7d;}
+#hardware-atlas .hwat-bin-pane {min-width:0;}
+#hardware-atlas .hwat-bin-columns {display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);gap:16px;align-items:start;}
+#hardware-atlas .hwat-bin-panel {min-width:0;padding:21px;background:linear-gradient(180deg,#102639,#0b1929);border:1px solid #2b4557;border-radius:15px;color:#d7e5ed;}
+#hardware-atlas .hwat-bin-panel-heading {margin-bottom:16px;}
+#hardware-atlas .hwat-bin-panel-heading>span {font-size:10px;letter-spacing:.16em;color:#7ce6d3;font-weight:800;display:block;margin-bottom:7px;}
+#hardware-atlas .hwat-bin-panel-heading h4 {font-size:20px;font-weight:800;color:#f1f8ff;letter-spacing:-.03em;line-height:1.3;}
+#hardware-atlas .hwat-bin-panel>p, #hardware-atlas .hwat-bin-fact p {font-size:13px;line-height:1.75;color:#b1c6d7;}
+#hardware-atlas .hwat-bin-rule {margin-top:16px;padding:16px 20px;font-size:12px;line-height:1.75;color:#afc6d7;border:1px solid #335368;border-radius:11px;background:#102b38;}
+#hardware-atlas .hwat-bin-rule strong {color:#ecf8ff;}
+#hardware-atlas .hwat-bin-path {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+#hardware-atlas .hwat-bin-path-node {min-height:98px;display:flex;align-items:center;gap:12px;text-align:left;padding:14px 12px;background:#0c1d30;border:1px solid #2a4458;border-radius:10px;color:#d6e9f2;cursor:pointer;transition:background .16s,border-color .16s,transform .16s;}
+#hardware-atlas .hwat-bin-path-node:hover {transform:translateY(-1px);border-color:#75cfce;}
+#hardware-atlas .hwat-bin-path-node.is-active {background:#194654;border-color:#6de7d0;box-shadow:0 0 0 1px #2b7f83;}
+#hardware-atlas .hwat-bin-node-num {color:#7ce7dc;align-self:flex-start;font:800 11px ui-monospace,monospace;padding:6px 7px;border-radius:5px;background:#123143;}
+#hardware-atlas .hwat-bin-node-body {flex:1;min-width:0;display:grid;gap:4px;}
+#hardware-atlas .hwat-bin-node-body strong {font-size:13px;line-height:1.3;}
+#hardware-atlas .hwat-bin-node-body small {color:#93afc0;font-size:11px;line-height:1.4;}
+#hardware-atlas .hwat-bin-node-chevron {color:#74d5c9;font-size:17px;}
+#hardware-atlas .hwat-bin-code-line {font:700 12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere;background:#07131f;color:#7defd1;padding:15px;border:1px solid #34516a;border-radius:9px;margin-bottom:16px;}
+#hardware-atlas .hwat-bin-side {position:sticky;top:20px;}
+#hardware-atlas .hwat-bin-related {border-top:1px solid #294658;margin-top:21px;padding-top:17px;display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+#hardware-atlas .hwat-bin-related>span {font-weight:800;font-size:10px;letter-spacing:.07em;display:block;flex-basis:100%;color:#8dbed2;}
+#hardware-atlas .hwat-bin-related button {background:#19394b;border:1px solid #477684;color:#c4f4ea;border-radius:100px;padding:6px 11px;font-size:11px;}
+#hardware-atlas .hwat-bin-related button:hover {background:#246069;}
+#hardware-atlas .hwat-bin-step-actions {display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid #284457;padding-top:19px;margin-top:20px;font-size:12px;color:#91bbcc;}
+#hardware-atlas .hwat-bin-step-actions button, #hardware-atlas .hwat-bin-go-board {border:1px solid #42817e;border-radius:8px;background:#1b5557;color:#d5fff8;padding:9px 13px;cursor:pointer;font-size:12px;font-weight:700;}
+#hardware-atlas .hwat-bin-step-actions button:disabled {opacity:.4;cursor:not-allowed;}
+#hardware-atlas .hwat-bin-filters {display:flex;align-items:end;gap:11px;margin:10px 0 16px;flex-wrap:wrap;}
+#hardware-atlas .hwat-bin-filters label, #hardware-atlas .hwat-bin-select-label, #hardware-atlas .hwat-bin-number-label, #hardware-atlas .hwat-bin-alu label {display:grid;gap:6px;font-weight:700;color:#a5c9d5;font-size:12px;}
+#hardware-atlas .hwat-bin-filters input, #hardware-atlas .hwat-bin-filters select, #hardware-atlas .hwat-bin-select-label select, #hardware-atlas .hwat-bin-number-label input, #hardware-atlas .hwat-bin-alu input {width:100%;background:#09192a;color:#e1f5f2;border:1px solid #34566d;border-radius:9px;padding:11px 12px;font:600 13px system-ui;min-width:0;}
+#hardware-atlas .hwat-bin-filters label:first-child {flex:1 1 320px;}
+#hardware-atlas .hwat-bin-filters label:last-child {flex:0 1 300px;}
+#hardware-atlas .hwat-bin-index {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:660px;overflow:auto;padding-right:3px;}
+#hardware-atlas .hwat-bin-index-item {min-width:0;min-height:104px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:13px;border-radius:10px;background:#101f32;border:1px solid #284357;color:#c9e0ec;cursor:pointer;}
+#hardware-atlas .hwat-bin-index-item.is-active {border-color:#65e5d0;background:#1b4b54;}
+#hardware-atlas .hwat-bin-index-item:hover {border-color:#69b8c1;}
+#hardware-atlas .hwat-bin-index-item small {font-size:9px;letter-spacing:.11em;color:#80d4ce;font-weight:800;}
+#hardware-atlas .hwat-bin-index-item strong {font-size:12px;overflow-wrap:anywhere;}
+#hardware-atlas .hwat-bin-index-item>span {font-size:11px;line-height:1.3;color:#8cabbf;}
+#hardware-atlas .hwat-bin-dossier {position:sticky;top:20px;}
+#hardware-atlas .hwat-bin-dossier>.hwat-bin-panel-heading h4 {font-size:24px;}
+#hardware-atlas .hwat-bin-tag {border-radius:100px;background:#204355;border:1px solid #3a6d76;color:#88f8df;display:inline-block;font-weight:750;font-size:11px;padding:5px 11px;margin-bottom:13px;}
+#hardware-atlas .hwat-bin-dossier-box {margin:18px 0 15px;border-radius:11px;background:#061523;border:1px solid #2c6670;padding:15px;display:grid;gap:9px;}
+#hardware-atlas .hwat-bin-dossier-box>span {color:#8fbed2;font-size:10px;font-weight:800;letter-spacing:.09em;}
+#hardware-atlas .hwat-bin-dossier-box code {color:#8bf7dd;overflow-wrap:anywhere;white-space:normal;font:700 13px/1.8 ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-fact {border-top:1px solid #2c4558;padding:13px 0;}
+#hardware-atlas .hwat-bin-fact h5 {color:#f0f7fa;margin:0 0 5px;font-size:12px;}
+#hardware-atlas .hwat-bin-go-board {width:100%;margin-top:10px;}
+#hardware-atlas .hwat-open-binary {display:block;margin:15px 0;padding:12px;width:100%;font-size:12px;font-weight:800;border-radius:9px;color:#dcfff7;border:1px solid #397e77;background:linear-gradient(90deg,#1b575d,#173e50);cursor:pointer;text-align:left;}
+#hardware-atlas .hwat-open-binary:hover {background:#226e70;}
+#hardware-atlas .hwat-bin-subtext {color:#a9c2d4;font-size:12px;line-height:1.75;margin:0 0 16px;}
+#hardware-atlas .hwat-bin-bitfield {display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;}
+#hardware-atlas .hwat-bin-bit {border:1px solid #325167;background:#122a3f;color:#96b0bf;padding:12px 2px;border-radius:9px;display:grid;place-items:center;gap:8px;min-width:0;cursor:pointer;}
+#hardware-atlas .hwat-bin-bit small {font:700 10px/1.3 ui-monospace,Consolas,monospace;white-space:nowrap;}
+#hardware-atlas .hwat-bin-bit strong {font:850 clamp(19px,2vw,30px)/1 ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-bit.is-one {background:#195a5c;border-color:#69dccb;color:#aaffec;box-shadow:inset 0 0 15px #2c9f8950;}
+#hardware-atlas .hwat-bin-numeric {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:17px 0;}
+#hardware-atlas .hwat-bin-numeric>div {display:grid;gap:5px;padding:12px;background:#09192a;border:1px solid #2a4659;border-radius:9px;min-width:0;}
+#hardware-atlas .hwat-bin-numeric small {font-size:10px;font-weight:700;color:#8eb7c9;}
+#hardware-atlas .hwat-bin-numeric strong {font:800 13px/1.4 ui-monospace,Consolas,monospace;color:#b5f7e4;overflow-wrap:anywhere;}
+#hardware-atlas .hwat-bin-waveform {width:100%;background:#071420;border:1px solid #2b4f62;border-radius:11px;padding:10px 6px;margin:0 0 14px;}
+#hardware-atlas .hwat-bin-waveform svg {display:block;width:100%;height:auto;}
+#hardware-atlas .hwat-bin-number-label {max-width:260px;}
+#hardware-atlas .hwat-bin-explainer {margin:17px 0 0;background:#0b2432;border-radius:9px;border-left:3px solid #3b9895;color:#9ebccc;padding:13px;font-size:11px;line-height:1.75;}
+#hardware-atlas .hwat-bin-explainer strong {color:#d6f5ef;}
+#hardware-atlas .hwat-bin-gate-switch {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:14px;}
+#hardware-atlas .hwat-bin-gate-switch button {min-width:0;font-size:10px;font-weight:700;padding:9px 2px;border-radius:7px;color:#a9becf;background:#122b3d;border:1px solid #345469;}
+#hardware-atlas .hwat-bin-gate-switch button.is-active {color:#74f9df;border-color:#63d9c6;background:#1b5157;}
+#hardware-atlas .hwat-bin-truth {width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;border:1px solid #32566a;border-radius:8px;overflow:hidden;text-align:center;font:700 12px ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-truth th {background:#1d3647;color:#a4d9d1;font-size:11px;padding:9px 4px;}
+#hardware-atlas .hwat-bin-truth td {border-top:1px solid #284153;color:#bfd5e4;padding:9px 4px;}
+#hardware-atlas .hwat-bin-truth tr.is-selected td {background:#1d5356;color:#eafff9;}
+#hardware-atlas .hwat-bin-alu {display:flex;gap:12px;margin:18px 0 10px;}
+#hardware-atlas .hwat-bin-alu label {min-width:0;flex:1;}
+#hardware-atlas .hwat-bin-alu-result {background:#071723;border:1px solid #32576d;border-radius:9px;padding:15px;}
+#hardware-atlas .hwat-bin-alu-equation {display:flex;gap:8px;align-items:center;flex-wrap:wrap;font:700 clamp(11px,1.3vw,14px) ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-alu-equation span {color:#bad2e3;}
+#hardware-atlas .hwat-bin-alu-equation strong {color:#80f3df;}
+#hardware-atlas .hwat-bin-alu-flags {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:13px 0;font-size:11px;color:#a5bdc9;}
+#hardware-atlas .hwat-bin-alu-flags b {color:#7fffe5;}
+#hardware-atlas .hwat-bin-alu-result>small {color:#95b9c9;line-height:1.6;}
+#hardware-atlas .hwat-bin-instruction-list {display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+#hardware-atlas .hwat-bin-instruction-list button {background:#172d42;border:1px solid #31556c;border-radius:9px;color:#bbd0df;padding:10px 15px;font-weight:800;font:700 12px ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-instruction-list button.is-active {background:#1c5557;color:#8dffe6;border-color:#58d8ca;}
+#hardware-atlas .hwat-bin-ins-bytes {display:flex;gap:7px;flex-wrap:wrap;padding:20px;background:#081724;border:1px solid #2b5063;border-radius:11px;}
+#hardware-atlas .hwat-bin-ins-bytes span {min-width:52px;text-align:center;border:1px solid #488b82;border-radius:6px;color:#8cffde;background:#123841;padding:11px 8px;font:800 18px ui-monospace,Consolas,monospace;}
+#hardware-atlas .hwat-bin-asm-name {font:800 15px ui-monospace,Consolas,monospace;margin:15px 0!important;color:#d5ffec!important;}
+#hardware-atlas .hwat-bin-decode {width:100%;border-collapse:collapse;font-size:12px;line-height:1.6;}
+#hardware-atlas .hwat-bin-decode td, #hardware-atlas .hwat-bin-decode th {border-bottom:1px solid #2a4758;text-align:left;padding:12px 9px;vertical-align:top;overflow-wrap:anywhere;}
+#hardware-atlas .hwat-bin-decode th {font:750 12px ui-monospace,Consolas,monospace;color:#7cf1df;min-width:100px;}
+#hardware-atlas .hwat-bin-decode td {color:#b6cddd;}
+#hardware-atlas .hwat-bin-ins-result {background:#193c44;padding:15px;border-radius:8px;margin-top:16px!important;}
+#hardware-atlas .hwat-bin-pipeline {display:grid;gap:9px;}
+#hardware-atlas .hwat-bin-pipeline-step {display:flex;gap:14px;align-items:start;background:#112b3d;border:1px solid #2f5161;border-radius:10px;padding:14px;}
+#hardware-atlas .hwat-bin-pipeline-step>span {font:800 12px ui-monospace,monospace;background:#205e60;color:#a9f8e9;padding:8px;border-radius:5px;}
+#hardware-atlas .hwat-bin-pipeline-step>div {display:grid;gap:5px;}
+#hardware-atlas .hwat-bin-pipeline-step strong {font-size:14px;}
+#hardware-atlas .hwat-bin-pipeline-step small {color:#8eafc3;font-size:11px;line-height:1.45;}
+#hardware-atlas .hwat-bin-select-label {margin-bottom:18px;max-width:540px;}
+#hardware-atlas .hwat-bin-protocol-diagram {display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+#hardware-atlas .hwat-bin-proto-node {flex:0 1 190px;text-align:center;border-radius:9px;border:1px solid #3c7378;background:#1b484b;color:#c5fff1;padding:22px 8px;font-size:12px;font-weight:800;}
+#hardware-atlas .hwat-bin-proto-link {min-width:35px;flex:1;display:grid;gap:10px;color:#7fbdc8;text-align:center;font-size:11px;}
+#hardware-atlas .hwat-bin-proto-track {height:5px;border-radius:4px;background:#254b5c;position:relative;}
+#hardware-atlas .hwat-bin-proto-track i {position:absolute;left:5px;top:-4px;width:20px;height:12px;border-radius:100px;background:#70f5db;box-shadow:0 0 18px #5ae6d5;animation:hwat-bin-run 2.8s linear infinite;}
+@keyframes hwat-bin-run {to {left:calc(100% - 26px)}}
+#hardware-atlas .hwat-bin-protocol-hex {display:flex;flex-wrap:wrap;gap:8px;}
+#hardware-atlas .hwat-bin-protocol-hex>div {padding:13px 8px;min-width:75px;max-width:132px;flex:1;background:#091b2c;border:1px solid #315a68;border-radius:9px;text-align:center;display:grid;gap:7px;}
+#hardware-atlas .hwat-bin-protocol-hex strong {font:800 22px ui-monospace,Consolas,monospace;color:#87f2dc;}
+#hardware-atlas .hwat-bin-protocol-hex small {font:600 10px ui-monospace,Consolas,monospace;color:#accbd9;}
+#hardware-atlas .hwat-bin-protocol-hex span {font-size:10px;color:#9bb8c9;}
+#hardware-atlas .hwat-bin-footer {display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:23px 0 8px;border-top:1px solid #294b59;padding:20px 0 4px;color:#83aaba;font-size:10px;}
+#hardware-atlas .hwat-bin-footer strong {color:#b5f8e9;}
+#hardware-atlas .hwat-bin-empty {padding:19px;color:#99b8c6;font-size:13px;}
+@media(max-width:1080px){#hardware-atlas .hwat-bin-columns {grid-template-columns:minmax(0,1fr)}#hardware-atlas .hwat-bin-side,#hardware-atlas .hwat-bin-dossier{position:static;}}
+@media(max-width:680px){
+ #hardware-atlas .hwat-bin-head {padding:21px;}
+ #hardware-atlas .hwat-bin-head-code {display:none;}
+ #hardware-atlas .hwat-bin-panel {padding:15px;}
+ #hardware-atlas .hwat-bin-path {grid-template-columns:1fr;}
+ #hardware-atlas .hwat-bin-path-node {min-height:72px;}
+ #hardware-atlas .hwat-bin-index {grid-template-columns:1fr;max-height:480px;}
+ #hardware-atlas .hwat-bin-index-item {min-height:76px;}
+ #hardware-atlas .hwat-bin-numeric {grid-template-columns:repeat(2,minmax(0,1fr));}
+ #hardware-atlas .hwat-bin-bit {padding:9px 1px;gap:6px;}
+ #hardware-atlas .hwat-bin-bit small {font-size:8px;}
+ #hardware-atlas .hwat-bin-bit strong {font-size:19px;}
+ #hardware-atlas .hwat-bin-alu {flex-wrap:wrap;}
+ #hardware-atlas .hwat-bin-alu-equation {font-size:11px;}
+ #hardware-atlas .hwat-bin-protocol-diagram {gap:6px;}
+ #hardware-atlas .hwat-bin-proto-node {padding:14px 5px;font-size:10px;}
+ #hardware-atlas .hwat-bin-proto-link>span{font-size:9px;}
+ #hardware-atlas .hwat-bin-nav button {font-size:11px;padding:9px 10px;}
+}
+@media(prefers-reduced-motion:reduce){#hardware-atlas .hwat-bin-proto-track i {animation:none;}#hardware-atlas .hwat-bin-path-node {transition:none;}}
+
+/* v3.1 HTML source-byte bridge: scoped to the existing hardware atlas */
+#hardware-atlas .hwat-bin-markup-label {display:grid;gap:8px;margin:16px 0;color:#87ded1;font-weight:750;font-size:12px;}
+#hardware-atlas .hwat-bin-markup-label textarea {box-sizing:border-box;width:100%;min-height:115px;resize:vertical;background:#071724;color:#e6f5fa;padding:13px 14px;border:1px solid #376679;border-radius:9px;font:600 14px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;}
+#hardware-atlas .hwat-bin-markup-label textarea:focus-visible {outline:2px solid #77f5df;outline-offset:2px;}
+#hardware-atlas .hwat-bin-html-stats {margin:0 0 24px;font:700 12px/1.7 ui-monospace,Consolas,monospace;color:#89b4d7;}
+#hardware-atlas .hwat-bin-html-sequence {display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px;max-height:390px;overflow:auto;}
+#hardware-atlas .hwat-bin-html-byte {display:grid;align-content:center;gap:3px;background:#071b29;border:1px solid #2b4d61;border-radius:8px;padding:9px 5px;text-align:center;min-width:0;}
+#hardware-atlas .hwat-bin-html-byte small {font:700 10px ui-monospace,monospace;color:#8db7d2;}
+#hardware-atlas .hwat-bin-html-byte strong {font:800 21px ui-monospace,monospace;color:#8cfce4;}
+#hardware-atlas .hwat-bin-html-byte code {font:600 12px ui-monospace,monospace;color:#c1d2ea;}
+#hardware-atlas .hwat-bin-html-explainer {border-left:2px solid #407e8b;padding:8px 14px;margin:0 0 13px;background:#122b3a;}
+#hardware-atlas .hwat-bin-html-explainer strong {font-size:14px;color:#f6feff;}
+#hardware-atlas .hwat-bin-html-explainer p {margin:5px 0 0;font-size:12px;line-height:1.75;color:#b6cbdd;}
+#hardware-atlas .hwat-bin-html-explainer code {font-size:11px;color:#7de5cf;overflow-wrap:anywhere;}

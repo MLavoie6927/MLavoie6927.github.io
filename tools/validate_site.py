@@ -230,44 +230,121 @@ def validate_git_mb(errors: list[str]) -> None:
     html = (base / "index.html").read_text(encoding="utf-8")
     page_css = (base / "page.css").read_text(encoding="utf-8")
     page_script = (base / "page.js").read_text(encoding="utf-8")
-    atlas_css_path = base / "assets" / "hardware" / "motherboard-atlas.css"
-    atlas_script_path = base / "assets" / "hardware" / "motherboard-atlas.js"
-    atlas_css = atlas_css_path.read_text(encoding="utf-8")
-    atlas_script = atlas_script_path.read_text(encoding="utf-8")
+    hardware = base / "assets" / "hardware"
+    asset_paths = {
+        "atlas_css": hardware / "motherboard-atlas.css",
+        "atlas_js": hardware / "motherboard-atlas.js",
+        "binary_css": hardware / "motherboard-binary.css",
+        "binary_js": hardware / "motherboard-binary.js",
+        "advanced_css": hardware / "motherboard-advanced.css",
+        "advanced_js": hardware / "motherboard-advanced.js",
+    }
+    assets = {name: path.read_text(encoding="utf-8") for name, path in asset_paths.items()}
 
     for marker in (
         "GIT &amp; MB",
         "Anatomy of a <span>Computer.</span>",
+        "SILICON-TO-SOFTWARE INTERACTIVE REFERENCE",
+        "V4.0 · MARC LAVOIE",
         "25</strong> board components",
         "14</strong> chip regions",
         "12</strong> materials",
         "10</strong> milestones",
+        "39</strong> binary profiles",
+        "Binary &amp; Chip Signals",
         "Explore the circuit board",
+        "From <em>0 &amp; 1</em> to an operating computer",
+        "Turn markup characters into real UTF-8 bytes",
+        "A single action crosses multiple layers of hardware",
+        "Assemble instructions, step the processor, inspect registers and RAM",
+        "How a logical byte turns into sampled signal edges",
+        "Decode actual x86 and RISC-V instruction fields",
+        "The chip-to-browser knowledge challenge",
         "Follow the signals. Understand the system.",
-        "61 learning targets",
-        "Conceptual—not repair CAD",
+        "61 visual learning targets",
+        "39 component profiles",
+        "6 end-to-end workflows",
+        "11 interactive laboratories",
+        "15 questions · 35 terms",
+        "Evidence boundary",
+        "Architecture &amp; data flow",
+        "EDU-8 instruction set",
+        "The complete visual record, connected to one live model.",
         "38893704296065a3f65f1c60b69b4b96c0f72d5eb2e018c16d10c909b04635d1",
+        "a1f8a4b1b9f988eb1779b2feb6dd76a3e113a466cce872483972fb7207310d63",
         'id="hardware-atlas"',
         'id="atlas-menu-toggle"',
+        'id="engineering-evidence"',
         'data-hwat-view="board"',
         'data-hwat-view="chip"',
         'data-hwat-view="materials"',
         'data-hwat-view="history"',
+        "data-hwat-binary-tab",
+        'data-bin-content="html"',
+        'data-bin-content="path"',
+        'data-bin-content="catalog"',
+        'data-bin-content="bits"',
+        'data-bin-content="instructions"',
+        'data-bin-content="protocols"',
+        'data-bin-content="scenarios"',
+        'data-bin-content="cpu"',
+        'data-bin-content="scope"',
+        'data-bin-content="isa"',
+        'data-bin-content="academy"',
         'data-hwat-trace="power"',
         'data-hwat-trace="data"',
         'data-hwat-tour',
+        'data-v4-scenario-select',
+        'data-v4-cpu-source',
+        'data-v4-scope-chart',
+        'data-v4-isa-mode="x86"',
+        'data-v4-quiz-question',
+        'data-v4-glossary',
         'href="../index.html"',
         'href="../general-it/"',
         'href="../full-portfolio.html"',
+        'href="reference/ARCHITECTURE-AND-DATA-FLOW.md"',
+        'href="reference/EDU8-INSTRUCTION-SET.md"',
+        'href="reference/CHIP-PROFILES.md"',
+        'href="reference/chip-to-binary-map.csv"',
+        'href="reference/chip-to-binary-map.json"',
+        'href="reference/QA-AND-SECURITY.md"',
+        'href="reference/SITE-INTEGRATION-NOTES.md"',
+        'href="reference/v2-SHA256SUMS.txt"',
+        'href="reference/SHA256SUMS.txt"',
+        'src="assets/previews/v4-board-1280.png"',
+        'src="assets/previews/v4-academy-1280.png"',
+        'src="assets/previews/03-materials-lab.png"',
+        'src="assets/previews/07-mobile-full-page.png"',
+        'href="assets/previews/v4-board-390.png"',
+        'href="assets/previews/v4-academy-390.png"',
     ):
         if marker not in html:
             errors.append(f"GIT & MB atlas: missing page marker {marker}")
+
+    ordered_styles = (
+        "motherboard-atlas.css?v=4.0.0",
+        "motherboard-binary.css?v=4.0.0",
+        "motherboard-advanced.css?v=4.0.0",
+    )
+    ordered_scripts = (
+        "motherboard-atlas.js?v=4.0.0",
+        "motherboard-binary.js?v=4.0.0",
+        "motherboard-advanced.js?v=4.0.1",
+    )
+    if list(map(html.index, ordered_styles)) != sorted(map(html.index, ordered_styles)):
+        errors.append("GIT & MB atlas: stylesheet extension order is incorrect")
+    if list(map(html.index, ordered_scripts)) != sorted(map(html.index, ordered_scripts)):
+        errors.append("GIT & MB atlas: script extension order is incorrect")
 
     for marker in (
         ".atlas-site-header",
         ".atlas-menu.is-open",
         ".atlas-context",
         ".atlas-provenance-grid",
+        ".atlas-reference-library",
+        ".atlas-proof-grid",
+        ".atlas-boundary",
         "@media (max-width: 700px)",
         "prefers-reduced-motion",
     ):
@@ -276,7 +353,7 @@ def validate_git_mb(errors: list[str]) -> None:
 
     for marker in (
         "window.HardwareAtlas",
-        "version:'2.0.0'",
+        "version:'3.0.0'",
         "board:board.length",
         "chip:chip.length",
         "materials:materials.length",
@@ -290,8 +367,40 @@ def validate_git_mb(errors: list[str]) -> None:
         "pointerdown",
         "keydown",
     ):
-        if marker not in atlas_script:
+        if marker not in assets["atlas_js"]:
             errors.append(f"GIT & MB atlas: missing interactive module marker {marker}")
+
+    for marker in (
+        "window.HardwareBinaryAtlas",
+        "profileCount:profiles.length",
+        "protocolCount:protocols.length",
+        "data-hwat-open-binary",
+        "data-bin-html-source",
+        "data-bin-path-step",
+        "data-bin-profile",
+        "data-bin-bit",
+        "data-bin-protocol",
+        "UTF-8",
+        "MOV EAX, 42",
+    ):
+        if marker not in assets["binary_js"]:
+            errors.append(f"GIT & MB atlas: missing binary module marker {marker}")
+
+    for marker in (
+        "window.HardwareAdvancedAtlas",
+        "scenarioCount:Object.keys(scenarios).length",
+        "quizCount:questions.length",
+        "glossaryCount:glossary.length",
+        "class TinyCPU",
+        "data-v4-scenario-next",
+        "data-v4-cpu-step",
+        "data-v4-scope-preset",
+        "data-v4-isa-mode",
+        "data-v4-answer",
+        "RV32I",
+    ):
+        if marker not in assets["advanced_js"]:
+            errors.append(f"GIT & MB atlas: missing advanced module marker {marker}")
 
     for marker in (
         "#hardware-atlas",
@@ -302,19 +411,55 @@ def validate_git_mb(errors: list[str]) -> None:
         ".hwat-timeline",
         "prefers-reduced-motion",
     ):
-        if marker not in atlas_css:
+        if marker not in assets["atlas_css"]:
             errors.append(f"GIT & MB atlas: missing module style marker {marker}")
 
+    for marker in (
+        ".hwat-bin-head",
+        ".hwat-bin-nav",
+        ".hwat-bin-columns",
+        ".hwat-bin-waveform",
+        ".hwat-bin-pipeline",
+    ):
+        if marker not in assets["binary_css"]:
+            errors.append(f"GIT & MB atlas: missing binary module style {marker}")
+
+    for marker in (
+        ".hwat-v4-pane",
+        ".hwat-v4-trace-map",
+        ".hwat-v4-memory",
+        ".hwat-v4-scope-svg",
+        ".hwat-v4-isa-bitfields",
+        ".hwat-v4-glossary",
+    ):
+        if marker not in assets["advanced_css"]:
+            errors.append(f"GIT & MB atlas: missing advanced module style {marker}")
+
     expected_hashes = {
-        atlas_css_path: "a4e90c482fa6ab990ab7e4ce8607af141fa73dbb3d096a6af5002b8fd114cf8c",
-        atlas_script_path: "0187053c12135421175df4ff66d7d30c6e5e8c8fbc533b8ddf573204c1306321",
+        asset_paths["atlas_css"]: "a4e90c482fa6ab990ab7e4ce8607af141fa73dbb3d096a6af5002b8fd114cf8c",
+        asset_paths["atlas_js"]: "97ffe220a3d106b0a0bb569e4f9404aee46ea0280a72b971f740f68fe1b8581d",
+        asset_paths["binary_css"]: "a6ec0fb517ca7ce9a457b16067540a3def6deb80cbbdc9282e88e3e4e5a05a21",
+        asset_paths["binary_js"]: "598a5e043ce6ada4975031bafac9d2be8bdc95f7758ab0665a23249b8d9b17fe",
+        asset_paths["advanced_css"]: "2896c4baf7aa6e2b7c3caa3dd0d3b2fcc6a58f689d5692e78c54381ba42a6a90",
+        asset_paths["advanced_js"]: "bc24b88cbce7c3cd1719470d04c562a172b016fa2f2c83560cc692be72330c5d",
+        base / "reference" / "ARCHITECTURE-AND-DATA-FLOW.md": "d6f696c551e5f778bb2ce321d8e080ab6387346eaa9f0ac7424928012099a575",
+        base / "reference" / "EDU8-INSTRUCTION-SET.md": "98fbb8adc146b3b4c76f1c31703ba958289f614fc123098d94e8e5b7a407e81b",
+        base / "reference" / "CHIP-PROFILES.md": "15452787251f140aa3ee22d153969d765413ca2ed7ae82756dcd1c9767c9790c",
+        base / "reference" / "chip-to-binary-map.csv": "be90da357c1d85de6a24a2ebed78f0f858bdfbb819908d512ec9f01494a7e323",
+        base / "reference" / "chip-to-binary-map.json": "f335747e1ada17cc98a91b40156812aa06119a9183f091dd8049044d0b315592",
+        base / "reference" / "QA-AND-SECURITY.md": "aeea78f53b32777a2f3f680f9ecb5306f1a154ec8c8ea962ce9fbd44f2be5bec",
+        base / "reference" / "SOURCE-REFERENCE-NOTES.md": "b6eb91c49432cf371bcaa2f3f0dc05bb3d01afc96d4ba160945b0510923c1400",
+        base / "reference" / "PACKAGE-MANIFEST.json": "973dc28191b637c6ff5256c607fc684b4d94d68c67b373855fe42f4bf8cd0dd6",
+        base / "reference" / "v2-README-CODEX.md": "a7dcb4c4414c8fa397aca0ec37049b120ce52e592990ba62ea9e278eb5f5b284",
+        base / "reference" / "v2-CHANGELOG.md": "48d355e282aaee341646f259d22ae6d9e317b01be9f26b6e3cea08771267a530",
+        base / "reference" / "v2-SHA256SUMS.txt": "8c2ac1f33ef0d23c4a023039fa555e8837959059215eaeb196f3653f7a80ca46",
     }
     for path, expected in expected_hashes.items():
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         if actual != expected:
             errors.append(f"GIT & MB atlas: imported asset hash changed for {path.name}")
 
-    scripts = atlas_script + "\n" + page_script
+    scripts = "\n".join((assets["atlas_js"], assets["binary_js"], assets["advanced_js"], page_script))
     without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", scripts, flags=re.S)
     for label, pattern in {
         "fetch calls": r"(?<![\w])fetch\s*\(",
@@ -1500,7 +1645,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
-    print("PASS: GIT & MB atlas has a dedicated landing tab, 61 learning targets, illustrated interactions, source integrity, and a static-browser boundary")
+    print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
     print("PASS: History research atlas has 201 generations, 17 deep studies, 159 influence dossiers, 530-page PDF integrity, reader, and static-browser boundary")

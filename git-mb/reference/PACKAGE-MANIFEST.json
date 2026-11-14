@@ -1,0 +1,29 @@
+{
+  "name": "Motherboard & Chips \u2014 Full Stack Silicon Lab",
+  "version": "4.0.0",
+  "owner": "Marc Lavoie",
+  "release_date": "2026-11-13",
+  "production_assets": [
+    "motherboard-atlas-tab.html",
+    "motherboard-atlas.css",
+    "motherboard-atlas.js",
+    "motherboard-binary.css",
+    "motherboard-binary.js",
+    "motherboard-advanced.css",
+    "motherboard-advanced.js"
+  ],
+  "entry_preview": "preview.html",
+  "codex_handoff": "CODEX-INTEGRATION-PROMPT.txt",
+  "binary_component_profiles": 39,
+  "motherboard_regions": 25,
+  "chip_regions": 14,
+  "materials": 12,
+  "history_milestones": 10,
+  "binary_labs": 11,
+  "system_scenarios": 6,
+  "assessment_questions": 15,
+  "offline_runtime": true,
+  "external_javascript_dependencies": 0,
+  "hardware_warning": "Illustrative educational models, not electrical/physical reference schematics.",
+  "deployment_state": "Uncommitted standalone Codex handoff; not yet integrated with host website"
+}
