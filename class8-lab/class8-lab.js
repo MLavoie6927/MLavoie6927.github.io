@@ -18,9 +18,11 @@
   const flashReveal=byId('flash-reveal');
   const flashNext=byId('flash-next');
   const storageKey='atlas-class8-cdl-reviewed-v1';
+  const deepLinkTargets=new Set(['#cdl-academy','#cdl-study','#gallery']);
   let activeCategory='all';
   let flashItem=null;
   let reviewed=new Set();
+  let deepLinkRestores=0;
 
   try{
     const stored=JSON.parse(localStorage.getItem(storageKey)||'[]');
@@ -225,6 +227,23 @@
     navToggle.setAttribute('aria-expanded','false');
     navToggle.setAttribute('aria-label','Open Class 8 navigation');
   }));
+
+  function restoreDeepLinkAfterStudioResize(){
+    if(!deepLinkTargets.has(location.hash)||deepLinkRestores>=4)return;
+    const target=document.querySelector(location.hash);
+    if(!target)return;
+    deepLinkRestores++;
+    requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));
+  }
+
+  window.addEventListener('hashchange',()=>{deepLinkRestores=0;});
+  window.addEventListener('message',event=>{
+    if(event.origin!==window.location.origin)return;
+    if(!event.data||event.data.source!=='ATLAS_CLASS8_FRAME'||event.data.type!=='resize')return;
+    const studioFrame=document.querySelector('[data-atlas-class8] iframe');
+    if(!studioFrame||event.source!==studioFrame.contentWindow)return;
+    restoreDeepLinkAfterStudioResize();
+  });
 
   saveReviewed();
   renderQuestions();

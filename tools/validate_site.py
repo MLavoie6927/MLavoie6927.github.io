@@ -231,6 +231,7 @@ def validate_general_it(errors: list[str]) -> None:
 def validate_class8_lab(errors: list[str]) -> None:
     shell = ROOT / "class8-lab"
     source = ROOT / "atlas-class8"
+    academy = ROOT / "atlas-cdl"
     html = (shell / "index.html").read_text(encoding="utf-8")
     css = (shell / "class8-lab.css").read_text(encoding="utf-8")
     script = (shell / "class8-lab.js").read_text(encoding="utf-8")
@@ -251,6 +252,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         "Class 8 Engineering &amp; CDL Lab",
         'id="class8-menu-toggle"',
         'id="studio"',
+        'id="cdl-academy"',
         'id="cdl-study"',
         'id="permit-study-path"',
         'id="cdl-results"',
@@ -259,9 +261,14 @@ def validate_class8_lab(errors: list[str]) -> None:
         'data-atlas-class8',
         'data-atlas-src="../atlas-class8/index.html?embed=1#explorer"',
         'src="../atlas-class8/integration/atlas-embed.js?v=3.0.0"',
+        'data-atlas-cdl-embed',
+        'src="../atlas-cdl/index.html#dashboard"',
+        'src="../atlas-cdl/integration/atlas-cdl-embed.js?v=1.0.0"',
         'href="../full-portfolio.html#class8-engineering"',
         "A1C5004457656C7028584B833BA3F8E2A22E28287716F0C26EB02F5B3FE478F0",
         "2026 CDL Learner's Permit Center",
+        "Build from the permit foundation to full CDL exam practice.",
+        "300 original questions across ten knowledge areas",
         "Know exactly what this permit guide covers.",
         "Additional endorsements",
         "Confirm class and endorsements",
@@ -273,6 +280,9 @@ def validate_class8_lab(errors: list[str]) -> None:
     for marker in (
         ".class8-menu-toggle",
         ".studio-frame-shell",
+        ".cdl-academy-section",
+        ".study-track-comparison",
+        ".academy-frame-shell",
         ".cdl-question-card",
         ".permit-scope-heading",
         ".permit-study-path",
@@ -293,6 +303,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         "renderMiniExam",
         "grade-mini-exam",
         "class8-menu-toggle",
+        "restoreDeepLinkAfterStudioResize",
     ):
         if marker not in script:
             errors.append(f"Class 8 lab: missing interaction marker {marker}")
@@ -379,13 +390,162 @@ def validate_class8_lab(errors: list[str]) -> None:
         if re.search(pattern, package_without_comments):
             errors.append(f"Class 8 source package: forbidden {label}")
 
+    required_academy_files = (
+        "index.html",
+        "app/styles.css",
+        "app/app.js",
+        "data/questions-source.txt",
+        "data/questions.json",
+        "data/questions.js",
+        "integration/atlas-cdl-embed.js",
+        "docs/SOURCES.md",
+        "docs/CONTENT_REVIEW.md",
+        "tests/validate_bank.py",
+        "README.md",
+        "CODEX_HANDOFF.md",
+        "SHA256SUMS.txt",
+        "preview-desktop.png",
+        "preview-mobile.png",
+    )
+    for relative in required_academy_files:
+        if not (academy / relative).exists():
+            errors.append(f"CDL Exam Academy: missing {relative}")
+
+    academy_manifest = academy / "SHA256SUMS.txt"
+    if academy_manifest.exists():
+        academy_manifest_entries: list[tuple[str, str]] = []
+        for line in academy_manifest.read_text(encoding="utf-8").splitlines():
+            match = re.fullmatch(r"([0-9a-f]{64})  (.+)", line.strip())
+            if match:
+                academy_manifest_entries.append((match.group(1), match.group(2)))
+        if len(academy_manifest_entries) != 22:
+            errors.append(
+                f"CDL Exam Academy: expected 22 checksum entries, found {len(academy_manifest_entries)}"
+            )
+        for expected, relative in academy_manifest_entries:
+            path = academy / relative
+            if not path.is_file():
+                errors.append(f"CDL Exam Academy: manifest target missing {relative}")
+                continue
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+            if actual != expected:
+                errors.append(f"CDL Exam Academy: checksum mismatch for {relative}")
+
+    academy_json = academy / "data" / "questions.json"
+    if academy_json.exists():
+        bank = json.loads(academy_json.read_text(encoding="utf-8"))
+        questions = bank.get("questions", [])
+        if len(questions) != 300:
+            errors.append(f"CDL Exam Academy: expected 300 questions, found {len(questions)}")
+        expected_sections = {
+            "General": 77,
+            "Cargo": 25,
+            "Air": 49,
+            "Combination": 38,
+            "Doubles": 15,
+            "Tank": 15,
+            "Hazmat": 25,
+            "Passenger": 18,
+            "School": 18,
+            "Inspection": 20,
+        }
+        actual_sections = {
+            section: sum(1 for question in questions if question.get("section") == section)
+            for section in expected_sections
+        }
+        if actual_sections != expected_sections:
+            errors.append(f"CDL Exam Academy: category counts differ: {actual_sections}")
+        ids = [question.get("id") for question in questions]
+        stems = [str(question.get("question", "")).casefold() for question in questions]
+        if len(set(ids)) != len(ids):
+            errors.append("CDL Exam Academy: duplicate question IDs")
+        if len(set(stems)) != len(stems):
+            errors.append("CDL Exam Academy: duplicate question stems")
+        for index, question in enumerate(questions, start=1):
+            options = question.get("options", [])
+            answer = question.get("answer")
+            if len(options) != 4 or len(set(options)) != 4:
+                errors.append(f"CDL Exam Academy: question {index} needs four unique options")
+            if not isinstance(answer, int) or answer not in range(4):
+                errors.append(f"CDL Exam Academy: question {index} has an invalid answer index")
+            if question.get("original") is not True:
+                errors.append(f"CDL Exam Academy: question {index} lacks original-content marker")
+            if question.get("reviewStatus") != "author_review_required":
+                errors.append(f"CDL Exam Academy: question {index} overstates review status")
+            for field in ("topic", "question", "explanation", "sourceId"):
+                if not str(question.get(field, "")).strip():
+                    errors.append(f"CDL Exam Academy: question {index} missing {field}")
+
+    academy_scripts = []
+    for relative in (
+        "data/questions.js",
+        "app/app.js",
+        "integration/atlas-cdl-embed.js",
+    ):
+        path = academy / relative
+        if path.exists():
+            academy_scripts.append(path.read_text(encoding="utf-8"))
+    academy_without_comments = re.sub(
+        r"/\*.*?\*/|//[^\n]*", "", "\n".join(academy_scripts), flags=re.S
+    )
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, academy_without_comments):
+            errors.append(f"CDL Exam Academy: forbidden {label}")
+
+    academy_html = academy / "index.html"
+    academy_css = academy / "app" / "styles.css"
+    academy_js = academy / "app" / "app.js"
+    for path, markers in (
+        (
+            academy_html,
+            (
+                "ATLAS — CDL Exam Academy",
+                'id="start-class-a"',
+                'id="study-questions"',
+                'id="exam-presets"',
+                'id="flash-stage"',
+                'id="inspection-grid"',
+                'id="sources-content"',
+            ),
+        ),
+        (
+            academy_css,
+            (".app-shell", ".track-grid", ".exam-options", "@media(max-width:550px)"),
+        ),
+        (
+            academy_js,
+            (
+                "atlas-cdl-academy-progress-v1",
+                "function beginExam()",
+                "function gradeExam()",
+                "function renderFlash()",
+                "function renderInspection()",
+            ),
+        ),
+    ):
+        if path.exists():
+            value = path.read_text(encoding="utf-8")
+            for marker in markers:
+                if marker not in value:
+                    errors.append(
+                        f"CDL Exam Academy: {path.relative_to(ROOT).as_posix()} missing marker {marker}"
+                    )
+
     full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
     for marker in (
         'id="class8-engineering"',
         'href="#class8-engineering">Class 8 Lab</a>',
         'href="class8-lab/">Class 8 Lab</a>',
         'href="class8-lab/">Open the Class 8 Engineering &amp; CDL Lab</a>',
-        'href="class8-lab/#cdl-study">Open the 2026 CDL Learner\'s Permit Center</a>',
+        'href="class8-lab/#cdl-study">Open the learner\'s-permit foundation</a>',
+        'href="class8-lab/#cdl-academy">Open the embedded CDL Exam Academy</a>',
+        'href="atlas-cdl/">Launch the full-screen CDL Exam Academy</a>',
         'href="atlas-class8/">Launch the full-screen engineering studio</a>',
     ):
         if marker not in full_portfolio:
@@ -395,6 +555,7 @@ def validate_class8_lab(errors: list[str]) -> None:
     for url in (
         "https://mlavoie6927.github.io/class8-lab/",
         "https://mlavoie6927.github.io/atlas-class8/",
+        "https://mlavoie6927.github.io/atlas-cdl/",
     ):
         if url not in sitemap:
             errors.append(f"sitemap.xml: missing {url}")
@@ -1821,7 +1982,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
-    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, a complete 2026 CDL learner's permit center with 70 study prompts, a 5-question checkpoint, responsive portfolio shell, and static-browser boundary")
+    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, a 70-question learner's-permit foundation, a checksum-preserved 300-question CDL Exam Academy, responsive portfolio shell, and static-browser boundary")
     print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")

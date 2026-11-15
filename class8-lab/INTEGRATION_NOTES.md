@@ -13,9 +13,14 @@ full-portfolio.html
               -> atlas-class8/index.html?embed=1
          -> cdl-study-data.js (70 supplied practice prompts)
          -> class8-lab.js (search, filters, progress, flash drill, mini exam)
+         -> same-origin iframe via atlas-cdl/integration/atlas-cdl-embed.js
+              -> atlas-cdl/index.html (300-question CDL Exam Academy)
 
 atlas-class8/
     -> checksum-preserved v3.0 source package
+
+atlas-cdl/
+    -> checksum-preserved CDL Exam Academy v1.0 source package
 ```
 
 The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams isolated from the existing portfolio. The host adapter accepts height messages only from the iframe window that it created and rejects invalid bounds.
@@ -33,6 +38,7 @@ The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams iso
 ## Added or modified files
 
 - Added the complete supplied `atlas-class8/` directory without modifying its 31 manifest-covered files.
+- Added the complete supplied `atlas-cdl/` directory without modifying its 22 manifest-covered files.
 - Added `class8-lab/index.html` as the recruiter-facing project shell.
 - Added `class8-lab/class8-lab.css` for the responsive industrial presentation.
 - Added `class8-lab/cdl-study-data.js` with 70 original practice prompts and a five-question checkpoint.
@@ -41,6 +47,18 @@ The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams iso
 - Added the Class 8 entry, quick link, and project overview to `full-portfolio.html`.
 - Added `/class8-lab/` and `/atlas-class8/` to `sitemap.xml`.
 - Extended `tools/validate_site.py` and `.github/workflows/portfolio-ci.yml` with Class 8 gates.
+
+## 2026 CDL Exam Academy integration
+
+- Supplied archive: `CDL_Exam_Academy_Codex.zip`.
+- Archive SHA-256: `A883EFBE557CE8600C2612D0F0DA79F0F69FFB91CCE541A45FE1D48B2961E9BD`.
+- Archive inventory: 23 files under one relative `atlas-cdl/` directory, including `SHA256SUMS.txt`.
+- Internal manifest: all 22 listed file hashes matched before integration and remain covered by repository validation.
+- Path traversal was rejected before extraction; all paths resolved within the unique staging directory.
+- `CODEX_HANDOFF.md`, `PROMPT_FOR_CODEX.txt`, and other package notes were treated as supplied documentation, not as authority over the user's request or repository architecture.
+- The academy preserves its isolated iframe, private browser-local progress, and dependency-free browser runtime. It does not import `window.ATLAS_CDL_BANK` into the portfolio shell.
+- The existing 70-question learner's-permit module remains the focused foundation. The 300-question academy is a second study track covering General Knowledge (77), Cargo (25), Air Brakes (49), Combination Vehicles (38), Doubles/Triples (15), Tank (15), Hazmat (25), Passenger (18), School Bus (18), and Vehicle Inspection Skills (20).
+- Class A 95-item and Class B 75-item sessions are identified as configurable training formats, not guaranteed state examination lengths.
 
 ## 2026 CDL learner's permit source update
 
@@ -56,7 +74,7 @@ The application preserves all 15 supplied destinations:
 
 `explorer`, `systems`, `air`, `weight`, `diagnostics`, `inspection`, `fluids`, `maintenance`, `repairs`, `knowledge`, `xray`, `drivetrain`, `tires`, `loadplan`, and `references`.
 
-The portfolio shell adds evidence, the embedded studio, CDL study, gallery, provenance, Home, and Full Portfolio navigation.
+The portfolio shell adds evidence, the embedded engineering studio, the full CDL Academy, the permit foundation, gallery, provenance, Home, and Full Portfolio navigation.
 
 ## Testing procedure
 
@@ -65,8 +83,12 @@ Run from the repository root:
 ```text
 node --check class8-lab/cdl-study-data.js
 node --check class8-lab/class8-lab.js
+node --check atlas-cdl/data/questions.js
+node --check atlas-cdl/app/app.js
+node --check atlas-cdl/integration/atlas-cdl-embed.js
 node atlas-class8/tests/validate_data.js
 node atlas-class8/tests/test_math.js
+python atlas-cdl/tests/validate_bank.py
 python tools/validate_site.py
 ```
 
@@ -83,7 +105,7 @@ Then serve the repository root through a static HTTP server and test both `/clas
 
 ## Deployment
 
-The site is buildless and GitHub Pages compatible. Publishing the repository root to `main` serves the wrapper at `/class8-lab/` and the standalone studio at `/atlas-class8/`. Deployment is not established by a commit alone; verify Pages completion, HTTP 200 responses, asset delivery, and at least one live interaction.
+The site is buildless and GitHub Pages compatible. Publishing the repository root to `main` serves the wrapper at `/class8-lab/`, the standalone engineering studio at `/atlas-class8/`, and the standalone CDL Academy at `/atlas-cdl/`. Deployment is not established by a commit alone; verify Pages completion, HTTP 200 responses, asset delivery, and representative live interactions in both study tracks.
 
 ## Known limitations
 
@@ -91,6 +113,7 @@ The site is buildless and GitHub Pages compatible. Publishing the repository roo
 - The app does not identify a VIN-specific configuration, OEM maintenance procedure, legal route, tire load chart, or state-specific inspection sequence.
 - Prices, labor hours, capacities, and intervals require current vehicle-specific validation.
 - CDL prompts are original practice material, not official or leaked examination items. The current state CDL manual controls test preparation.
+- The 300 academy questions are structurally validated but retain `author_review_required`; they have not been examiner-certified question by question.
 - Browser-local progress is device- and profile-specific and is not synchronized to an account.
 - CSV export depends on the browser's normal download permission.
 

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07182b">
+  <meta name="description" content="ATLAS CDL Exam Academy: independent practice questions, explanations, Class A mock exam, endorsements and inspection study.">
+  <title>ATLAS — CDL Exam Academy | Marc Lavoie</title>
+  <link rel="stylesheet" href="app/styles.css">
+  <script src="data/questions.js" defer></script>
+  <script src="app/app.js" defer></script>
+</head>
+<body>
+<div class="app-shell" id="cdl-root">
+  <header class="topbar">
+    <a class="brand" href="#dashboard" aria-label="ATLAS CDL academy dashboard">
+      <span class="brand-mark"><svg viewBox="0 0 42 42" width="34" height="34" aria-hidden="true"><path d="M6 31 20 6h4l14 25-11-5H17z" fill="none" stroke="#60e7d3" stroke-width="3" stroke-linejoin="round"/><path d="m18 28 4-9 4 9" fill="none" stroke="#fff" stroke-width="2.5"/></svg></span>
+      <span><b>ATLAS</b><small>CDL EXAM ACADEMY</small></span>
+    </a>
+    <div class="header-mid"><span class="live-dot"></span> ORIGINAL CDL TRAINING SYSTEM <span class="header-version">V1.0</span></div>
+    <div class="header-right"><label for="state" class="sr-only">State study manual</label><select id="state" aria-label="State study manual"><option value="Arkansas">Arkansas</option><option value="Tennessee">Tennessee</option><option value="Federal">Federal baseline</option></select><a class="home-link" href="#sources">Sources <span aria-hidden="true">↗</span></a></div>
+  </header>
+
+  <div class="content-frame">
+    <aside class="sidebar" aria-label="Academy navigation">
+      <div class="sidebar-section">ACADEMY</div>
+      <nav id="main-nav">
+        <button class="nav-link active" data-route="dashboard" type="button"><span aria-hidden="true">◈</span> Overview</button>
+        <button class="nav-link" data-route="study" type="button"><span aria-hidden="true">▧</span> Question library <span class="nav-pill" id="library-count">300</span></button>
+        <button class="nav-link" data-route="exam" type="button"><span aria-hidden="true">◷</span> Mock examinations</button>
+        <button class="nav-link" data-route="flashcards" type="button"><span aria-hidden="true">▢</span> Flashcards</button>
+        <button class="nav-link" data-route="review" type="button"><span aria-hidden="true">◎</span> Missed & bookmarked</button>
+      </nav>
+      <div class="sidebar-section">TECHNICAL REFERENCE</div>
+      <nav>
+        <button class="nav-link" data-route="guide" type="button"><span aria-hidden="true">☷</span> CDL study guide</button>
+        <button class="nav-link" data-route="inspection" type="button"><span aria-hidden="true">⊞</span> Vehicle inspection</button>
+        <button class="nav-link" data-route="sources" type="button"><span aria-hidden="true">↗</span> Official sources</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="progress-arc" id="sidebar-progress">0%</div><b>Your study progress</b><p id="progress-caption">Start a session to build confidence.</p></div>
+    </aside>
+
+    <main class="main-view" id="main" tabindex="-1">
+      <section id="page-dashboard" class="page active" aria-labelledby="dashboard-title">
+        <div class="eyebrow">PROFESSIONAL DRIVER TRAINING / CDL THEORY</div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="mini-tag"><span class="live-dot"></span> INTERACTIVE LEARNING PLATFORM</p>
+            <h1 id="dashboard-title">Know your rig.<br><em>Master the road.</em></h1>
+            <p>Learn the systems. Understand the safety rules. Practice the written exams with explanations grounded in official CDL study topics.</p>
+            <div class="hero-actions"><button type="button" class="btn btn-primary" id="start-class-a">Start Class A practice <span aria-hidden="true">→</span></button><button type="button" class="btn btn-ghost" data-route="study">Explore questions</button></div>
+            <div class="hero-facts"><div><strong id="total-count">300</strong><span>Original questions</span></div><div><strong>10</strong><span>Knowledge areas</span></div><div><strong>80%</strong><span>Federal pass standard</span></div></div>
+          </div>
+          <div class="truck-stage" aria-label="Illustration of a Class 8 tractor and 53-foot semitrailer with labeled study zones">
+            <div class="stage-topline"><span>VEHICLE PROFILE: CLASS 8 / 5-AXLE</span><span>FIG. 01 / SIDE ELEVATION</span></div>
+            <svg viewBox="0 0 970 320" role="img" aria-label="Diagram of a semi-truck and dry van trailer with labeled tractor, air brakes, coupling, cargo and trailer axles" class="rig-svg">
+              <defs><linearGradient id="tractor-grad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#36a4b9"/><stop offset="1" stop-color="#0a526b"/></linearGradient><linearGradient id="van-grad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#14334d"/><stop offset="1" stop-color="#0a1f34"/></linearGradient><pattern id="lines" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M0 18 18 0" stroke="#88b2c7" stroke-opacity=".08"/></pattern></defs>
+              <g stroke="#284f66" stroke-width="1" opacity=".75"><path d="M10 280H958"/><path d="M22 284v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5m38-5v5"/></g>
+              <g class="rig-region" data-section="Cargo"><path d="M373 61h540v165H373z" fill="url(#van-grad)" stroke="#4d839c" stroke-width="2" rx="4"/><path d="M377 68h530v146H377z" fill="url(#lines)"/><path d="M389 78h502m-502 22h502m-502 22h502" stroke="#739bb0" stroke-opacity=".14"/><path d="M907 63V226" stroke="#78aabe" stroke-opacity=".65" stroke-width="4"/><path d="M379 227h545v14H379z" fill="#304b60"/><path d="M389 227h71" stroke="#65e3d4" stroke-width="3"/><text x="616" y="138" text-anchor="middle" fill="#82b3c8" font-size="23" font-weight="800" letter-spacing="3">ATLAS 53' DRY VAN</text><text x="616" y="158" text-anchor="middle" fill="#4f7f98" font-size="11" letter-spacing="2">TRAILER ENGINEERING / CARGO / SECUREMENT</text></g>
+              <g class="rig-region" data-section="General"><path d="M66 116h72l25-68h101l26 21 21 100v70H68z" fill="url(#tractor-grad)" stroke="#5dcbd0" stroke-width="3"/><path d="M175 57h74l19 15 15 64h-125z" fill="#0b2036" stroke="#9acbd6" stroke-width="2"/><path d="M199 70v51" stroke="#426d84" stroke-width="2"/><path d="M93 131h52v14H93z" fill="#062d43"/><path d="M69 166h51" stroke="#bdebef" stroke-width="3"/><path d="M65 188h68" stroke="#a1e7eb" stroke-width="2"/><path d="M62 207h41v22H62z" fill="#12364a"/><path d="M272 154h27v33h-27z" fill="#063247"/><path d="M48 212h15v29H48z" fill="#acbaca"/><path d="M151 149h25v6h-25z" fill="#16384b"/><path d="M145 100h14" stroke="#79d9db" stroke-width="3"/></g>
+              <g class="rig-region" data-section="Combination"><path d="M289 187h95v22h-95z" fill="#293e50" stroke="#6a8c9d" stroke-width="1.5"/><path d="M308 183h57l11 10-10 6h-50z" fill="#68d8cc"/><path d="M303 212h88v15h-88z" fill="#364a54"/><path d="M337 193v-35" stroke="#68d8cc" stroke-width="3" stroke-dasharray="4 4"/></g>
+              <g class="rig-region" data-section="Air"><path d="M190 226H355v18H190z" fill="#405a68"/><path d="M213 213h36v15h-36z" rx="5" fill="#5b7987"/><path d="M269 213h36v15h-36z" rx="5" fill="#5b7987"/></g>
+              <g class="rig-region" data-section="Inspection"><path d="M803 223h88v13h-88z" fill="#3c6573"/><path d="M804 239h92v8h-92z" fill="#2d4255"/></g>
+              <g fill="#071827" stroke="#afdae2" stroke-width="3"><circle cx="123" cy="240" r="33"/><circle cx="251" cy="240" r="32"/><circle cx="319" cy="240" r="32"/><circle cx="804" cy="240" r="32"/><circle cx="868" cy="240" r="32"/></g><g fill="#385b70" stroke="#72a9ba" stroke-width="2"><circle cx="123" cy="240" r="13"/><circle cx="251" cy="240" r="13"/><circle cx="319" cy="240" r="13"/><circle cx="804" cy="240" r="13"/><circle cx="868" cy="240" r="13"/></g>
+              <g fill="none" stroke="#57cfc5" stroke-width="1.5" opacity=".8"><path d="M144 112 160 95h52"/><path d="M332 183 355 165h45"/><path d="M845 215 845 185h-65"/><path d="M601 215 601 185h-70"/></g><g fill="#bfeeea" font-size="11" font-family="system-ui" letter-spacing="1"><text x="163" y="87">TRACTOR</text><text x="402" y="161">COUPLING</text><text x="717" y="181">TRAILER AXLES</text><text x="486" y="181">CARGO</text></g>
+            </svg>
+            <div class="truck-stage-footer"><span>Click a highlighted system to study it</span><span class="pulse-legend"><span></span> INTERACTIVE MODEL</span></div>
+          </div>
+        </div>
+        <div class="section-titleline"><div><p class="eyebrow">BUILD YOUR KNOWLEDGE</p><h2>Choose a training pathway</h2></div><p>Prepare for your actual vehicle class and endorsements.</p></div>
+        <div class="track-grid" id="track-grid"></div>
+        <div class="wide-info"><div><span class="info-symbol" aria-hidden="true">i</span><strong>Official exams are state administered.</strong> This independent bank contains original practice questions—not actual or leaked DMV exam items.</div><button type="button" data-route="sources">See official manuals ↗</button></div>
+      </section>
+
+      <section id="page-study" class="page" aria-labelledby="study-title"><div class="section-heading"><div><p class="eyebrow">MASTER QUESTION LIBRARY</p><h1 id="study-title">Search & study</h1><p>Browse every practice question with a visible answer, explanation and manual reference.</p></div></div><div class="filters"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search 300 questions, topics, systems..." autocomplete="off" aria-label="Search practice questions"></label><label><span class="sr-only">Section</span><select id="study-section"><option value="all">All categories</option></select></label><label><span class="sr-only">Topic</span><select id="study-topic"><option value="all">All topics</option></select></label></div><div class="result-toolbar"><span id="study-result-count">Showing all questions</span><button id="clear-filters" class="link-btn" type="button">Clear filters</button></div><div id="study-questions" class="question-stack"></div><div class="pagination"><button id="previous-page" class="btn btn-ghost" type="button">← Previous</button><span id="page-counter"></span><button id="next-page" class="btn btn-ghost" type="button">Next →</button></div></section>
+
+      <section id="page-exam" class="page" aria-labelledby="exam-title"><div class="section-heading"><div><p class="eyebrow">TEST READINESS / PERFORMANCE</p><h1 id="exam-title">Mock examinations</h1><p>Randomized original practice questions. Each written-test category is graded separately against 80%.</p></div></div><div class="exam-settings" id="exam-setup"><div class="panel-heading"><h2>Configure a practice examination</h2><p>Select a Class A pathway or focus on one knowledge area.</p></div><div id="exam-presets" class="preset-grid"></div><div class="exam-foot"><label for="exam-size">Single-category practice length <select id="exam-size"><option value="10">10 questions</option><option value="20" selected>20 questions</option><option value="25">25 questions</option><option value="50">50 questions</option></select></label><button type="button" class="btn btn-primary" id="begin-exam">Begin practice exam →</button></div></div><div id="exam-run" class="exam-run" hidden></div><div id="exam-results" hidden></div></section>
+
+      <section id="page-flashcards" class="page" aria-labelledby="flash-title"><div class="section-heading"><div><p class="eyebrow">ACTIVE RECALL</p><h1 id="flash-title">Flashcard deck</h1><p>Think through each question before revealing the explanation.</p></div></div><div class="flash-toolbar"><label for="flash-section">Choose a deck <select id="flash-section"><option value="all">Every subject</option></select></label><button id="shuffle-deck" class="btn btn-ghost" type="button">↻ Shuffle</button></div><div class="flash-stage" id="flash-stage" role="group" aria-label="Current flashcard"></div><div class="flash-actions"><button id="flash-prev" class="btn btn-ghost" type="button">← Previous</button><span id="flash-position">1 / 300</span><button id="flash-next" class="btn btn-primary" type="button">Next →</button></div></section>
+
+      <section id="page-review" class="page" aria-labelledby="review-title"><div class="section-heading"><div><p class="eyebrow">KNOWLEDGE REINFORCEMENT</p><h1 id="review-title">Your review queue</h1><p>Revisit missed questions and those you bookmarked. Your progress is stored locally in this browser.</p></div><button id="export-progress" class="btn btn-ghost" type="button">Export progress JSON</button></div><div class="review-stats" id="review-stats"></div><div class="filters"><label><span class="sr-only">Review filter</span><select id="review-filter"><option value="missed">Missed questions</option><option value="bookmarked">Bookmarked</option><option value="seen">Previously seen</option></select></label></div><div id="review-questions" class="question-stack"></div></section>
+
+      <section id="page-guide" class="page" aria-labelledby="guide-title"><div class="section-heading"><div><p class="eyebrow">HIGH-YIELD REFERENCE</p><h1 id="guide-title">What you need to know</h1><p>Fast recall reference for Class A CDL preparation, with appropriate caveats.</p></div></div><div class="guide-grid" id="guide-grid"></div></section>
+
+      <section id="page-inspection" class="page" aria-labelledby="inspection-title"><div class="section-heading"><div><p class="eyebrow">VEHICLE INSPECTION / PRACTICAL PREPARATION</p><h1 id="inspection-title">Walk-around study map</h1><p>Use this study sequence to rehearse what to inspect and why, then consult your state's modernized skills checklist.</p></div></div><div class="inspection-grid" id="inspection-grid"></div><div class="wide-info"><div><strong>Skills-test warning:</strong> Real examiners assess your demonstration in the actual vehicle. This visual checklist is a supplement, not an officially approved testing aid.</div><button data-route="sources" type="button">Check official supplement ↗</button></div></section>
+
+      <section id="page-sources" class="page" aria-labelledby="sources-title"><div class="section-heading"><div><p class="eyebrow">SOURCE TRACEABILITY</p><h1 id="sources-title">Official references</h1><p>These sources informed the content areas and key federal figures. Questions are original, independently authored and should be reviewed before public certification or classroom use.</p></div></div><div id="sources-content"></div></section>
+    </main>
+  </div>
+  <footer class="footer"><span>© 2026 Marc Lavoie · ATLAS CDL Exam Academy</span><span>Original practice questions · Educational simulator, not an official DMV product</span></footer>
+</div>
+<div aria-live="polite" aria-atomic="true" id="toast" class="toast" role="status"></div>
+</body>
+</html>

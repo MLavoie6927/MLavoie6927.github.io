@@ -20,6 +20,7 @@ on:
       - "general-it/**"
       - "class8-lab/**"
       - "atlas-class8/**"
+      - "atlas-cdl/**"
       - "geology/**"
       - "tools/check_general_it_data.cjs"
       - "tools/check_geology_data.cjs"
@@ -44,6 +45,7 @@ on:
       - "general-it/**"
       - "class8-lab/**"
       - "atlas-class8/**"
+      - "atlas-cdl/**"
       - "geology/**"
       - "tools/check_general_it_data.cjs"
       - "tools/check_geology_data.cjs"
@@ -88,6 +90,9 @@ jobs:
           node --check atlas-class8/js/v3-labs.js
           node --check atlas-class8/js/embed-frame.js
           node --check atlas-class8/integration/atlas-embed.js
+          node --check atlas-cdl/data/questions.js
+          node --check atlas-cdl/app/app.js
+          node --check atlas-cdl/integration/atlas-cdl-embed.js
           node --check geology/geology-data.js
           node --check geology/geology.js
           node --check projects/operation-glass-meridian/glass-meridian.js
@@ -98,5 +103,7 @@ jobs:
         run: |
           node atlas-class8/tests/test_math.js
           node atlas-class8/tests/validate_data.js
+      - name: Validate CDL Exam Academy question bank
+        run: python atlas-cdl/tests/validate_bank.py
       - name: Validate Geology coverage
         run: node tools/check_geology_data.cjs
