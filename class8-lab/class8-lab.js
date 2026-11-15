@@ -19,10 +19,12 @@
   const flashNext=byId('flash-next');
   const storageKey='atlas-class8-cdl-reviewed-v1';
   const deepLinkTargets=new Set(['#cdl-academy','#cdl-study','#gallery']);
+  const deepLinkRestoreWindow=15000;
   let activeCategory='all';
   let flashItem=null;
   let reviewed=new Set();
-  let deepLinkRestores=0;
+  let deepLinkRestoreDeadline=performance.now()+deepLinkRestoreWindow;
+  let deepLinkRestoreTimer=0;
 
   try{
     const stored=JSON.parse(localStorage.getItem(storageKey)||'[]');
@@ -229,14 +231,20 @@
   }));
 
   function restoreDeepLinkAfterStudioResize(){
-    if(!deepLinkTargets.has(location.hash)||deepLinkRestores>=4)return;
+    if(!deepLinkTargets.has(location.hash)||performance.now()>deepLinkRestoreDeadline)return;
     const target=document.querySelector(location.hash);
     if(!target)return;
-    deepLinkRestores++;
-    requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));
+    const position=()=>window.scrollTo({top:Math.max(0,target.offsetTop-96),behavior:'instant'});
+    requestAnimationFrame(position);
+    window.clearTimeout(deepLinkRestoreTimer);
+    deepLinkRestoreTimer=window.setTimeout(position,400);
   }
 
-  window.addEventListener('hashchange',()=>{deepLinkRestores=0;});
+  window.addEventListener('hashchange',()=>{
+    deepLinkRestoreDeadline=performance.now()+deepLinkRestoreWindow;
+    restoreDeepLinkAfterStudioResize();
+  });
+  window.addEventListener('load',restoreDeepLinkAfterStudioResize);
   window.addEventListener('message',event=>{
     if(event.origin!==window.location.origin)return;
     if(!event.data||event.data.source!=='ATLAS_CLASS8_FRAME'||event.data.type!=='resize')return;
@@ -244,6 +252,8 @@
     if(!studioFrame||event.source!==studioFrame.contentWindow)return;
     restoreDeepLinkAfterStudioResize();
   });
+
+  restoreDeepLinkAfterStudioResize();
 
   saveReviewed();
   renderQuestions();
