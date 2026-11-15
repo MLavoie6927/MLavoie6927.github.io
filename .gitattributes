@@ -3,3 +3,7 @@
 *.mp4 binary
 *.pdf binary
 *.png binary
+
+# Preserve the supplied CDL academy source export byte-for-byte so its
+# published SHA-256 manifest validates identically on Windows and Linux.
+atlas-cdl/data/questions.csv -text
