@@ -42,6 +42,14 @@ The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams iso
 - Added `/class8-lab/` and `/atlas-class8/` to `sitemap.xml`.
 - Extended `tools/validate_site.py` and `.github/workflows/portfolio-ci.yml` with Class 8 gates.
 
+## 2026 CDL learner's permit source update
+
+- Re-supplied learner's-permit reference SHA-256: `D89A795146DB8414578354431F82883D52070F22E031EC84F7468E19D4D44029`.
+- The re-supplied text was byte-for-byte identical to the original learner's-permit source used for the 70-question browser dataset. The existing 35 general-knowledge, 20 air-brake, 15 combination-vehicle, and five checkpoint records therefore remain unchanged rather than being duplicated.
+- The public presentation now names the module **2026 CDL Learner's Permit Center**, adds an explicit Class A CLP scope statement, distinguishes included core knowledge from separate endorsement testing, and supplies a four-step official-source-to-practice study path.
+- Full Portfolio language and direct links now identify the learner's-permit center instead of using the less-specific “CDL study desk” label.
+- FMCSA references were rechecked on 2026-11-14. The site preserves the 80% federal knowledge-test benchmark, state-manual boundary, state administration of CLPs, and separate class/endorsement decision point.
+
 ## Module navigation
 
 The application preserves all 15 supplied destinations:

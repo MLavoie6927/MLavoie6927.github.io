@@ -252,6 +252,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         'id="class8-menu-toggle"',
         'id="studio"',
         'id="cdl-study"',
+        'id="permit-study-path"',
         'id="cdl-results"',
         'id="mini-exam"',
         'id="gallery"',
@@ -260,7 +261,10 @@ def validate_class8_lab(errors: list[str]) -> None:
         'src="../atlas-class8/integration/atlas-embed.js?v=3.0.0"',
         'href="../full-portfolio.html#class8-engineering"',
         "A1C5004457656C7028584B833BA3F8E2A22E28287716F0C26EB02F5B3FE478F0",
-        "70 original practice prompts",
+        "2026 CDL Learner's Permit Center",
+        "Know exactly what this permit guide covers.",
+        "Additional endorsements",
+        "Confirm class and endorsements",
         "Practice, not an official examination.",
     ):
         if marker not in html:
@@ -270,6 +274,8 @@ def validate_class8_lab(errors: list[str]) -> None:
         ".class8-menu-toggle",
         ".studio-frame-shell",
         ".cdl-question-card",
+        ".permit-scope-heading",
+        ".permit-study-path",
         ".mini-exam",
         ".preview-gallery",
         "@media (max-width:1120px)",
@@ -379,6 +385,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         'href="#class8-engineering">Class 8 Lab</a>',
         'href="class8-lab/">Class 8 Lab</a>',
         'href="class8-lab/">Open the Class 8 Engineering &amp; CDL Lab</a>',
+        'href="class8-lab/#cdl-study">Open the 2026 CDL Learner\'s Permit Center</a>',
         'href="atlas-class8/">Launch the full-screen engineering studio</a>',
     ):
         if marker not in full_portfolio:
@@ -1814,7 +1821,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
-    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, 70 study prompts, 5-question checkpoint, responsive portfolio shell, and static-browser boundary")
+    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, a complete 2026 CDL learner's permit center with 70 study prompts, a 5-question checkpoint, responsive portfolio shell, and static-browser boundary")
     print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")
