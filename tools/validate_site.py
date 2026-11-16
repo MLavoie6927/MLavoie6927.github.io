@@ -273,6 +273,8 @@ def validate_class8_lab(errors: list[str]) -> None:
         "Additional endorsements",
         "Confirm class and endorsements",
         "Practice, not an official examination.",
+        "COMPLETE QUESTION &amp; ANSWER LIBRARY",
+        "Optional random flash drill",
     ):
         if marker not in html:
             errors.append(f"Class 8 lab: missing page marker {marker}")
@@ -284,6 +286,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         ".study-track-comparison",
         ".academy-frame-shell",
         ".cdl-question-card",
+        ".question-library-heading",
         ".permit-scope-heading",
         ".permit-study-path",
         ".mini-exam",
@@ -404,6 +407,7 @@ def validate_class8_lab(errors: list[str]) -> None:
         "README.md",
         "CODEX_HANDOFF.md",
         "SHA256SUMS.txt",
+        "SHA256SUMS.source.txt",
         "preview-desktop.png",
         "preview-mobile.png",
     )
@@ -412,6 +416,11 @@ def validate_class8_lab(errors: list[str]) -> None:
             errors.append(f"CDL Exam Academy: missing {relative}")
 
     academy_manifest = academy / "SHA256SUMS.txt"
+    academy_source_manifest = academy / "SHA256SUMS.source.txt"
+    if academy_source_manifest.exists():
+        source_manifest_hash = hashlib.sha256(academy_source_manifest.read_bytes()).hexdigest()
+        if source_manifest_hash != "25fbe20d3e30cd757a0ef9a2ce78eb46a7c429fccf515e4483e01859a67efd7b":
+            errors.append("CDL Exam Academy: original source manifest was changed")
     if academy_manifest.exists():
         academy_manifest_entries: list[tuple[str, str]] = []
         for line in academy_manifest.read_text(encoding="utf-8").splitlines():
@@ -512,11 +521,20 @@ def validate_class8_lab(errors: list[str]) -> None:
                 'id="flash-stage"',
                 'id="inspection-grid"',
                 'id="sources-content"',
+                "CENTERED QUESTION &amp; ANSWER WORKSPACE",
+                'app/styles.css?v=20261115a',
             ),
         ),
         (
             academy_css,
-            (".app-shell", ".track-grid", ".exam-options", "@media(max-width:550px)"),
+            (
+                ".app-shell",
+                ".track-grid",
+                ".exam-options",
+                ".study-library-banner",
+                "#page-study .question-stack{grid-template-columns:repeat(2,minmax(0,1fr))",
+                "@media(max-width:550px)",
+            ),
         ),
         (
             academy_js,
@@ -526,6 +544,7 @@ def validate_class8_lab(errors: list[str]) -> None:
                 "function gradeExam()",
                 "function renderFlash()",
                 "function renderInspection()",
+                "const length=20",
             ),
         ),
     ):
@@ -1982,7 +2001,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
-    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, a 70-question learner's-permit foundation, a checksum-preserved 300-question CDL Exam Academy, responsive portfolio shell, and static-browser boundary")
+    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, centered 70-question and 300-question study libraries, source-manifest preservation, responsive portfolio shells, and static-browser boundaries")
     print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")

@@ -25,7 +25,7 @@ with sync_playwright() as p:
     print('PASS dashboard: 6 tracks, 5 clickable schematic groups, 300-question indicator')
 
     page.get_by_role('button',name='Explore questions').click()
-    assert page.locator('.question-card').count()==12
+    assert page.locator('.question-card').count()==20
     assert '300' in page.locator('#study-result-count').inner_text()
     page.locator('#search').fill('hydroplaning')
     assert page.locator('.question-card').count()>=1
@@ -35,7 +35,7 @@ with sync_playwright() as p:
     assert '49' in page.locator('#study-result-count').inner_text()
     page.locator('.question-card footer button').first.click()
     assert 'Bookmarked' in page.locator('.question-card footer button').first.inner_text()
-    print('PASS study: search, section filter, pagination, bookmark')
+    print('PASS study: centered 20-card library, search, section filter, pagination, bookmark')
 
     page.get_by_role('button',name='Flashcards').click()
     assert page.locator('#flash-stage h2').count()==1

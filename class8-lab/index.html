@@ -8,7 +8,7 @@
   <meta name="description" content="ATLAS Class 8 Engineering and CDL Lab: an interactive tractor-trailer studio, a 70-question learner's-permit foundation, and a 300-question CDL Exam Academy by Marc Lavoie.">
   <title>Class 8 Engineering &amp; CDL Lab | Marc Lavoie</title>
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="class8-lab.css?v=20261114c">
+  <link rel="stylesheet" href="class8-lab.css?v=20261115a">
 </head>
 <body class="class8-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -176,7 +176,7 @@
         <div>
           <p class="eyebrow"><span></span> COMMERCIAL LEARNER'S PERMIT · 2026 STUDY CENTER</p>
           <h2 id="cdl-title">2026 CDL Learner's Permit Center</h2>
-          <p>Start with the three knowledge areas commonly associated with a Class A combination vehicle equipped with air brakes. Search all 70 original questions and answers, mark reviewed topics, run a flash drill, and grade a five-question checkpoint before advancing to the 300-question academy.</p>
+          <p>Start with the three knowledge areas commonly associated with a Class A combination vehicle equipped with air brakes. Search the centered 70-question library, reveal answers, mark reviewed topics, and grade a five-question checkpoint before advancing to the 300-question academy.</p>
         </div>
         <div class="study-proof">
           <strong>80%</strong>
@@ -232,18 +232,25 @@
           </div>
         </div>
 
+        <div class="question-library-heading">
+          <div><span>COMPLETE QUESTION &amp; ANSWER LIBRARY</span><h3>Study every permit-foundation question in the center workspace.</h3></div>
+          <p>The full searchable list is the primary study surface. Open any card for its answer, expand every visible answer at once, and mark completed material as reviewed.</p>
+        </div>
+        <div class="cdl-results" id="cdl-results" aria-live="polite"></div>
+
         <aside class="flash-card" aria-labelledby="flash-heading">
-          <span id="flash-category">General knowledge</span>
-          <h3 id="flash-heading">Flash drill</h3>
-          <p id="flash-question"></p>
-          <div id="flash-answer" class="flash-answer" hidden></div>
+          <div class="flash-card-copy">
+            <span id="flash-category">General knowledge</span>
+            <h3 id="flash-heading">Optional random flash drill</h3>
+            <p id="flash-question"></p>
+            <div id="flash-answer" class="flash-answer" hidden></div>
+          </div>
           <div class="flash-actions">
+            <small>Use this after working through the complete library above.</small>
             <button type="button" id="flash-reveal" aria-expanded="false">Reveal answer</button>
             <button type="button" id="flash-next">Another question →</button>
           </div>
         </aside>
-
-        <div class="cdl-results" id="cdl-results" aria-live="polite"></div>
       </div>
 
       <div class="mini-exam" id="mini-exam">

@@ -4,3 +4,19 @@
 @media(max-width:860px){.header-mid{display:none}.content-frame{display:block}.topbar{min-height:66px;padding:11px 14px}.sidebar{position:sticky;top:66px;z-index:20;padding:8px 10px;background:#071929e8;backdrop-filter:blur(12px);border:0;border-bottom:1px solid #355068;gap:0}.sidebar-section,.sidebar-bottom{display:none}.sidebar nav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:thin;flex-wrap:nowrap}.sidebar nav+nav{display:none}.nav-link{width:auto;white-space:nowrap;padding:8px 12px;flex:none;font-size:11px;border-radius:8px}.nav-link span:first-child{font-size:14px;width:auto}.main-view{padding:22px 18px 40px}.truck-stage{min-height:240px}.rig-svg{min-width:600px}.truck-stage{overflow-x:auto}.header-right .home-link{display:none}.topbar .brand-mark{width:40px;height:40px}.track-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:550px){.brand b{font-size:17px}.brand small{font-size:7px;letter-spacing:1px}.topbar{gap:8px}.topbar select{padding:7px;font-size:11px;max-width:114px}.hero-copy h1{font-size:36px}.track-grid,.guide-grid,.inspection-grid,.preset-grid{grid-template-columns:1fr}.track-card{min-height:0}.hero-facts{gap:8px}.hero-facts strong{font-size:21px}.hero-facts span{font-size:9px}.section-titleline{align-items:start;flex-direction:column}.wide-info{flex-wrap:wrap}.filters{display:grid;grid-template-columns:1fr;width:100%}.filters>label{width:100%}.filters select{width:100%}.section-heading{flex-direction:column}.exam-foot,.exam-controls{flex-wrap:wrap}.exam-foot>.btn{width:100%}.exam-result-stats{gap:6px}.stat{padding:10px}.stat strong{font-size:20px}.review-stats{gap:6px}.question-card{padding:16px}.footer{flex-direction:column;gap:5px}.flash-stage{padding:16px;min-height:310px}.nav-pill{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:0s!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Centered question-library layout · Marc Lavoie · 2026-11-15 */
+#page-study{width:min(100%,1480px);margin-inline:auto}
+#page-study .section-heading{max-width:980px;margin-bottom:20px}
+.study-library-banner{display:grid;grid-template-columns:minmax(240px,.65fr) minmax(0,1.35fr);gap:28px;align-items:center;margin:0 0 20px;padding:18px 20px;border:1px solid #31556a;border-radius:13px;background:linear-gradient(135deg,#0e293c,#0b2032)}
+.study-library-banner div{display:grid;gap:7px}.study-library-banner span{color:var(--teal);font-size:9px;font-weight:900;letter-spacing:1.5px}.study-library-banner strong{font-size:19px}.study-library-banner p{margin:0;color:#9fb8c7;font-size:12px;line-height:1.65}
+#page-study .filters{padding:16px;border:1px solid #29485d;border-radius:13px;background:#091d2e}
+#page-study .result-toolbar{margin:20px 2px 14px}
+#page-study .question-stack{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+#page-study .question-card{display:flex;min-width:0;min-height:100%;flex-direction:column;padding:22px 24px}
+#page-study .question-card h3{font-size:17px;line-height:1.48}
+#page-study .question-card .explanation{font-size:12.5px}
+#page-study .question-card footer{margin-top:auto;padding-top:16px}
+#page-study .pagination{max-width:760px;margin:28px auto 0}
+@media(max-width:1100px){#page-study .question-stack{grid-template-columns:1fr}.study-library-banner{grid-template-columns:1fr;gap:8px}}
+@media(max-width:550px){.study-library-banner{padding:15px}#page-study .question-card{padding:17px}#page-study .question-card footer{align-items:flex-start;flex-direction:column}#page-study .pagination{gap:8px}#page-study .pagination .btn{padding:9px 11px}}

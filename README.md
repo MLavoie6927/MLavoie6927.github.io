@@ -12,7 +12,7 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `browser-os/` - Browser OS 3.0 static security operations workstation
 - `class8-lab/` - portfolio shell, evidence gallery, 70-question learner's-permit foundation, and embedded 300-question CDL Exam Academy for the Class 8 engineering project
 - `atlas-class8/` - checksum-preserved ATLAS Class 8 v3.0 tractor-trailer engineering studio and supplied regression tests
-- `atlas-cdl/` - checksum-preserved ATLAS CDL Exam Academy with 300 original questions, Class A and Class B practice, endorsement study, flashcards, inspection review, and local progress
+- `atlas-cdl/` - checksum-verified ATLAS CDL Exam Academy with a centered 300-question library, Class A and Class B practice, endorsement study, flashcards, inspection review, and local progress; the original package manifest remains preserved separately
 - `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation
 - `.github/workflows/k12-operations-ci.yml` - K-12 model, evidence, generated-data, and browser-source validation

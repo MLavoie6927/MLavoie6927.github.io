@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#07182b">
   <meta name="description" content="ATLAS CDL Exam Academy: independent practice questions, explanations, Class A mock exam, endorsements and inspection study.">
   <title>ATLAS — CDL Exam Academy | Marc Lavoie</title>
-  <link rel="stylesheet" href="app/styles.css">
+  <link rel="stylesheet" href="app/styles.css?v=20261115a">
   <script src="data/questions.js" defer></script>
-  <script src="app/app.js" defer></script>
+  <script src="app/app.js?v=20261115a" defer></script>
 </head>
 <body>
 <div class="app-shell" id="cdl-root">
@@ -72,7 +72,14 @@
         <div class="wide-info"><div><span class="info-symbol" aria-hidden="true">i</span><strong>Official exams are state administered.</strong> This independent bank contains original practice questions—not actual or leaked DMV exam items.</div><button type="button" data-route="sources">See official manuals ↗</button></div>
       </section>
 
-      <section id="page-study" class="page" aria-labelledby="study-title"><div class="section-heading"><div><p class="eyebrow">MASTER QUESTION LIBRARY</p><h1 id="study-title">Search & study</h1><p>Browse every practice question with a visible answer, explanation and manual reference.</p></div></div><div class="filters"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search 300 questions, topics, systems..." autocomplete="off" aria-label="Search practice questions"></label><label><span class="sr-only">Section</span><select id="study-section"><option value="all">All categories</option></select></label><label><span class="sr-only">Topic</span><select id="study-topic"><option value="all">All topics</option></select></label></div><div class="result-toolbar"><span id="study-result-count">Showing all questions</span><button id="clear-filters" class="link-btn" type="button">Clear filters</button></div><div id="study-questions" class="question-stack"></div><div class="pagination"><button id="previous-page" class="btn btn-ghost" type="button">← Previous</button><span id="page-counter"></span><button id="next-page" class="btn btn-ghost" type="button">Next →</button></div></section>
+      <section id="page-study" class="page study-library-page" aria-labelledby="study-title">
+        <div class="section-heading"><div><p class="eyebrow">MASTER QUESTION LIBRARY</p><h1 id="study-title">Search &amp; study</h1><p>Browse the full question-and-answer library in a centered two-column workspace, with answers, explanations, and manual references kept together.</p></div></div>
+        <div class="study-library-banner"><div><span>CENTERED QUESTION &amp; ANSWER WORKSPACE</span><strong>20 questions per page</strong></div><p>Use the filters to narrow the 300-question bank, or read across the full-width card grid. Flashcards remain available as a separate optional active-recall tool.</p></div>
+        <div class="filters"><label class="searchbox"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search 300 questions, topics, systems..." autocomplete="off" aria-label="Search practice questions"></label><label><span class="sr-only">Section</span><select id="study-section"><option value="all">All categories</option></select></label><label><span class="sr-only">Topic</span><select id="study-topic"><option value="all">All topics</option></select></label></div>
+        <div class="result-toolbar"><span id="study-result-count">Showing all questions</span><button id="clear-filters" class="link-btn" type="button">Clear filters</button></div>
+        <div id="study-questions" class="question-stack"></div>
+        <div class="pagination"><button id="previous-page" class="btn btn-ghost" type="button">← Previous</button><span id="page-counter"></span><button id="next-page" class="btn btn-ghost" type="button">Next →</button></div>
+      </section>
 
       <section id="page-exam" class="page" aria-labelledby="exam-title"><div class="section-heading"><div><p class="eyebrow">TEST READINESS / PERFORMANCE</p><h1 id="exam-title">Mock examinations</h1><p>Randomized original practice questions. Each written-test category is graded separately against 80%.</p></div></div><div class="exam-settings" id="exam-setup"><div class="panel-heading"><h2>Configure a practice examination</h2><p>Select a Class A pathway or focus on one knowledge area.</p></div><div id="exam-presets" class="preset-grid"></div><div class="exam-foot"><label for="exam-size">Single-category practice length <select id="exam-size"><option value="10">10 questions</option><option value="20" selected>20 questions</option><option value="25">25 questions</option><option value="50">50 questions</option></select></label><button type="button" class="btn btn-primary" id="begin-exam">Begin practice exam →</button></div></div><div id="exam-run" class="exam-run" hidden></div><div id="exam-results" hidden></div></section>
 

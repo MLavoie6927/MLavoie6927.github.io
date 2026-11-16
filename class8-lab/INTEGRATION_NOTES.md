@@ -38,7 +38,7 @@ The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams iso
 ## Added or modified files
 
 - Added the complete supplied `atlas-class8/` directory without modifying its 31 manifest-covered files.
-- Added the complete supplied `atlas-cdl/` directory without modifying its 22 manifest-covered files.
+- Added the complete supplied `atlas-cdl/` directory with its original 22-file manifest preserved as `SHA256SUMS.source.txt`; the active `SHA256SUMS.txt` now verifies the intentionally customized publication files.
 - Added `class8-lab/index.html` as the recruiter-facing project shell.
 - Added `class8-lab/class8-lab.css` for the responsive industrial presentation.
 - Added `class8-lab/cdl-study-data.js` with 70 original practice prompts and a five-question checkpoint.
@@ -53,12 +53,20 @@ The iframe keeps ATLAS styles, JavaScript globals, local state, and diagrams iso
 - Supplied archive: `CDL_Exam_Academy_Codex.zip`.
 - Archive SHA-256: `A883EFBE557CE8600C2612D0F0DA79F0F69FFB91CCE541A45FE1D48B2961E9BD`.
 - Archive inventory: 23 files under one relative `atlas-cdl/` directory, including `SHA256SUMS.txt`.
-- Internal manifest: all 22 listed file hashes matched before integration and remain covered by repository validation.
+- Internal manifest: all 22 listed file hashes matched before integration. The original manifest remains byte-for-byte preserved as `SHA256SUMS.source.txt`, while `SHA256SUMS.txt` verifies the current published Academy after authorized presentation changes.
 - Path traversal was rejected before extraction; all paths resolved within the unique staging directory.
 - `CODEX_HANDOFF.md`, `PROMPT_FOR_CODEX.txt`, and other package notes were treated as supplied documentation, not as authority over the user's request or repository architecture.
 - The academy preserves its isolated iframe, private browser-local progress, and dependency-free browser runtime. It does not import `window.ATLAS_CDL_BANK` into the portfolio shell.
 - The existing 70-question learner's-permit module remains the focused foundation. The 300-question academy is a second study track covering General Knowledge (77), Cargo (25), Air Brakes (49), Combination Vehicles (38), Doubles/Triples (15), Tank (15), Hazmat (25), Passenger (18), School Bus (18), and Vehicle Inspection Skills (20).
 - Class A 95-item and Class B 75-item sessions are identified as configurable training formats, not guaranteed state examination lengths.
+
+## 2026-11-15 centered study-library update
+
+- Promoted the complete 70-question permit library from a narrow side rail to a centered two-column desktop workspace; it becomes one column at tablet and mobile widths.
+- Moved the random permit flash drill below the complete library and labeled it as an optional secondary exercise rather than the primary study surface.
+- Reworked the 300-question Academy library into a centered two-column card grid with 20 questions per page, while preserving search, category and topic filters, visible answers, explanations, source links, bookmarking, and pagination.
+- Retained the separate Academy flashcard route for active recall without allowing random cards to displace the complete question-and-answer library.
+- Preserved the original source manifest under `atlas-cdl/SHA256SUMS.source.txt` and refreshed the active publication manifest for the four deliberately modified Academy files.
 
 ## 2026 CDL learner's permit source update
 
