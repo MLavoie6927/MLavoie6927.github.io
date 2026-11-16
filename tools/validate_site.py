@@ -149,7 +149,7 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'id="general-it"',
         'class8-lab/',
         'id="class8-engineering"',
-        'href="#class8-engineering">Class 8 Lab</a>',
+        'href="#class8-engineering">CDL Lab</a>',
         'science/',
         'id="science"',
         'geology/',
@@ -559,8 +559,8 @@ def validate_class8_lab(errors: list[str]) -> None:
     full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
     for marker in (
         'id="class8-engineering"',
-        'href="#class8-engineering">Class 8 Lab</a>',
-        'href="class8-lab/">Class 8 Lab</a>',
+        'href="#class8-engineering">CDL Lab</a>',
+        'href="class8-lab/">CDL Lab</a>',
         'href="class8-lab/">Open the Class 8 Engineering &amp; CDL Lab</a>',
         'href="class8-lab/#cdl-study">Open the learner\'s-permit foundation</a>',
         'href="class8-lab/#cdl-academy">Open the embedded CDL Exam Academy</a>',
