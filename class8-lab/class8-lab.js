@@ -18,13 +18,9 @@
   const flashReveal=byId('flash-reveal');
   const flashNext=byId('flash-next');
   const storageKey='atlas-class8-cdl-reviewed-v1';
-  const deepLinkTargets=new Set(['#cdl-academy','#cdl-study','#gallery']);
-  const deepLinkRestoreWindow=15000;
   let activeCategory='all';
   let flashItem=null;
   let reviewed=new Set();
-  let deepLinkRestoreDeadline=performance.now()+deepLinkRestoreWindow;
-  let deepLinkRestoreTimer=0;
 
   try{
     const stored=JSON.parse(localStorage.getItem(storageKey)||'[]');
@@ -221,39 +217,14 @@
     const open=nav.classList.toggle('is-open');
     navToggle.classList.toggle('is-open',open);
     navToggle.setAttribute('aria-expanded',String(open));
-    navToggle.setAttribute('aria-label',open?'Close Class 8 navigation':'Open Class 8 navigation');
+    navToggle.setAttribute('aria-label',open?'Close CDL navigation':'Open CDL navigation');
   });
   nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
     nav.classList.remove('is-open');
     navToggle.classList.remove('is-open');
     navToggle.setAttribute('aria-expanded','false');
-    navToggle.setAttribute('aria-label','Open Class 8 navigation');
+    navToggle.setAttribute('aria-label','Open CDL navigation');
   }));
-
-  function restoreDeepLinkAfterStudioResize(){
-    if(!deepLinkTargets.has(location.hash)||performance.now()>deepLinkRestoreDeadline)return;
-    const target=document.querySelector(location.hash);
-    if(!target)return;
-    const position=()=>window.scrollTo({top:Math.max(0,target.offsetTop-96),behavior:'instant'});
-    requestAnimationFrame(position);
-    window.clearTimeout(deepLinkRestoreTimer);
-    deepLinkRestoreTimer=window.setTimeout(position,400);
-  }
-
-  window.addEventListener('hashchange',()=>{
-    deepLinkRestoreDeadline=performance.now()+deepLinkRestoreWindow;
-    restoreDeepLinkAfterStudioResize();
-  });
-  window.addEventListener('load',restoreDeepLinkAfterStudioResize);
-  window.addEventListener('message',event=>{
-    if(event.origin!==window.location.origin)return;
-    if(!event.data||event.data.source!=='ATLAS_CLASS8_FRAME'||event.data.type!=='resize')return;
-    const studioFrame=document.querySelector('[data-atlas-class8] iframe');
-    if(!studioFrame||event.source!==studioFrame.contentWindow)return;
-    restoreDeepLinkAfterStudioResize();
-  });
-
-  restoreDeepLinkAfterStudioResize();
 
   saveReviewed();
   renderQuestions();

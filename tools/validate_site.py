@@ -149,7 +149,7 @@ def validate_full_portfolio(errors: list[str]) -> None:
         'id="general-it"',
         'class8-lab/',
         'id="class8-engineering"',
-        'href="#class8-engineering">CDL Lab</a>',
+        'href="#class8-engineering">CDL</a>',
         'science/',
         'id="science"',
         'geology/',
@@ -232,6 +232,8 @@ def validate_class8_lab(errors: list[str]) -> None:
     shell = ROOT / "class8-lab"
     source = ROOT / "atlas-class8"
     academy = ROOT / "atlas-cdl"
+    safety = ROOT / "atlas-class-a-cdl"
+    hazard = ROOT / "cdl-hazard-map"
     html = (shell / "index.html").read_text(encoding="utf-8")
     css = (shell / "class8-lab.css").read_text(encoding="utf-8")
     script = (shell / "class8-lab.js").read_text(encoding="utf-8")
@@ -254,6 +256,8 @@ def validate_class8_lab(errors: list[str]) -> None:
         'id="studio"',
         'id="cdl-academy"',
         'id="cdl-study"',
+        'id="cdl-safety"',
+        'id="cdl-hazard-map"',
         'id="permit-study-path"',
         'id="cdl-results"',
         'id="mini-exam"',
@@ -264,17 +268,28 @@ def validate_class8_lab(errors: list[str]) -> None:
         'data-atlas-cdl-embed',
         'src="../atlas-cdl/index.html#dashboard"',
         'src="../atlas-cdl/integration/atlas-cdl-embed.js?v=1.0.0"',
+        'src="../atlas-class-a-cdl/index.html"',
+        'href="../atlas-class-a-cdl/"',
+        'src="../cdl-hazard-map/index.html?embed=1"',
+        'href="../cdl-hazard-map/"',
         'href="../full-portfolio.html#class8-engineering"',
         "A1C5004457656C7028584B833BA3F8E2A22E28287716F0C26EB02F5B3FE478F0",
         "2026 CDL Learner's Permit Center",
-        "Build from the permit foundation to full CDL exam practice.",
-        "300 original questions across ten knowledge areas",
+        "Build from the permit foundation to complete Class A practice.",
+        "264 original questions across General Knowledge",
         "Know exactly what this permit guide covers.",
-        "Additional endorsements",
+        "Class A endorsements",
         "Confirm class and endorsements",
         "Practice, not an official examination.",
         "COMPLETE QUESTION &amp; ANSWER LIBRARY",
         "Optional random flash drill",
+        "Turn CDL knowledge into safer operating decisions.",
+        "<strong>222</strong>",
+        "Class A operating scenarios",
+        "Educational system—not truck GPS.",
+        "See the restriction before the road becomes a trap.",
+        "Visual atlas—not truck navigation.",
+        "Named road profiles",
     ):
         if marker not in html:
             errors.append(f"Class 8 lab: missing page marker {marker}")
@@ -285,6 +300,11 @@ def validate_class8_lab(errors: list[str]) -> None:
         ".cdl-academy-section",
         ".study-track-comparison",
         ".academy-frame-shell",
+        ".safety-studio-section",
+        ".safety-capability-grid",
+        ".safety-frame-shell",
+        ".hazard-atlas-section",
+        ".hazard-frame-shell",
         ".cdl-question-card",
         ".question-library-heading",
         ".permit-scope-heading",
@@ -306,10 +326,11 @@ def validate_class8_lab(errors: list[str]) -> None:
         "renderMiniExam",
         "grade-mini-exam",
         "class8-menu-toggle",
-        "restoreDeepLinkAfterStudioResize",
     ):
         if marker not in script:
             errors.append(f"Class 8 lab: missing interaction marker {marker}")
+    if "window.scrollTo" in script or "scrollIntoView" in script:
+        errors.append("Class 8 lab: navigation must not repeatedly force the page scroll position")
 
     question_matches = re.findall(r"\[\d+,'(general|air|combination)'", data)
     if len(question_matches) != 70:
@@ -464,6 +485,12 @@ def validate_class8_lab(errors: list[str]) -> None:
         }
         if actual_sections != expected_sections:
             errors.append(f"CDL Exam Academy: category counts differ: {actual_sections}")
+        class_a_sections = {
+            "General", "Cargo", "Air", "Combination", "Doubles", "Tank", "Hazmat", "Inspection"
+        }
+        class_a_count = sum(1 for question in questions if question.get("section") in class_a_sections)
+        if class_a_count != 264:
+            errors.append(f"CDL Exam Academy: expected 264 Class A-public questions, found {class_a_count}")
         ids = [question.get("id") for question in questions]
         stems = [str(question.get("question", "")).casefold() for question in questions]
         if len(set(ids)) != len(ids):
@@ -507,6 +534,164 @@ def validate_class8_lab(errors: list[str]) -> None:
         if re.search(pattern, academy_without_comments):
             errors.append(f"CDL Exam Academy: forbidden {label}")
 
+    required_safety_files = (
+        "index.html",
+        "assets/styles.css",
+        "js/catalog.js",
+        "js/quiz.js",
+        "js/logic.js",
+        "js/app.js",
+        "docs/catalog.json",
+        "docs/desktop-preview.png",
+        "docs/mobile-preview.png",
+        "docs/reports-preview.png",
+        "docs/RESEARCH_NOTES.md",
+        "tests/test-logic.cjs",
+        "README.md",
+        "SHA256SUMS.txt",
+    )
+    for relative in required_safety_files:
+        if not (safety / relative).exists():
+            errors.append(f"Class A CDL Safety Studio: missing {relative}")
+
+    safety_manifest = safety / "SHA256SUMS.txt"
+    if safety_manifest.exists():
+        if hashlib.sha256(safety_manifest.read_bytes()).hexdigest() != (
+            "f5394d68b04c20ab8280a73694f4f5c7078a391edfd35b7d87b13ab51572759b"
+        ):
+            errors.append("Class A CDL Safety Studio: supplied manifest was changed")
+        safety_manifest_entries: list[tuple[str, str]] = []
+        for line in safety_manifest.read_text(encoding="utf-8").splitlines():
+            match = re.fullmatch(r"([0-9a-f]{64})\s+(.+)", line.strip())
+            if match:
+                safety_manifest_entries.append((match.group(1), match.group(2)))
+        if len(safety_manifest_entries) != 20:
+            errors.append(
+                "Class A CDL Safety Studio: expected 20 checksum entries, "
+                f"found {len(safety_manifest_entries)}"
+            )
+        for expected, relative in safety_manifest_entries:
+            path = safety / relative
+            if not path.is_file():
+                errors.append(f"Class A CDL Safety Studio: manifest target missing {relative}")
+                continue
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+            if actual != expected:
+                errors.append(f"Class A CDL Safety Studio: checksum mismatch for {relative}")
+
+    safety_catalog = safety / "docs" / "catalog.json"
+    if safety_catalog.exists():
+        safety_data = json.loads(safety_catalog.read_text(encoding="utf-8"))
+        if len(safety_data.get("scenarios", [])) != 222:
+            errors.append("Class A CDL Safety Studio: expected 222 scenarios")
+        if len(safety_data.get("categories", [])) != 14:
+            errors.append("Class A CDL Safety Studio: expected 14 categories")
+        if len(safety_data.get("sources", [])) != 16:
+            errors.append("Class A CDL Safety Studio: expected 16 source records")
+
+    safety_quiz = safety / "js" / "quiz.js"
+    safety_app = safety / "js" / "app.js"
+    if safety_quiz.exists() and len(re.findall(r"\{id:'Q\d+'", safety_quiz.read_text(encoding="utf-8"))) != 24:
+        errors.append("Class A CDL Safety Studio: expected 24 decision drills")
+    if safety_app.exists():
+        safety_app_text = safety_app.read_text(encoding="utf-8")
+        checklist = re.search(r"const CHECK_ITEMS=\[(.*?)\];", safety_app_text, re.S)
+        if not checklist or len(re.findall(r"^\s*'", checklist.group(1), re.M)) != 28:
+            errors.append("Class A CDL Safety Studio: expected 28 readiness checks")
+
+    safety_scripts = "\n".join(
+        (safety / "js" / name).read_text(encoding="utf-8")
+        for name in ("catalog.js", "quiz.js", "logic.js", "app.js")
+        if (safety / "js" / name).exists()
+    )
+    safety_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", safety_scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, safety_without_comments):
+            errors.append(f"Class A CDL Safety Studio: forbidden {label}")
+
+    required_hazard_files = (
+        "index.html",
+        "assets/css/atlas.css",
+        "assets/data/hazards.json",
+        "assets/data/road-traps.json",
+        "assets/data/us-state-geometry.json",
+        "assets/js/geography.js",
+        "assets/js/hazards.js",
+        "assets/js/road-traps.js",
+        "assets/js/atlas.js",
+        "assets/js/trap-engine.js",
+        "docs/SOURCE_REGISTER.md",
+        "docs/GPS_TRAP_SOURCES.md",
+        "docs/desktop-v1.1.png",
+        "docs/mobile-v1.1.png",
+        "tests/test_data.py",
+        "tests/test_road_traps.py",
+        "README.md",
+        "SHA256SUMS.txt",
+    )
+    for relative in required_hazard_files:
+        if not (hazard / relative).exists():
+            errors.append(f"Class A CDL Hazard Atlas: missing {relative}")
+
+    hazard_manifest = hazard / "SHA256SUMS.txt"
+    if hazard_manifest.exists():
+        if hashlib.sha256(hazard_manifest.read_bytes()).hexdigest() != (
+            "cacf3faa1270581bc3ea501ad25dff84eb5011a7c6a48a22b3ac024a05cd6611"
+        ):
+            errors.append("Class A CDL Hazard Atlas: supplied manifest was changed")
+        hazard_manifest_entries: list[tuple[str, str]] = []
+        for line in hazard_manifest.read_text(encoding="utf-8").splitlines():
+            match = re.fullmatch(r"([0-9a-f]{64})\s+(.+)", line.strip())
+            if match:
+                hazard_manifest_entries.append((match.group(1), match.group(2)))
+        if len(hazard_manifest_entries) != 28:
+            errors.append(
+                "Class A CDL Hazard Atlas: expected 28 checksum entries, "
+                f"found {len(hazard_manifest_entries)}"
+            )
+        for expected, relative in hazard_manifest_entries:
+            path = hazard / relative
+            if not path.is_file():
+                errors.append(f"Class A CDL Hazard Atlas: manifest target missing {relative}")
+                continue
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+            if actual != expected:
+                errors.append(f"Class A CDL Hazard Atlas: checksum mismatch for {relative}")
+
+    hazard_data_path = hazard / "assets" / "data" / "hazards.json"
+    road_data_path = hazard / "assets" / "data" / "road-traps.json"
+    geography_path = hazard / "assets" / "data" / "us-state-geometry.json"
+    if hazard_data_path.exists() and len(json.loads(hazard_data_path.read_text(encoding="utf-8"))) != 80:
+        errors.append("Class A CDL Hazard Atlas: expected 80 mapped location records")
+    if road_data_path.exists() and len(json.loads(road_data_path.read_text(encoding="utf-8"))) != 30:
+        errors.append("Class A CDL Hazard Atlas: expected 30 named-road profiles")
+    if geography_path.exists():
+        geography = json.loads(geography_path.read_text(encoding="utf-8"))
+        if len(geography.get("states", [])) != 51:
+            errors.append("Class A CDL Hazard Atlas: expected 50 states plus Washington, D.C.")
+
+    hazard_scripts = "\n".join(
+        (hazard / "assets" / "js" / name).read_text(encoding="utf-8")
+        for name in ("geography.js", "hazards.js", "road-traps.js", "atlas.js", "trap-engine.js")
+        if (hazard / "assets" / "js" / name).exists()
+    )
+    hazard_without_comments = re.sub(r"/\*.*?\*/|//[^\n]*", "", hazard_scripts, flags=re.S)
+    for label, pattern in {
+        "fetch calls": r"(?<![\w])fetch\s*\(",
+        "XMLHttpRequest": r"new\s+XMLHttpRequest",
+        "WebSocket": r"new\s+WebSocket\s*\(",
+        "eval": r"(?<![\w])eval\s*\(",
+        "Function constructor": r"new\s+Function\s*\(",
+    }.items():
+        if re.search(pattern, hazard_without_comments):
+            errors.append(f"Class A CDL Hazard Atlas: forbidden {label}")
+
     academy_html = academy / "index.html"
     academy_css = academy / "app" / "styles.css"
     academy_js = academy / "app" / "app.js"
@@ -514,15 +699,15 @@ def validate_class8_lab(errors: list[str]) -> None:
         (
             academy_html,
             (
-                "ATLAS — CDL Exam Academy",
+                "ATLAS — Class A CDL Exam Academy",
                 'id="start-class-a"',
                 'id="study-questions"',
                 'id="exam-presets"',
                 'id="flash-stage"',
                 'id="inspection-grid"',
                 'id="sources-content"',
-                "CENTERED QUESTION &amp; ANSWER WORKSPACE",
-                'app/styles.css?v=20261115a',
+                "CENTERED CLASS A QUESTION &amp; ANSWER WORKSPACE",
+                'app/styles.css?v=20261117b',
             ),
         ),
         (
@@ -539,7 +724,8 @@ def validate_class8_lab(errors: list[str]) -> None:
         (
             academy_js,
             (
-                "atlas-cdl-academy-progress-v1",
+                "atlas-cdl-class-a-progress-v2",
+                "CLASS_A_SECTIONS",
                 "function beginExam()",
                 "function gradeExam()",
                 "function renderFlash()",
@@ -559,12 +745,16 @@ def validate_class8_lab(errors: list[str]) -> None:
     full_portfolio = (ROOT / "full-portfolio.html").read_text(encoding="utf-8")
     for marker in (
         'id="class8-engineering"',
-        'href="#class8-engineering">CDL Lab</a>',
-        'href="class8-lab/">CDL Lab</a>',
-        'href="class8-lab/">Open the Class 8 Engineering &amp; CDL Lab</a>',
+        'href="#class8-engineering">CDL</a>',
+        'href="class8-lab/">CDL</a>',
+        'href="class8-lab/">Open the CDL Lab</a>',
+        'href="class8-lab/#cdl-safety">Open the Class A Safety Studio</a>',
+        'href="class8-lab/#cdl-hazard-map">Open the U.S. CDL Hazard Map</a>',
         'href="class8-lab/#cdl-study">Open the learner\'s-permit foundation</a>',
-        'href="class8-lab/#cdl-academy">Open the embedded CDL Exam Academy</a>',
-        'href="atlas-cdl/">Launch the full-screen CDL Exam Academy</a>',
+        'href="class8-lab/#cdl-academy">Open the Class A CDL Academy</a>',
+        'href="atlas-cdl/">Launch the full-screen Class A CDL Academy</a>',
+        'href="atlas-class-a-cdl/">Launch the full-screen Safety Studio</a>',
+        'href="cdl-hazard-map/">Launch the full-screen Hazard Atlas</a>',
         'href="atlas-class8/">Launch the full-screen engineering studio</a>',
     ):
         if marker not in full_portfolio:
@@ -575,6 +765,8 @@ def validate_class8_lab(errors: list[str]) -> None:
         "https://mlavoie6927.github.io/class8-lab/",
         "https://mlavoie6927.github.io/atlas-class8/",
         "https://mlavoie6927.github.io/atlas-cdl/",
+        "https://mlavoie6927.github.io/atlas-class-a-cdl/",
+        "https://mlavoie6927.github.io/cdl-hazard-map/",
     ):
         if url not in sitemap:
             errors.append(f"sitemap.xml: missing {url}")
@@ -2001,7 +2193,7 @@ def main() -> None:
     print(f"PASS: validated {len(HTML_FILES)} HTML pages")
     print("PASS: local links, IDs, landing and full-portfolio navigation, and external-tab safety")
     print("PASS: General IT Field Desk navigation, responsive UI, searchable libraries, safety boundary, and static-browser boundary")
-    print("PASS: Class 8 Engineering & CDL Lab has the checksum-preserved 117-part source app, 29 hotspots, 18 tire positions, centered 70-question and 300-question study libraries, source-manifest preservation, responsive portfolio shells, and static-browser boundaries")
+    print("PASS: CDL Lab has the checksum-preserved Class 8 engineering app, centered 70-question foundation and 264-question Class A Academy, the 222-scenario Safety Studio, the 51-jurisdiction Hazard Atlas with 30 named-road profiles, stable manual scrolling, responsive portfolio shells, and static-browser boundaries")
     print("PASS: GIT & MB atlas has 61 illustrated targets, 39 binary profiles, 11 labs, 6 workflows, 15 questions, 35 glossary terms, published references, source-package integrity, and a static-browser boundary")
     print("PASS: Geology Field Guide navigation, 20-domain architecture, 6-system energy module, plate lab, investigations, and static-browser boundary")
     print("PASS: Archaeology reference navigation, 39 chapters, 22 regions, PDF integrity, critical-evidence method, reader, and static-browser boundary")

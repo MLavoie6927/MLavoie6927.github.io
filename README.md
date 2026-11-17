@@ -10,9 +10,11 @@ Public GitHub Pages portfolio for Marc Lavoie. The site is built with plain HTML
 - `script.js` - mobile navigation and active-section highlighting
 - `interview/` - interactive 200-question interview preparation library
 - `browser-os/` - Browser OS 3.0 static security operations workstation
-- `class8-lab/` - portfolio shell, evidence gallery, 70-question learner's-permit foundation, and embedded 300-question CDL Exam Academy for the Class 8 engineering project
+- `class8-lab/` - CDL portfolio shell with Class 8 engineering, a 70-question learner's-permit foundation, the 264-question Class A CDL Exam Academy, the Class A operating-safety studio, and the U.S. GPS Trap & Hazard Atlas
 - `atlas-class8/` - checksum-preserved ATLAS Class 8 v3.0 tractor-trailer engineering studio and supplied regression tests
-- `atlas-cdl/` - checksum-verified ATLAS CDL Exam Academy with a centered 300-question library, Class A and Class B practice, endorsement study, flashcards, inspection review, and local progress; the original package manifest remains preserved separately
+- `atlas-class-a-cdl/` - checksum-preserved ATLAS Class A CDL Safety Studio with 222 scenarios, 24 decision drills, readiness checks, conservative restriction comparisons, local-only reports, and exports
+- `cdl-hazard-map/` - checksum-preserved U.S. Class A CDL GPS Trap & Hazard Atlas with 51 mapped jurisdictions, 80 location records, and 30 source-backed named-road profiles
+- `atlas-cdl/` - checksum-verified ATLAS Class A CDL Exam Academy displaying 264 Class A-relevant questions, a 95-item tractor-trailer practice configuration, Class A endorsement study, flashcards, inspection review, and local progress; the full 300-question source bank and original package manifest remain preserved
 - `.github/workflows/browser-os-ci.yml` - syntax, assertion, and security-boundary checks
 - `projects/k12-network-operations/` - interactive regional K-12 network support and operations simulation
 - `.github/workflows/k12-operations-ci.yml` - K-12 model, evidence, generated-data, and browser-source validation

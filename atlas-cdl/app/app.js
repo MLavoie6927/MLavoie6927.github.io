@@ -1,6 +1,6 @@
 /*
- * ATLAS CDL Exam Academy | Original exam-style study platform
- * Author: Marc Lavoie | 2026-11-14
+ * ATLAS Class A CDL Exam Academy | Original exam-style study platform
+ * Author: Marc Lavoie | 2026-11-17
  * Defensive vanilla JS: DOM textContent for question data, no remote assets,
  * local-only student progress; designed to integrate as same-origin iframe.
  */
@@ -8,10 +8,11 @@
   'use strict';
   const bank = window.ATLAS_CDL_BANK;
   if (!bank || !Array.isArray(bank.questions)) { document.body.textContent='Question data missing. Keep data/questions.js with this application.'; return; }
-  const qs=bank.questions;
+  const CLASS_A_SECTIONS=Object.freeze(['General','Cargo','Air','Combination','Doubles','Tank','Hazmat','Inspection']);
+  const qs=bank.questions.filter(q=>CLASS_A_SECTIONS.includes(q.section));
   const sections=[...new Set(qs.map(q=>q.section))];
   const byId=new Map(qs.map(q=>[q.id,q]));
-  const key='atlas-cdl-academy-progress-v1';
+  const key='atlas-cdl-class-a-progress-v2';
   const $=selector=>document.querySelector(selector);
   const $$=selector=>[...document.querySelectorAll(selector)];
   const el=(tag,cl,text)=>{const n=document.createElement(tag);if(cl)n.className=cl;if(text!==undefined)n.textContent=text;return n;};
@@ -20,6 +21,7 @@
   function loadProgress(){try{return {...defaultProgress(),...safeJSON(localStorage.getItem(key),{})}}catch{return defaultProgress()}}
   let progress=loadProgress();
   for(const name of ['seen','missed','bookmarked','history','inspections'])if(!Array.isArray(progress[name]))progress[name]=[];
+  for(const name of ['seen','missed','bookmarked'])progress[name]=progress[name].filter(id=>byId.has(id));
   let route='dashboard', pageNo=0, flashIndex=0, flashRevealed=false, flashDeck=qs.slice(), picked='classA';
   let exam=null, timerInterval=null, activeQuestionSearch='';
   const sourceData={
@@ -54,10 +56,9 @@
   function initSelect(select,all=false){select.replaceChildren();if(all)select.add(new Option('All categories','all'));for(const sec of sections)select.add(new Option(sec.replace('General','General Knowledge').replace('Air','Air Brakes').replace('Combination','Combination Vehicles'),sec))}
   function renderDashboard(){const tracks=[
     ['CLASS A','Tractor-Trailer CDL','General knowledge, cargo, air brakes and combinations.','95-question full practice exam','classA','▣'],
-    ['CLASS B','Straight Truck CDL','General knowledge and air brakes for equipped vehicles.','75-question pathway','classB','▥'],
-    ['ENDORSEMENTS','Specialized Operations','Doubles, tank, hazmat, passenger and school bus practice.','Single-category exams','Hazmat','⬡'],
+    ['ENDORSEMENTS','Class A Specialized Operations','Doubles and triples, tank vehicle, and hazardous-material practice.','Class A endorsement study','Hazmat','⬡'],
     ['INSPECTION','Walk-Around Skills','Equipment identification, defect recognition and test sequences.','20 inspection practice items','Inspection','⌁'],
-    ['STUDY','Question Library','All questions with answers, explanations and source links.','300 independent questions','study','▦'],
+    ['STUDY','Class A Question Library','All displayed questions support the Class A pathway, related endorsements, or inspection.','264 original questions','study','▦'],
     ['REVIEW','Weak-Topic Practice','Retake missed items and build confidence by repetition.','Track your progress','review','◎']
   ];
   const root=$('#track-grid');root.replaceChildren();for(const [tag,title,desc,note,target,ico] of tracks){const card=el('article','track-card');card.append(el('div','track-icon',ico),el('h3','',title),el('p','',desc));const foot=el('div','card-footer');const info=el('span','',note);const btn=el('button','',target==='study'||target==='review'?'Open →':'Start →');btn.type='button';btn.addEventListener('click',()=>{if(target==='study'||target==='review')routeTo(target);else if(target==='Inspection'){routeTo('inspection')}else{picked=target;routeTo('exam')}});foot.append(info,btn);card.append(foot);root.append(card)}
@@ -69,11 +70,10 @@
   function renderStudy(){const matches=studyFiltered();const length=20;const pages=Math.max(1,Math.ceil(matches.length/length));pageNo=Math.min(pageNo,pages-1);const start=pageNo*length;const visible=matches.slice(start,start+length);$('#study-result-count').textContent=matches.length?`Showing ${start+1}–${start+visible.length} of ${matches.length} matching questions`:'No questions found';$('#page-counter').textContent=`Page ${pageNo+1} of ${pages}`;const area=$('#study-questions');area.replaceChildren();if(!visible.length)area.append(el('div','empty-state','No questions match these filters.'));else for(const q of visible){area.append(makeCard(q));markSeen(q.id)}$('#previous-page').disabled=pageNo===0;$('#next-page').disabled=pageNo>=pages-1}
   const presets=[
     {id:'classA',label:'Class A Tractor-Trailer',help:'50 general/cargo · 25 air brakes · 20 combinations',groups:[['General Knowledge / Cargo',['General','Cargo'],50],['Air Brakes',['Air'],25],['Combination Vehicles',['Combination'],20]]},
-    {id:'classB',label:'Class B with Air Brakes',help:'50 general/cargo · 25 air brakes',groups:[['General Knowledge / Cargo',['General','Cargo'],50],['Air Brakes',['Air'],25]]},
     {id:'General',label:'General Knowledge',help:'Single-category exam (includes cargo)',groups:[['General Knowledge / Cargo',['General','Cargo'],null]]},
     {id:'Air',label:'Air Brakes',help:'Air system, testing, braking and failures',groups:[['Air Brakes',['Air'],null]]},
     {id:'Combination',label:'Combination Vehicles',help:'Coupling, air lines and handling',groups:[['Combination Vehicles',['Combination'],null]]},
-    ...['Doubles','Tank','Hazmat','Passenger','School','Inspection'].map(cat=>({id:cat,label:cat==='Doubles'?'Doubles / Triples':cat==='Hazmat'?'Hazardous Materials':cat==='Inspection'?'Vehicle Inspection Skills':cat==='School'?'School Bus':cat==='Tank'?'Tank Vehicles':cat==='Passenger'?'Passenger Transport':cat,help:`Practice ${cat.toLowerCase()} questions`,groups:[[cat,[cat],null]]}))
+    ...['Doubles','Tank','Hazmat','Inspection'].map(cat=>({id:cat,label:cat==='Doubles'?'Doubles / Triples':cat==='Hazmat'?'Hazardous Materials':cat==='Inspection'?'Vehicle Inspection Skills':cat==='Tank'?'Tank Vehicles':cat,help:`Practice ${cat.toLowerCase()} questions`,groups:[[cat,[cat],null]]}))
   ];
   function renderPresets(){const container=$('#exam-presets');container.replaceChildren();for(const p of presets){const btn=el('button','preset'+(p.id===picked?' active':''));btn.type='button';btn.setAttribute('aria-pressed',String(p.id===picked));btn.append(el('strong','',p.label),el('small','',p.help));btn.addEventListener('click',()=>{picked=p.id;renderPresets()});container.append(btn)}}
   function beginExam(){const p=presets.find(x=>x.id===picked)||presets[0];const chosen=[];const groups=[];const size=+$('#exam-size').value;for(const [name,categories,exact] of p.groups){const pool=shuffle(qs.filter(q=>categories.includes(q.section)));const items=pool.slice(0,Math.min(exact||size,pool.length));groups.push({name,ids:items.map(q=>q.id)});chosen.push(...items)}exam={preset:p.id,groups,questions:chosen,answers:{},index:0,started:Date.now()};$('#exam-setup').hidden=true;$('#exam-results').hidden=true;$('#exam-run').hidden=false;routeTo('exam');renderExam();}
@@ -91,7 +91,7 @@
     ['Federal Interstate weight baseline',['Gross combination: commonly up to 80,000 lb.','Single axle: commonly up to 20,000 lb.','Tandem axle: commonly up to 34,000 lb.','Bridge formula, manufacturer ratings, route and state rules can further restrict loads.']],
     ['Property-carrier hours of service',['Normally up to 11 driving hours after 10 consecutive off duty.','The standard driving window is 14 consecutive hours after coming on duty.','A qualifying 30-minute non-driving interruption is required after eight cumulative driving hours (subject to exceptions).','Federal 60/7 or 70/8 on-duty limits may apply.']],
     ['Combination vehicle systems',['Inspect fifth wheel, kingpin, release lock, and mounting hardware.','Connect service and supply air lines correctly; check glad-hand gaskets.','Perform appropriate coupling and trailer brake tests.','Watch for off-tracking, trailer swing and rollovers.']],
-    ['Hazmat / passengers / endorsements',['Passenger, school bus and hazmat privileges have additional conditions.','Hazmat endorsement training requirements occur before its knowledge test for applicable first-time applicants.','Class A/B initial ELDT verification generally occurs before skills testing.','Always read your licensing state’s manual and official endorsement requirements.']]
+    ['Class A endorsements',['Doubles/triples, tank vehicle and hazardous-material privileges have additional conditions.','Hazmat endorsement training requirements occur before its knowledge test for applicable first-time applicants.','Class A initial ELDT verification generally occurs before skills testing.','Always read your licensing state’s manual and official endorsement requirements.']]
   ];
   function renderGuide(){const root=$('#guide-grid');root.replaceChildren();for(const [name,points] of guide){const card=el('article','guide-card');card.append(el('h3','',name));const ul=el('ul');for(const p of points)ul.append(el('li','',p));card.append(ul);root.append(card)}}
   const stations=[

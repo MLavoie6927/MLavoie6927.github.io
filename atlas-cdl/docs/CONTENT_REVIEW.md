@@ -1,6 +1,6 @@
 # Curriculum and content review notes
 
-**Status:** Developer-ready original question bank; **not examiner-certified**. All 300 questions have `reviewStatus: "author_review_required"` to prevent overclaiming official validation.
+**Status:** Developer-ready original question bank; **not examiner-certified**. All 300 source questions have `reviewStatus: "author_review_required"` to prevent overclaiming official validation. The public Class A interface displays 264 questions and omits the passenger and school-bus sections.
 
 ## Scope covered
 

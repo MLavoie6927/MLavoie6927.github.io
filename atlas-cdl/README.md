@@ -1,14 +1,15 @@
-# ATLAS CDL Exam Academy v1.0 — 300 original questions
+# ATLAS Class A CDL Exam Academy v1.1 — 264 displayed Class A questions
 
 **Author:** Marc Lavoie · **Date:** 2026-11-14
 
-A complete offline-capable HTML/CSS/JavaScript practice exam module for integration with the **ATLAS Class 8 Engineering Studio** and a static portfolio website.
+A complete offline-capable HTML/CSS/JavaScript practice exam module for integration with the **ATLAS Class 8 Engineering Studio** and a static portfolio website. The preserved source bank contains 300 original questions; the public v1.1 interface filters it to the 264 questions supporting Marc Lavoie's Class A path.
 
 ## Features
 
-- 300 independent 4-option CDL practice questions with answers, explanations and source references.
+- 264 displayed Class A practice questions with answers, explanations and source references.
+- Preserved 300-question source bank for provenance; passenger and school-bus sections are not exposed in the public Class A workspace.
 - General Knowledge (77), Cargo (25), Air Brakes (49), Combination Vehicles (38), Doubles/Triples (15), Tank (15), Hazmat (25), Passenger (18), School Bus (18), and Vehicle Inspection Skills (20).
-- Full Class A 95-item practice exam (50 general/cargo, 25 air, 20 combination); Class B 75 items; category-specific 10/20/25/50-item exams (limited to available items).
+- Full Class A 95-item practice exam (50 general/cargo, 25 air, 20 combination); category-specific 10/20/25/50-item exams (limited to available items).
 - Per-category >=80% pass calculations, missed-answer review, practice results JSON export.
 - Question search, category/topic filter, visual flashcards, bookmarks, source links.
 - Eighteen-point illustrated walk-around study checklist and concise study guide.

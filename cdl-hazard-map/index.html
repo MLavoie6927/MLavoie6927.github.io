@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07101f">
+  <meta name="description" content="Offline interactive US Class A CDL truck routing and road problem awareness map with 30 GPS-trap road examples, documented restrictions and illustrative logistics planning regions.">
+  <title>ATLAS | U.S. Class A CDL GPS Trap & Road Hazard Atlas v1.1</title>
+  <link rel="stylesheet" href="assets/css/atlas.css">
+  <script src="assets/js/geography.js" defer></script>
+  <script src="assets/js/hazards.js" defer></script>
+  <script src="assets/js/road-traps.js" defer></script>
+  <script src="assets/js/atlas.js" defer></script>
+  <script src="assets/js/trap-engine.js" defer></script>
+</head>
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+  <div class="app" id="atlas-app">
+    <header class="site-head">
+      <a href="#top" class="brand" aria-label="ATLAS CDL Road Hazard Atlas home"><span class="brand-symbol" aria-hidden="true">A<span>↗</span></span><span><strong>ATLAS</strong><small>COMMERCIAL VEHICLE INTELLIGENCE</small></span></a>
+      <div class="head-right"><span class="edition-pill"><span class="dot-teal"></span> USA / ALL 50 STATES + DC</span><span class="edition-label">GPS TRAP EDITION <b>01.1</b></span></div>
+    </header>
+
+    <section class="intro" id="top">
+      <div class="intro-copy"><div class="eyebrow"><span class="tiny-line"></span> TRANSPORTATION SAFETY INTELLIGENCE  /  CLASS A CDL</div>
+        <h1>BEYOND THE GPS.<br><em>KNOW WHERE YOUR SEMI CANNOT GO.</em></h1>
+        <p>A visual Class A CDL intelligence atlas identifying truck-restricted roads, low bridges, cramped mountain passes and deceptive GPS shortcuts. Distinguish published rules from route-planning concerns — before approaching a road with no safe turnaround.</p>
+      </div>
+      <div class="intro-stats" aria-label="Map data counts">
+        <div class="stat"><span class="stat-icon">◉</span><strong id="stat-total">80</strong><small>MAP LOCATIONS</small></div>
+        <div class="stat"><span class="stat-icon orange">◆</span><strong id="stat-verified">30</strong><small>SOURCED ENTRIES</small></div>
+        <div class="stat"><span class="stat-icon blue">▦</span><strong id="stat-planning">50</strong><small>PLANNING ZONES</small></div>
+        <div class="stat"><span class="stat-icon gps-orange">⚠</span><strong id="stat-gps">30</strong><small>GPS TRAP ROADS</small></div>
+      </div>
+    </section>
+
+    <main class="workspace" aria-label="Class A CDL hazard map workspace">
+      <div class="workspace-left">
+        <div class="map-topbar">
+          <div class="map-topbar-title"><span class="led"></span><div><strong>NATIONAL ROAD RISK OVERVIEW</strong><span>UNITED STATES  /  TRACTOR-TRAILER OPERATIONS</span></div></div>
+          <div class="map-topbar-status"><span class="pulse-mini"></span><span>REFERENCE · NOT LIVE</span></div>
+        </div>
+        <div class="gps-alert-strip"><span class="gps-alert-icon">⚠</span><span><strong>GPS TRAP ROADS LAYER</strong><small>30 authority-sourced road profiles, including narrow mountain passes and prohibited truck parkways. Diagram traces are approximate — never a driving route.</small></span><a href="#gps-trap-studio">EXPLORE ROADS ↘</a></div>
+        <div class="filters" aria-label="Map category filters">
+          <button class="filter-pill active" data-category="all" aria-pressed="true"><span class="filter-symbol">◉</span> All hazards</button>
+          <button class="filter-pill" data-category="access" aria-pressed="false"><i class="swatch access"></i> Restricted roads</button>
+          <button class="filter-pill" data-category="clearance" aria-pressed="false"><i class="swatch clearance"></i> Low clearance</button>
+          <button class="filter-pill" data-category="geometry" aria-pressed="false"><i class="swatch geometry"></i> Length / turns</button>
+          <button class="filter-pill" data-category="weather" aria-pressed="false"><i class="swatch weather"></i> Weather / wind</button>
+          <button class="filter-pill" data-category="weight" aria-pressed="false"><i class="swatch weight"></i> Weight / bridges</button>
+          <button class="filter-pill" data-category="hazmat" aria-pressed="false"><i class="swatch hazmat"></i> Hazmat</button>
+          <button class="filter-pill" data-category="facility" aria-pressed="false"><i class="swatch facility"></i> Pickups / docks</button>
+        </div>
+
+        <section class="map-panel" aria-label="Interactive U.S. truck problem map">
+          <div class="map-corner top-left"><span class="map-kicker">CLASS A CDL  /  US TRUCK ROUTE AWARENESS</span><span class="map-index">01<span>/</span>50 STATES</span></div>
+          <div class="map-corner top-right"><span class="arc-symbol">✣</span><span>MAP / CONUS + AK + HI</span></div>
+          <div class="map-controls" aria-label="Map zoom controls"><button id="zoom-in" aria-label="Zoom in" title="Zoom in">+</button><button id="zoom-out" aria-label="Zoom out" title="Zoom out">−</button><button id="zoom-reset" aria-label="Reset map" title="Reset map">⌖</button><button id="save-svg" aria-label="Download map SVG" title="Download map SVG">↓</button></div>
+          <div class="map-canvas" id="map-canvas">
+            <svg id="usa-map" viewBox="0 0 1250 790" role="img" aria-label="Vector map of US states and truck routing risk locations, including Alaska and Hawaii" tabindex="0">
+              <defs>
+                <linearGradient id="ocean-gradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b1e31"/><stop offset=".55" stop-color="#071523"/><stop offset="1" stop-color="#0a1929"/></linearGradient>
+                <linearGradient id="land-gradient" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#183349"/><stop offset="1" stop-color="#102637"/></linearGradient>
+                <radialGradient id="heat-gradient"><stop offset="0" stop-color="#ff7755" stop-opacity=".48"/><stop offset=".38" stop-color="#fa7047" stop-opacity=".18"/><stop offset="1" stop-color="#fa7047" stop-opacity="0"/></radialGradient>
+                <radialGradient id="heat-gradient-cyan"><stop offset="0" stop-color="#28cfe7" stop-opacity=".27"/><stop offset=".55" stop-color="#28cfe7" stop-opacity=".12"/><stop offset="1" stop-color="#28cfe7" stop-opacity="0"/></radialGradient>
+                <pattern id="square-grid" width="44" height="44" patternUnits="userSpaceOnUse"><path d="M 44 0 L 0 0 0 44" fill="none" stroke="#d2efff" stroke-opacity=".052" stroke-width="1"/></pattern>
+                <filter id="soft-glow" x="-160%" y="-160%" width="420%" height="420%"><feGaussianBlur stdDeviation="6"/></filter>
+              </defs>
+              <rect width="1250" height="790" fill="url(#ocean-gradient)"/><rect width="1250" height="790" fill="url(#square-grid)"/>
+              <g id="map-longitudes" class="longitudes"></g>
+              <g id="map-states"></g>
+              <g id="map-heat"></g>
+              <g id="map-corridors"></g>
+              <g id="map-labels"></g>
+              <g id="map-trap-lines" aria-label="Schematic trap-road highlights"></g>
+              <g id="map-markers"></g>
+              <g id="map-trap-markers" aria-label="GPS problem road markers"></g>
+              <g id="map-insets"></g>
+            </svg>
+            <div class="map-tooltip" id="map-tooltip" role="tooltip" hidden></div>
+          </div>
+          <div class="map-overlay-left"><span><b id="shown-count">80</b> locations visible</span><span class="map-mode" id="map-mode">ALL CATEGORIES</span></div>
+          <div class="map-overlay-right">ROAD TRACES SCHEMATIC · DO NOT NAVIGATE<span class="crosshair">⌖</span></div>
+        </section>
+
+        <div class="map-bottom-controls">
+          <div class="layer-toggles"><span class="layer-label">MAP LAYERS</span><label class="toggle-chip gps-toggle"><input type="checkbox" id="layer-gps-traps" checked><span class="toggle-indicator"></span><b>GPS TRAP ROADS</b></label><label class="toggle-chip"><input type="checkbox" id="layer-official" checked><span class="toggle-indicator"></span>Documented guidance</label><label class="toggle-chip"><input type="checkbox" id="layer-illustrative" checked><span class="toggle-indicator"></span>Planning zones</label><label class="toggle-chip"><input type="checkbox" id="layer-heat" checked><span class="toggle-indicator"></span>Heat layer</label><label class="toggle-chip"><input type="checkbox" id="layer-corridors" checked><span class="toggle-indicator"></span>Corridor guides</label><label class="toggle-chip"><input type="checkbox" id="layer-labels" checked><span class="toggle-indicator"></span>State labels</label></div>
+          <div class="map-scale">ZOOM <strong id="zoom-level">100%</strong></div>
+        </div>
+        <div class="map-callout"><span class="safety-icon">!</span><p><b>Safety and data integrity:</b> This atlas is a static training and route-awareness reference, <strong>not</strong> a certified commercial navigation map or live DOT alert feed. Marker locations are approximate. The heat layer shows where curated map entries concentrate, not crash rates or active danger. Source-backed entries summarize published restrictions; planning zones are illustrative, not recorded incidents. Always follow current signs, permits, and road-agency data.</p></div>
+      </div>
+
+      <aside class="intelligence" aria-label="Location intelligence and map settings">
+        <div class="panel-heading"><div><small>ATLAS / EXPLORER</small><h2>Road intelligence</h2></div><span class="panel-icon">⊞</span></div>
+        <label class="search-shell"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Search a state, road, or city..." aria-label="Search map locations" autocomplete="off"><kbd>/</kbd></label>
+        <div class="status-tabs" role="group" aria-label="Source confidence filter"><button class="status-tab active" data-status="all" aria-pressed="true">All locations</button><button class="status-tab" data-status="official" aria-pressed="false">Source-backed</button><button class="status-tab" data-status="illustrative" aria-pressed="false">Planning only</button></div>
+        <div class="selected-panel" id="selected-panel" aria-live="polite">
+          <div class="selected-empty"><span class="empty-radar">◉</span><strong>Select a hazard marker</strong><p>Click any map pin or location below to inspect the roadway issue, operational considerations, and authority source when available.</p></div>
+        </div>
+        <div id="gps-mini-panel" class="gps-mini-panel"><span class="gps-mini-title">⚠ GPS TRAP FOCUS</span><strong id="gps-mini-name">Choose an orange road marker</strong><small id="gps-mini-status">Official-source road profiles · not GPS error incident reports</small><a href="#gps-trap-studio">Explore all 30 road profiles ↗</a></div>
+        <div class="list-head"><div><b>LOCATIONS IN VIEW</b><small id="list-count">80 results</small></div><button id="clear-search" title="Clear search and reset filters">RESET</button></div>
+        <div class="location-list" id="location-list" aria-label="Hazard locations list"></div>
+        <div class="source-footer"><strong><span class="source-led"></span> Source policy</strong><p>Official restrictions and general planning themes are deliberately separated. Source links open the responsible road authority. This version has no real-time feeds or incident verification service.</p></div>
+      </aside>
+    </main>
+    <section id="gps-trap-studio" class="gps-studio" aria-label="Roads that can mislead ordinary GPS navigation">
+      <div class="gps-heading"><div><div class="eyebrow"><span class="tiny-line"></span> ROUTING CONFLICT INTELLIGENCE / SOURCE-REFERENCED</div><h2>THE ROADS AN ORDINARY GPS<br><em>DOESN’T KNOW YOUR TRUCK CAN’T TAKE.</em></h2><p>Click a highlighted route to investigate the underlying restriction, the driver-facing failure mode, and what needs to be verified. These are <strong>potential passenger-GPS mismatch traps</strong>, not evidence that any named GPS provider currently generates a wrong route.</p></div><div class="gps-heading-count"><span>30</span><small>ROAD PROFILES<br>15 STATES</small></div></div>
+      <div class="gps-pillars" aria-label="Three road risk illustrations">
+        <div class="gps-pillar"><span class="gps-pillar-icon">↕</span><div><strong>LOW BRIDGE / FALSE CLEARANCE</strong><small>Boston’s river roads can have bridge clearances far below a typical semi’s height.</small></div><span class="gps-pillar-n">01</span></div>
+        <div class="gps-pillar"><span class="gps-pillar-icon">⌁</span><div><strong>NARROW CURVES / NO TURNAROUND</strong><small>A short mountain route may have combination length restrictions and tight hairpins.</small></div><span class="gps-pillar-n">02</span></div>
+        <div class="gps-pillar"><span class="gps-pillar-icon">⊘</span><div><strong>RESTRICTED TRUCK CORRIDOR</strong><small>Highway-looking parkways, tunnels and bridges may ban specific trucks or cargo.</small></div><span class="gps-pillar-n">03</span></div>
+      </div>
+      <div class="gps-toolgrid">
+        <section class="gps-catalog" aria-label="GPS trap road library">
+          <div class="gps-tool-head"><div><small>30 NAMED ROAD SEGMENTS</small><h3>Road conflict explorer</h3></div><span class="gps-led"></span></div>
+          <div class="gps-filterbar"><input type="search" id="trap-search" placeholder="Search road, state, city or issue…" aria-label="Search road trap profiles"><select id="trap-category" aria-label="Filter problem type"><option value="all">All problem types</option><option value="access">Restricted road</option><option value="clearance">Low bridge</option><option value="geometry">Narrow / length / turning</option><option value="weight">Weight restrictions</option><option value="hazmat">Hazmat routing</option><option value="weather">Conditional weather</option></select></div>
+          <div class="gps-catalog-summary"><span id="trap-results">30 roads listed</span><button type="button" id="trap-clear">RESET FILTERS</button></div>
+          <div id="trap-list" class="trap-list" aria-live="polite"></div>
+        </section>
+        <section class="gps-inspector" id="gps-inspector" aria-label="Road restriction detail">
+          <div class="gps-tool-head"><div><small>SAFETY INTELLIGENCE PANEL</small><h3>Road restriction briefing</h3></div><span class="inspector-hex">⬡</span></div>
+          <div id="gps-detail" class="gps-detail" aria-live="polite"></div>
+          <div class="vehicle-profile"><div class="vehicle-head"><strong>CLASS A VEHICLE PROFILE COMPARISON</strong><small>Planning comparison only · not permission to travel</small></div><div class="vehicle-form">
+            <label>Overall length (ft)<input id="truck-length" type="number" min="10" max="150" step="0.5" value="73"></label>
+            <label>Vehicle height (ft)<input id="truck-height" type="number" min="6" max="22" step="0.1" value="13.5"></label>
+            <label>Gross weight (lb)<input id="truck-weight" type="number" min="1000" max="200000" step="1000" value="80000"></label>
+            <label>KPRA (ft)<input id="truck-kpra" type="number" min="5" max="65" step="0.5" value="41"></label>
+            <label>Registered weight (lb)<input id="truck-registration" type="number" min="1000" max="200000" step="1000" value="80000"></label>
+          </div><div class="vehicle-result" id="vehicle-result" aria-live="polite"></div></div>
+        </section>
+      </div>
+      <div class="gps-accuracy"><strong>IMPORTANT MAP LIMITATION</strong><p>All orange highlighted road traces and markers are schematic regional references, not legal route geometry or verified GPS guidance. These entries summarize government-published restrictions and operating conditions, but do not prove that a particular GPS product will send a truck there. Temporary conditions change. Vehicle configuration, route segments, signed exceptions, hazmat classifications and jurisdictional rules require authoritative checks before driving. Neither the map nor its profile comparison can certify a road as safe or legal.</p></div>
+    </section>
+    <section class="bottom-band" aria-label="Map legend and features"><div><small>MAP KEY</small><span><i class="legend-dot official"></i> Government-source entry</span><span><i class="legend-dot illustrative"></i> Illustrative planning zone</span><span><i class="legend-ring"></i> Grouped markers (zoom to expand)</span><span><i class="legend-dot gps"></i> GPS conflict road profile</span></div><div class="bottom-credit">DESIGNED FOR CLASS A COMBINATION VEHICLES <b>↗</b> RESEARCH-BASED · LOCAL-OFFLINE</div></section>
+    <footer class="foot"><span>© 2026 Marc Lavoie · ATLAS U.S. Class A CDL Road Hazard Atlas</span><span>GPS trap edition v1.1 · No quizzes · No live traffic · No route authorization</span></footer>
+  </div>
+</body>
+</html>
